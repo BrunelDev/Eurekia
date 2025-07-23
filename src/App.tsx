@@ -3,6 +3,8 @@ import { Pricing } from "./screens/Pricing";
 import { Contact } from "./screens/Contact";
 import { RessourcesEtudeDe } from "./screens/RessourcesEtude";
 import { Accueil } from "./screens/Accueil";
+import { NosSolutions } from "./screens/NosSolutions";
+import { APropos } from "./screens/APropos";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,14 @@ const router = createBrowserRouter([
   {
     path: "/ressources",
     element: <RessourcesEtudeDe />,
+  },
+  {
+    path: "/nos-solutions",
+    element: <NosSolutions />,
+  },
+  {
+    path: "/a-propos",
+    element: <APropos />,
   },
 ]);
 

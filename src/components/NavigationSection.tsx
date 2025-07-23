@@ -11,11 +11,31 @@ export const NavigationSection = (): JSX.Element => {
   // Navigation menu items data
   const navItems = [
     { label: "Accueil", path: "/", active: location.pathname === "/" },
-    { label: "A propos", path: "/about", active: location.pathname === "/about" },
-    { label: "Nos solutions", path: "/solutions", active: location.pathname === "/solutions" },
-    { label: "Tarifs", path: "/pricing", active: location.pathname === "/pricing" },
-    { label: "Ressources", path: "/ressources", active: location.pathname === "/ressources" },
-    { label: "Contact", path: "/contact", active: location.pathname === "/contact" },
+    {
+      label: "A propos",
+      path: "/a-propos",
+      active: location.pathname === "/a-propos",
+    },
+    {
+      label: "Nos solutions",
+      path: "/nos-solutions",
+      active: location.pathname === "/nos-solutions",
+    },
+    {
+      label: "Tarifs",
+      path: "/pricing",
+      active: location.pathname === "/pricing",
+    },
+    {
+      label: "Ressources",
+      path: "/ressources",
+      active: location.pathname === "/ressources",
+    },
+    {
+      label: "Contact",
+      path: "/contact",
+      active: location.pathname === "/contact",
+    },
   ];
 
   return (

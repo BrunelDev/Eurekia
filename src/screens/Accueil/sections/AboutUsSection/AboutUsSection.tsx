@@ -11,7 +11,7 @@ export const AboutUsSection = (): JSX.Element => {
       description:
         "Préparez votre projet en toute autonomie avec nos outils pour estimer les coûts, générer vos documents et structurer votre dossier.",
       buttonText: "Simuler votre projet",
-      backgroundImage: "url(..//frame-16.png)",
+      backgroundImage: "url(..//frame16-1.png)",
       backgroundOverlay:
         "linear-gradient(0deg,rgba(72,54,33,0.4) 0%,rgba(72,54,33,0.4) 100%)",
     },
@@ -20,7 +20,7 @@ export const AboutUsSection = (): JSX.Element => {
       description:
         "Préparez votre projet en toute autonomie avec nos outils pour estimer les coûts, générer vos documents et structurer votre dossier.",
       buttonText: "Voir un exemple",
-      backgroundImage: "url(..//frame-16-1.png)",
+      backgroundImage: "url(..//frame16-2.png)",
       backgroundOverlay: "none",
     },
     {
@@ -28,7 +28,7 @@ export const AboutUsSection = (): JSX.Element => {
       description:
         "Automatisez la rédaction de vos documents techniques et gagnez un temps précieux sur vos projets grâce à l'intelligence artificielle.",
       buttonText: "Accéder aux solutions",
-      backgroundImage: "url(..//frame-16-2.png)",
+      backgroundImage: "url(..//frame16-3.png)",
       backgroundOverlay: "none",
     },
   ];

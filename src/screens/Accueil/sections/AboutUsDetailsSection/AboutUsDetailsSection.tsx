@@ -26,11 +26,13 @@ export const AboutUsDetailsSection = (): JSX.Element => {
     <section className="relative w-full bg-[#fbf9eb] z-[2]">
       <div className="flex flex-row max-w-[1280px] mx-auto">
         {/* Left side - Background image with overlay */}
-        <div className="w-full md:w-1/2 h-[832px] bg-[linear-gradient(0deg,rgba(72,54,33,0.4)_0%,rgba(72,54,33,0.4)_100%),url(..//frame-15.png)_50%_50%_/_cover]" />
+        <div className="relative w-1/2 md:w-full h-[832px] bg-[url(/frame15.png)] bg-cover bg-center">
+          <div className="absolute inset-0 bg-[rgba(72,54,33,0.4)]" />
+        </div>
 
         {/* Right side - Testimonial content */}
         <div className="w-full md:w-1/2 h-[832px] relative">
-          <div className="relative w-full h-full bg-[url(/fond-principal.png)] bg-cover bg-center">
+          <div className="relative w-full h-full bg-[url(/fond_principal.png)] bg-cover bg-center">
             <div className="flex flex-col w-full max-w-[564px] gap-[100px] pt-[202px] px-7 md:px-28">
               {/* Section heading */}
               <div className="flex flex-col gap-5 w-full">
