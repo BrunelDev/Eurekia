@@ -1,0 +1,1 @@
+export { RessourcesEtudeDe } from "./RessourcesEtudeDe";

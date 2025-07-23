@@ -1,0 +1,1 @@
+export { HeroWrapperSection } from "./HeroWrapperSection";
