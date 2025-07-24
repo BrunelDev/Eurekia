@@ -61,7 +61,7 @@ export const SolutionsSection = (): JSX.Element => {
       </div>
 
       {/* Center column - Image */}
-      <div className="w-[366px] h-[600px] bg-[url(/frame-704.png)] bg-cover bg-[50%_50%]" />
+      <div className="w-[366px] h-[600px] bg-[url(/engineer.png)] bg-cover bg-[50%_50%]" />
 
       {/* Right column - Services accordion */}
       <div className="flex flex-col w-[365px] items-start gap-6 mr-[60px]">

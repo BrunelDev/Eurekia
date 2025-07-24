@@ -4,7 +4,7 @@ import { Card, CardContent } from "../../../../components/ui/card";
 export const CallToActionSection = (): JSX.Element => {
   return (
     <section className="py-20 w-full bg-white z-[1]">
-      <Card className="max-w-screen-xl mx-auto border-none">
+      <Card className="max-w-screen-xl mx-auto border-none shadow-none">
         <CardContent className="flex flex-col items-center gap-20 p-0">
           <div className="max-w-screen-md w-full flex flex-col items-center gap-8">
             <div className="flex flex-col items-center gap-6 w-full">
@@ -19,7 +19,7 @@ export const CallToActionSection = (): JSX.Element => {
             </div>
 
             <div className="flex items-center gap-8 w-[366px]">
-              <Button className="flex-1 p-3 bg-[#f6f2cb] hover:bg-[#f6f2cb]/90 text-[#483621] font-label-small font-[number:var(--label-small-font-weight)] text-[length:var(--label-small-font-size)] tracking-[var(--label-small-letter-spacing)] leading-[var(--label-small-line-height)] [font-style:var(--label-small-font-style)] rounded-none h-auto">
+              <Button className="flex-1 p-3 bg-[#f6f2cb] hover:bg-[#f6f2cb]/90 text-[#483621] font-label-small font-[number:var(--label-small-font-weight)] text-[length:var(--label-small-font-size)] tracking-[var(--label-small-letter-spacing)] leading-[var(--label-small-line-height)] [font-style:var(--label-small-font-style)] rounded-none h-auto shadow-none">
                 Créer un compte gratuit
               </Button>
 

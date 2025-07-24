@@ -49,7 +49,7 @@ export const NavigationSection = (): JSX.Element => {
         />
 
         {/* Navigation Menu */}
-        <NavigationMenu>
+        <NavigationMenu className="hidden md:flex">
           <NavigationMenuList className="flex items-center gap-4">
             {navItems.map((item) => (
               <NavigationMenuItem

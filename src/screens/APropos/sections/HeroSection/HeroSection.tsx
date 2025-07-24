@@ -1,13 +1,14 @@
 import { Card, CardContent } from "../../../../components/ui/card";
 
+
 export const HeroSection = (): JSX.Element => {
   // Data for roadmap points
   const roadmapPoints = [
     { top: "top-[405px]", left: "left-[944px]", number: "1" },
-    { top: "top-[783px]", left: "left-10", number: "1" },
-    { top: "top-[973px]", left: "left-[546px]", number: "1" },
-    { top: "top-[1527px]", left: "left-[944px]", number: "1" },
-    { top: "top-[1533px]", left: "left-[266px]", number: "1" },
+    { top: "top-[783px]", left: "left-10", number: "2" },
+    { top: "top-[973px]", left: "left-[546px]", number: "3" },
+    { top: "top-[1527px]", left: "left-[944px]", number: "5" },
+    { top: "top-[1533px]", left: "left-[266px]", number: "4" },
   ];
 
   return (
@@ -36,6 +37,8 @@ export const HeroSection = (): JSX.Element => {
           </CardContent>
         </Card>
       ))}
+      
     </section>
+      
   );
 };

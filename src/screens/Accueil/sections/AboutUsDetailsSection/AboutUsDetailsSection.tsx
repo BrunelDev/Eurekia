@@ -78,7 +78,9 @@ export const AboutUsDetailsSection = (): JSX.Element => {
                     {[1, 2, 3, 4].map((dot, index) => (
                       <div
                         key={`dot-${index}`}
-                        className={`w-3 h-3 rounded-md ${index === 0 ? "bg-[#cd9f25]" : "bg-[#d1d1d1]"}`}
+                        className={`w-3 h-3 rounded-md ${
+                          index === 0 ? "bg-[#cd9f25]" : "bg-[#d1d1d1]"
+                        }`}
                       />
                     ))}
                   </div>

@@ -1,0 +1,77 @@
+import { ArrowDownIcon, MailIcon, MapPinIcon, PhoneIcon } from "lucide-react";
+import { Button } from "../../../../components/ui/button";
+import { Card, CardContent } from "../../../../components/ui/card";
+
+export const HeroHeader = (): JSX.Element => {
+  const contactItems = [
+    {
+      icon: <MapPinIcon className="w-7 h-7 text-black" />,
+      description: "Nos bureaux sont situés en plein cœur de Paris.",
+      link: "15 rue des Projets, 75000 Paris, France",
+    },
+    {
+      icon: <PhoneIcon className="w-7 h-7 text-black" />,
+      description: "Appelez-nous du lundi au vendredi, de 9h à 18h",
+      link: "+33 1 23 45 67 89",
+    },
+    {
+      icon: <MailIcon className="w-7 h-7 text-black" />,
+      description: "Nous répondons sous 24h ouvrées",
+      link: "contact@eureka-ingenierie.fr",
+    },
+  ];
+
+  return (
+    <section className="w-full bg-[#fbf9eb]">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 min-h-[600px] lg:min-h-[832px]">
+          {/* Left side with heading and CTA */}
+          <div className="flex flex-col justify-center items-start gap-12 py-16 lg:py-24">
+            <div className="flex flex-col items-start gap-6">
+              <h1 className="text-4xl lg:text-5xl font-bold text-[#1e1e1e]">
+                Une <span className="text-[#cd9f25]">question</span> ? Un <span className="text-[#cd9f25]">projet</span> ? Parlons-en.
+              </h1>
+              <p className="text-lg text-[#1e1e1e]">
+                Notre équipe vous répond sous 24h ouvrées. Choisissez le canal de contact qui vous convient.
+              </p>
+            </div>
+            <Button variant="ghost" className="h-auto p-0 inline-flex items-center gap-3 group">
+              <span className="text-base font-medium text-[#1e1e1e]">Envoyer un message</span>
+              <div className="flex w-10 h-10 items-center justify-center rounded-full bg-yellow-300 group-hover:bg-yellow-400 transition-colors">
+                <ArrowDownIcon className="w-5 h-5 text-black" />
+              </div>
+            </Button>
+          </div>
+
+          {/* Right side with image and contact info */}
+          <div
+            className="relative w-full min-h-[400px] lg:min-h-full bg-cover bg-center"
+            style={{ backgroundImage: "url('/home4.jpg')" }}
+          >
+            <div className="absolute inset-0 flex items-center justify-center p-4">
+              <Card className="w-full max-w-md bg-[rgba(72,54,33,0.8)] border-none rounded-lg shadow-lg">
+                <CardContent className="p-6 sm:p-8 space-y-6">
+                  {contactItems.map((item, index) => (
+                    <div key={index} className="flex items-start gap-4">
+                      <div className="flex-shrink-0 flex w-14 h-14 items-center justify-center rounded-full bg-yellow-300">
+                        {item.icon}
+                      </div>
+                      <div className="flex flex-col gap-1">
+                        <p className="text-base text-white">
+                          {item.description}
+                        </p>
+                        <a href="#" className="text-base font-semibold text-[#f7e1aa] underline">
+                          {item.link}
+                        </a>
+                      </div>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};

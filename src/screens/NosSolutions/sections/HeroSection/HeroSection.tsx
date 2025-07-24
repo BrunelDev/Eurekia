@@ -26,7 +26,7 @@ export const HeroSection = (): JSX.Element => {
       {decorativeElements.map((element, index) => (
         <div
           key={`decorative-element-${index}`}
-          className={`absolute w-[167px] h-[167px] ${element.top} ${element.left} [background:url(..//frame-708.png)_50%_50%_/_cover]`}
+          className={`absolute w-[167px] h-[167px] ${element.top} ${element.left} [background:url(/checker.png)_50%_50%_/_cover]`}
         />
       ))}
     </section>

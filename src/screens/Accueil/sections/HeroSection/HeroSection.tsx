@@ -27,72 +27,76 @@ export const HeroSection = (): JSX.Element => {
   ];
 
   return (
-    <section className="relative w-full h-[832px] bg-white">
-      <img
-        className="absolute w-[624px] h-[760px] top-[72px] right-0 object-cover"
-        alt="Placeholder image"
-        src="/placeholder-image.png"
-      />
-
-      <div className="flex flex-col w-[565px] items-start gap-20 absolute top-[186px] left-[59px]">
-        <div className="flex flex-col items-start gap-[60px] relative self-stretch w-full">
-          <div className="gap-8 self-stretch w-full flex flex-col items-start">
-            <h1 className="self-stretch mt-[-1.00px] font-['Neulis_Alt-Regular',Helvetica] font-normal text-5xl leading-[48px]">
-              <span className="text-[#1e1e1e]">Pilotez vos </span>
-              <span className="text-[#cd9f25]">projets de construction</span>
-              <span className="text-[#1e1e1e]"> avec EURÊKA INGÉNIERIE!</span>
-            </h1>
-
-            <p className="self-stretch font-text-medium font-[number:var(--text-medium-font-weight)] text-[#1e1e1e] text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
-              Des solutions humaines et intelligentes pour piloter vos projets
-              de construction, de la simple rénovation à l&apos;ouvrage
-              complexe.
-            </p>
+    <section className="w-full bg-white">
+      <div className="container mx-auto px-0 sm:px-6 lg:px-8">
+        <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20 py-16 lg:py-24">
+          {/* Text Content */}
+          <div className="lg:w-1/2 flex px-4 sm:px-0 flex-col items-start gap-10">
+            <div className="flex flex-col items-start gap-6 self-stretch">
+              <h1 className="self-stretch font-['Neulis_Alt-Regular',Helvetica] font-normal text-3xl sm:text-4xl lg:text-5xl lg:leading-[1.2]">
+                <span className="text-[#1e1e1e]">Pilotez vos </span>
+                <span className="text-[#cd9f25]">projets de construction</span>
+                <span className="text-[#1e1e1e]"> avec EURÊKA INGÉNIERIE!</span>
+              </h1>
+              <p className="self-stretch text-base sm:text-lg text-[#1e1e1e]">
+                Des solutions humaines et intelligentes pour piloter vos projets
+                de construction, de la simple rénovation à l&apos;ouvrage
+                complexe.
+              </p>
+            </div>
+            <Button
+              variant="ghost"
+              className="h-12 px-0 py-0 gap-3 justify-start"
+            >
+              <span className="text-base font-medium text-[#1e1e1e]">
+                Découvrir nos solutions
+              </span>
+              <div className="flex w-10 h-10 items-center justify-center rounded-full [background:radial-gradient(50%_50%_at_50%_50%,rgba(249,229,185,1)_0%,rgba(248,227,181,1)_22%,rgba(246,224,172,1)_40%,rgba(242,218,155,1)_55%,rgba(237,210,131,1)_70%,rgba(231,199,101,1)_85%,rgba(223,186,65,1)_98%,rgba(222,184,59,1)_100%)]">
+                <ArrowRightIcon className="w-6 h-6 text-black" />
+              </div>
+            </Button>
           </div>
 
-          <Button
-            variant="ghost"
-            className="h-10 pl-0 pr-2 py-0 gap-3 justify-start"
-          >
-            <span className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#1e1e1e] text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] whitespace-nowrap [font-style:var(--label-medium-font-style)]">
-              Découvrir nos solutions
-            </span>
-            <div className="flex w-8 h-8 items-center justify-center rounded-[1000px] overflow-hidden [background:radial-gradient(50%_50%_at_50%_50%,rgba(249,229,185,1)_0%,rgba(248,227,181,1)_22%,rgba(246,224,172,1)_40%,rgba(242,218,155,1)_55%,rgba(237,210,131,1)_70%,rgba(231,199,101,1)_85%,rgba(223,186,65,1)_98%,rgba(222,184,59,1)_100%)]">
-              <ArrowRightIcon className="w-5 h-5 text-black" />
-            </div>
-          </Button>
+          {/* Image */}
+          <div className="w-full lg:flex lg:w-1/2 justify-center">
+            <img
+              className="w-full h-auto object-cover rounded-none shadow-none sm:rounded-lg sm:shadow-lg"
+              alt="Placeholder image"
+              src="/placeholder-image.png"
+            />
+          </div>
         </div>
 
-        <div className="flex items-center gap-8">
+        {/* Stats Section */}
+        <div className="flex flex-col md:flex-row items-center justify-center md:justify-around gap-8 md:gap-12 py-12 border-t border-gray-200">
           {statsData.map((stat, index) => (
             <React.Fragment key={`stat-${index}`}>
-              {index > 0 && (
-                <Separator
-                  orientation="vertical"
-                  className="h-auto self-stretch"
-                />
-              )}
-
-              <div className="flex flex-col w-[167px] items-start gap-5">
-                <h2 className="self-stretch mt-[-1.00px] font-heading-h1 font-[number:var(--heading-h1-font-weight)] text-[#444444] text-[length:var(--heading-h1-font-size)] tracking-[var(--heading-h1-letter-spacing)] leading-[var(--heading-h1-line-height)] [font-style:var(--heading-h1-font-style)]">
+              <div className="flex flex-col items-center md:items-start text-center md:text-left gap-4 max-w-xs">
+                <h2 className="text-3xl sm:text-4xl font-bold text-[#444444]">
                   {stat.number}
                 </h2>
-
-                <p className="self-stretch font-text-small font-[number:var(--text-small-font-weight)] text-[#1e1e1e] text-[length:var(--text-small-font-size)] tracking-[var(--text-small-letter-spacing)] leading-[var(--text-small-line-height)] [font-style:var(--text-small-font-style)]">
+                <p className="text-sm sm:text-base text-[#1e1e1e]">
                   {stat.description}
                 </p>
-
-                <div className="flex items-center">
+                <div className="flex items-center justify-center md:justify-start">
                   {stat.avatars.map((avatar, avatarIndex) => (
                     <img
                       key={`avatar-${index}-${avatarIndex}`}
-                      className={`relative w-6 h-6 ${avatarIndex > 0 ? "-ml-1" : ""} z-[${2 - avatarIndex}] object-cover`}
+                      className={`relative w-8 h-8 rounded-full border-2 border-white ${
+                        avatarIndex > 0 ? "-ml-2" : ""
+                      }`}
                       alt={avatar.alt}
                       src={avatar.src}
                     />
                   ))}
                 </div>
               </div>
+              {index < statsData.length - 1 && (
+                <Separator
+                  orientation="vertical"
+                  className="h-20 hidden md:block"
+                />
+              )}
             </React.Fragment>
           ))}
         </div>

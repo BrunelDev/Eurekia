@@ -1,7 +1,7 @@
-import React from "react";
 import { Button } from "../../../../components/ui/button";
 import { Card, CardContent, CardHeader } from "../../../../components/ui/card";
 import { Separator } from "../../../../components/ui/separator";
+import { ArrowRightIcon, BoxIcon } from "lucide-react";
 
 // Service item data for both cards
 const engineeringServices = [
@@ -22,133 +22,112 @@ const aiServices = [
 
 export const ProjectViewSection = (): JSX.Element => {
   return (
-    <section className="flex flex-wrap justify-center gap-8 py-16 bg-white">
-      {/* Engineering Services Card */}
-      <Card className="w-full max-w-[564px] h-[704px] rounded-[28px] overflow-hidden border-none shadow-none">
-        <div className="flex flex-col h-full">
-          <div className="flex items-center justify-between w-full">
-            <div className="bg-[#fbf9eb] translate-y-[10px]">
-              <CardHeader className="px-5 py-4 bg-white rounded-[0px_0px_28px_0px]">
-                <h2 className="font-heading-h1 text-[#1e1e1e] text-[length:var(--heading-h1-font-size)] tracking-[var(--heading-h1-letter-spacing)] leading-[var(--heading-h1-line-height)] [font-style:var(--heading-h1-font-style)]">
-                  EURÊKA INGENIERIE!
-                </h2>
-              </CardHeader>
-            </div>
-            <div className="flex-1 h-[69px] bg-[#fbf9eb] rounded-[28px_0px_0px_0px] "></div>
-          </div>
-
-          <CardContent className="flex-1 flex flex-col gap-5 p-8 bg-[#fbf9eb] rounded-[28px_0px_0px_0px]">
-            <div className="flex flex-col gap-10">
-              <div className="flex flex-col gap-5">
-                <p className="font-label-large text-[#444444] text-[length:var(--label-large-font-size)] tracking-[var(--label-large-letter-spacing)] leading-[var(--label-large-line-height)] [font-style:var(--label-large-font-style)]">
-                  L&apos;expertise humaine à vos côtés
+    <section className="bg-white py-16 sm:py-20 lg:py-24">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+          {/* Engineering Services Card */}
+          <Card className="w-full h-full flex flex-col rounded-3xl overflow-hidden border-none shadow-none bg-[#fbf9eb]">
+            <CardHeader className="p-6 sm:p-8">
+              <h2 className="text-3xl sm:text-4xl font-bold text-[#1e1e1e]">
+                EURÊKA INGENIERIE!
+              </h2>
+            </CardHeader>
+            <CardContent className="flex-1 flex flex-col gap-6 sm:gap-8 p-6 sm:p-8 pt-0">
+              <div className="flex flex-col gap-4">
+                <p className="text-lg font-semibold text-[#444444]">
+                  L'expertise humaine à vos côtés
                 </p>
-                <p className="font-text-medium text-[#1e1e1e] text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
+                <p className="text-base text-[#1e1e1e]">
                   Un accompagnement sur mesure par des professionnels du
                   bâtiment pour sécuriser chaque étape de votre projet.
                 </p>
               </div>
 
-              <Separator className="w-[150px] h-0.5 bg-[#deb83b]" />
+              <Separator className="w-24 h-1 bg-[#deb83b]" />
 
-              <div className="flex flex-col">
+              <div className="flex flex-col gap-2">
                 {engineeringServices.map((service, index) => (
                   <div
                     key={`engineering-service-${index}`}
-                    className="flex items-center gap-3 py-3 pr-2"
+                    className="flex items-center gap-4 py-2"
                   >
-                    <div className="w-5 h-5 bg-[url(/3dcube.svg)] bg-[100%_100%]" />
-                    <p className="flex-1 font-text-medium text-[#1e1e1e] text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
-                      {service}
-                    </p>
+                    <BoxIcon className="w-6 h-6 text-[#cd9f25]" />
+                    <p className="flex-1 text-base text-[#1e1e1e]">{service}</p>
                   </div>
                 ))}
               </div>
 
-              <p className="font-text-medium text-[#1e1e1e] text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
+              <p className="text-base text-[#1e1e1e]">
                 Un accompagnement sur mesure par des professionnels du bâtiment
                 pour sécuriser chaque étape de votre projet.
               </p>
 
               <Button
                 variant="ghost"
-                className="inline-flex h-10 items-center justify-start gap-3 p-0 w-fit"
+                className="inline-flex h-auto items-center justify-start gap-3 p-0 w-fit mt-auto"
               >
-                <span className="font-label-medium text-[#1e1e1e] text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)]">
+                <span className="text-base font-medium text-[#1e1e1e]">
                   Voir toutes les prestations
                 </span>
-                <div className="flex w-8 h-8 items-center justify-center rounded-[1000px] overflow-hidden [background:radial-gradient(50%_50%_at_50%_50%,rgba(249,229,185,1)_0%,rgba(248,227,181,1)_22%,rgba(246,224,172,1)_40%,rgba(242,218,155,1)_55%,rgba(237,210,131,1)_70%,rgba(231,199,101,1)_85%,rgba(223,186,65,1)_98%,rgba(222,184,59,1)_100%)]">
-                  <div className="w-5 h-5 bg-[url(/arrow-right.svg)] bg-[100%_100%]" />
+                <div className="flex w-10 h-10 items-center justify-center rounded-full overflow-hidden [background:radial-gradient(50%_50%_at_50%_50%,rgba(249,229,185,1)_0%,rgba(248,227,181,1)_22%,rgba(246,224,172,1)_40%,rgba(242,218,155,1)_55%,rgba(237,210,131,1)_70%,rgba(231,199,101,1)_85%,rgba(223,186,65,1)_98%,rgba(222,184,59,1)_100%)]">
+                  <ArrowRightIcon className="w-6 h-6 text-black" />
                 </div>
               </Button>
-            </div>
-          </CardContent>
-        </div>
-      </Card>
+            </CardContent>
+          </Card>
 
-      {/* AI Services Card */}
-      <Card className="w-full max-w-[564px] h-[704px] rounded-[28px] overflow-hidden border-none shadow-none">
-        <div className="flex flex-col h-full">
-          <div className="flex items-center justify-between w-full">
-            <div className="bg-[#f6f6f6] translate-y-[10px]">
-              <CardHeader className="px-5 py-4 bg-white  rounded-[0px_0px_28px_0px]">
-                <h2 className="font-heading-h1 text-[#1e1e1e] text-[length:var(--heading-h1-font-size)] tracking-[var(--heading-h1-letter-spacing)] leading-[var(--heading-h1-line-height)] [font-style:var(--heading-h1-font-style)]">
-                  EURÊK&apos;IA!
-                </h2>
-              </CardHeader>
-            </div>
-            <div className="flex-1 h-[69px] bg-[#f6f6f6] rounded-[28px_0px_0px_0px]"></div>
-          </div>
-
-          <CardContent className="flex-1 flex flex-col gap-5 p-8 bg-[#f6f6f6] rounded-[28px_0px_0px_0px]">
-            <div className="flex flex-col gap-10">
-              <div className="flex flex-col gap-5">
-                <p className="font-text-bold-large text-[#444444] text-[length:var(--text-bold-large-font-size)] tracking-[var(--text-bold-large-letter-spacing)] leading-[var(--text-bold-large-line-height)] [font-style:var(--text-bold-large-font-style)]">
-                  L&apos;intelligence artificielle pour construire mieux et plus
-                  vite
+          {/* AI Services Card */}
+          <Card className="w-full h-full flex flex-col rounded-3xl overflow-hidden border-none shadow-none bg-[#f6f6f6]">
+            <CardHeader className="p-6 sm:p-8">
+              <h2 className="text-3xl sm:text-4xl font-bold text-[#1e1e1e]">
+                EURÊK'IA!
+              </h2>
+            </CardHeader>
+            <CardContent className="flex-1 flex flex-col gap-6 sm:gap-8 p-6 sm:p-8 pt-0">
+              <div className="flex flex-col gap-4">
+                <p className="text-lg font-semibold text-[#444444]">
+                  L'intelligence artificielle pour construire mieux et plus vite
                 </p>
-                <p className="font-text-medium text-[#1e1e1e] text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
+                <p className="text-base text-[#1e1e1e]">
                   Des outils puissants pour simuler, générer et structurer vos
                   projets en toute autonomie.
                 </p>
               </div>
 
-              <Separator className="w-[150px] h-0.5 bg-[#deb83b]" />
+              <Separator className="w-24 h-1 bg-[#deb83b]" />
 
-              <div className="flex flex-col">
+              <div className="flex flex-col gap-2">
                 {aiServices.map((service, index) => (
                   <div
                     key={`ai-service-${index}`}
-                    className="flex items-center gap-3 py-3 pr-2"
+                    className="flex items-center gap-4 py-2"
                   >
-                    <div className="w-5 h-5 bg-[url(/3dcube.svg)] bg-[100%_100%]" />
-                    <p className="flex-1 font-text-medium text-[#1e1e1e] text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
-                      {service}
-                    </p>
+                    <BoxIcon className="w-6 h-6 text-[#cd9f25]" />
+                    <p className="flex-1 text-base text-[#1e1e1e]">{service}</p>
                   </div>
                 ))}
               </div>
 
-              <p className="font-text-medium text-[#1e1e1e] text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
+              <p className="text-base text-[#1e1e1e]">
                 Un accompagnement sur mesure par des professionnels du bâtiment
                 pour sécuriser chaque étape de votre projet.
               </p>
 
               <Button
                 variant="ghost"
-                className="inline-flex h-10 items-center justify-start gap-3 p-0 w-fit"
+                className="inline-flex h-auto items-center justify-start gap-3 p-0 w-fit mt-auto"
               >
-                <span className="font-label-medium text-[#1e1e1e] text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)]">
-                  Découvrir l&apos;assistant IA
+                <span className="text-base font-medium text-[#1e1e1e]">
+                  Découvrir l'assistant IA
                 </span>
-                <div className="flex w-8 h-8 items-center justify-center rounded-[1000px] overflow-hidden [background:radial-gradient(50%_50%_at_50%_50%,rgba(249,229,185,1)_0%,rgba(248,227,181,1)_22%,rgba(246,224,172,1)_40%,rgba(242,218,155,1)_55%,rgba(237,210,131,1)_70%,rgba(231,199,101,1)_85%,rgba(223,186,65,1)_98%,rgba(222,184,59,1)_100%)]">
-                  <div className="w-5 h-5 bg-[url(/arrow-right.svg)] bg-[100%_100%]" />
+                <div className="flex w-10 h-10 items-center justify-center rounded-full overflow-hidden [background:radial-gradient(50%_50%_at_50%_50%,rgba(249,229,185,1)_0%,rgba(248,227,181,1)_22%,rgba(246,224,172,1)_40%,rgba(242,218,155,1)_55%,rgba(237,210,131,1)_70%,rgba(231,199,101,1)_85%,rgba(223,186,65,1)_98%,rgba(222,184,59,1)_100%)]">
+                  <ArrowRightIcon className="w-6 h-6 text-black" />
                 </div>
               </Button>
-            </div>
-          </CardContent>
+            </CardContent>
+          </Card>
         </div>
-      </Card>
+      </div>
     </section>
   );
 };

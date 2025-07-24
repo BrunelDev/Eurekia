@@ -29,7 +29,7 @@ export const SolutionsOverviewSection = (): JSX.Element => {
   return (
     <section className="w-full bg-white py-24">
       <div className="container flex flex-col md:flex-row items-center gap-8 max-w-[1220px] mx-auto">
-        <div className="relative w-full md:w-1/2 h-[621px] bg-[url(..//frame-679.png)] bg-cover bg-center rounded-md" />
+        <div className="relative w-full md:w-1/2 h-[621px] bg-[url(/placeholder-image.png)] bg-cover bg-center rounded-md" />
 
         <div className="flex flex-col w-full md:w-1/2 items-start gap-[60px]">
           <div className="flex flex-col items-start gap-8 w-full">

@@ -34,7 +34,7 @@ export const BlogPresentationSection = (): JSX.Element => {
       <div className="container max-w-7xl mx-auto px-4">
         <div className="flex flex-col gap-10">
           {/* Header section */}
-          <div className="flex items-end justify-between gap-3 w-full">
+          <div className="flex flex-wrap items-end justify-between gap-3 w-full">
             <div className="flex flex-col items-start gap-5 flex-1">
               <h2 className="font-display-h4 font-[number:var(--display-h4-font-weight)] text-[#1e1e1e] text-[length:var(--display-h4-font-size)] tracking-[var(--display-h4-letter-spacing)] leading-[var(--display-h4-line-height)] [font-style:var(--display-h4-font-style)]">
                 Apprenez, explorez, restez à jour

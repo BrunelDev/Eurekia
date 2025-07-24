@@ -45,7 +45,7 @@ export const FooterSection = (): JSX.Element => {
 
         {/* Newsletter subscription section */}
         <div className="relative w-full">
-          <div className="flex items-center gap-8 relative py-16 px-16">
+          <div className="flex flex-wrap items-center gap-8 relative py-16 px-16">
             <div className="flex flex-col items-start gap-5 relative flex-1 grow">
               <div className="relative self-stretch mt-[-1.00px] [font-family:'Neulis_Alt-Regular',Helvetica] font-normal text-[#f6f6f6] text-4xl tracking-[0] leading-[normal]">
                 Rejoignez la communauté EURÊKA
@@ -83,7 +83,7 @@ export const FooterSection = (): JSX.Element => {
         {/* Main footer content */}
         <div className="flex flex-col w-full items-start gap-12 pt-0 pb-[60px] px-[60px] relative">
           {/* Navigation links */}
-          <div className="inline-flex items-center gap-4 relative flex-[0_0_auto]">
+          <div className="inline-flex flex-wrap items-center gap-4 relative flex-[0_0_auto]">
             {navLinks.map((link, index) => (
               <div
                 key={index}
@@ -108,9 +108,9 @@ export const FooterSection = (): JSX.Element => {
             <div className="flex flex-col items-start gap-8 relative self-stretch w-full flex-[0_0_auto]">
               <Separator className="h-px bg-[#f6f6f6]/20" />
 
-              <div className="flex items-start justify-between relative self-stretch w-full">
+              <div className="flex flex-wrap items-start justify-between relative self-stretch w-full">
                 {/* Policy links */}
-                <div className="inline-flex items-start gap-6 relative flex-[0_0_auto]">
+                <div className="inline-flex flex-wrap items-start gap-6 relative">
                   {policyLinks.map((link, index) => (
                     <div
                       key={index}
