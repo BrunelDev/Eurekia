@@ -27,7 +27,7 @@ export const ProjectViewSection = (): JSX.Element => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Engineering Services Card */}
           <Card className="w-full h-full flex flex-col rounded-3xl overflow-hidden border-none shadow-none bg-[#fbf9eb]">
-            <CardHeader className="p-6 sm:p-8">
+            <CardHeader className="p-6 sm:p-8 rounded-[0px_0px_28px_0px]">
               <h2 className="text-3xl sm:text-4xl font-bold text-[#1e1e1e]">
                 EURÊKA INGENIERIE!
               </h2>

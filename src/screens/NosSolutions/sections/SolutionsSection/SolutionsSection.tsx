@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Accordion,
   AccordionContent,
@@ -13,83 +12,87 @@ export const SolutionsSection = (): JSX.Element => {
   const services = [
     {
       title: "Assistant à la Maîtrise d'Ouvrage (AMO)",
-      content: "",
+      content: "Description for AMO service.",
     },
     {
       title: "Maîtrise d'Œuvre (MOE)",
-      content: "",
+      content: "Description for MOE service.",
     },
     {
       title: "Ordonnancement, Pilotage, Coordination (OPC)",
-      content: "",
+      content: "Description for OPC service.",
     },
     {
       title: "Études techniques, notices, autorisations",
-      content: "",
+      content: "Description for technical studies.",
     },
     {
       title: "Rédaction de CCTP, CCAP, DPGF, etc.",
-      content: "",
+      content: "Description for document writing.",
     },
   ];
 
   return (
-    <section className="relative w-full py-16 flex flex-row justify-between items-center">
-      {/* Left column - Title and description */}
-      <div className="flex flex-col w-[365px] items-start gap-8 ml-[60px]">
-        <h2 className="self-stretch font-display-h3 font-[number:var(--display-h3-font-weight)] text-[#1e1e1e] text-[length:var(--display-h3-font-size)] tracking-[var(--display-h3-letter-spacing)] leading-[var(--display-h3-line-height)] [font-style:var(--display-h3-font-style)]">
-          EURÊKA INGENIERIE!
-        </h2>
+    <section className="w-full py-16 px-4 sm:px-8 lg:px-12 mt-[250px]">
+      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-center items-center gap-12 lg:gap-8">
+        
+        {/* Image Column - Order 1 on mobile, Order 2 on desktop */}
+        <div className="w-full lg:w-1/3 order-1 lg:order-2">
+          <div className="h-[400px] md:h-[600px] bg-[url(/engineer.png)] bg-cover bg-center rounded-lg" />
+        </div>
 
-        <p className="self-stretch font-text-medium font-[number:var(--text-medium-font-weight)] text-[#1e1e1e] text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
-          L&apos;expertise terrain de notre équipe pour piloter vos projets
-        </p>
-
-        <Button
-          variant="ghost"
-          className="h-10 pl-0 pr-2 py-0 flex items-center gap-3 hover:bg-transparent"
-        >
-          <span className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#1e1e1e] text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] whitespace-nowrap [font-style:var(--label-medium-font-style)]">
-            Découvrir les prestations
-          </span>
-          <div className="flex w-8 h-8 items-center justify-center rounded-[1000px] overflow-hidden [background:radial-gradient(50%_50%_at_50%_50%,rgba(249,229,185,1)_0%,rgba(248,227,181,1)_22%,rgba(246,224,172,1)_40%,rgba(242,218,155,1)_55%,rgba(237,210,131,1)_70%,rgba(231,199,101,1)_85%,rgba(223,186,65,1)_98%,rgba(222,184,59,1)_100%)]">
-            <div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-              <div className="relative w-5 h-5 bg-[url(/arrow-right.svg)] bg-[100%_100%]" />
+        {/* Left Column - Title and description - Order 2 on mobile, Order 1 on desktop */}
+        <div className="w-full lg:w-1/3 flex flex-col items-start gap-8 order-2 lg:order-1">
+          <h2 className="self-stretch font-display-h3 font-[number:var(--display-h3-font-weight)] text-[#1e1e1e] text-[length:var(--display-h3-font-size)] tracking-[var(--display-h3-letter-spacing)] leading-[var(--display-h3-line-height)] [font-style:var(--display-h3-font-style)]">
+            EURÊKA INGENIERIE!
+          </h2>
+          <p className="self-stretch font-text-medium font-[number:var(--text-medium-font-weight)] text-[#1e1e1e] text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
+            L'expertise terrain de notre équipe pour piloter vos projets
+          </p>
+          <Button
+            variant="ghost"
+            className="h-10 pl-0 pr-2 py-0 flex items-center gap-3 hover:bg-transparent"
+          >
+            <span className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#1e1e1e] text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] whitespace-nowrap [font-style:var(--label-medium-font-style)]">
+              Découvrir les prestations
+            </span>
+            <div className="flex w-8 h-8 items-center justify-center rounded-[1000px] overflow-hidden [background:radial-gradient(50%_50%_at_50%_50%,rgba(249,229,185,1)_0%,rgba(248,227,181,1)_22%,rgba(246,224,172,1)_40%,rgba(242,218,155,1)_55%,rgba(237,210,131,1)_70%,rgba(231,199,101,1)_85%,rgba(223,186,65,1)_98%,rgba(222,184,59,1)_100%)]">
+              <div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
+                <div className="relative w-5 h-5 bg-[url(/arrow-right.svg)] bg-[100%_100%]" />
+              </div>
             </div>
-          </div>
-        </Button>
-      </div>
+          </Button>
+        </div>
 
-      {/* Center column - Image */}
-      <div className="w-[366px] h-[600px] bg-[url(/engineer.png)] bg-cover bg-[50%_50%]" />
-
-      {/* Right column - Services accordion */}
-      <div className="flex flex-col w-[365px] items-start gap-6 mr-[60px]">
-        <Accordion type="single" collapsible className="w-full">
-          {services.map((service, index) => (
-            <AccordionItem
-              key={index}
-              value={`item-${index}`}
-              className="border-0 mb-6 last:mb-0"
-            >
-              <Card className="bg-[#fbf9eb]">
-                <CardContent className="p-3">
-                  <AccordionTrigger className="hover:no-underline p-0">
-                    <h3 className="text-left font-heading-h5 font-[number:var(--heading-h5-font-weight)] text-[#1e1e1e] text-[length:var(--heading-h5-font-size)] tracking-[var(--heading-h5-letter-spacing)] leading-[var(--heading-h5-line-height)] [font-style:var(--heading-h5-font-style)]">
-                      {service.title}
-                    </h3>
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    <p className="font-text-small font-[number:var(--text-small-font-weight)] text-[#1e1e1e] text-[length:var(--text-small-font-size)] tracking-[var(--text-small-letter-spacing)] leading-[var(--text-small-line-height)] [font-style:var(--text-small-font-style)]">
-                      {service.content}
-                    </p>
-                  </AccordionContent>
-                </CardContent>
-              </Card>
-            </AccordionItem>
-          ))}
-        </Accordion>
+        {/* Right Column - Services accordion - Order 3 on all screens */}
+        <div className="w-full lg:w-1/3 flex flex-col items-start gap-6 order-3">
+          <Accordion type="single" collapsible className="w-full">
+            {services.map((service, index) => (
+              <AccordionItem
+                key={index}
+                value={`item-${index}`}
+                className="border-0 mb-6 last:mb-0"
+              >
+                <Card className="bg-[#fbf9eb]">
+                  <CardContent className="p-3">
+                    <AccordionTrigger className="hover:no-underline p-0">
+                      <h3 className="text-left font-heading-h5 font-[number:var(--heading-h5-font-weight)] text-[#1e1e1e] text-[length:var(--heading-h5-font-size)] tracking-[var(--heading-h5-letter-spacing)] leading-[var(--heading-h5-line-height)] [font-style:var(--heading-h5-font-style)]">
+                        {service.title}
+                      </h3>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <p className="font-text-small font-[number:var(--text-small-font-weight)] text-[#1e1e1e] text-[length:var(--text-small-font-size)] tracking-[var(--text-small-letter-spacing)] leading-[var(--text-small-line-height)] [font-style:var(--text-small-font-style)]">
+                        {service.content}
+                      </p>
+                    </AccordionContent>
+                  </CardContent>
+                </Card>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
       </div>
     </section>
   );
 };
+
