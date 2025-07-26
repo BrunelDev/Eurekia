@@ -26,7 +26,7 @@ export const ProjectViewSection = (): JSX.Element => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           {/* Engineering Services Card */}
-          <Card className="w-full max-w-[564px] h-[704px] rounded-[28px] overflow-hidden border-none shadow-none">
+          <Card className="w-full max-w-[564px] min-h-[704px] rounded-[28px] overflow-hidden border-none shadow-none">
             <div className="flex flex-col h-full">
               <div className="flex items-center justify-between w-full translate-y-1 rounded-tr-[28px] overflow-hidden">
                 <div className="bg-[#fbf9eb] ">
@@ -93,7 +93,7 @@ export const ProjectViewSection = (): JSX.Element => {
           </Card>
 
           {/* AI Services Card */}
-          <Card className="w-full max-w-[564px] h-[704px] rounded-[28px] overflow-hidden border-none shadow-none">
+          <Card className="w-full max-w-[564px] min-h-[704px] rounded-[28px] overflow-hidden border-none shadow-none">
             <div className="flex flex-col h-full">
               <div className="flex items-center justify-between w-full translate-y-1 rounded-tr-[28px] overflow-hidden">
                 <div className="bg-[#f6f6f6] ">
