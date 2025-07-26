@@ -16,12 +16,12 @@ export const ContactFormSection = (): JSX.Element => {
     { id: "partenariat", label: "Partenariat" },
     { id: "autre", label: "Autre" },
   ];
-  const [selectedSubject, setSelectedSubject] = useState<string>("");
+  const [selectedSubject, setSelectedSubject] = useState<string>("information");
 
   return (
     <section className="w-full bg-white py-16 sm:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl">
-        <form className="flex flex-col gap-10">
+        <form className="flex flex-col gap-10 px-4">
           {/* Input Fields */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
             <div className="flex flex-col gap-2">

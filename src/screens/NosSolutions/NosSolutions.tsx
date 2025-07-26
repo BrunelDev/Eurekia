@@ -1,4 +1,3 @@
-import React from "react";
 import { CallToActionSection } from "./sections/CallToActionSection";
 import { FooterSection } from "../../components/FooterSection";
 import { HeroSection } from "./sections/HeroSection";

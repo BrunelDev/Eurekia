@@ -12,7 +12,7 @@ export const CallToActionSection = (): JSX.Element => {
   ];
 
   return (
-    <section className="relative w-full py-24 bg-[#fbf9eb] z-[1]">
+    <section className="relative w-full py-24 bg-[#fbf9eb] z-[1] overflow-hidden">
       <div className="flex flex-col items-center justify-center gap-8 mx-auto max-w-screen-md">
         <div className="flex flex-col items-center justify-center gap-6 w-full">
           <h2 className="font-display-h4 text-[#1e1e1e] text-[length:var(--display-h4-font-size)] text-center tracking-[var(--display-h4-letter-spacing)] leading-[var(--display-h4-line-height)] [font-style:var(--display-h4-font-style)]">
@@ -37,7 +37,7 @@ export const CallToActionSection = (): JSX.Element => {
       {decorativeCircles.map((circle, index) => (
         <div
           key={`circle-${index}`}
-          className={`absolute w-8 h-8 bg-white rounded-2xl ${circle.top} ${circle.left}`}
+          className={`absolute w-8 h-8 bg-white rounded-2xl ${circle.top} ${circle.left} -z-10`}
         />
       ))}
     </section>
