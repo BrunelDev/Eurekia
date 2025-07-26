@@ -45,14 +45,17 @@ export const HeroSection = (): JSX.Element => {
               </p>
             </div>
             <Button
-              variant="ghost"
-              className="h-12 px-0 py-0 gap-3 justify-start"
+              variant="default"
+              className="h-12 px-0 py-0 gap-3 w-[207px] bg-transparent hover:bg-transparent justify-start group hover:gap-1 hover:px-2 transition-all duration-300"
             >
-              <span className="text-base font-medium text-[#1e1e1e]">
+              <a
+                href="/nos-solutions"
+                className="text-base font-medium text-[#1e1e1e] group-hover:text-[#cd9f25]"
+              >
                 Découvrir nos solutions
-              </span>
-              <div className="flex w-10 h-10 items-center justify-center rounded-full [background:radial-gradient(50%_50%_at_50%_50%,rgba(249,229,185,1)_0%,rgba(248,227,181,1)_22%,rgba(246,224,172,1)_40%,rgba(242,218,155,1)_55%,rgba(237,210,131,1)_70%,rgba(231,199,101,1)_85%,rgba(223,186,65,1)_98%,rgba(222,184,59,1)_100%)]">
-                <ArrowRightIcon className="w-6 h-6 text-black" />
+              </a>
+              <div className="flex w-10 h-10 items-center justify-center rounded-full bg-radial-gold group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white">
+                <ArrowRightIcon className="w-6 h-6 text-black group-hover:text-[#cd9f25]" />
               </div>
             </Button>
           </div>

@@ -33,7 +33,7 @@ export const SolutionsSection = (): JSX.Element => {
   ];
 
   return (
-    <section className="w-full py-16 px-4 sm:px-8 lg:px-12 mt-[250px]">
+    <section className="w-full py-16 px-4 sm:px-8 lg:px-12 md:mt-[320px] mt-0">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-center items-center gap-12 lg:gap-8">
         {/* Image Column - Order 1 on mobile, Order 2 on desktop */}
         <div className="w-full lg:w-1/3 order-1 lg:order-2">

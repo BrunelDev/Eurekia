@@ -15,7 +15,7 @@ export const NavigationSection = (): JSX.Element => {
   const navItems = [
     { label: "Accueil", path: "/", active: location.pathname === "/" },
     {
-      label: "A propos",
+      label: "À propos",
       path: "/a-propos",
       active: location.pathname === "/a-propos",
     },
@@ -64,7 +64,7 @@ export const NavigationSection = (): JSX.Element => {
               >
                 <Link to={item.path} className="relative group flex flex-col items-center">
                   <span
-                    className={`font-label-medium text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] ${
+                    className={`font-label-medium text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] hover:text-[#deb83b] transition-all duration-300 ease-out ${
                       item.active
                         ? "text-[#1e1e1e]"
                         : "text-[#1e1e1e] opacity-60"
@@ -72,9 +72,7 @@ export const NavigationSection = (): JSX.Element => {
                   >
                     {item.label}
                   </span>
-                  <div
-                    className={`absolute -bottom-3 left-1/2 -translate-x-1/2 h-0.5 bg-[#deb83b] transition-all duration-300 ease-out ${item.active ? "w-full" : "w-0 group-hover:w-full"}`}
-                  />
+                 
                 </Link>
               </NavigationMenuItem>
             ))}

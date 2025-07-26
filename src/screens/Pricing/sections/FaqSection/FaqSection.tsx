@@ -33,12 +33,6 @@ export const FaqSection = (): JSX.Element => {
   return (
     <section className="relative w-full bg-[#f6f6f6] py-16 overflow-hidden">
       <div className="relative w-full max-w-[1160px] mx-auto">
-        <img
-          className="absolute w-[706px] h-auto top-[-136px] right-[-60px]"
-          alt="Vector"
-          src="/vector-1.svg"
-        />
-
         <div className="flex flex-col items-center gap-10 relative z-10">
           <h2 className="font-display-h3 font-[number:var(--display-h3-font-weight)] text-[#313131] text-[length:var(--display-h3-font-size)] text-center tracking-[var(--display-h3-letter-spacing)] leading-[var(--display-h3-line-height)] [font-style:var(--display-h3-font-style)]">
             FAQ&apos;s

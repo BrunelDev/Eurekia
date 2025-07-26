@@ -19,7 +19,7 @@ export const ContactFormSection = (): JSX.Element => {
   const [selectedSubject, setSelectedSubject] = useState<string>("information");
 
   return (
-    <section className="w-full bg-white py-16 sm:py-20 lg:py-24">
+    <section className="w-full bg-white py-16 sm:py-20 lg:py-24" id="contact-form">
       <div className="mx-auto max-w-7xl">
         <form className="flex flex-col gap-10 px-4">
           {/* Input Fields */}

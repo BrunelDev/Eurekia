@@ -3,6 +3,33 @@ import { Button } from "../../../../components/ui/button";
 import { Card, CardContent } from "../../../../components/ui/card";
 
 export const HeroHeader = (): JSX.Element => {
+  const handleScrollToContact = () => {
+    const contactForm = document.getElementById("contact-form");
+    if (contactForm) {
+      const targetPosition = contactForm.getBoundingClientRect().top + window.pageYOffset;
+      const startPosition = window.pageYOffset;
+      const distance = targetPosition - startPosition;
+      const duration = 1000; // Scroll duration in milliseconds (1 second)
+      let startTime: number | null = null;
+
+      const easeInOutQuad = (t: number, b: number, c: number, d: number) => {
+        t /= d / 2;
+        if (t < 1) return (c / 2) * t * t + b;
+        t--;
+        return (-c / 2) * (t * (t - 2) - 1) + b;
+      };
+
+      const animation = (currentTime: number) => {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const run = easeInOutQuad(timeElapsed, startPosition, distance, duration);
+        window.scrollTo(0, run);
+        if (timeElapsed < duration) requestAnimationFrame(animation);
+      };
+
+      requestAnimationFrame(animation);
+    }
+  };
   const contactItems = [
     {
       icon: <MapPinIcon className="w-7 h-7 text-black" />,
@@ -39,21 +66,18 @@ export const HeroHeader = (): JSX.Element => {
                 de contact qui vous convient.
               </p>
             </div>
-            <Button
-              variant="ghost"
-              className="h-auto p-0 inline-flex items-center gap-3 group"
+                        <Button
+              variant="default"
+              className="h-auto w-[185px] p-0 inline-flex items-center gap-3 group bg-transparent hover:bg-transparent hover:px-2 hover:gap-1 transition-all duration-300"
+              onClick={handleScrollToContact}
             >
-              <span className="text-base font-medium text-[#1e1e1e]">
+              <span className="text-base font-medium text-[#1e1e1e] group-hover:text-[#cd9f25]">
                 Envoyer un message
               </span>
-              <div
-                className="flex w-10 h-10 items-center justify-center rounded-full group-hover:bg-yellow-400 transition-colors"
-                style={{
-                  background:
-                    "radial-gradient(circle, #F9E5B9, #F8E3B5, #F6E0AC, #F2DA9B, #EDD283, #E7C765, #DFBA41, #DEB83B)",
-                }}
+                            <div
+                className="flex w-10 h-10 items-center justify-center rounded-full bg-radial-gold-circle group-hover:bg-gradient-to-r group-hover:from-transparent group-hover:to-transparent transition-all duration-300"
               >
-                <ArrowDownIcon className="w-5 h-5 text-black" />
+                <ArrowDownIcon className="w-5 h-5 text-black group-hover:text-[#cd9f25]" />
               </div>
             </Button>
           </div>
@@ -68,12 +92,8 @@ export const HeroHeader = (): JSX.Element => {
                 <CardContent className="p-6 sm:p-8 space-y-6">
                   {contactItems.map((item, index) => (
                     <div key={index} className="flex items-start gap-4">
-                      <div
-                        className="flex-shrink-0 flex w-14 h-14 items-center justify-center rounded-full"
-                        style={{
-                          background:
-                            "radial-gradient(circle, #F9E5B9, #F8E3B5, #F6E0AC, #F2DA9B, #EDD283, #E7C765, #DFBA41, #DEB83B)",
-                        }}
+                                            <div
+                        className="flex-shrink-0 flex w-14 h-14 items-center justify-center rounded-full bg-radial-gold-circle"
                       >
                         {item.icon}
                       </div>
