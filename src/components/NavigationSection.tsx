@@ -42,7 +42,8 @@ export const NavigationSection = (): JSX.Element => {
   ];
 
   return (
-    <header className="w-full bg-white py-4 px-4 sm:px-8 md:px-[60px] z-[4] relative">
+    <header className="w-full bg-white py-4 px-4 sm:px-8 md:px-[60px] relative"
+    style={{zIndex: 9999}}>
       <div className="flex items-center justify-between w-full">
         {/* Logo */}
         <Link to="/">
@@ -61,7 +62,7 @@ export const NavigationSection = (): JSX.Element => {
                 key={item.label}
                 className="h-9 flex flex-col items-center justify-center gap-0.5"
               >
-                <Link to={item.path} className="flex flex-col items-center">
+                <Link to={item.path} className="relative group flex flex-col items-center">
                   <span
                     className={`font-label-medium text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] ${
                       item.active
@@ -72,9 +73,7 @@ export const NavigationSection = (): JSX.Element => {
                     {item.label}
                   </span>
                   <div
-                    className={`w-5 h-0.5 rounded-[1000px] ${
-                      item.active ? "bg-[#deb83b]" : ""
-                    }`}
+                    className={`absolute -bottom-3 left-1/2 -translate-x-1/2 h-0.5 bg-[#deb83b] transition-all duration-300 ease-out ${item.active ? "w-full" : "w-0 group-hover:w-full"}`}
                   />
                 </Link>
               </NavigationMenuItem>
@@ -97,10 +96,15 @@ export const NavigationSection = (): JSX.Element => {
           </div>
 
           {/* Mobile Menu Button */}
-          {/*<div className="md:hidden">*/}
-          <div className="">
+          <div className="md:hidden">
             <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="z-50">
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMenuOpen ? (
+                <X size={24} />
+              ) : (
+                <div className="border rounded-md p-2">
+                  <Menu size={24} />
+                </div>
+              )}
             </button>
           </div>
         </div>
@@ -108,19 +112,22 @@ export const NavigationSection = (): JSX.Element => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <NavigationMenu className="absolute top-0 left-0 right-0 w-full max-w-full h-screen bg-white z-10 flex flex-col gap-y-2">
-          <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="z-50 absolute top-4 right-4">
+        <NavigationMenu className="md:hidden absolute top-0 left-0 right-0 w-full max-w-full h-screen bg-white z-10 flex flex-col gap-y-2">
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="z-50 absolute top-4 right-4"
+          >
             <X size={24} />
           </button>
           <NavigationMenuList className="flex flex-col items-center gap-4 py-4 w-full">
             {navItems.map((item) => (
               <NavigationMenuItem
                 key={item.label}
-                className="h-9 flex flex-col items-center justify-center gap-0.5"
+                className={`h-9 flex flex-col items-center justify-center gap-0.5`}
               >
                 <Link
                   to={item.path}
-                  className="flex flex-col items-center"
+                  className="relative group flex flex-col items-center"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <span
@@ -133,8 +140,8 @@ export const NavigationSection = (): JSX.Element => {
                     {item.label}
                   </span>
                   <div
-                    className={`w-5 h-0.5 rounded-[1000px] ${
-                      item.active ? "bg-[#deb83b]" : ""
+                    className={`absolute -bottom-1 left-1/2 -translate-x-1/2 h-0.5 bg-[#deb83b] transition-all duration-300 ease-out ${
+                      item.active ? "w-1/2" : "w-0 group-hover:w-1/2"
                     }`}
                   />
                 </Link>

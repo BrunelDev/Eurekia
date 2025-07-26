@@ -7,7 +7,7 @@ import {
   AccordionTrigger,
 } from "../../../../components/ui/accordion";
 import { Button } from "../../../../components/ui/button";
-import { Card } from "../../../../components/ui/card";
+import { Card, CardContent } from "../../../../components/ui/card";
 
 export const SolutionsOverviewSection = (): JSX.Element => {
   // Data for the accordion items
@@ -44,20 +44,15 @@ export const SolutionsOverviewSection = (): JSX.Element => {
           </div>
 
           <div className="w-full">
-            <Accordion type="single" collapsible className="w-full">
-              {solutionItems.map((item, index) => (
-                <AccordionItem key={index} value={`item-${index}`}>
-                  <Card className="mb-3 bg-[#fbf9eb] border-none">
-                    <AccordionTrigger className="px-3 py-3 font-heading-h5 text-[#1e1e1e] text-[length:var(--heading-h5-font-size)] tracking-[var(--heading-h5-letter-spacing)] leading-[var(--heading-h5-line-height)]">
-                      {item.title}
-                    </AccordionTrigger>
-                    <AccordionContent className="px-3 pb-3 font-text-small text-[#1e1e1e] text-[length:var(--text-small-font-size)] tracking-[var(--text-small-letter-spacing)] leading-[var(--text-small-line-height)]">
-                      {item.content}
-                    </AccordionContent>
-                  </Card>
-                </AccordionItem>
-              ))}
-            </Accordion>
+            {solutionItems.map((item) => (
+              <Card className="mb-3 bg-[#fbf9eb] border-none rounded-none shadow-none w-full">
+                <CardContent className="p-3">
+                  <h3 className="text-left font-heading-h5 font-[number:var(--heading-h5-font-weight)] text-[#1e1e1e] text-[length:var(--heading-h5-font-size)] tracking-[var(--heading-h5-letter-spacing)] leading-[var(--heading-h5-line-height)] [font-style:var(--heading-h5-font-style)]">
+                    {item.title}
+                  </h3>
+                </CardContent>
+              </Card>
+            ))}
           </div>
 
           <Button variant="ghost" className="p-0 h-auto hover:bg-transparent">

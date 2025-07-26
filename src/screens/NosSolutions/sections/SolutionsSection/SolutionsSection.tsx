@@ -35,7 +35,6 @@ export const SolutionsSection = (): JSX.Element => {
   return (
     <section className="w-full py-16 px-4 sm:px-8 lg:px-12 mt-[250px]">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-center items-center gap-12 lg:gap-8">
-        
         {/* Image Column - Order 1 on mobile, Order 2 on desktop */}
         <div className="w-full lg:w-1/3 order-1 lg:order-2">
           <div className="h-[400px] md:h-[600px] bg-[url(/engineer.png)] bg-cover bg-center rounded-lg" />
@@ -66,33 +65,17 @@ export const SolutionsSection = (): JSX.Element => {
 
         {/* Right Column - Services accordion - Order 3 on all screens */}
         <div className="w-full lg:w-1/3 flex flex-col items-start gap-6 order-3">
-          <Accordion type="single" collapsible className="w-full">
-            {services.map((service, index) => (
-              <AccordionItem
-                key={index}
-                value={`item-${index}`}
-                className="border-0 mb-6 last:mb-0"
-              >
-                <Card className="bg-[#fbf9eb]">
-                  <CardContent className="p-3">
-                    <AccordionTrigger className="hover:no-underline p-0">
-                      <h3 className="text-left font-heading-h5 font-[number:var(--heading-h5-font-weight)] text-[#1e1e1e] text-[length:var(--heading-h5-font-size)] tracking-[var(--heading-h5-letter-spacing)] leading-[var(--heading-h5-line-height)] [font-style:var(--heading-h5-font-style)]">
-                        {service.title}
-                      </h3>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <p className="font-text-small font-[number:var(--text-small-font-weight)] text-[#1e1e1e] text-[length:var(--text-small-font-size)] tracking-[var(--text-small-letter-spacing)] leading-[var(--text-small-line-height)] [font-style:var(--text-small-font-style)]">
-                        {service.content}
-                      </p>
-                    </AccordionContent>
-                  </CardContent>
-                </Card>
-              </AccordionItem>
-            ))}
-          </Accordion>
+          {services.map((service, index) => (
+            <Card className="bg-[#fbf9eb] rounded-none shadow-none w-full border-none">
+              <CardContent className="p-3">
+                <h3 className="text-left font-heading-h5 font-[number:var(--heading-h5-font-weight)] text-[#1e1e1e] text-[length:var(--heading-h5-font-size)] tracking-[var(--heading-h5-letter-spacing)] leading-[var(--heading-h5-line-height)] [font-style:var(--heading-h5-font-style)]">
+                  {service.title}
+                </h3>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </div>
     </section>
   );
 };
-

@@ -28,10 +28,10 @@ export const HeroSection = (): JSX.Element => {
 
   return (
     <section className="w-full bg-white">
-      <div className="container mx-auto px-0 sm:px-6 lg:px-8">
-        <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20 py-16 lg:py-24">
+      <div className="mx-auto">
+        <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20 py-16 lg:py-24 ">
           {/* Text Content */}
-          <div className="lg:w-1/2 flex px-4 sm:px-0 flex-col items-start gap-10">
+          <div className="lg:w-1/2 flex px-4 flex-col items-start gap-10 sm:px-6 lg:px-8">
             <div className="flex flex-col items-start gap-6 self-stretch">
               <h1 className="self-stretch font-['Neulis_Alt-Regular',Helvetica] font-normal text-3xl sm:text-4xl lg:text-5xl lg:leading-[1.2]">
                 <span className="text-[#1e1e1e]">Pilotez vos </span>
@@ -60,7 +60,7 @@ export const HeroSection = (): JSX.Element => {
           {/* Image */}
           <div className="w-full lg:flex lg:w-1/2 justify-center">
             <img
-              className="w-full h-auto object-cover rounded-none shadow-none sm:rounded-lg sm:shadow-lg"
+              className="w-full h-auto object-cover rounded-none shadow-none"
               alt="Placeholder image"
               src="/placeholder-image.png"
             />

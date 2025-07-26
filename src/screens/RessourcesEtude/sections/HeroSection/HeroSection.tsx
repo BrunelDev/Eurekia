@@ -10,7 +10,7 @@ import {
 export const HeroSection = (): JSX.Element => {
   return (
     <section className="w-full py-12 md:py-20 z-[3]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-8 md:px-[60px] flex flex-col-reverse md:flex-row items-center gap-12 md:gap-8 relative">
+      <div className="w-full mx-auto px-4 sm:px-8 md:px-[60px] flex flex-col-reverse md:flex-row items-center gap-12 md:gap-8 relative">
         {/* Left Column: Text Content */}
         <div className="flex-1 flex flex-col items-start gap-8">
           <NavigationMenu className="self-place-start">
@@ -25,7 +25,7 @@ export const HeroSection = (): JSX.Element => {
                   <ul className="grid w-[150px] p-4 gap-4">
                     <li>
                       <NavigationMenuLink asChild>
-                        <a href="#">
+                        <a href="https://blog.eurekaingenierie.com/">
                           <div className="font-medium">Blog</div>
                         </a>
                       </NavigationMenuLink>
@@ -34,13 +34,6 @@ export const HeroSection = (): JSX.Element => {
                       <NavigationMenuLink asChild>
                         <a href="#">
                           <div className="font-medium">Etudes de cas</div>
-                        </a>
-                      </NavigationMenuLink>
-                    </li>
-                    <li>
-                      <NavigationMenuLink asChild>
-                        <a href="#">
-                          <div className="font-medium">Actualités</div>
                         </a>
                       </NavigationMenuLink>
                     </li>
@@ -64,7 +57,7 @@ export const HeroSection = (): JSX.Element => {
         {/* Right Column: Image */}
         <div className="flex-1 w-full">
           <div
-            className="w-full h-80 sm:h-96 md:h-[600px] bg-cover bg-center rounded-lg"
+            className="w-full h-80 sm:h-96 md:h-[600px] bg-cover bg-center"
             style={{ backgroundImage: "url(/resource-1.png)" }}
           />
         </div>
