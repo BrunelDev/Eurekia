@@ -12,28 +12,32 @@ export const HeroSection = (): JSX.Element => {
     <section className="w-full py-12 md:py-20 z-[3]">
       <div className="w-full mx-auto px-4 sm:px-8 md:px-[60px] flex flex-col-reverse md:flex-row items-center gap-12 md:gap-8 relative">
         {/* Left Column: Text Content */}
-        <div className="flex-1 flex flex-col items-start gap-8">
-          <NavigationMenu className="self-place-start">
-            <NavigationMenuList>
+        <div className="flex-1 flex flex-col justify-center gap-8 h-80 sm:h-96 md:h-[600px] relative"> 
+          <NavigationMenu className="self-place-start rounded-none shadow-none md:absolute md:top-0 md:left-0">
+            <NavigationMenuList className="rounded-none shadow-none">
               <NavigationMenuItem>
                 <NavigationMenuTrigger className="hover:bg-transparent p-0">
                   <h2 className="font-display-h5 text-xl text-[length:var(--display-h5-font-size)] font-[number:var(--display-h5-font-weight)] tracking-[var(--display-h5-letter-spacing)] leading-[var(--display-h5-line-height)] [font-style:var(--display-h5-font-style)] text-[#1e1e1e]">
                     Etudes de cas
                   </h2>
                 </NavigationMenuTrigger>
-                <NavigationMenuContent className="rounded-none">
+                <NavigationMenuContent className="rounded-none shadow-none">
                   <ul className="grid w-[150px] p-4 gap-4">
                     <li>
                       <NavigationMenuLink asChild>
                         <a href="https://blog.eurekaingenierie.com/">
-                          <div className="font-medium">Blog</div>
+                          <div className="font-medium hover:text-[#deb83b] transition-all duration-300 ease-out">
+                            Blog
+                          </div>
                         </a>
                       </NavigationMenuLink>
                     </li>
                     <li>
                       <NavigationMenuLink asChild>
                         <a href="#">
-                          <div className="font-medium">Etudes de cas</div>
+                          <div className="font-medium hover:text-[#deb83b] transition-all duration-300 ease-out">
+                            Etudes de cas
+                          </div>
                         </a>
                       </NavigationMenuLink>
                     </li>

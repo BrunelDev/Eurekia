@@ -6,10 +6,10 @@ export const FooterSection = (): JSX.Element => {
   // Navigation links data
   const navLinks = [
     { label: "Accueil", link: "/" },
-    { label: "A propos", link: "/a-propos" },
+    { label: "À propos", link: "/a-propos" },
     { label: "Nos solutions", link: "/nos-solutions" },
     { label: "Tarifs", link: "/tarifs" },
-    { label: "Ressources", link: "/ressources" },
+    { label: "Ressources", link: "https://blog.eurekaingenierie.com/" },
     { label: "Contact", link: "/contact" },
   ];
 
@@ -96,7 +96,7 @@ export const FooterSection = (): JSX.Element => {
                 key={index}
                 className="inline-flex flex-col items-center justify-center gap-0.5 relative flex-[0_0_auto]"
               >
-                <div className="mt-[-1.00px] text-white relative w-fit font-label-medium font-[number:var(--label-medium-font-weight)] text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] whitespace-nowrap [font-style:var(--label-medium-font-style)]">
+                <div className="mt-[-1.00px] text-white relative w-fit font-label-medium font-[number:var(--label-medium-font-weight)] text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] whitespace-nowrap [font-style:var(--label-medium-font-style)] hover:text-[#ffffff88] transition-all duration-300 ease-out">
                   <a href={link.link}>{link.label}</a>
                 </div>
               </div>
@@ -123,7 +123,7 @@ export const FooterSection = (): JSX.Element => {
                       key={index}
                       className="relative w-fit mt-[-1.00px] [font-family:'Sofia_Pro-Regular',Helvetica] font-normal text-[#f6f6f6] text-sm tracking-[0] leading-[14px]"
                     >
-                      <span className="leading-[var(--label-small-line-height)] underline font-label-small [font-style:var(--label-small-font-style)] font-[number:var(--label-small-font-weight)] tracking-[var(--label-small-letter-spacing)] text-[length:var(--label-small-font-size)]">
+                      <span className="leading-[var(--label-small-line-height)] underline font-label-small [font-style:var(--label-small-font-style)] font-[number:var(--label-small-font-weight)] tracking-[var(--label-small-letter-spacing)] text-[length:var(--label-small-font-size)] cursor-pointer">
                         {link}
                       </span>
                     </div>

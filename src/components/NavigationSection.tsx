@@ -31,7 +31,7 @@ export const NavigationSection = (): JSX.Element => {
     },
     {
       label: "Ressources",
-      path: "/ressources",
+      path: "https://blog.eurekaingenierie.com/",
       active: location.pathname === "/ressources",
     },
     {
