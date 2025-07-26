@@ -38,7 +38,7 @@ export const FooterSection = (): JSX.Element => {
         />
         <div className="absolute w-full h-full top-0 left-0 bg-gradient-to-b from-[#483621df] to-[#483621]" />
       </div>
-      <div className="relative w-full flex flex-col md:items-center md:gap-12 gap-6 ">
+      <div className="relative w-full flex flex-col  md:gap-12 gap-6 ">
         <div className="relative">
           {/* Background image with gradient overlay */}
           <div className="relative">
@@ -50,7 +50,7 @@ export const FooterSection = (): JSX.Element => {
             <div className="absolute w-full h-full top-0 left-0 bg-gradient-to-b from-[#483621df] to-[#483621]" />
             {/* Newsletter subscription section */}
             <div className="md:absolute top-0 left-0 w-full">
-              <div className="flex flex-wrap items-center gap-8 relative py-16 md:px-16 px-4">
+              <div className="flex flex-wrap items-center gap-8 relative md:px-16 py-16 px-4">
                 <div className="flex flex-col items-start gap-5 relative flex-1 grow md:min-w-[350px]">
                   <div className="relative self-stretch mt-[-1.00px] [font-family:'Neulis_Alt-Regular',Helvetica] font-normal text-[#f6f6f6] text-4xl tracking-[0] leading-[normal]">
                     Rejoignez la communauté EURÊKA
