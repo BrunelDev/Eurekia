@@ -5,7 +5,7 @@ export const HeroSection = (): JSX.Element => {
   const roadmapPoints = [
     {
       number: "1",
-      desktopClasses: "top-[405px] left-[944px]",
+      desktopClasses: "top-[405px] left-[644px]",
       title: "Phase 1: Fondation",
       description: "Établir les bases de l'écosystème EURÊKA avec les fonctionnalités d'ingénierie de base.",
     },
@@ -29,7 +29,7 @@ export const HeroSection = (): JSX.Element => {
     },
     {
       number: "5",
-      desktopClasses: "top-[1527px] left-[944px]",
+      desktopClasses: "top-[1527px] left-[650px]",
       title: "Phase 5: Écosystème Intelligent",
       description: "Atteindre une synergie complète entre tous les composants, créant un écosystème véritablement intelligent.",
     },
