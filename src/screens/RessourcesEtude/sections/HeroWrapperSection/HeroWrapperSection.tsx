@@ -84,7 +84,7 @@ export const HeroWrapperSection = (): JSX.Element => {
       <div className="container mx-auto">
         {/* Filter Categories */}
         <div className="flex items-center justify-center gap-3 mb-12">
-          <ToggleGroup type="single" defaultValue="all">
+          <ToggleGroup type="single" defaultValue="all" className="flex gap-3 flex-wrap">
             {filterCategories.map((category) => (
               <ToggleGroupItem
                 key={category.id}
