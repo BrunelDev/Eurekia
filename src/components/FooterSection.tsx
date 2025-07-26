@@ -5,12 +5,12 @@ import { Separator } from "./ui/separator";
 export const FooterSection = (): JSX.Element => {
   // Navigation links data
   const navLinks = [
-    "Accueil",
-    "A propos",
-    "Nos solutions",
-    "Tarifs",
-    "Ressources",
-    "Contact",
+    { label: "Accueil", link: "/" },
+    { label: "A propos", link: "/a-propos" },
+    { label: "Nos solutions", link: "/nos-solutions" },
+    { label: "Tarifs", link: "/tarifs" },
+    { label: "Ressources", link: "/ressources" },
+    { label: "Contact", link: "/contact" },
   ];
 
   // Footer policy links data
@@ -38,7 +38,7 @@ export const FooterSection = (): JSX.Element => {
         />
         <div className="absolute w-full h-full top-0 left-0 bg-gradient-to-b from-[#483621df] to-[#483621]" />
       </div>
-      <div className="relative w-full flex flex-col md:items-center gap-12">
+      <div className="relative w-full flex flex-col md:items-center md:gap-12 gap-6 ">
         <div className="relative">
           {/* Background image with gradient overlay */}
           <div className="relative">
@@ -50,7 +50,7 @@ export const FooterSection = (): JSX.Element => {
             <div className="absolute w-full h-full top-0 left-0 bg-gradient-to-b from-[#483621df] to-[#483621]" />
             {/* Newsletter subscription section */}
             <div className="md:absolute top-0 left-0 w-full">
-              <div className="flex flex-wrap items-center gap-8 relative py-16 px-16">
+              <div className="flex flex-wrap items-center gap-8 relative py-16 md:px-16 px-4">
                 <div className="flex flex-col items-start gap-5 relative flex-1 grow md:min-w-[350px]">
                   <div className="relative self-stretch mt-[-1.00px] [font-family:'Neulis_Alt-Regular',Helvetica] font-normal text-[#f6f6f6] text-4xl tracking-[0] leading-[normal]">
                     Rejoignez la communauté EURÊKA
@@ -88,7 +88,7 @@ export const FooterSection = (): JSX.Element => {
         </div>
 
         {/* Main footer content */}
-        <div className="flex flex-col w-full items-start gap-12 pt-0 pb-[60px] px-[60px] relative">
+        <div className="flex flex-col w-full items-start gap-12 pt-0 pb-[60px] md:px-[60px] px-4 relative">
           {/* Navigation links */}
           <div className="inline-flex flex-wrap items-center gap-4 relative flex-[0_0_auto]">
             {navLinks.map((link, index) => (
@@ -97,7 +97,7 @@ export const FooterSection = (): JSX.Element => {
                 className="inline-flex flex-col items-center justify-center gap-0.5 relative flex-[0_0_auto]"
               >
                 <div className="mt-[-1.00px] text-white relative w-fit font-label-medium font-[number:var(--label-medium-font-weight)] text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] whitespace-nowrap [font-style:var(--label-medium-font-style)]">
-                  {link}
+                  <a href={link.link}>{link.label}</a>
                 </div>
               </div>
             ))}
@@ -106,18 +106,18 @@ export const FooterSection = (): JSX.Element => {
           <div className="flex flex-col items-start gap-[60px] relative self-stretch w-full flex-[0_0_auto]">
             {/* Logo */}
             <img
-              className="relative w-full h-[250px]"
+              className="relative w-full h-auto"
               alt="Logo"
               src="/logo1.svg"
             />
 
             {/* Footer bottom section */}
-            <div className="flex flex-col items-start gap-8 relative self-stretch w-full flex-[0_0_auto]">
+            <div className="flex flex-col items-start md:gap-8 gap-4 relative self-stretch w-full flex-[0_0_auto]">
               <Separator className="h-px bg-[#f6f6f6]/20" />
 
               <div className="flex flex-wrap items-start justify-between relative self-stretch w-full">
                 {/* Policy links */}
-                <div className="inline-flex flex-wrap items-start gap-6 relative">
+                <div className="inline-flex flex-wrap items-start md:gap-6 gap-2 relative">
                   {policyLinks.map((link, index) => (
                     <div
                       key={index}
