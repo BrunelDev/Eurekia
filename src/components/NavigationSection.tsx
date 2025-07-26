@@ -42,8 +42,10 @@ export const NavigationSection = (): JSX.Element => {
   ];
 
   return (
-    <header className="w-full bg-white py-4 px-4 sm:px-8 md:px-[60px] relative"
-    style={{zIndex: 9999}}>
+    <header
+      className="w-full bg-white py-4 px-4 sm:px-8 md:px-[60px] relative"
+      style={{ zIndex: 9999 }}
+    >
       <div className="flex items-center justify-between w-full">
         {/* Logo */}
         <Link to="/">
@@ -62,18 +64,23 @@ export const NavigationSection = (): JSX.Element => {
                 key={item.label}
                 className="h-9 flex flex-col items-center justify-center gap-0.5"
               >
-                <Link to={item.path} className="relative group flex flex-col items-center">
+                <Link
+                  to={item.path}
+                  className="relative group flex flex-col items-center"
+                >
                   <span
-                    className={`font-label-medium text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] hover:text-[#deb83b] transition-all duration-300 ease-out ${
+                    className={`font-label-medium text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)]  transition-all duration-300 ease-out ${
                       item.active
                         ? "text-[#1e1e1e]"
-                        : "text-[#1e1e1e] opacity-60"
+                        : "text-[#1e1e1e] opacity-60 hover:text-[#deb83b]"
                     }`}
                   >
                     {item.label}
                   </span>
                   <div
-                    className={`absolute -bottom-3 left-1/2 -translate-x-1/2 h-0.5 bg-[#deb83b] transition-all duration-300 ease-out ${item.active ? "w-[30px] mx-auto" : "w-0"}`}
+                    className={`absolute -bottom-3 left-1/2 -translate-x-1/2 h-0.5 bg-[#deb83b] transition-all duration-300 ease-out ${
+                      item.active ? "w-[30px] mx-auto" : "w-0"
+                    }`}
                   />
                 </Link>
               </NavigationMenuItem>
