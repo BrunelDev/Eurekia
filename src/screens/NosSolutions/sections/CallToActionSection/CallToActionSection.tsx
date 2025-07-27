@@ -1,7 +1,5 @@
 import { ArrowRightIcon } from "lucide-react";
-import React from "react";
 import { Button } from "../../../../components/ui/button";
-
 export const CallToActionSection = (): JSX.Element => {
   // Decorative circles data
   const decorativeCircles = [
@@ -25,7 +23,12 @@ export const CallToActionSection = (): JSX.Element => {
           </p>
         </div>
 
-        <Button className="flex items-center justify-center gap-2 p-3 bg-[#f6f2cb] hover:bg-[#f6f2cb]/90 text-[#483621]">
+        <Button
+          className="flex items-center justify-center gap-2 p-3 bg-[#f6f2cb] hover:bg-[#f6f2cb]/90 text-[#483621]"
+          onClick={() => {
+            window.location.href = "/pricing";
+          }}
+        >
           <span className="font-label-small text-[length:var(--label-small-font-size)] tracking-[var(--label-small-letter-spacing)] leading-[var(--label-small-line-height)] [font-style:var(--label-small-font-style)]">
             Explorer les tarifs
           </span>
