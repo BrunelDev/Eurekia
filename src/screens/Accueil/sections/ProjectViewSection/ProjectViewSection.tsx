@@ -24,14 +24,19 @@ export const ProjectViewSection = (): JSX.Element => {
   return (
     <section className="bg-white py-16 sm:py-20 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+        {
+          /**
+           * center the grid
+           */
+        }
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Engineering Services Card */}
           <Card className="w-full max-w-[564px] min-h-[704px] rounded-[28px] overflow-hidden border-none shadow-none">
             <div className="flex flex-col h-full">
               <div className="flex items-center justify-between w-full translate-y-1 rounded-tr-[28px] overflow-hidden">
                 <div className="bg-[#fbf9eb] ">
                   <CardHeader className="px-5 py-4 bg-white rounded-[0px_0px_28px_0px] overflow-hidden">
-                    <h2 className="text-3xl font-bold font-heading-h1 text-[#1e1e1e]  tracking-[var(--heading-h1-letter-spacing)] leading-[var(--heading-h1-line-height)] [font-style:var(--heading-h1-font-style)]">
+                    <h2 className="md:text-3xl text-xl md:font-bold font-semibold font-heading-h1 text-[#1e1e1e]  tracking-[var(--heading-h1-letter-spacing)] leading-[var(--heading-h1-line-height)] [font-style:var(--heading-h1-font-style)]">
                       EURÊKA INGENIERIE!
                     </h2>
                   </CardHeader>
@@ -98,7 +103,7 @@ export const ProjectViewSection = (): JSX.Element => {
               <div className="flex items-center justify-between w-full translate-y-1 rounded-tr-[28px] overflow-hidden">
                 <div className="bg-[#f6f6f6] ">
                   <CardHeader className="px-5 py-4 bg-white rounded-[0px_0px_28px_0px] overflow-hidden">
-                    <h2 className="text-3xl font-bold font-heading-h1 text-[#1e1e1e]  tracking-[var(--heading-h1-letter-spacing)] leading-[var(--heading-h1-line-height)] [font-style:var(--heading-h1-font-style)]">
+                    <h2 className="md:text-3xl text-xl md:font-bold font-semibold font-heading-h1 text-[#1e1e1e]  tracking-[var(--heading-h1-letter-spacing)] leading-[var(--heading-h1-line-height)] [font-style:var(--heading-h1-font-style)]">
                       EURÊK’IA!
                     </h2>
                   </CardHeader>

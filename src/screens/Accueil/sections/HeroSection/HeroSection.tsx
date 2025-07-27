@@ -29,7 +29,7 @@ export const HeroSection = (): JSX.Element => {
   return (
     <section className="w-full bg-white">
       <div className="mx-auto">
-        <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20 py-16 lg:py-24 ">
+        <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-20 pt-16 lg:pt-24 ">
           {/* Text Content */}
           <div className="lg:w-1/2 flex px-4 flex-col items-start gap-10 sm:px-6 lg:px-8">
             <div className="flex flex-col items-start gap-6 self-stretch">
@@ -58,6 +58,39 @@ export const HeroSection = (): JSX.Element => {
                 <ArrowRightIcon className="w-6 h-6 text-black group-hover:text-[#cd9f25]" />
               </div>
             </Button>
+            {/* Stats Section */}
+            <div className="flex flex-row pb-4 md:flex-row items-center justify-center md:justify-around gap-8 md:gap-12 pt-12 border-t border-gray-200">
+              {statsData.map((stat, index) => (
+                <React.Fragment key={`stat-${index}`}>
+                  <div className="flex flex-col items-center md:items-start text-center md:text-left gap-4 max-w-xs">
+                    <h2 className="text-3xl sm:text-4xl font-bold text-[#444444]">
+                      {stat.number}
+                    </h2>
+                    <p className="text-sm sm:text-base text-[#1e1e1e]">
+                      {stat.description}
+                    </p>
+                    <div className="flex items-center justify-center md:justify-start">
+                      {stat.avatars.map((avatar, avatarIndex) => (
+                        <img
+                          key={`avatar-${index}-${avatarIndex}`}
+                          className={`relative w-8 h-8 rounded-full border-2 border-white ${
+                            avatarIndex > 0 ? "-ml-2" : ""
+                          }`}
+                          alt={avatar.alt}
+                          src={avatar.src}
+                        />
+                      ))}
+                    </div>
+                  </div>
+                  {index < statsData.length - 1 && (
+                    <Separator
+                      orientation="vertical"
+                      className="h-20 hidden md:block"
+                    />
+                  )}
+                </React.Fragment>
+              ))}
+            </div>
           </div>
 
           {/* Image */}
@@ -68,40 +101,6 @@ export const HeroSection = (): JSX.Element => {
               src="/placeholder-image.png"
             />
           </div>
-        </div>
-
-        {/* Stats Section */}
-        <div className="flex flex-col md:flex-row items-center justify-center md:justify-around gap-8 md:gap-12 py-12 border-t border-gray-200">
-          {statsData.map((stat, index) => (
-            <React.Fragment key={`stat-${index}`}>
-              <div className="flex flex-col items-center md:items-start text-center md:text-left gap-4 max-w-xs">
-                <h2 className="text-3xl sm:text-4xl font-bold text-[#444444]">
-                  {stat.number}
-                </h2>
-                <p className="text-sm sm:text-base text-[#1e1e1e]">
-                  {stat.description}
-                </p>
-                <div className="flex items-center justify-center md:justify-start">
-                  {stat.avatars.map((avatar, avatarIndex) => (
-                    <img
-                      key={`avatar-${index}-${avatarIndex}`}
-                      className={`relative w-8 h-8 rounded-full border-2 border-white ${
-                        avatarIndex > 0 ? "-ml-2" : ""
-                      }`}
-                      alt={avatar.alt}
-                      src={avatar.src}
-                    />
-                  ))}
-                </div>
-              </div>
-              {index < statsData.length - 1 && (
-                <Separator
-                  orientation="vertical"
-                  className="h-20 hidden md:block"
-                />
-              )}
-            </React.Fragment>
-          ))}
         </div>
       </div>
     </section>
