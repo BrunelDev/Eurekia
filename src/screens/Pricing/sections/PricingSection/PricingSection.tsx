@@ -4,12 +4,12 @@ import { Card, CardContent } from "../../../../components/ui/card";
 export const PricingSection = (): JSX.Element => {
   return (
     <section className="relative w-full py-24 bg-white">
-      <div className="container flex flex-col md:flex-row items-center gap-8">
+      <div className="container px-0 mx-0 flex flex-col md:flex-row items-center gap-8">
         {/* Left side image */}
         <div className="w-full md:w-1/2">
           <Card className="border-0 shadow-none">
             <CardContent className="p-0">
-              <div className="h-[621px] w-full bg-[linear-gradient(0deg,rgba(0,0,0,0.16)_0%,rgba(0,0,0,0.16)_100%)] rounded-md" style={{
+              <div className="h-[621px] w-full bg-[linear-gradient(0deg,rgba(0,0,0,0.16)_0%,rgba(0,0,0,0.16)_100%)]" style={{
                 backgroundImage: "url(/hero-img.png)",
                 backgroundPosition: "center",
                 backgroundSize: "cover",
