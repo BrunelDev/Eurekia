@@ -8,7 +8,7 @@ export const FooterSection = (): JSX.Element => {
     { label: "Accueil", link: "/" },
     { label: "À propos", link: "/a-propos" },
     { label: "Nos solutions", link: "/nos-solutions" },
-    { label: "Tarifs", link: "/tarifs" },
+    { label: "Tarifs", link: "/pricing" },
     { label: "Ressources", link: "https://blog.eurekaingenierie.com/" },
     { label: "Contact", link: "/contact" },
   ];
