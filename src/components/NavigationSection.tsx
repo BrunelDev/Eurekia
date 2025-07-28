@@ -77,11 +77,7 @@ export const NavigationSection = (): JSX.Element => {
                   >
                     {item.label}
                   </span>
-                  <div
-                    className={`absolute -bottom-3 left-1/2 -translate-x-1/2 h-0.5 bg-[#deb83b] transition-all duration-300 ease-out ${
-                      item.active ? "w-[30px] mx-auto" : "w-0"
-                    }`}
-                  />
+                  
                 </Link>
               </NavigationMenuItem>
             ))}
