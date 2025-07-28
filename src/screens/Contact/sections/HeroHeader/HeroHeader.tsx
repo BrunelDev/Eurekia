@@ -34,17 +34,20 @@ export const HeroHeader = (): JSX.Element => {
     {
       icon: <MapPinIcon className="w-7 h-7 text-black" />,
       description: "Nos bureaux sont situés en plein cœur de Paris.",
-      link: "15 rue des Projets, 75000 Paris, France",
+      link: "159 Chemin du Val de Cagne 06800 Cagnes-sur-Mer FRANCE",
+      href: "https://www.google.com/maps/search/?api=1&query=159+Chemin+du+Val+de+Cagne+06800+Cagnes-sur-Mer+FRANCE",
     },
     {
       icon: <PhoneIcon className="w-7 h-7 text-black" />,
       description: "Appelez-nous du lundi au vendredi, de 9h à 18h",
-      link: "+33 1 23 45 67 89",
+      link: "06.15.66.39.70",
+      href: "tel:0615663970",
     },
     {
       icon: <MailIcon className="w-7 h-7 text-black" />,
       description: "Nous répondons sous 24h ouvrées",
-      link: "contact@eureka-ingenierie.fr",
+      link: "contact@eurekaingenierie.com",
+      href: "mailto:contact@eurekaingenierie.com",
     },
   ];
 
@@ -91,24 +94,19 @@ export const HeroHeader = (): JSX.Element => {
               <Card className="w-full max-w-md bg-[rgba(72,54,33,0.8)] border-none rounded-lg shadow-lg">
                 <CardContent className="p-6 sm:p-8 space-y-6">
                   {contactItems.map((item, index) => (
-                    <div key={index} className="flex items-start gap-4">
-                                            <div
+                    <a href={item.href} target="_blank" rel="noopener noreferrer" key={index} className="flex items-start gap-4 no-underline">
+                      <div
                         className="flex-shrink-0 flex w-14 h-14 items-center justify-center rounded-full bg-radial-gold-circle"
                       >
                         {item.icon}
                       </div>
                       <div className="flex flex-col gap-1">
-                        <p className="text-base text-white">
+                        <p className="text-white font-semibold">
                           {item.description}
                         </p>
-                        <a
-                          href="#"
-                          className="text-base font-semibold text-[#f7e1aa] underline"
-                        >
-                          {item.link}
-                        </a>
+                        <p className="text-white">{item.link}</p>
                       </div>
-                    </div>
+                    </a>
                   ))}
                 </CardContent>
               </Card>

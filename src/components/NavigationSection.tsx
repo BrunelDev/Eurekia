@@ -69,7 +69,7 @@ export const NavigationSection = (): JSX.Element => {
                   className="relative group flex flex-col items-center"
                 >
                   <span
-                    className={`font-label-medium text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)]  transition-all duration-300 ease-out ${
+                    className={`font-label-medium text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] transition-all duration-300 ease-out ${
                       item.active
                         ? "text-[#1e1e1e]"
                         : "text-[#1e1e1e] opacity-60 hover:text-[#deb83b]"
@@ -119,44 +119,44 @@ export const NavigationSection = (): JSX.Element => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <NavigationMenu className="md:hidden absolute top-0 left-0 right-0 w-full max-w-full h-screen bg-white z-10 flex flex-col gap-y-2">
+        <NavigationMenu className="md:hidden absolute top-0 left-0 right-0 w-full max-w-full h-screen bg-white z-10 gap-y-2 block">
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="z-50 absolute top-4 right-4"
           >
             <X size={24} />
           </button>
-          <NavigationMenuList className="flex flex-col items-center gap-4 py-4 w-full">
+          <NavigationMenuList className="flex flex-col gap-4 py-4 mt-20">
             {navItems.map((item) => (
               <NavigationMenuItem
                 key={item.label}
-                className={`h-9 flex flex-col items-center justify-center gap-0.5`}
+                className={`h-14 flex flex-col justify-center gap-0.5 border-b w-full border-gray-200 pl-5`}
               >
                 <Link
                   to={item.path}
-                  className="relative group flex flex-col items-center"
+                  className="relative group flex flex-col p-0"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   <span
-                    className={`font-label-medium text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] ${
+                    className={`p-0 font-label-medium text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] transition-all duration-300 ease-out ${
                       item.active
                         ? "text-[#1e1e1e]"
-                        : "text-[#1e1e1e] opacity-60"
+                        : "text-[#1e1e1e] opacity-60 hover:text-[#deb83b]"
                     }`}
                   >
                     {item.label}
                   </span>
-                  <div
+                  {/*<div
                     className={`absolute -bottom-1 left-1/2 -translate-x-1/2 h-0.5 bg-[#deb83b] transition-all duration-300 ease-out ${
                       item.active ? "w-1/2" : "w-0 group-hover:w-1/2"
                     }`}
-                  />
+                  />*/}
                 </Link>
               </NavigationMenuItem>
             ))}
           </NavigationMenuList>
           {/* Sign Up Button for Mobile */}
-          <div className="flex items-center justify-center gap-3 h-10 py-4 cursor-pointer">
+          <div className="pl-5 flex gap-3 h-10 py-4 cursor-pointer">
             <span className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#1e1e1e] text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] whitespace-nowrap [font-style:var(--label-medium-font-style)]">
               S'inscrire
             </span>
