@@ -17,11 +17,32 @@ export const ContactFormSection = (): JSX.Element => {
     { id: "autre", label: "Autre" },
   ];
   const [selectedSubject, setSelectedSubject] = useState<string>("information");
+  const [nom, setNom] = useState("");
+  const [prenom, setPrenom] = useState("");
+  const [email, setEmail] = useState("");
+  const [telephone, setTelephone] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    const subject = subjectOptions.find(opt => opt.id === selectedSubject)?.label || 'Sujet non spécifié';
+    const body = `
+      Nom: ${nom}
+      Prénom: ${prenom}
+      Email: ${email}
+      Téléphone: ${telephone}
+      Sujet: ${subject}
+      Message: ${message}
+    `;
+    const mailtoLink = `mailto:contact@eurekaingenierie.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailtoLink;
+  };
+
 
   return (
     <section className="w-full bg-white py-16 sm:py-20 lg:py-24" id="contact-form">
       <div className="mx-auto max-w-7xl">
-        <form className="flex flex-col gap-10 px-4">
+        <form className="flex flex-col gap-10 px-4" onSubmit={handleSubmit}>
           {/* Input Fields */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
             <div className="flex flex-col gap-2">
@@ -35,6 +56,8 @@ export const ContactFormSection = (): JSX.Element => {
                 id="nom"
                 placeholder="DOE"
                 className="border-0 border-b-2 border-gray-300 rounded-none px-2 py-3 focus:border-yellow-400 transition"
+                value={nom}
+                onChange={(e) => setNom(e.target.value)}
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -48,6 +71,8 @@ export const ContactFormSection = (): JSX.Element => {
                 id="prenom"
                 placeholder="John"
                 className="border-0 border-b-2 border-gray-300 rounded-none px-2 py-3 focus:border-yellow-400 transition"
+                value={prenom}
+                onChange={(e) => setPrenom(e.target.value)}
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -62,6 +87,8 @@ export const ContactFormSection = (): JSX.Element => {
                 type="email"
                 placeholder="johndoe@gmail.com"
                 className="border-0 border-b-2 border-gray-300 rounded-none px-2 py-3 focus:border-yellow-400 transition"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div className="flex flex-col gap-2">
@@ -76,6 +103,8 @@ export const ContactFormSection = (): JSX.Element => {
                 type="tel"
                 placeholder="+33 1 23 45 67 89"
                 className="border-0 border-b-2 border-gray-300 rounded-none px-2 py-3 focus:border-yellow-400 transition"
+                value={telephone}
+                onChange={(e) => setTelephone(e.target.value)}
               />
             </div>
           </div>
@@ -130,6 +159,8 @@ export const ContactFormSection = (): JSX.Element => {
               id="message"
               placeholder="Écrivez votre message ici..."
               className="border-0 border-b-2 border-gray-300 rounded-none px-2 py-3 focus:border-yellow-400 transition h-24"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
             />
           </div>
 

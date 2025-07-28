@@ -6,7 +6,8 @@ export const HeroHeader = (): JSX.Element => {
   const handleScrollToContact = () => {
     const contactForm = document.getElementById("contact-form");
     if (contactForm) {
-      const targetPosition = contactForm.getBoundingClientRect().top + window.pageYOffset;
+      const targetPosition =
+        contactForm.getBoundingClientRect().top + window.pageYOffset;
       const startPosition = window.pageYOffset;
       const distance = targetPosition - startPosition;
       const duration = 1000; // Scroll duration in milliseconds (1 second)
@@ -22,7 +23,12 @@ export const HeroHeader = (): JSX.Element => {
       const animation = (currentTime: number) => {
         if (startTime === null) startTime = currentTime;
         const timeElapsed = currentTime - startTime;
-        const run = easeInOutQuad(timeElapsed, startPosition, distance, duration);
+        const run = easeInOutQuad(
+          timeElapsed,
+          startPosition,
+          distance,
+          duration
+        );
         window.scrollTo(0, run);
         if (timeElapsed < duration) requestAnimationFrame(animation);
       };
@@ -69,7 +75,7 @@ export const HeroHeader = (): JSX.Element => {
                 de contact qui vous convient.
               </p>
             </div>
-                        <Button
+            <Button
               variant="default"
               className="h-auto w-[185px] p-0 inline-flex items-center gap-3 group bg-transparent hover:bg-transparent hover:px-2 hover:gap-1 transition-all duration-300"
               onClick={handleScrollToContact}
@@ -77,9 +83,7 @@ export const HeroHeader = (): JSX.Element => {
               <span className="text-base font-medium text-[#1e1e1e] group-hover:text-[#cd9f25]">
                 Envoyer un message
               </span>
-                            <div
-                className="flex w-10 h-10 items-center justify-center rounded-full bg-radial-gold-circle group-hover:bg-gradient-to-r group-hover:from-transparent group-hover:to-transparent transition-all duration-300"
-              >
+              <div className="flex w-10 h-10 items-center justify-center rounded-full bg-radial-gold-circle group-hover:bg-gradient-to-r group-hover:from-transparent group-hover:to-transparent transition-all duration-300">
                 <ArrowDownIcon className="w-5 h-5 text-black group-hover:text-[#cd9f25]" />
               </div>
             </Button>
@@ -94,17 +98,23 @@ export const HeroHeader = (): JSX.Element => {
               <Card className="w-full max-w-md bg-[rgba(72,54,33,0.8)] border-none rounded-lg shadow-lg">
                 <CardContent className="p-6 sm:p-8 space-y-6">
                   {contactItems.map((item, index) => (
-                    <a href={item.href} target="_blank" rel="noopener noreferrer" key={index} className="flex items-start gap-4 no-underline">
-                      <div
-                        className="flex-shrink-0 flex w-14 h-14 items-center justify-center rounded-full bg-radial-gold-circle"
-                      >
+                    <a
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      key={index}
+                      className="flex items-start gap-4 no-underline"
+                    >
+                      <div className="flex-shrink-0 flex w-14 h-14 items-center justify-center rounded-full bg-radial-gold-circle">
                         {item.icon}
                       </div>
                       <div className="flex flex-col gap-1">
                         <p className="text-white font-semibold">
                           {item.description}
                         </p>
-                        <p className="text-white">{item.link}</p>
+                        <p className="text-base font-semibold text-[#f7e1aa] underline">
+                          {item.link}
+                        </p>
                       </div>
                     </a>
                   ))}
