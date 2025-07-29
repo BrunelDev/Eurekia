@@ -5,6 +5,7 @@ import { RessourcesEtudeDe } from "./screens/RessourcesEtude";
 import { Accueil } from "./screens/Accueil";
 import { NosSolutions } from "./screens/NosSolutions";
 import { APropos } from "./screens/APropos";
+import { MapPage } from "./screens/Map";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: "/a-propos",
     element: <APropos />,
+  },
+  {
+    path: "/contact/carte",
+    element: <MapPage />,
   },
 ]);
 

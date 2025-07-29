@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ArrowDownIcon, MailIcon, MapPinIcon, PhoneIcon } from "lucide-react";
 import { Button } from "../../../../components/ui/button";
 import { Card, CardContent } from "../../../../components/ui/card";
@@ -40,8 +41,8 @@ export const HeroHeader = (): JSX.Element => {
     {
       icon: <MapPinIcon className="w-7 h-7 text-black" />,
       description: "Nos bureaux sont situés en plein cœur de Paris.",
-      link: "159 Chemin du Val de Cagne 06800 Cagnes-sur-Mer FRANCE",
-      href: "https://www.google.com/maps/search/?api=1&query=159+Chemin+du+Val+de+Cagne+06800+Cagnes-sur-Mer+FRANCE",
+      link: "/contact/carte",
+      target: "_self",
     },
     {
       icon: <PhoneIcon className="w-7 h-7 text-black" />,
@@ -98,10 +99,9 @@ export const HeroHeader = (): JSX.Element => {
               <Card className="w-full max-w-md bg-[rgba(72,54,33,0.8)] border-none rounded-lg shadow-lg">
                 <CardContent className="p-6 sm:p-8 space-y-6">
                   {contactItems.map((item, index) => (
-                    <a
-                      href={item.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <Link
+                      to={item.link}
+                      target={item.target}
                       key={index}
                       className="flex items-start gap-4 no-underline"
                     >
@@ -113,10 +113,12 @@ export const HeroHeader = (): JSX.Element => {
                           {item.description}
                         </p>
                         <p className="text-base font-semibold text-[#f7e1aa] underline">
-                          {item.link}
+                          {item.link === "/contact/carte"
+                            ? "159 Chemin du Val de Cagne 06800 Cagnes-sur-Mer FRANCE"
+                            : item.link}
                         </p>
                       </div>
-                    </a>
+                    </Link>
                   ))}
                 </CardContent>
               </Card>

@@ -71,7 +71,7 @@ export const NavigationSection = (): JSX.Element => {
                   <span
                     className={`font-label-medium text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] transition-all duration-300 ease-out ${
                       item.active
-                        ? "text-[#1e1e1e]"
+                        ? "text-[#deb83b]"
                         : "text-[#1e1e1e] opacity-60 hover:text-[#deb83b]"
                     }`}
                   >
