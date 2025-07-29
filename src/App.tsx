@@ -6,6 +6,7 @@ import { Accueil } from "./screens/Accueil";
 import { NosSolutions } from "./screens/NosSolutions";
 import { APropos } from "./screens/APropos";
 import { MapPage } from "./screens/Map";
+import { Toaster } from "@/components/ui/sonner"
 
 const router = createBrowserRouter([
   {
@@ -39,5 +40,10 @@ const router = createBrowserRouter([
 ]);
 
 export const App = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+      <Toaster richColors />
+    </>
+  );
 };

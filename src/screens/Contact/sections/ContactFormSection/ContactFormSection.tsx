@@ -2,6 +2,8 @@ import { CheckIcon } from "lucide-react";
 import { Button } from "../../../../components/ui/button";
 import { Input } from "../../../../components/ui/input";
 import { Label } from "../../../../components/ui/label";
+import { Textarea } from "../../../../components/ui/textarea";
+import { toast } from "sonner";
 import {
   RadioGroup,
   RadioGroupItem,
@@ -20,7 +22,7 @@ export const ContactFormSection = (): JSX.Element => {
   const [selectedSubject, setSelectedSubject] = useState<string>("Information");
   const form = useRef<HTMLFormElement>(null);
   const [submissionStatus, setSubmissionStatus] = useState<
-    "idle" | "sending" | "success" | "error"
+    "idle" | "sending"
   >("idle");
 
   const handleSubmit = (event: React.FormEvent) => {
@@ -38,12 +40,13 @@ export const ContactFormSection = (): JSX.Element => {
       )
       .then(
         () => {
-          setSubmissionStatus("success");
+          setSubmissionStatus("idle");
+          toast.success("Votre message a été envoyé avec succès !");
           form.current?.reset();
-          setSelectedSubject("Information");
         },
         (error) => {
-          setSubmissionStatus("error");
+          setSubmissionStatus("idle");
+          toast.error("Une erreur s'est produite. Veuillez réessayer.");
           console.log("FAILED...", error.text);
         }
       );
@@ -171,11 +174,11 @@ export const ContactFormSection = (): JSX.Element => {
             >
               Message
             </Label>
-            <Input
+            <Textarea
               id="message"
               name="message"
               placeholder="Écrivez votre message ici..."
-              className="border-0 border-b-2 border-gray-300 rounded-none px-2 py-3 focus:border-yellow-400 transition h-24"
+              className="border-0 border-b-2 border-gray-300  rounded-none px-2 py-3 focus:outline-none focus:border-yellow-400 transition h-24"
               required
             />
           </div>
@@ -191,16 +194,6 @@ export const ContactFormSection = (): JSX.Element => {
                 ? "Envoi en cours..."
                 : "Envoyer le message"}
             </Button>
-            {submissionStatus === "success" && (
-              <p className="text-green-600 mt-4">
-                Message envoyé avec succès !
-              </p>
-            )}
-            {submissionStatus === "error" && (
-              <p className="text-red-600 mt-4">
-                Une erreur est survenue. Veuillez réessayer.
-              </p>
-            )}
           </div>
         </form>
       </div>
