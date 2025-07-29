@@ -11,13 +11,13 @@ import emailjs from "@emailjs/browser";
 
 export const ContactFormSection = (): JSX.Element => {
   const subjectOptions = [
-    { id: "information", label: "Demande d'information" },
-    { id: "devis", label: "Devis" },
-    { id: "assistance", label: "Assistance IA" },
-    { id: "partenariat", label: "Partenariat" },
-    { id: "autre", label: "Autre" },
+    { id: "Information", label: "Demande d'information" },
+    { id: "Devis", label: "Devis" },
+    { id: "Assistance IA", label: "Assistance IA" },
+    { id: "Partenariat", label: "Partenariat" },
+    { id: "Autre", label: "Autre" },
   ];
-  const [selectedSubject, setSelectedSubject] = useState<string>("information");
+  const [selectedSubject, setSelectedSubject] = useState<string>("Information");
   const form = useRef<HTMLFormElement>(null);
   const [submissionStatus, setSubmissionStatus] = useState<
     "idle" | "sending" | "success" | "error"
@@ -40,7 +40,7 @@ export const ContactFormSection = (): JSX.Element => {
         () => {
           setSubmissionStatus("success");
           form.current?.reset();
-          setSelectedSubject("information");
+          setSelectedSubject("Information");
         },
         (error) => {
           setSubmissionStatus("error");
@@ -132,7 +132,7 @@ export const ContactFormSection = (): JSX.Element => {
               Sélectionnez un Sujet?
             </Label>
             <RadioGroup
-              defaultValue="information"
+              defaultValue="Information"
               className="flex flex-wrap gap-x-6 gap-y-4"
               onValueChange={setSelectedSubject}
               name="sujet"
