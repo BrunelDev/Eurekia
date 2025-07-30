@@ -34,11 +34,11 @@ export const HeroSection = (): JSX.Element => {
           <div className="lg:w-1/2 flex px-4 flex-col items-start gap-10 sm:px-6 lg:px-8">
             <div className="flex flex-col items-start gap-6 self-stretch">
               <h1 className="self-stretch font-['Neulis_Alt-Regular',Helvetica] font-normal text-3xl sm:text-4xl lg:text-5xl lg:leading-[1.2]">
-                <span className="text-[#1e1e1e]">Pilotez vos </span>
-                <span className="text-[#cd9f25]">projets de construction</span>
-                <span className="text-[#1e1e1e]"> avec EURÊKA INGÉNIERIE!</span>
+                <span className="text-[#1e1e1e] font-display-h6">Pilotez vos </span>
+                <span className="text-[#cd9f25] font-display-h6">projets de construction</span>
+                <span className="text-[#1e1e1e] font-display-h6"> avec EURÊKA INGÉNIERIE!</span>
               </h1>
-              <p className="self-stretch text-base sm:text-lg text-[#1e1e1e]">
+              <p className="self-stretch text-base sm:text-lg text-[#1e1e1e] font-display-h6">
                 Des solutions humaines et intelligentes pour piloter vos projets
                 de construction, de la simple rénovation à l&apos;ouvrage
                 complexe.
@@ -46,11 +46,11 @@ export const HeroSection = (): JSX.Element => {
             </div>
             <Button
               variant="default"
-              className="h-12 px-0 py-0 gap-3 w-[207px] bg-transparent hover:bg-transparent justify-start group hover:gap-1 hover:px-2 transition-all duration-300"
+              className="h-12 px-0 py-0 gap-3 w-[230px] bg-transparent hover:bg-transparent justify-start group hover:gap-1 hover:px-2 transition-all duration-300"
             >
               <a
                 href="/nos-solutions"
-                className="text-base font-medium text-[#1e1e1e] group-hover:text-[#cd9f25]"
+                className="text-base font-medium text-[#1e1e1e] group-hover:text-[#cd9f25] font-display-h6"
               >
                 Découvrir nos solutions
               </a>
@@ -63,10 +63,10 @@ export const HeroSection = (): JSX.Element => {
               {statsData.map((stat, index) => (
                 <React.Fragment key={`stat-${index}`}>
                   <div className="flex flex-col items-center md:items-start text-center md:text-left gap-4 max-w-xs">
-                    <h2 className="text-3xl sm:text-4xl font-bold text-[#444444]">
+                    <h2 className="text-3xl sm:text-4xl text-[#444444] font-display-h6">
                       {stat.number}
                     </h2>
-                    <p className="text-sm sm:text-base text-[#1e1e1e]">
+                    <p className="text-sm sm:text-base text-[#1e1e1e] font-display-h6">
                       {stat.description}
                     </p>
                     <div className="flex items-center justify-center md:justify-start">

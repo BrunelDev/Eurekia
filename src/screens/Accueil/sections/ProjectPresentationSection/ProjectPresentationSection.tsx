@@ -30,7 +30,7 @@ export const ProjectPresentationSection = (): JSX.Element => {
     <section className="w-full bg-white py-16 sm:py-20 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className="flex flex-col gap-12 text-center">
-          <h2 className="text-3xl sm:text-4xl font-bold text-[#1e1e1e]">
+          <h2 className="text-3xl sm:text-4xl text-[#1e1e1e] font-display-h6">
             Vos outils, à portée de clic
           </h2>
 
@@ -44,10 +44,10 @@ export const ProjectPresentationSection = (): JSX.Element => {
                 }}
               >
                 <CardContent className="flex flex-col items-start justify-end gap-4 p-6 text-left h-full">
-                  <h3 className={`text-2xl font-bold ${tool.titleColor}`}>
+                  <h3 className={`text-xl ${tool.titleColor} font-display-h6`}>
                     {tool.title}
                   </h3>
-                  <p className="text-base text-white">{tool.description}</p>
+                  <p className="text-base font-light text-white font-display-h6">{tool.description}</p>
                 </CardContent>
               </Card>
             ))}

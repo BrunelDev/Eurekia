@@ -46,7 +46,7 @@ export const AboutUsDetailsSection = (): JSX.Element => {
                 {/* Testimonial card */}
                 <Card className="border-none shadow-none bg-transparent">
                   <CardContent className="p-0 flex flex-col h-[200px] gap-5">
-                    <p className="font-text-large text-[#1e1e1e] text-[length:var(--text-large-font-size)] tracking-[var(--text-large-letter-spacing)] leading-[var(--text-large-line-height)] [font-style:var(--text-large-font-style)]">
+                    <p className="font-text-large text-[#1e1e1e] text-[length:var(--text-large-font-size)] tracking-[var(--text-large-letter-spacing)] leading-[var(--text-large-line-height)] [font-style:var(--text-large-font-style)] font-display-h6">
                       {testimonials[0].quote}
                     </p>
 
