@@ -48,6 +48,9 @@ export const BlogPresentationSection = (): JSX.Element => {
             <Button
               variant="ghost"
               className="flex items-center gap-3 pr-2 h-10"
+              onClick={() => {
+                window.location.href = "https://blog.eurekaingenierie.com/";
+              }}
             >
               <span className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#1e1e1e] text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)]">
                 Lire le blog Archim&apos;aide
@@ -69,16 +72,16 @@ export const BlogPresentationSection = (): JSX.Element => {
                   />
                   <div className="flex flex-col items-start gap-3 w-full">
                     <div className="flex flex-col items-start gap-1 w-full">
-                      <h3 className="font-heading-h5 font-[number:var(--heading-h5-font-weight)] text-[length:var(--heading-h5-font-size)] leading-[var(--heading-h5-line-height)] text-[#1e1e1e] tracking-[var(--heading-h5-letter-spacing)] [font-style:var(--heading-h5-font-style)]">
+                      <h3 className="font-heading-h5 min-h-[48px] font-display-h6 font-[number:var(--heading-h5-font-weight)] text-[length:var(--heading-h5-font-size)] leading-[var(--heading-h5-line-height)] text-[#1e1e1e] tracking-[var(--heading-h5-letter-spacing)] [font-style:var(--heading-h5-font-style)]">
                         {post.title}
                       </h3>
-                      <p className="font-text-smaller font-[number:var(--text-smaller-font-weight)] text-[length:var(--text-smaller-font-size)] leading-[var(--text-smaller-line-height)] text-[#1e1e1e] tracking-[var(--text-smaller-letter-spacing)] [font-style:var(--text-smaller-font-style)]">
+                      <p className="font-text-smaller [font-family:'Sofia_Pro-Light',Helvetica] font-[number:var(--text-smaller-font-weight)] text-[length:var(--text-smaller-font-size)] leading-[var(--text-smaller-line-height)] text-[#1e1e1e] tracking-[var(--text-smaller-letter-spacing)] [font-style:var(--text-smaller-font-style)]">
                         {post.date}
                       </p>
                     </div>
                     <a
                       href={post.url}
-                      className="font-text-underline font-[number:var(--text-underline-font-weight)] text-[#deb83b] text-[length:var(--text-underline-font-size)] tracking-[var(--text-underline-letter-spacing)] leading-[var(--text-underline-line-height)] underline [font-style:var(--text-underline-font-style)]"
+                      className="font-text-underline [font-family:'Sofia_Pro-Light',Helvetica] font-[number:var(--text-underline-font-weight)] text-[#deb83b] text-[length:var(--text-underline-font-size)] tracking-[var(--text-underline-letter-spacing)] leading-[var(--text-underline-line-height)] underline [font-style:var(--text-underline-font-style)]"
                     >
                       {post.url}
                     </a>

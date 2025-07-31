@@ -6,7 +6,9 @@ import { Accueil } from "./screens/Accueil";
 import { NosSolutions } from "./screens/NosSolutions";
 import { APropos } from "./screens/APropos";
 import { MapPage } from "./screens/Map";
-import { Toaster } from "@/components/ui/sonner"
+import { Toaster } from "./components/ui/sonner";
+import { NewsletterRegister } from "./screens/newsletterRegister/Register";
+import { DevisChoice } from "./screens/DevisChoice";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +38,14 @@ const router = createBrowserRouter([
   {
     path: "/contact/carte",
     element: <MapPage />,
+  },
+  {
+    path: "/newsletter",
+    element: <NewsletterRegister />,
+  },
+  {
+    path: "/devis",
+    element: <DevisChoice />,
   },
 ]);
 

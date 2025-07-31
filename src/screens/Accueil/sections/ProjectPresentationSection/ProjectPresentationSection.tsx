@@ -47,7 +47,7 @@ export const ProjectPresentationSection = (): JSX.Element => {
                   <h3 className={`text-xl ${tool.titleColor} font-display-h6`}>
                     {tool.title}
                   </h3>
-                  <p className="text-base font-light text-white font-display-h6">{tool.description}</p>
+                  <p className="text-base text-white [font-family:'Sofia_Pro'] font-light">{tool.description}</p>
                 </CardContent>
               </Card>
             ))}

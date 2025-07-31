@@ -38,7 +38,7 @@ export const HeroSection = (): JSX.Element => {
                 <span className="text-[#cd9f25] font-display-h6">projets de construction</span>
                 <span className="text-[#1e1e1e] font-display-h6"> avec EURÊKA INGÉNIERIE!</span>
               </h1>
-              <p className="self-stretch text-base sm:text-lg text-[#1e1e1e] font-display-h6">
+              <p className="self-stretch text-base sm:text-lg text-[#1e1e1e] [font-family:'Sofia_Pro'] font-light">
                 Des solutions humaines et intelligentes pour piloter vos projets
                 de construction, de la simple rénovation à l&apos;ouvrage
                 complexe.
@@ -50,7 +50,7 @@ export const HeroSection = (): JSX.Element => {
             >
               <a
                 href="/nos-solutions"
-                className="text-base font-medium text-[#1e1e1e] group-hover:text-[#cd9f25] font-display-h6"
+                className="text-base font-medium text-[#1e1e1e] group-hover:text-[#cd9f25] [font-family:'Sofia_Pro'] font-light"
               >
                 Découvrir nos solutions
               </a>

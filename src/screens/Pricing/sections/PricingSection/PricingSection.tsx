@@ -39,9 +39,9 @@ export const PricingSection = (): JSX.Element => {
             variant="ghost"
             className="w-fit h-10 p-0 gap-3 justify-start hover:bg-transparent"
           >
-            <span className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#1e1e1e] text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)]">
-              Demander un devis personnalisé
-            </span>
+            <a href="/devis" className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#1e1e1e] text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)]">
+              Demander un devis
+            </a>
             <div className="flex w-8 h-8 items-center justify-center rounded-full overflow-hidden [background:radial-gradient(50%_50%_at_50%_50%,rgba(249,229,185,1)_0%,rgba(248,227,181,1)_22%,rgba(246,224,172,1)_40%,rgba(242,218,155,1)_55%,rgba(237,210,131,1)_70%,rgba(231,199,101,1)_85%,rgba(223,186,65,1)_98%,rgba(222,184,59,1)_100%)]">
               <div className="w-5 h-5 bg-[url(/arrow-right.svg)] bg-[100%_100%]" />
             </div>

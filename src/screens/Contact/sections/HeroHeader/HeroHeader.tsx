@@ -40,7 +40,7 @@ export const HeroHeader = (): JSX.Element => {
   const contactItems = [
     {
       icon: <MapPinIcon className="w-7 h-7 text-black" />,
-      description: "Nos bureaux sont situés en plein cœur de Paris.",
+      description: "Nos bureaux sont situés :",
       link: "/contact/carte",
       target: "_self",
     },
@@ -67,21 +67,21 @@ export const HeroHeader = (): JSX.Element => {
           {/* Left side with heading and CTA */}
           <div className="flex flex-col justify-center items-start gap-12 py-16 lg:py-24">
             <div className="flex flex-col items-start gap-6">
-              <h1 className="text-4xl lg:text-5xl font-bold text-[#1e1e1e]">
+              <h1 className="text-4xl lg:text-5xl  text-[#1e1e1e] font-display-h6">
                 Une <span className="text-[#cd9f25]">question</span> ? Un{" "}
                 <span className="text-[#cd9f25]">projet</span> ? Parlons-en.
               </h1>
-              <p className="text-lg text-[#1e1e1e]">
+              <p className="text-lg text-[#1e1e1e] [font-family:'Sofia_Pro-Light',Helvetica] font-light">
                 Notre équipe vous répond sous 24h ouvrées. Choisissez le canal
                 de contact qui vous convient.
               </p>
             </div>
             <Button
               variant="default"
-              className="h-auto w-[185px] p-0 inline-flex items-center gap-3 group bg-transparent hover:bg-transparent hover:px-2 hover:gap-1 transition-all duration-300"
+              className="h-auto w-[210px] p-0 inline-flex items-center gap-3 group bg-transparent hover:bg-transparent hover:px-2 hover:gap-1 transition-all duration-300"
               onClick={handleScrollToContact}
             >
-              <span className="text-base font-medium text-[#1e1e1e] group-hover:text-[#cd9f25]">
+              <span className="text-base font-medium text-[#1e1e1e] group-hover:text-[#cd9f25] [font-family:'Sofia_Pro-Regular',Helvetica]">
                 Envoyer un message
               </span>
               <div className="flex w-10 h-10 items-center justify-center rounded-full bg-radial-gold-circle group-hover:bg-gradient-to-r group-hover:from-transparent group-hover:to-transparent transition-all duration-300">
@@ -109,10 +109,10 @@ export const HeroHeader = (): JSX.Element => {
                         {item.icon}
                       </div>
                       <div className="flex flex-col gap-1">
-                        <p className="text-white font-semibold">
+                        <p className="text-white font-light [font-family:'Sofia_Pro-Light',Helvetica]">
                           {item.description}
                         </p>
-                        <p className="text-base font-semibold text-[#f7e1aa] underline">
+                        <p className="text-base font-light text-[#f7e1aa] underline font-display-h6">
                           {item.link === "/contact/carte"
                             ? "159 Chemin du Val de Cagne 06800 Cagnes-sur-Mer FRANCE"
                             : item.link}

@@ -40,7 +40,7 @@ export const AboutUsSection = (): JSX.Element => {
             <h2 className="text-3xl sm:text-4xl text-[#1e1e1e] font-display-h6">
               Une plateforme pensée pour chaque acteur du projet
             </h2>
-            <p className="text-base sm:text-lg text-[#1e1e1e] max-w-4xl mx-auto md:mx-0 font-display-h6">
+            <p className="text-base sm:text-lg text-[#1e1e1e] max-w-4xl mx-auto md:mx-0 [font-family:'Sofia_Pro'] font-light">
               Que vous soyez particulier, agent immobilier ou professionnel du
               bâtiment, EURÊKA vous offre des outils adaptés à vos besoins pour
               piloter, valoriser ou accélérer vos projets de construction et de
@@ -67,7 +67,7 @@ export const AboutUsSection = (): JSX.Element => {
                     <h3 className="text-xl text-[#cd9f25] font-display-h6">
                       {category.title}
                     </h3>
-                    <p className="text-base text-[#1e1e1e] flex-grow font-display-h6">
+                    <p className="text-base text-[#1e1e1e] flex-grow [font-family:'Sofia_Pro'] font-light">
                       {category.description}
                     </p>
                   </div>
@@ -75,7 +75,7 @@ export const AboutUsSection = (): JSX.Element => {
                     variant="ghost"
                     className="justify-start p-0 h-auto hover:bg-transparent mt-4"
                   >
-                    <span className="text-base text-[#1e1e1e] font-display-h6">
+                    <span className="text-base text-[#1e1e1e] [font-family:'Sofia_Pro']">
                       {category.buttonText}
                     </span>
                     <div className="flex w-10 h-10 items-center justify-center ml-3 rounded-full overflow-hidden [background:radial-gradient(50%_50%_at_50%_50%,rgba(249,229,185,1)_0%,rgba(248,227,181,1)_22%,rgba(246,224,172,1)_40%,rgba(242,218,155,1)_55%,rgba(237,210,131,1)_70%,rgba(231,199,101,1)_85%,rgba(223,186,65,1)_98%,rgba(222,184,59,1)_100%)]">

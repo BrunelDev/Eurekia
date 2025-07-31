@@ -1,0 +1,1 @@
+export { NewsletterRegister } from "./Register";

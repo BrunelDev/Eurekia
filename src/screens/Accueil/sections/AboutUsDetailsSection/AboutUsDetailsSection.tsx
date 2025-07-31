@@ -24,9 +24,9 @@ export const AboutUsDetailsSection = (): JSX.Element => {
 
   return (
     <section className="relative w-full bg-[#fbf9eb] z-[2]">
-      <div className="flex flex-row max-w-[1280px] mx-auto">
+      <div className="flex flex-row w-full">
         {/* Left side - Background image with overlay */}
-        <div className="relative w-1/2 md:w-full h-[832px] bg-[url(/frame15.png)] bg-cover bg-center">
+        <div className="relative w-1/2 md:w-1/2 h-[832px] bg-[url(/frame15.png)] bg-cover bg-center">
           <div className="absolute inset-0 bg-[rgba(72,54,33,0.4)]" />
         </div>
 
@@ -46,7 +46,7 @@ export const AboutUsDetailsSection = (): JSX.Element => {
                 {/* Testimonial card */}
                 <Card className="border-none shadow-none bg-transparent">
                   <CardContent className="p-0 flex flex-col h-[200px] gap-5">
-                    <p className="font-text-large text-[#1e1e1e] text-[length:var(--text-large-font-size)] tracking-[var(--text-large-letter-spacing)] leading-[var(--text-large-line-height)] [font-style:var(--text-large-font-style)] font-display-h6">
+                    <p className="font-text-large text-[#1e1e1e] text-[length:var(--text-large-font-size)] tracking-[var(--text-large-letter-spacing)] leading-[var(--text-large-line-height)] [font-style:var(--text-large-font-style)] [font-family:'Sofia_Pro'] font-light">
                       {testimonials[0].quote}
                     </p>
 

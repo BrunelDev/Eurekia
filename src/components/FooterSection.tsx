@@ -70,7 +70,7 @@ export const FooterSection = (): JSX.Element => {
                     />
 
                     <Button className="p-3 [background:radial-gradient(50%_50%_at_50%_50%,rgba(249,229,185,1)_0%,rgba(248,227,181,1)_22%,rgba(246,224,172,1)_40%,rgba(242,218,155,1)_55%,rgba(237,210,131,1)_70%,rgba(231,199,101,1)_85%,rgba(223,186,65,1)_98%,rgba(222,184,59,1)_100%)] text-[#1e1e1e] font-label-small">
-                      Souscrire
+                      S'inscrire
                     </Button>
                   </div>
 
@@ -132,7 +132,8 @@ export const FooterSection = (): JSX.Element => {
 
                 {/* Copyright */}
                 <div className="relative w-fit mt-[-1.00px] font-label-small font-[number:var(--label-small-font-weight)] text-[#f6f6f6] text-[length:var(--label-small-font-size)] tracking-[var(--label-small-letter-spacing)] leading-[var(--label-small-line-height)] whitespace-nowrap [font-style:var(--label-small-font-style)]">
-                  © 2025 Eurêka. Tout droit réservé
+                  {/*© 2025 Eurêka. Tout droit réservé*/}
+                  Eurêka Ingénierie!
                 </div>
               </div>
             </div>

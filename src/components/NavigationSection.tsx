@@ -1,16 +1,18 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { ArrowRightIcon, Menu, X } from "lucide-react";
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuList,
 } from "./ui/navigation-menu";
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const NavigationSection = (): JSX.Element => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   // Navigation menu items data
   const navItems = [
     { label: "Accueil", path: "/", active: location.pathname === "/" },
@@ -87,15 +89,14 @@ export const NavigationSection = (): JSX.Element => {
         {/* Sign Up Button & Mobile Menu Toggle */}
         <div className="flex items-center gap-4">
           {/* Sign Up Button */}
-          <div className="hidden md:flex items-center gap-3 h-10 cursor-pointer">
-            <span className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#1e1e1e] text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] whitespace-nowrap [font-style:var(--label-medium-font-style)]">
+          <div className="hidden w-[118px] md:flex items-center gap-3 h-10 cursor-pointer group hover:gap-1 hover:px-2 transition-all duration-300"
+          onClick={() => navigate("/newsletter")}>
+            <span className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#1e1e1e] group-hover:text-[#cd9f25] text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] whitespace-nowrap [font-style:var(--label-medium-font-style)]">
               S'inscrire
             </span>
-            <div className="w-8 h-8 rounded-[1000px] overflow-hidden flex items-center justify-center [background:radial-gradient(50%_50%_at_50%_50%,rgba(249,229,185,1)_0%,rgba(248,227,181,1)_22%,rgba(246,224,172,1)_40%,rgba(242,218,155,1)_55%,rgba(237,210,131,1)_70%,rgba(231,199,101,1)_85%,rgba(223,186,65,1)_98%,rgba(222,184,59,1)_100%)]">
-              <div className="flex items-center justify-center">
-                <div className="w-5 h-5 bg-[url(/arrow-right.svg)] bg-[100%_100%]" />
+            <div className="flex w-10 h-10 items-center justify-center rounded-full bg-radial-gold group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white">
+                <ArrowRightIcon className="w-5 h-5 text-black group-hover:text-[#cd9f25]" size={18}/>
               </div>
-            </div>
           </div>
 
           {/* Mobile Menu Button */}
@@ -152,7 +153,9 @@ export const NavigationSection = (): JSX.Element => {
             ))}
           </NavigationMenuList>
           {/* Sign Up Button for Mobile */}
-          <div className="pl-5 flex gap-3 h-10 py-4 cursor-pointer">
+          <div className="pl-5 flex gap-3 h-10 py-4 cursor-pointer"
+          onClick={() => navigate("/newsletter")}
+          >
             <span className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#1e1e1e] text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] whitespace-nowrap [font-style:var(--label-medium-font-style)]">
               S'inscrire
             </span>

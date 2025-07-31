@@ -6,7 +6,7 @@ export const SolutionsOverviewSection = (): JSX.Element => {
       <div className="relative bg-[url(/apropos-hero.jpg)] bg-center bg-cover w-full h-[832px] flex justify-center items-center">
         <div className="absolute top-0 left-0 w-full h-[832px] bg-[#00000066]" />
         <h6 className="text-center text-[48px] text-white z-50 w-[60%] font-display-h3">
-          EURÊKA INGENIERIE — Là où l’expertise rencontre l’intelligence
+          EURÊKA INGENIERIE! — Là où l’expertise rencontre l’intelligence
           artificielle
         </h6>
       </div>
