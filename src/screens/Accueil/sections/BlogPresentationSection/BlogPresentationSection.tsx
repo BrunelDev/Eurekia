@@ -19,7 +19,12 @@ export const BlogPresentationSection = (): JSX.Element => {
         id: index + 1,
         image: post.blogPhoto,
         title: post.title,
-        date: post.creationDate,
+        // date is like that : 2025-08-04T01:53:10.000Z, we need to convert it to 23 Mai 2025
+        date: "Publié le " + new Date(post.creationDate).toLocaleDateString("fr-FR", {
+          day: "2-digit",
+          month: "long",
+          year: "numeric",
+        }),
         url: post.link,
       }))) ||
     [];
