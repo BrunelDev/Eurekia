@@ -12,10 +12,9 @@ import React from "react";
 // Define filter categories
 const filterCategories = [
   { id: "all", label: "Tous", active: true },
-  { id: "glossary", label: "Glossaire", active: false },
-  { id: "technical", label: "Domaine technique", active: false },
   { id: "administrative", label: "Administratif", active: false },
   { id: "legal", label: "Juridique", active: false },
+  { id: "technical", label: "Technique", active: false },
 ];
 
 // Define case studies data
@@ -84,16 +83,21 @@ export const HeroWrapperSection = (): JSX.Element => {
       <div className="container mx-auto">
         {/* Filter Categories */}
         <div className="flex items-center justify-center gap-3 mb-12">
-          <ToggleGroup type="single" defaultValue="all" className="flex gap-3 flex-wrap">
+          <ToggleGroup
+            type="single"
+            defaultValue="all"
+            className="flex gap-3 flex-wrap"
+          >
             {filterCategories.map((category) => (
               <ToggleGroupItem
+              size={"lg"}
+              variant={"default"}
                 key={category.id}
                 value={category.id}
-                className={`p-3 rounded ${
-                  category.active ? "bg-[#efe299]" : ""
-                }`}
+                
+                className={`px-3 py-6 rounded `}
               >
-                <span className="font-text-small text-[#1e1e1e] text-[length:var(--text-small-font-size)] tracking-[var(--text-small-letter-spacing)] leading-[var(--text-small-line-height)] [font-style:var(--text-small-font-style)]">
+                <span className="[font-family:'Sofia_Pro'] font-light text-[15px] text-[#1e1e1e]">
                   {category.label}
                 </span>
               </ToggleGroupItem>
