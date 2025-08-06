@@ -102,7 +102,7 @@ export const NewsletterRegister = () => {
             </div>
             <Button 
               type="submit" 
-              className="w-full bg-radial-gold" 
+              className="w-full bg-radial-gold hover:brightness-90 hover:shadow-md transition-all duration-300" 
               disabled={isSubmitting}
             >
               <h6 className="text-center font-display-h6 text-gray-700">

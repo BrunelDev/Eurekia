@@ -44,7 +44,7 @@ const router = createBrowserRouter([
     element: <NewsletterRegister />,
   },
   {
-    path: "/devis",
+    path: "/pricing/devis",
     element: <DevisChoice />,
   },
 ]);

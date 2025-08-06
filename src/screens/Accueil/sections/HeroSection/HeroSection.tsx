@@ -1,6 +1,5 @@
 import { ArrowRightIcon } from "lucide-react";
-import React from "react";
-import { Button } from "../../../../components/ui/button";
+import React, { useEffect } from "react";
 import { Separator } from "../../../../components/ui/separator";
 import ArrowButton from "../../../../components/ArrowButton";
 import { useNavigate } from "react-router-dom";
@@ -28,6 +27,8 @@ export const HeroSection = (): JSX.Element => {
       ],
     },
   ];
+
+
 
   return (
     <section className="w-full bg-white">

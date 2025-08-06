@@ -11,7 +11,7 @@ export const SolutionsOverviewSection = (): JSX.Element => {
         </h6>
       </div>
 
-      <div className="relative mx-auto bg-[url(hero-bg.png)] bg-center bg-cover bg-no-repeat">
+      <div className="relative mx-auto bg-[url(/hero-bg.png)] bg-center bg-cover bg-no-repeat">
         <div className="relative flex justify-center">
           {/*if w > h, h = w, else w = h*/}
 
