@@ -1,13 +1,7 @@
 import { ArrowRightIcon } from "lucide-react";
-import React from "react";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "../../../../components/ui/accordion";
 import { Button } from "../../../../components/ui/button";
 import { Card, CardContent } from "../../../../components/ui/card";
+import ArrowButton from "../../../../components/ArrowButton";
 
 export const SolutionsOverviewSection = (): JSX.Element => {
   // Data for the accordion items
@@ -55,14 +49,13 @@ export const SolutionsOverviewSection = (): JSX.Element => {
             ))}
           </div>
 
-          <Button variant="ghost" className="p-0 h-auto hover:bg-transparent">
-            <span className="font-label-medium text-[#1e1e1e] text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)]">
-              Essayer une démo IA
-            </span>
-            <div className="flex w-8 h-8 items-center justify-center ml-3 rounded-full overflow-hidden [background:radial-gradient(50%_50%_at_50%_50%,rgba(249,229,185,1)_0%,rgba(248,227,181,1)_22%,rgba(246,224,172,1)_40%,rgba(242,218,155,1)_55%,rgba(237,210,131,1)_70%,rgba(231,199,101,1)_85%,rgba(223,186,65,1)_98%,rgba(222,184,59,1)_100%)]">
-              <ArrowRightIcon className="w-5 h-5" />
-            </div>
-          </Button>
+          <ArrowButton
+            handleClick={() => (window.location.href = "/solutions")}
+            text="Essayer une démo IA"
+            lucideIcon={
+              <ArrowRightIcon className="w-5 h-5 text-black group-hover:text-[#cd9f25]" />
+            }
+          />
         </div>
       </div>
     </section>

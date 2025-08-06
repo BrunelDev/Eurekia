@@ -46,19 +46,7 @@ export const SolutionsSection = (): JSX.Element => {
           <p className="self-stretch font-text-medium font-[number:var(--text-medium-font-weight)] text-[#1e1e1e] text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
             L'expertise terrain de notre équipe pour piloter vos projets
           </p>
-          <Button
-            variant="ghost"
-            className="h-10 pl-0 pr-2 py-0 flex items-center gap-3 hover:bg-transparent"
-          >
-            <span className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#1e1e1e] text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] whitespace-nowrap [font-style:var(--label-medium-font-style)]">
-              Découvrir les prestations
-            </span>
-            <div className="flex w-8 h-8 items-center justify-center rounded-[1000px] overflow-hidden [background:radial-gradient(50%_50%_at_50%_50%,rgba(249,229,185,1)_0%,rgba(248,227,181,1)_22%,rgba(246,224,172,1)_40%,rgba(242,218,155,1)_55%,rgba(237,210,131,1)_70%,rgba(231,199,101,1)_85%,rgba(223,186,65,1)_98%,rgba(222,184,59,1)_100%)]">
-              <div className="inline-flex items-center gap-2.5 relative flex-[0_0_auto]">
-                <div className="relative w-5 h-5 bg-[url(/arrow-right.svg)] bg-[100%_100%]" />
-              </div>
-            </div>
-          </Button>
+          
           <ArrowButton
             handleClick={() => window.location.href = "/solutions"}
             text="Découvrir les prestations"

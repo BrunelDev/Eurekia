@@ -156,7 +156,7 @@ export const ContactFormSection = (): JSX.Element => {
           </div>
 
           {/* Subject Selection */}
-          {!sujet ? (
+          {!sujet && (selectedSubject !== "Devis personnalisé" && selectedSubject !== "Devis instantané") ? (
             <div className="flex flex-col gap-4">
               <Label className="text-lg font-medium text-[#1e1e1e] [font-family:'Sofia_Pro']">
                 Sélectionnez un Sujet?
@@ -195,11 +195,11 @@ export const ContactFormSection = (): JSX.Element => {
           ) : (
             <div>
               <div className="flex flex-col gap-4">
-                <Label className="text-lg font-medium text-[#1e1e1e]">
-                  Sélectionnez un Sujet?
+                <Label className="text-lg font-medium text-[#1e1e1e] [font-family:'Sofia_Pro']">
+                  Sélectionnez un type de devis?
                 </Label>
                 <RadioGroup
-                  defaultValue={sujet}
+                  defaultValue={sujet!}
                   className="flex flex-wrap gap-x-6 gap-y-4"
                   onValueChange={setSelectedSubject}
                   name="sujet"
