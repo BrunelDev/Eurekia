@@ -55,7 +55,7 @@ export const DevisChoice = () => {
             <div className="mt-6">
               <Button
                 onClick={() => handleChoice("Devis personnalisé")}
-                className="w-full bg-radial-gold"
+                className="w-full bg-radial-gold hover:brightness-90 hover:shadow-md transition-all duration-300"
               >
                 <h6 className="text-center font-display-h6 text-gray-700">
                   Demander un devis personnalisé
@@ -89,7 +89,7 @@ export const DevisChoice = () => {
             <div className="mt-6">
               <Button
                 onClick={() => handleChoice("Devis instantané")}
-                className="w-full bg-radial-gold"
+                className="w-full bg-radial-gold hover:brightness-90 hover:shadow-md transition-all duration-300"
               >
                 <h6 className="text-center font-display-h6 text-gray-700">
                   Obtenir un devis instantané

@@ -1,6 +1,7 @@
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Separator } from "./ui/separator";
+import { useState } from "react";
 
 export const FooterSection = (): JSX.Element => {
   // Navigation links data
@@ -19,6 +20,8 @@ export const FooterSection = (): JSX.Element => {
     "Terms of Service",
     "Cookies Settings",
   ];
+
+  const [email, setEmail] = useState("");
 
   return (
     <footer
@@ -67,9 +70,13 @@ export const FooterSection = (): JSX.Element => {
                     <Input
                       className="flex-1 p-3 border border-solid border-[#f6f6f6] bg-transparent [font-family:'Sofia_Pro-Regular',Helvetica] text-[#d1d1d1] text-sm"
                       placeholder="Entrez votre email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      type="email"
                     />
 
-                    <Button className="p-3 [background:radial-gradient(50%_50%_at_50%_50%,rgba(249,229,185,1)_0%,rgba(248,227,181,1)_22%,rgba(246,224,172,1)_40%,rgba(242,218,155,1)_55%,rgba(237,210,131,1)_70%,rgba(231,199,101,1)_85%,rgba(223,186,65,1)_98%,rgba(222,184,59,1)_100%)] text-[#1e1e1e] font-label-small">
+                    <Button className="p-3 [background:radial-gradient(50%_50%_at_50%_50%,rgba(249,229,185,1)_0%,rgba(248,227,181,1)_22%,rgba(246,224,172,1)_40%,rgba(242,218,155,1)_55%,rgba(237,210,131,1)_70%,rgba(231,199,101,1)_85%,rgba(223,186,65,1)_98%,rgba(222,184,59,1)_100%)] text-[#1e1e1e] font-label-small"
+                    onClick={() => (window.location.href = "/newsletter/?email=" + encodeURIComponent(email))}>
                       S'inscrire
                     </Button>
                   </div>
