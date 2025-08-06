@@ -1,11 +1,8 @@
-import { Button } from "../../../../components/ui/button";
 import { Card, CardContent } from "../../../../components/ui/card";
-import { useNavigate } from "react-router-dom";
 import ArrowButton from "../../../../components/ArrowButton";
 import { ArrowRightIcon } from "lucide-react";
 
 export const PricingSection = (): JSX.Element => {
-  const navigate = useNavigate();
   return (
     <section className="relative w-full py-24 bg-white">
       <div className="container px-0 mx-0 flex flex-col md:flex-row items-center gap-8">
@@ -43,7 +40,7 @@ export const PricingSection = (): JSX.Element => {
           </div>
 
           <ArrowButton
-            handleClick={() => navigate("/pricing/devis")}
+            handleClick={() => window.location.href = "/pricing/devis"}
             text="Demander un devis"
             lucideIcon={
               <ArrowRightIcon className="w-6 h-6 text-black group-hover:text-[#cd9f25]" />

@@ -1,9 +1,7 @@
 import ArrowButton from "../../../../components/ArrowButton";
-import { Button } from "../../../../components/ui/button";
 import { Card, CardContent, CardHeader } from "../../../../components/ui/card";
 import { Separator } from "../../../../components/ui/separator";
 import { ArrowRightIcon } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 
 // Service item data for both cards
 const engineeringServices = [
@@ -23,7 +21,7 @@ const aiServices = [
 ];
 
 export const ProjectViewSection = (): JSX.Element => {
-  const navigate = useNavigate();
+  
   return (
     <section className="bg-white py-16 sm:py-20 lg:py-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
@@ -83,7 +81,7 @@ export const ProjectViewSection = (): JSX.Element => {
                   </p>
 
                   <ArrowButton
-                    handleClick={() => navigate("/pricing")}
+                    handleClick={() => window.location.href = "/pricing"}
                     text="Voir toutes les prestations"
                     lucideIcon={
                       <ArrowRightIcon className="w-6 h-6 text-black group-hover:text-[#cd9f25]" />
@@ -147,7 +145,7 @@ export const ProjectViewSection = (): JSX.Element => {
                   </p>
 
                   <ArrowButton
-                    handleClick={() => navigate("/pricing")}
+                    handleClick={() => window.location.href = "/pricing"}
                     text="Découvrir l'assistant IA"
                     lucideIcon={
                       <ArrowRightIcon className="w-6 h-6 text-black group-hover:text-[#cd9f25]" />

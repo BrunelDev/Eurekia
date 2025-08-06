@@ -7,13 +7,12 @@ import {
   NavigationMenuList,
 } from "./ui/navigation-menu";
 import { useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import ArrowButton from "./ArrowButton";
 
 export const NavigationSection = (): JSX.Element => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
+ 
   // Navigation menu items data
   const navItems = [
     { label: "Accueil", path: "/", active: location.pathname === "/" },
@@ -90,7 +89,7 @@ export const NavigationSection = (): JSX.Element => {
         {/* Sign Up Button & Mobile Menu Toggle */}
         <div className="flex items-center gap-4">
           {/* Sign Up Button */}
-          <ArrowButton handleClick={() => navigate("/newsletter")} text="S'inscrire" lucideIcon={<ArrowRightIcon className="w-5 h-5 text-black group-hover:text-[#cd9f25]" size={18}/>}/>
+          <ArrowButton handleClick={() =>  window.location.href = "/newsletter"} text="S'inscrire" lucideIcon={<ArrowRightIcon className="w-5 h-5 text-black group-hover:text-[#cd9f25]" size={18}/>}/>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">
@@ -147,7 +146,7 @@ export const NavigationSection = (): JSX.Element => {
           </NavigationMenuList>
           {/* Sign Up Button for Mobile */}
           <div className="pl-5 flex gap-3 h-10 py-4 cursor-pointer"
-          onClick={() => navigate("/newsletter")}
+          onClick={() => window.location.href = "/newsletter"}
           >
             <span className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#1e1e1e] text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] whitespace-nowrap [font-style:var(--label-medium-font-style)]">
               S'inscrire

@@ -1,14 +1,7 @@
 import { ArrowRightIcon } from "lucide-react";
 import ArrowButton from "../../../../components/ArrowButton";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "../../../../components/ui/accordion";
 import { Button } from "../../../../components/ui/button";
 import { Card, CardContent } from "../../../../components/ui/card";
-import { useNavigate } from "react-router-dom";
 
 export const SolutionsSection = (): JSX.Element => {
   // Services data for the accordion
@@ -34,7 +27,7 @@ export const SolutionsSection = (): JSX.Element => {
       content: "Description for document writing.",
     },
   ];
-  const navigate = useNavigate();
+ 
 
   return (
 
@@ -67,7 +60,7 @@ export const SolutionsSection = (): JSX.Element => {
             </div>
           </Button>
           <ArrowButton
-            handleClick={() => navigate("/solutions")}
+            handleClick={() => window.location.href = "/solutions"}
             text="Découvrir les prestations"
             lucideIcon={<ArrowRightIcon className="w-5 h-5 text-black group-hover:text-[#cd9f25]" />}
           />

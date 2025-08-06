@@ -1,11 +1,9 @@
 import { ArrowRightIcon } from "lucide-react";
-import { Button } from "../../../../components/ui/button";
 import { Card, CardContent } from "../../../../components/ui/card";
 import ArrowButton from "../../../../components/ArrowButton";
-import { useNavigate } from "react-router-dom";
 
 export const AboutUsSection = (): JSX.Element => {
-  const navigate = useNavigate();
+
   // Data for the three user category cards
   const userCategories = [
     {
@@ -75,7 +73,7 @@ export const AboutUsSection = (): JSX.Element => {
                     </p>
                   </div>
                   <ArrowButton
-                    handleClick={() => navigate("category.link")}
+                    handleClick={() => window.location.href = "category.link"}
                     text={category.buttonText}
                     lucideIcon={
                       <ArrowRightIcon className="w-6 h-6 text-black group-hover:text-[#cd9f25]" />

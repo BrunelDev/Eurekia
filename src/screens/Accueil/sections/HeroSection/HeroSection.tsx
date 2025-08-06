@@ -1,11 +1,10 @@
 import { ArrowRightIcon } from "lucide-react";
-import React, { useEffect } from "react";
+import React from "react";
 import { Separator } from "../../../../components/ui/separator";
 import ArrowButton from "../../../../components/ArrowButton";
-import { useNavigate } from "react-router-dom";
 
 export const HeroSection = (): JSX.Element => {
-  const navigate = useNavigate();
+
   // Stats data for the two stat cards
   const statsData = [
     {
@@ -57,7 +56,7 @@ export const HeroSection = (): JSX.Element => {
             </div>
 
             <ArrowButton
-              handleClick={() => navigate("/nos-solutions")}
+              handleClick={() => window.location.href = "/nos-solutions"}
               text="Découvrir nos solutions"
               lucideIcon={
                 <ArrowRightIcon className="w-6 h-6 text-black group-hover:text-[#cd9f25]" />

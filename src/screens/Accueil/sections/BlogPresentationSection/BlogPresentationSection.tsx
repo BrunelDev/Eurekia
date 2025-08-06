@@ -1,12 +1,11 @@
 import { ArrowRightIcon } from "lucide-react";
 import { Card, CardContent } from "../../../../components/ui/card";
-import { useNavigate } from "react-router-dom";
 import ArrowButton from "../../../../components/ArrowButton";
 import { useRSSFeed } from "../../../../../services/blogService";
 import { Skeleton } from "../../../../components/ui/skeleton";
 
 export const BlogPresentationSection = (): JSX.Element => {
-  const navigate = useNavigate();
+
   // Blog post data for mapping
   const { data, loading, error, refetch } = useRSSFeed(
     "https://blog.eurekaingenierie.com/feed/"
@@ -19,7 +18,6 @@ export const BlogPresentationSection = (): JSX.Element => {
         id: index + 1,
         image: post.blogPhoto,
         title: post.title,
-        // date is like that : 2025-08-04T01:53:10.000Z, we need to convert it to 23 Mai 2025
         date: "Publié le " + new Date(post.creationDate).toLocaleDateString("fr-FR", {
           day: "2-digit",
           month: "long",
@@ -46,7 +44,7 @@ export const BlogPresentationSection = (): JSX.Element => {
             </div>
 
             <ArrowButton
-              handleClick={() => navigate("/blog")}
+              handleClick={() => window.location.href = "/blog"}
               text="Lire le blog Archim'aide"
               lucideIcon={
                 <ArrowRightIcon className="w-5 h-5 text-black group-hover:text-[#cd9f25]" />

@@ -1,5 +1,3 @@
-import { useNavigate } from "react-router-dom";
-import { Button } from "../../components/ui/button";
 import {
   Card,
   CardContent,
@@ -11,10 +9,10 @@ import { FooterSection } from "../../components/FooterSection";
 import { NavigationSection } from "../../components/NavigationSection";
 
 export const DevisChoice = () => {
-  const navigate = useNavigate();
+ 
 
   const handleChoice = (sujet: string) => {
-    navigate(`/contact?sujet=${sujet}`);
+    window.location.href = `/contact?sujet=${sujet}`;
   };
 
   return (
