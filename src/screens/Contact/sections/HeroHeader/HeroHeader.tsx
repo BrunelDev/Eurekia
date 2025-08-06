@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowDownIcon, MailIcon, MapPinIcon, PhoneIcon } from "lucide-react";
-import { Button } from "../../../../components/ui/button";
 import { Card, CardContent } from "../../../../components/ui/card";
+import ArrowButton from "../../../../components/ArrowButton";
 
 export const HeroHeader = (): JSX.Element => {
   const handleScrollToContact = () => {
@@ -42,12 +42,13 @@ export const HeroHeader = (): JSX.Element => {
       icon: <MapPinIcon className="w-7 h-7 text-black" />,
       description: "Nos bureaux sont situés :",
       link: "/contact/carte",
+      href: "/contact/carte",
       target: "_self",
     },
     {
       icon: <PhoneIcon className="w-7 h-7 text-black" />,
       description: "Appelez-nous du lundi au vendredi, de 9h à 18h",
-      link: "06.15.66.39.70",
+      link: "0615663970",
       href: "tel:0615663970",
     },
     {
@@ -76,18 +77,8 @@ export const HeroHeader = (): JSX.Element => {
                 de contact qui vous convient.
               </p>
             </div>
-            <Button
-              variant="default"
-              className="h-auto w-[210px] p-0 inline-flex items-center gap-3 group bg-transparent hover:bg-transparent hover:px-2 hover:gap-1 transition-all duration-300"
-              onClick={handleScrollToContact}
-            >
-              <span className="text-base font-medium text-[#1e1e1e] group-hover:text-[#cd9f25] [font-family:'Sofia_Pro-Regular',Helvetica]">
-                Envoyer un message
-              </span>
-              <div className="flex w-10 h-10 items-center justify-center rounded-full bg-radial-gold-circle group-hover:bg-gradient-to-r group-hover:from-transparent group-hover:to-transparent transition-all duration-300">
-                <ArrowDownIcon className="w-5 h-5 text-black group-hover:text-[#cd9f25]" />
-              </div>
-            </Button>
+      
+            <ArrowButton handleClick={handleScrollToContact} text="Envoyer un message" lucideIcon={<ArrowDownIcon className="w-5 h-5 text-black group-hover:text-[#cd9f25]" />} />
           </div>
 
           {/* Right side with image and contact info */}
@@ -100,7 +91,7 @@ export const HeroHeader = (): JSX.Element => {
                 <CardContent className="p-6 sm:p-8 space-y-6">
                   {contactItems.map((item, index) => (
                     <Link
-                      to={item.link}
+                      to={item.href}
                       target={item.target}
                       key={index}
                       className="flex items-start gap-4 no-underline"

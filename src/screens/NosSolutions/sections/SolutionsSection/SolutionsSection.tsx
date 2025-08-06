@@ -1,3 +1,5 @@
+import { ArrowRightIcon } from "lucide-react";
+import ArrowButton from "../../../../components/ArrowButton";
 import {
   Accordion,
   AccordionContent,
@@ -61,6 +63,11 @@ export const SolutionsSection = (): JSX.Element => {
               </div>
             </div>
           </Button>
+          <ArrowButton
+            handleClick={() => navigate("/solutions")}
+            text="Découvrir les prestations"
+            lucideIcon={<ArrowRightIcon className="w-5 h-5 text-black group-hover:text-[#cd9f25]" />}
+          />
         </div>
 
         {/* Right Column - Services accordion - Order 3 on all screens */}

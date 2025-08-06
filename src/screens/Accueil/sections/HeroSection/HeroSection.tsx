@@ -2,8 +2,11 @@ import { ArrowRightIcon } from "lucide-react";
 import React from "react";
 import { Button } from "../../../../components/ui/button";
 import { Separator } from "../../../../components/ui/separator";
+import ArrowButton from "../../../../components/ArrowButton";
+import { useNavigate } from "react-router-dom";
 
 export const HeroSection = (): JSX.Element => {
+  const navigate = useNavigate();
   // Stats data for the two stat cards
   const statsData = [
     {
@@ -34,9 +37,16 @@ export const HeroSection = (): JSX.Element => {
           <div className="lg:w-1/2 flex px-4 flex-col items-start gap-10 sm:px-6 lg:px-8">
             <div className="flex flex-col items-start gap-6 self-stretch">
               <h1 className="self-stretch font-['Neulis_Alt-Regular',Helvetica] font-normal text-3xl sm:text-4xl lg:text-5xl lg:leading-[1.2]">
-                <span className="text-[#1e1e1e] font-display-h6">Pilotez vos </span>
-                <span className="text-[#cd9f25] font-display-h6">projets de construction</span>
-                <span className="text-[#1e1e1e] font-display-h6"> avec EURÊKA INGÉNIERIE!</span>
+                <span className="text-[#1e1e1e] font-display-h6">
+                  Pilotez vos{" "}
+                </span>
+                <span className="text-[#cd9f25] font-display-h6">
+                  projets de construction
+                </span>
+                <span className="text-[#1e1e1e] font-display-h6">
+                  {" "}
+                  avec EURÊKA INGÉNIERIE!
+                </span>
               </h1>
               <p className="self-stretch text-base sm:text-lg text-[#1e1e1e] [font-family:'Sofia_Pro'] font-light">
                 Des solutions humaines et intelligentes pour piloter vos projets
@@ -44,20 +54,14 @@ export const HeroSection = (): JSX.Element => {
                 complexe.
               </p>
             </div>
-            <Button
-              variant="default"
-              className="h-12 px-0 py-0 gap-3 w-[230px] bg-transparent hover:bg-transparent justify-start group hover:gap-1 hover:px-2 transition-all duration-300"
-            >
-              <a
-                href="/nos-solutions"
-                className="text-base font-medium text-[#1e1e1e] group-hover:text-[#cd9f25] [font-family:'Sofia_Pro'] font-light"
-              >
-                Découvrir nos solutions
-              </a>
-              <div className="flex w-10 h-10 items-center justify-center rounded-full bg-radial-gold group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white">
+
+            <ArrowButton
+              handleClick={() => navigate("/nos-solutions")}
+              text="Découvrir nos solutions"
+              lucideIcon={
                 <ArrowRightIcon className="w-6 h-6 text-black group-hover:text-[#cd9f25]" />
-              </div>
-            </Button>
+              }
+            />
             {/* Stats Section */}
             <div className="flex flex-row pb-4 md:flex-row items-center justify-center md:justify-around gap-8 md:gap-12 pt-12 border-t border-gray-200">
               {statsData.map((stat, index) => (

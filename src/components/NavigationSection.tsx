@@ -8,6 +8,7 @@ import {
 } from "./ui/navigation-menu";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import ArrowButton from "./ArrowButton";
 
 export const NavigationSection = (): JSX.Element => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -89,15 +90,7 @@ export const NavigationSection = (): JSX.Element => {
         {/* Sign Up Button & Mobile Menu Toggle */}
         <div className="flex items-center gap-4">
           {/* Sign Up Button */}
-          <div className="hidden w-[118px] md:flex items-center gap-3 h-10 cursor-pointer group hover:gap-1 hover:px-2 transition-all duration-300"
-          onClick={() => navigate("/newsletter")}>
-            <span className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#1e1e1e] group-hover:text-[#cd9f25] text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] whitespace-nowrap [font-style:var(--label-medium-font-style)]">
-              S'inscrire
-            </span>
-            <div className="flex w-10 h-10 items-center justify-center rounded-full bg-radial-gold group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-white">
-                <ArrowRightIcon className="w-5 h-5 text-black group-hover:text-[#cd9f25]" size={18}/>
-              </div>
-          </div>
+          <ArrowButton handleClick={() => navigate("/newsletter")} text="S'inscrire" lucideIcon={<ArrowRightIcon className="w-5 h-5 text-black group-hover:text-[#cd9f25]" size={18}/>}/>
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">

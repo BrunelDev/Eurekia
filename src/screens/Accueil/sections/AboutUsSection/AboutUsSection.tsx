@@ -1,8 +1,11 @@
 import { ArrowRightIcon } from "lucide-react";
 import { Button } from "../../../../components/ui/button";
 import { Card, CardContent } from "../../../../components/ui/card";
+import ArrowButton from "../../../../components/ArrowButton";
+import { useNavigate } from "react-router-dom";
 
 export const AboutUsSection = (): JSX.Element => {
+  const navigate = useNavigate();
   // Data for the three user category cards
   const userCategories = [
     {
@@ -71,17 +74,13 @@ export const AboutUsSection = (): JSX.Element => {
                       {category.description}
                     </p>
                   </div>
-                  <Button
-                    variant="ghost"
-                    className="justify-start p-0 h-auto hover:bg-transparent mt-4"
-                  >
-                    <span className="text-base text-[#1e1e1e] [font-family:'Sofia_Pro']">
-                      {category.buttonText}
-                    </span>
-                    <div className="flex w-10 h-10 items-center justify-center ml-3 rounded-full overflow-hidden [background:radial-gradient(50%_50%_at_50%_50%,rgba(249,229,185,1)_0%,rgba(248,227,181,1)_22%,rgba(246,224,172,1)_40%,rgba(242,218,155,1)_55%,rgba(237,210,131,1)_70%,rgba(231,199,101,1)_85%,rgba(223,186,65,1)_98%,rgba(222,184,59,1)_100%)]">
-                      <ArrowRightIcon className="w-6 h-6 text-black" />
-                    </div>
-                  </Button>
+                  <ArrowButton
+                    handleClick={() => navigate("category.link")}
+                    text={category.buttonText}
+                    lucideIcon={
+                      <ArrowRightIcon className="w-6 h-6 text-black group-hover:text-[#cd9f25]" />
+                    }
+                  />
                 </CardContent>
               </Card>
             ))}
