@@ -12,34 +12,34 @@ import ArrowButton from "./ArrowButton";
 export const NavigationSection = (): JSX.Element => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
- 
+
   // Navigation menu items data
   const navItems = [
     { label: "Accueil", path: "/", active: location.pathname === "/" },
     {
       label: "À propos",
       path: "/a-propos",
-      active: location.pathname === "/a-propos",
+      active: location.pathname.includes("/a-propos"),
     },
     {
       label: "Nos solutions",
       path: "/nos-solutions",
-      active: location.pathname === "/nos-solutions",
+      active: location.pathname.includes("/nos-solutions"),
     },
     {
       label: "Tarifs",
       path: "/pricing",
-      active: location.pathname === "/pricing",
+      active: location.pathname.includes("/pricing"),
     },
     {
       label: "Ressources",
       path: "https://blog.eurekaingenierie.com/",
-      active: location.pathname === "/ressources",
+      active: location.pathname.includes("/ressources"),
     },
     {
       label: "Contact",
       path: "/contact",
-      active: location.pathname === "/contact",
+      active: location.pathname.includes("/contact"),
     },
   ];
 
@@ -79,7 +79,6 @@ export const NavigationSection = (): JSX.Element => {
                   >
                     {item.label}
                   </span>
-                  
                 </Link>
               </NavigationMenuItem>
             ))}
@@ -89,7 +88,16 @@ export const NavigationSection = (): JSX.Element => {
         {/* Sign Up Button & Mobile Menu Toggle */}
         <div className="flex items-center gap-4">
           {/* Sign Up Button */}
-          <ArrowButton handleClick={() =>  window.location.href = "/newsletter"} text="S'inscrire" lucideIcon={<ArrowRightIcon className="w-5 h-5 text-black group-hover:text-[#cd9f25]" size={18}/>}/>
+          <ArrowButton
+            handleClick={() => (window.location.href = "/newsletter")}
+            text="S'inscrire"
+            lucideIcon={
+              <ArrowRightIcon
+                className="w-5 h-5 text-black group-hover:text-[#cd9f25]"
+                size={18}
+              />
+            }
+          />
 
           {/* Mobile Menu Button */}
           <div className="md:hidden">
@@ -145,8 +153,9 @@ export const NavigationSection = (): JSX.Element => {
             ))}
           </NavigationMenuList>
           {/* Sign Up Button for Mobile */}
-          <div className="pl-5 flex gap-3 h-10 py-4 cursor-pointer"
-          onClick={() => window.location.href = "/newsletter"}
+          <div
+            className="pl-5 flex gap-3 h-10 py-4 cursor-pointer"
+            onClick={() => (window.location.href = "/newsletter")}
           >
             <span className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#1e1e1e] text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] whitespace-nowrap [font-style:var(--label-medium-font-style)]">
               S'inscrire
