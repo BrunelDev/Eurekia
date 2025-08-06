@@ -8,6 +8,7 @@ import {
 } from "../../../../components/ui/accordion";
 import { Button } from "../../../../components/ui/button";
 import { Card, CardContent } from "../../../../components/ui/card";
+import { useNavigate } from "react-router-dom";
 
 export const SolutionsSection = (): JSX.Element => {
   // Services data for the accordion
@@ -33,8 +34,10 @@ export const SolutionsSection = (): JSX.Element => {
       content: "Description for document writing.",
     },
   ];
+  const navigate = useNavigate();
 
   return (
+
     <section className="w-full py-16 px-4 sm:px-8 lg:px-12 md:mt-[320px] mt-0">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-center items-center gap-12 lg:gap-8">
         {/* Image Column - Order 1 on mobile, Order 2 on desktop */}
