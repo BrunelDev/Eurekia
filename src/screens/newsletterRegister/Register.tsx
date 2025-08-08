@@ -41,6 +41,9 @@ export const NewsletterRegister = () => {
         setEmail("");
         setFirstName("");
         setLastName("");
+        setTimeout(() => {
+          window.location.href = "/contact";
+        }, 2000);
       } else {
         throw new Error("Échec de l'envoi");
       }
