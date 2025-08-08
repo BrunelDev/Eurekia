@@ -5,7 +5,6 @@ import { useRSSFeed } from "../../../../../services/blogService";
 import { Skeleton } from "../../../../components/ui/skeleton";
 
 export const BlogPresentationSection = (): JSX.Element => {
-
   // Blog post data for mapping
   const { data, loading, error, refetch } = useRSSFeed(
     "https://blog.eurekaingenierie.com/feed/"
@@ -18,11 +17,13 @@ export const BlogPresentationSection = (): JSX.Element => {
         id: index + 1,
         image: post.blogPhoto,
         title: post.title,
-        date: "Publié le " + new Date(post.creationDate).toLocaleDateString("fr-FR", {
-          day: "2-digit",
-          month: "long",
-          year: "numeric",
-        }),
+        date:
+          "Publié le " +
+          new Date(post.creationDate).toLocaleDateString("fr-FR", {
+            day: "2-digit",
+            month: "long",
+            year: "numeric",
+          }),
         url: post.link,
       }))) ||
     [];
@@ -44,7 +45,9 @@ export const BlogPresentationSection = (): JSX.Element => {
             </div>
 
             <ArrowButton
-              handleClick={() => window.location.href = "/blog"}
+              handleClick={() =>
+                (window.location.href = "https://blog.eurekaingenierie.com/")
+              }
               text="Lire le blog Archim'aide"
               lucideIcon={
                 <ArrowRightIcon className="w-5 h-5 text-black group-hover:text-[#cd9f25]" />
