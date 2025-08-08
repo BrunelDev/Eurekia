@@ -48,7 +48,7 @@ export const SolutionsSection = (): JSX.Element => {
           </p>
           
           <ArrowButton
-            handleClick={() => window.location.href = "/solutions"}
+            handleClick={() => window.location.href = "/pricing"}
             text="Découvrir les prestations"
             lucideIcon={<ArrowRightIcon className="w-5 h-5 text-black group-hover:text-[#cd9f25]" />}
           />
