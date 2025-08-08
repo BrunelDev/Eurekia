@@ -10,8 +10,6 @@ import { NavigationSection } from "../../components/NavigationSection";
 import { Button } from "../../components/ui/button";
 
 export const DevisChoice = () => {
- 
-
   const handleChoice = (sujet: string) => {
     window.location.href = `/contact?sujet=${sujet}`;
   };
@@ -38,10 +36,10 @@ export const DevisChoice = () => {
                 <CardTitle className="text-2xl font-bold text-gray-800 font-display-h6">
                   Devis Personnalisé
                 </CardTitle>
-                <CardDescription className="mt-2 text-gray-600 font-display-h6">
-                  Idéal pour les projets complexes ou de grande envergure.
-                  Obtenez une estimation détaillée et adaptée à vos
-                  spécifications uniques.
+                <CardDescription className="mt-2 text-gray-600 font-display-h6 min-h-[100px]">
+                  Idéal pour les projets complexes ou de grande envergure. Pour
+                  les chantiers de superficie supérieure à 150m². Obtenez une
+                  estimation détaillée et adaptée à vos spécifications uniques.
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -71,8 +69,9 @@ export const DevisChoice = () => {
                 <CardTitle className="text-2xl font-bold text-gray-800 font-display-h6">
                   Devis Instantané
                 </CardTitle>
-                <CardDescription className="mt-2 text-gray-600 font-display-h6">
-                  Parfait pour les projets simples et rapides. Obtenez une
+                <CardDescription className="mt-2 text-gray-600 font-display-h6 min-h-[100px]">
+                  Parfait pour les projets simples et rapides. Pour les
+                  chantiers de superficie inférieure à 150m². Obtenez une
                   estimation immédiate pour votre chantier.
                 </CardDescription>
               </CardHeader>
@@ -80,9 +79,7 @@ export const DevisChoice = () => {
                 <ul className="list-disc list-inside space-y-2 text-gray-700 font-display-h6">
                   <li>Réponse rapide et automatisée</li>
                   <li>Processus simple et direct</li>
-                  <li className="font-bold">
-                    Pour les chantiers de superficie inférieure à 150m²
-                  </li>
+                  <li>Estimation immédiate</li>
                 </ul>
               </CardContent>
             </div>
