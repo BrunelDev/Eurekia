@@ -7,24 +7,25 @@ Bienvenue sur le dépôt officiel du site web Eureka. Ce projet est une applicat
 Cette application constitue la présence numérique principale d'Eureka. Elle fournit aux utilisateurs des informations sur nos services, nos solutions, nos tarifs et notre entreprise. Elle comprend également un formulaire de contact et une inscription à la newsletter.
 
 Les fonctionnalités clés incluent :
-*   **Page d'accueil (`Accueil`) :** Une présentation de l'entreprise et de ses offres.
-*   **À propos de nous (`APropos`) :** Des informations détaillées sur la mission et l'équipe de l'entreprise.
-*   **Nos solutions (`NosSolutions`) :** Une description des services et produits proposés.
-*   **Tarifs (`Pricing`) :** Des informations sur le coût des services.
-*   **Contact (`Contact`) :** Un formulaire permettant aux utilisateurs de nous contacter.
-*   **Demande de devis (`DevisChoice`) :** Une fonctionnalité pour demander un devis.
-*   **Ressources (`RessourcesEtude`) :** Une section pour les études de cas et autres ressources.
-*   **Inscription à la newsletter (`newsletterRegister`) :** Un formulaire pour s'inscrire à la newsletter de l'entreprise.
+
+- **Page d'accueil (`Accueil`) :** Une présentation de l'entreprise et de ses offres.
+- **À propos de nous (`APropos`) :** Des informations détaillées sur la mission et l'équipe de l'entreprise.
+- **Nos solutions (`NosSolutions`) :** Une description des services et produits proposés.
+- **Tarifs (`Pricing`) :** Des informations sur le coût des services.
+- **Contact (`Contact`) :** Un formulaire permettant aux utilisateurs de nous contacter.
+- **Demande de devis (`DevisChoice`) :** Une fonctionnalité pour demander un devis.
+- **Ressources (`RessourcesEtude`) :** Une section pour les études de cas et autres ressources.
+- **Inscription à la newsletter (`newsletterRegister`) :** Un formulaire pour s'inscrire à la newsletter de l'entreprise.
 
 ## Stack Technologique
 
 Ce projet est construit avec une stack technologique moderne et robuste :
 
-*   **Framework :** [React](https://reactjs.org/)
-*   **Outil de build :** [Vite](https://vitejs.dev/)
-*   **Langage :** [TypeScript](https://www.typescriptlang.org/)
-*   **Style :** [Tailwind CSS](https://tailwindcss.com/)
-*   **Gestionnaire de paquets :** [Bun](https://bun.sh/)
+- **Framework :** [React](https://reactjs.org/)
+- **Outil de build :** [Vite](https://vitejs.dev/)
+- **Langage :** [TypeScript](https://www.typescriptlang.org/)
+- **Style :** [Tailwind CSS](https://tailwindcss.com/)
+- **Gestionnaire de paquets :** [Bun](https://bun.sh/)
 
 ## Structure du Projet
 
@@ -75,11 +76,11 @@ Assurez-vous d'avoir [Bun](https://bun.sh/docs/installation) installé sur votre
 
 Dans le répertoire du projet, vous pouvez exécuter les commandes suivantes :
 
-*   `bun run dev` : Lance l'application en mode développement. Ouvrez [http://localhost:5173](http://localhost:5173) pour la voir dans le navigateur.
-*   `bun run build` : Construit l'application pour la production dans le dossier `dist`.
-*   `bun run preview` : Sert la version de production localement pour un aperçu.
+- `bun run dev` : Lance l'application en mode développement. Ouvrez [http://localhost:5173](http://localhost:5173) pour la voir dans le navigateur.
+- `bun run build` : Construit l'application pour la production dans le dossier `dist`.
+- `serve -s dist` : Sert la version de production localement pour un aperçu.
 
-*Note : Ce sont des scripts Vite standards. Veuillez les vérifier par rapport à votre fichier `package.json`.*
+_Note : Ce sont des scripts Vite standards. Veuillez les vérifier par rapport à votre fichier `package.json`._
 
 ## Déploiement
 
