@@ -16,9 +16,10 @@ export const FooterSection = (): JSX.Element => {
 
   // Footer policy links data
   const policyLinks = [
-    "Privacy Policy",
-    "Terms of Service",
-    "Cookies Settings",
+    { label: "Privacy Policy", link: "/privacy-policy" },
+    { label: "Terms of Service", link: "/terms" },
+    { label: "Conditions Générales", link: "/conditions-generales" },
+    { label: "Cookies Settings", link: "/cookies-settings" },
   ];
 
   const [email, setEmail] = useState("");
@@ -75,8 +76,13 @@ export const FooterSection = (): JSX.Element => {
                       type="email"
                     />
 
-                    <Button className="p-3 [background:radial-gradient(50%_50%_at_50%_50%,rgba(249,229,185,1)_0%,rgba(248,227,181,1)_22%,rgba(246,224,172,1)_40%,rgba(242,218,155,1)_55%,rgba(237,210,131,1)_70%,rgba(231,199,101,1)_85%,rgba(223,186,65,1)_98%,rgba(222,184,59,1)_100%)] text-[#1e1e1e] font-label-small"
-                    onClick={() => (window.location.href = "/newsletter/?email=" + encodeURIComponent(email))}>
+                    <Button
+                      className="p-3 [background:radial-gradient(50%_50%_at_50%_50%,rgba(249,229,185,1)_0%,rgba(248,227,181,1)_22%,rgba(246,224,172,1)_40%,rgba(242,218,155,1)_55%,rgba(237,210,131,1)_70%,rgba(231,199,101,1)_85%,rgba(223,186,65,1)_98%,rgba(222,184,59,1)_100%)] text-[#1e1e1e] font-label-small"
+                      onClick={() =>
+                        (window.location.href =
+                          "/newsletter/?email=" + encodeURIComponent(email))
+                      }
+                    >
                       S'inscrire
                     </Button>
                   </div>
@@ -86,7 +92,7 @@ export const FooterSection = (): JSX.Element => {
                       En cliquant sur s&#39;inscrire, vous confirmez que vous
                       acceptez nos{" "}
                     </span>
-                    <span className="underline">Conditions Générales.</span>
+                    <a href="/conditions-generales" className="underline">Conditions Générales.</a>
                   </div>
                 </div>
               </div>
@@ -130,9 +136,9 @@ export const FooterSection = (): JSX.Element => {
                       key={index}
                       className="relative w-fit mt-[-1.00px] [font-family:'Sofia_Pro-Regular',Helvetica] font-normal text-[#f6f6f6] text-sm tracking-[0] leading-[14px]"
                     >
-                      <span className="leading-[var(--label-small-line-height)] underline font-label-small [font-style:var(--label-small-font-style)] font-[number:var(--label-small-font-weight)] tracking-[var(--label-small-letter-spacing)] text-[length:var(--label-small-font-size)] cursor-pointer">
-                        {link}
-                      </span>
+                      <a href={link.link} className="leading-[var(--label-small-line-height)] underline font-label-small [font-style:var(--label-small-font-style)] font-[number:var(--label-small-font-weight)] tracking-[var(--label-small-letter-spacing)] text-[length:var(--label-small-font-size)] cursor-pointer">
+                        {link.label}
+                      </a>
                     </div>
                   ))}
                 </div>
