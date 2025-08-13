@@ -8,6 +8,7 @@ import {
   ToggleGroupItem,
 } from "../../../../components/ui/toggle-group";
 import React from "react";
+import ArrowButton from "../../../../components/ArrowButton";
 
 // Define filter categories
 const filterCategories = [
@@ -30,7 +31,7 @@ const caseStudies = [
       "Produire une notice descriptive claire",
       "Appuyer sa demande de financement auprès de sa banque",
     ],
-    image: "/placeholder-image.png",
+    image: "/placeholder-image-0.png",
     imagePosition: "left",
   },
   {
@@ -44,7 +45,7 @@ const caseStudies = [
       "Établir un calendrier des travaux",
       "Obtenir des devis de plusieurs entreprises",
     ],
-    image: "/placeholder-image-1.png",
+    image: "/placeholder-image-01.png",
     imagePosition: "right",
   },
   {
@@ -58,7 +59,7 @@ const caseStudies = [
       "Optimiser l'espace de vente",
       "Lancer une campagne de communication autour de la réouverture",
     ],
-    image: "/placeholder-image-2.png",
+    image: "/placeholder-image-02.png",
     imagePosition: "left",
   },
   {
@@ -72,7 +73,7 @@ const caseStudies = [
       "Réduire les coûts énergétiques",
       "Préparer une vente éventuelle à long terme",
     ],
-    image: "/placeholder-image-3.png",
+    image: "/placeholder-image-03.png",
     imagePosition: "right",
   },
 ];
@@ -90,11 +91,10 @@ export const HeroWrapperSection = (): JSX.Element => {
           >
             {filterCategories.map((category) => (
               <ToggleGroupItem
-              size={"lg"}
-              variant={"default"}
+                size={"lg"}
+                variant={"default"}
                 key={category.id}
                 value={category.id}
-                
                 className={`px-3 py-6 rounded `}
               >
                 <span className="[font-family:'Sofia_Pro'] font-light text-[15px] text-[#1e1e1e]">
@@ -129,7 +129,7 @@ export const HeroWrapperSection = (): JSX.Element => {
                         {study.title}
                       </h3>
 
-                      <Badge className="bg-[#fbf9eb] text-[#1e1e1e] hover:bg-[#fbf9eb] p-1 rounded font-text-smaller font-[number:var(--text-smaller-font-weight)] text-[length:var(--text-smaller-font-size)] leading-[var(--text-smaller-line-height)] tracking-[var(--text-smaller-letter-spacing)] [font-style:var(--text-smaller-font-style)]">
+                      <Badge className="bg-[#fbf9eb] text-[#1e1e1e] hover:bg-[#fbf9eb] p-1 rounded shadow-none font-text-smaller font-[number:var(--text-smaller-font-weight)] text-[length:var(--text-smaller-font-size)] leading-[var(--text-smaller-line-height)] tracking-[var(--text-smaller-letter-spacing)] [font-style:var(--text-smaller-font-style)]">
                         {study.category}
                       </Badge>
 
@@ -160,17 +160,13 @@ export const HeroWrapperSection = (): JSX.Element => {
                       <Avatar className="w-10 h-10 bg-[#d9d9d9] rounded-[20px]" />
                     </div>
 
-                    <Button
-                      variant="ghost"
-                      className="h-10 p-0 gap-3 hover:bg-transparent"
-                    >
-                      <span className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#1e1e1e] text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)]">
-                        Lire le cas complet
-                      </span>
-                      <div className="flex w-8 h-8 items-center justify-center rounded-[1000px] overflow-hidden [background:radial-gradient(50%_50%_at_50%_50%,rgba(249,229,185,1)_0%,rgba(248,227,181,1)_22%,rgba(246,224,172,1)_40%,rgba(242,218,155,1)_55%,rgba(237,210,131,1)_70%,rgba(231,199,101,1)_85%,rgba(223,186,65,1)_98%,rgba(222,184,59,1)_100%)]">
-                        <ArrowRightIcon className="w-5 h-5" />
-                      </div>
-                    </Button>
+                    <ArrowButton
+                      handleClick={() => (window.location.href = "#")}
+                      text="Lire le cas complet"
+                      lucideIcon={
+                        <ArrowRightIcon className="w-6 h-6 text-black group-hover:text-[#cd9f25]" />
+                      }
+                    />
                   </div>
                 </div>
               </CardContent>
