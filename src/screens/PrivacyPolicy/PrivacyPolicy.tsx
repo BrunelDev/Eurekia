@@ -6,7 +6,7 @@ import {
 } from "../../components/ui/card";
 import { NavigationSection } from "../../components/NavigationSection";
 import { FooterSection } from "../../components/FooterSection";
-import { Shield, Lock, Eye, Users, FileText, CheckCircle } from "lucide-react";
+import { Shield, Lock, Eye, Users, FileText, CheckCircle, Mail } from "lucide-react";
 
 const PrivacyPolicy = () => {
   const policyData = [
@@ -189,7 +189,7 @@ const PrivacyPolicy = () => {
                 className="inline-flex items-center gap-2 bg-yellow-50 text-black px-6 py-3 rounded-lg font-medium hover:bg-[#EFE299] transition-all duration-200"
               >
                 Nous contacter
-                <CheckCircle className="w-4 h-4" />
+                <Mail className="w-4 h-4" />
               </a>
             </div>
           </div>
