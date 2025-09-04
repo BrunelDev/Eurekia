@@ -1,0 +1,18 @@
+{
+  "default_branch": "main",
+  "branches": [
+    "justedev",
+    "main",
+    "valdano"
+  ],
+  "parent": {
+    "justedev": "main",
+    "main": null,
+    "valdano": "main"
+  },
+  "order": [
+    "main",
+    "justedev",
+    "valdano"
+  ]
+}

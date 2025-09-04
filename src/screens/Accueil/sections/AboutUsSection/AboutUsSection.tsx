@@ -26,7 +26,7 @@ export const AboutUsSection = (): JSX.Element => {
     {
       title: "Professionnels du bâtiment",
       description:
-        "Automatisez la rédaction de vos documents techniques et gagnez un temps précieux sur vos projets grâce à l'intelligence artificielle.",
+        "Automatisez la rédaction de vos documents techniques et gagnez un temps précieux sur vos projets grâce à notre algorithme intelligent.",
       buttonText: "Accéder aux solutions",
       backgroundImage: "url(..//frame16-3.png)",
       backgroundOverlay: "none",
@@ -45,7 +45,7 @@ export const AboutUsSection = (): JSX.Element => {
               Que vous soyez particulier, agent immobilier ou professionnel du
               bâtiment, EURÊKA vous offre des outils adaptés à vos besoins pour
               piloter, valoriser ou accélérer vos projets de construction et de
-              rénovation — avec ou sans intelligence artificielle.
+              rénovation — avec ou sans technologies avancées.
             </p>
           </div>
 

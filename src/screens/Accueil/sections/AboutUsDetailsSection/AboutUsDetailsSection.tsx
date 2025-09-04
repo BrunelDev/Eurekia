@@ -13,7 +13,7 @@ export const AboutUsDetailsSection = (): JSX.Element => {
     {
       id: 1,
       quote:
-        "\"Grâce à l'assistant IA, j'ai pu constituer mon dossier de rénovation sans faire appel à un cabinet. J'ai économisé du temps et de l'argent.\"",
+        "\"Grâce à l'assistant numérique, j'ai pu constituer mon dossier de rénovation sans faire appel à un cabinet. J'ai économisé du temps et de l'argent.\"",
       name: "Ronald Richards",
       title: "Conducteur de travaux",
       image: "/rectangle-2.png",

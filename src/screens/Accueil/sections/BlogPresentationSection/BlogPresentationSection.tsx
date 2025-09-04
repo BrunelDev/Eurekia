@@ -9,7 +9,6 @@ export const BlogPresentationSection = (): JSX.Element => {
   const { data, loading, error, refetch } = useRSSFeed(
     "https://blog.eurekaingenierie.com/feed/"
   );
-
   console.log(data);
   const blogPosts =
     (data &&

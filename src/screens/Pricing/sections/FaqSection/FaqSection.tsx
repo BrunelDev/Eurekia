@@ -11,22 +11,22 @@ export const FaqSection = (): JSX.Element => {
     {
       question: "A quoi sert le simulateur de côut ?",
       answer:
-        "Notre assistant IA vous aide à comprendre la réglementation, les normes techniques, et à structurer vos documents de projet.",
+        "Notre assistant intelligent vous aide à comprendre la réglementation, les normes techniques, et à structurer vos documents de projet.",
     },
     {
       question: "A quoi sert le simulateur de côut ?",
       answer:
-        "Notre assistant IA vous aide à comprendre la réglementation, les normes techniques, et à structurer vos documents de projet.",
+        "Notre assistant intelligent vous aide à comprendre la réglementation, les normes techniques, et à structurer vos documents de projet.",
     },
     {
       question: "A quoi sert le simulateur de côut ?",
       answer:
-        "Notre assistant IA vous aide à comprendre la réglementation, les normes techniques, et à structurer vos documents de projet.",
+        "Notre assistant intelligent vous aide à comprendre la réglementation, les normes techniques, et à structurer vos documents de projet.",
     },
     {
       question: "A quoi sert le simulateur de côut ?",
       answer:
-        "Notre assistant IA vous aide à comprendre la réglementation, les normes techniques, et à structurer vos documents de projet.",
+        "Notre assistant intelligent vous aide à comprendre la réglementation, les normes techniques, et à structurer vos documents de projet.",
     },
   ];
 

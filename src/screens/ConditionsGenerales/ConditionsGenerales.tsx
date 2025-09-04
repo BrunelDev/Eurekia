@@ -64,7 +64,7 @@ const ConditionsGenerales = (): JSX.Element => {
       title: "6. Modifications",
       content: (
         <p className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e] leading-relaxed">
-          Eurêka Ingénierie se réserve le droit de modifier à tout moment les présentes Conditions Générales. La version applicable est celle en vigueur à la date d'acceptation du devis ou de la commande.
+          Eurêka Ingénierie réserve le droit de modifier à tout moment les présentes Conditions Générales. La version applicable est celle en vigueur à la date d'acceptation du devis ou de la commande.
         </p>
       ),
     },

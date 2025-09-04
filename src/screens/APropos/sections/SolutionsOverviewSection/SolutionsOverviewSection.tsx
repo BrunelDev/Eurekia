@@ -6,8 +6,7 @@ export const SolutionsOverviewSection = (): JSX.Element => {
       <div className="relative bg-[url(/apropos-hero.jpg)] bg-center bg-cover w-full h-[832px] flex justify-center items-center">
         <div className="absolute top-0 left-0 w-full h-[832px] bg-[#00000066]" />
         <h6 className="text-center text-[48px] text-white z-50 w-[60%] font-display-h3">
-          EURÊKA INGENIERIE! — Là où l’expertise rencontre l’intelligence
-          artificielle
+          EURÊKA INGENIERIE! — Là où l’expertise rencontre les outils numériques intelligents 
         </h6>
       </div>
 
@@ -32,8 +31,7 @@ export const SolutionsOverviewSection = (): JSX.Element => {
                   Notre mission est d&#39;accompagner les particuliers,
                   professionnels et agents immobiliers dans leurs démarches
                   techniques, administratives et documentaires, grâce à une
-                  alliance unique entre ingénierie humaine et intelligence
-                  artificielle.
+                  alliance unique entre ingénierie humaine et technologies avancées.
                 </p>
               </div>
             </CardContent>

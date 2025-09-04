@@ -15,7 +15,7 @@ const engineeringServices = [
 const aiServices = [
   "Simulateur de coût total du projet",
   "Générateur de documents (CCTP, notice, diagnostics)",
-  "Assistant IA pour réponses techniques",
+  "Assistant numérique pour réponses techniques",
   "Simulateur photo/vidéo avec rendu travaux",
   "Base technique intelligente et personnalisée",
 ];
@@ -110,7 +110,7 @@ export const ProjectViewSection = (): JSX.Element => {
                 <div className="flex flex-col gap-10">
                   <div className="flex flex-col gap-4">
                     <p className="font-label-large text-[#444444] text-[length:var(--label-large-font-size)] tracking-[var(--label-large-letter-spacing)] leading-[var(--label-large-line-height)] [font-style:var(--label-large-font-style)]">
-                      L'intelligence artificielle pour construire mieux et plus
+                      Les technologies avancées pour construire mieux et plus
                       vite
                     </p>
                     <p className="font-text-medium text-[#1e1e1e] text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
@@ -146,7 +146,7 @@ export const ProjectViewSection = (): JSX.Element => {
 
                   <ArrowButton
                     handleClick={() => window.location.href = "/pricing"}
-                    text="Découvrir l'assistant IA"
+                    text="Découvrir l'assistant intelligent"
                     lucideIcon={
                       <ArrowRightIcon className="w-6 h-6 text-black group-hover:text-[#cd9f25]" />
                     }
