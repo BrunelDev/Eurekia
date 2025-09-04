@@ -15,7 +15,7 @@ export const SolutionsOverviewSection = (): JSX.Element => {
       content: "",
     },
     {
-      title: "Assistant IA intelligent",
+      title: "Assistant numérique intelligent",
       content: "",
     },
   ];
@@ -51,7 +51,7 @@ export const SolutionsOverviewSection = (): JSX.Element => {
 
           <ArrowButton
             handleClick={() => (window.location.href = "/solutions")}
-            text="Essayer une démo IA"
+            text="Essayer une démo"
             lucideIcon={
               <ArrowRightIcon className="w-5 h-5 text-black group-hover:text-[#cd9f25]" />
             }

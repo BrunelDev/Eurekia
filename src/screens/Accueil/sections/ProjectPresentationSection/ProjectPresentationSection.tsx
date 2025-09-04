@@ -11,16 +11,16 @@ export const ProjectPresentationSection = (): JSX.Element => {
       titleColor: "text-[#f7e1aa]",
     },
     {
-      title: "Simulateur de photos IA",
+      title: "Simulateur de photos",
       description:
         "Transformez une photo de votre bien en un visuel projeté : façade rénovée, aménagement extérieur, intérieur etc.",
       backgroundImage: "url(..//frame16-5.png)",
       titleColor: "text-[#efe299]",
     },
     {
-      title: "Assistant IA intelligent",
+      title: "Assistant intelligent",
       description:
-        "Notre assistant IA vous aide à comprendre la réglementation, les normes techniques, et à structurer vos documents de projet.",
+        "Notre assistant numérique intelligent vous aide à comprendre la réglementation, les normes techniques, et à structurer vos documents de projet.",
       backgroundImage: "url(..//frame16-6.png)",
       titleColor: "text-[#efe299]",
     },
