@@ -35,7 +35,7 @@ export const PricingSection = (): JSX.Element => {
               La formule EURÊKA ! s&apos;adresse aux architectes, promoteurs,
               économistes ou maîtres d&apos;ouvrage souhaitant un accompagnement
               expert, des outils personnalisés et une intégration poussée de
-              l&apos;IA dans leur flux documentaire.
+              systèmes intelligents dans leur flux documentaire.
             </p>
           </div>
 
