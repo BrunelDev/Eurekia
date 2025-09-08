@@ -12,8 +12,8 @@ export const HeroSection = (): JSX.Element => {
     {
       number: "2",
       desktopClasses: "top-[783px] left-[10px]",
-      title: "Phase 2: Intégration IA",
-      description: "Introduire des algorithmes d'IA pour l'analyse prédictive et l'optimisation des processus.",
+      title: "Phase 2: Intégration intelligente",
+      description: "Introduire des algorithmes intelligents pour l'analyse prédictive et l'optimisation des processus.",
     },
     {
       number: "3",
@@ -43,7 +43,7 @@ export const HeroSection = (): JSX.Element => {
           Ce que nous construisons pour vous
         </h2>
         <p className="w-full md:w-[564px] font-text-medium font-[number:var(--text-medium-font-weight)] text-[#1e1e1e] text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
-          Notre roadmap reflète notre ambition : faire d&apos;EURÊKA l&apos;écosystème intelligent de référence dans le secteur du bâtiment, en mêlant ingénierie, IA et accessibilité.
+          Notre roadmap reflète notre ambition : faire d&apos;EURÊKA l&apos;écosystème intelligent de référence dans le secteur du bâtiment, en mêlant ingénierie, système intelligent et accessibilité.
         </p>
       </div>
 
