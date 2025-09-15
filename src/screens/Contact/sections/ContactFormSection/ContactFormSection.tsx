@@ -1,16 +1,25 @@
+import emailjs from "@emailjs/browser";
 import { CheckIcon } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
+import { useLocation } from "react-router-dom";
+import { toast } from "sonner";
 import { Button } from "../../../../components/ui/button";
 import { Input } from "../../../../components/ui/input";
 import { Label } from "../../../../components/ui/label";
-import { Textarea } from "../../../../components/ui/textarea";
-import { toast } from "sonner";
 import {
   RadioGroup,
   RadioGroupItem,
 } from "../../../../components/ui/radio-group";
-import { useState, useRef, useEffect } from "react";
-import emailjs from "@emailjs/browser";
-import { useLocation } from "react-router-dom";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../../../../components/ui/select";
+import { Textarea } from "../../../../components/ui/textarea";
 
 export const ContactFormSection = (): JSX.Element => {
   const location = useLocation();
@@ -36,6 +45,7 @@ export const ContactFormSection = (): JSX.Element => {
   const [submissionStatus, setSubmissionStatus] = useState<"idle" | "sending">(
     "idle"
   );
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -145,18 +155,37 @@ export const ContactFormSection = (): JSX.Element => {
               >
                 Téléphone
               </Label>
-              <Input
+              {/*
+                <Input
                 id="telephone"
                 name="telephone"
                 type="tel"
-                placeholder="+33 1 23 45 67 89"
                 className="border-0 border-b-2 border-gray-300 rounded-none px-2 py-3 focus:border-yellow-400 transition placeholder:[font-family:'Sofia_Pro']"
+              />*/}
+              <PhoneInput
+                inputProps={{ name: "telephone", required: true }}
+                inputStyle={{
+                  width: "100%",
+                  border: "0",
+                  borderBottom: "2px solid rgb(209, 213, 219)",
+                  borderRadius: "0",
+                  padding: "0.75rem 3rem",
+                  fontFamily: "Sofia_Pro",
+                  backgroundColor: "transparent",
+                  borderBottomColor: isFocused ? "rgb(250, 204, 21)" : "#ccc",
+                  outline: "none",
+                }}
+                country={"fr"}
+                onFocus={() => setIsFocused(true)}
+                onBlur={() => setIsFocused(false)}
               />
             </div>
           </div>
 
           {/* Subject Selection */}
-          {!sujet && (selectedSubject !== "Devis personnalisé" && selectedSubject !== "Devis instantané") ? (
+          {!sujet &&
+          selectedSubject !== "Devis personnalisé" &&
+          selectedSubject !== "Devis instantané" ? (
             <div className="flex flex-col gap-4">
               <Label className="text-lg font-medium text-[#1e1e1e] [font-family:'Sofia_Pro']">
                 Sélectionnez un Sujet?
@@ -228,6 +257,316 @@ export const ContactFormSection = (): JSX.Element => {
                     </div>
                   ))}
                 </RadioGroup>
+                <div className="space-y-8">
+                  {/* Adresse */}
+                  <div className="space-y-4">
+                    <Label className="text-lg font-medium text-[#1e1e1e] [font-family:'Sofia_Pro']">
+                      Adresse
+                    </Label>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div className="md:col-span-2">
+                        <Input
+                          name="adresse"
+                          placeholder="Adresse"
+                          className="border-0 border-b-2 border-gray-300 rounded-none px-2 py-3 focus:border-yellow-400 transition placeholder:[font-family:'Sofia_Pro']"
+                        />
+                      </div>
+                      <div>
+                        <Input
+                          name="code_postal"
+                          placeholder="Code Postal"
+                          className="border-0 border-b-2 border-gray-300 rounded-none px-2 py-3 focus:border-yellow-400 transition placeholder:[font-family:'Sofia_Pro']"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Type de projet */}
+                  <div className="space-y-4">
+                    <Label className="text-lg font-medium text-[#1e1e1e] [font-family:'Sofia_Pro']">
+                      Sélectionnez un élément qui décrit le mieux votre projet
+                    </Label>
+                    <RadioGroup name="type_projet" className="space-y-3">
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem
+                          value="renovation_complete"
+                          id="renovation_complete"
+                        />
+                        <Label
+                          htmlFor="renovation_complete"
+                          className="[font-family:'Sofia_Pro']"
+                        >
+                          Rénovation complète
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem
+                          value="renovation_partielle"
+                          id="renovation_partielle"
+                        />
+                        <Label
+                          htmlFor="renovation_partielle"
+                          className="[font-family:'Sofia_Pro']"
+                        >
+                          Rénovation partielle
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="extension" id="extension" />
+                        <Label
+                          htmlFor="extension"
+                          className="[font-family:'Sofia_Pro']"
+                        >
+                          Extension
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem
+                          value="construction"
+                          id="construction"
+                        />
+                        <Label
+                          htmlFor="construction"
+                          className="[font-family:'Sofia_Pro']"
+                        >
+                          Construction
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem
+                          value="amenagement_exterieur"
+                          id="amenagement_exterieur"
+                        />
+                        <Label
+                          htmlFor="amenagement_exterieur"
+                          className="[font-family:'Sofia_Pro']"
+                        >
+                          Aménagement extérieur
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="facades" id="facades" />
+                        <Label
+                          htmlFor="facades"
+                          className="[font-family:'Sofia_Pro']"
+                        >
+                          Façades (inclus ouverture, fenêtres, volets)
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem
+                          value="batiment_industriel"
+                          id="batiment_industriel"
+                        />
+                        <Label
+                          htmlFor="batiment_industriel"
+                          className="[font-family:'Sofia_Pro']"
+                        >
+                          Bâtiment industriel
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem
+                          value="locaux_professionnels"
+                          id="locaux_professionnels"
+                        />
+                        <Label
+                          htmlFor="locaux_professionnels"
+                          className="[font-family:'Sofia_Pro']"
+                        >
+                          Locaux professionnels
+                        </Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+
+                  {/* Niveau de performance énergétique */}
+                  <div className="space-y-4">
+                    <Label className="text-lg font-medium text-[#1e1e1e] [font-family:'Sofia_Pro']">
+                      Sélectionner le niveau de performance énergétique actuel :
+                    </Label>
+                    <Select name="performance_energetique">
+                      <SelectTrigger className="border-0 border-b-2 border-gray-300 rounded-none px-2 py-3 focus:border-yellow-400 focus:outline-none">
+                        <SelectValue placeholder="A afficher si concerne bâtiment (hors extérieur)" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="existant">Existant</SelectItem>
+                        <SelectItem value="standard_rt2012">
+                          Standard RT2012
+                        </SelectItem>
+                        <SelectItem value="re2020">
+                          RE2020 (de base pour projet neuf)
+                        </SelectItem>
+                        <SelectItem value="bbc">
+                          BBC (Bâtiment Basse Consommation)
+                        </SelectItem>
+                        <SelectItem value="bioclimatique">
+                          Bioclimatique
+                        </SelectItem>
+                        <SelectItem value="passive">
+                          Passive (maison passive – Passivhaus)
+                        </SelectItem>
+                        <SelectItem value="autonome">
+                          Autonome (énergétiquement et/ou en eau)
+                        </SelectItem>
+                        <SelectItem value="hqe_breeam">
+                          HQE / BREEAM / LEED (certifications environnementales)
+                        </SelectItem>
+                        <SelectItem value="ne_sais_pas">
+                          Je ne sais pas
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  {/* Type de bien */}
+                  <div className="space-y-4">
+                    <Label className="text-lg font-medium text-[#1e1e1e] [font-family:'Sofia_Pro']">
+                      Quel est le bien concerné ? *
+                    </Label>
+                    <RadioGroup name="type_bien" className="space-y-3" required>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="appartement" id="appartement" />
+                        <Label
+                          htmlFor="appartement"
+                          className="[font-family:'Sofia_Pro']"
+                        >
+                          Appartement
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="maison" id="maison" />
+                        <Label
+                          htmlFor="maison"
+                          className="[font-family:'Sofia_Pro']"
+                        >
+                          Maison
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="immeuble" id="immeuble" />
+                        <Label
+                          htmlFor="immeuble"
+                          className="[font-family:'Sofia_Pro']"
+                        >
+                          Immeuble
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem
+                          value="bien_professionnel"
+                          id="bien_professionnel"
+                        />
+                        <Label
+                          htmlFor="bien_professionnel"
+                          className="[font-family:'Sofia_Pro']"
+                        >
+                          Bien professionnel
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="autre" id="autre" />
+                        <Label
+                          htmlFor="autre"
+                          className="[font-family:'Sofia_Pro']"
+                        >
+                          Autre
+                        </Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+
+                  {/* Surface */}
+                  <div className="space-y-4">
+                    <Label
+                      htmlFor="surface"
+                      className="text-lg font-medium text-[#1e1e1e] [font-family:'Sofia_Pro']"
+                    >
+                      Quelle est la surface du bien à rénover ou à construire ?
+                      *
+                    </Label>
+                    <Input
+                      id="surface"
+                      name="surface"
+                      placeholder="m2"
+                      className="border-0 border-b-2 border-gray-300 rounded-none px-2 py-3 focus:border-yellow-400 transition placeholder:[font-family:'Sofia_Pro']"
+                      required
+                    />
+                  </div>
+
+                  {/* Budget */}
+                  <div className="space-y-4">
+                    <Label className="text-lg font-medium text-[#1e1e1e] [font-family:'Sofia_Pro']">
+                      Quel est votre budget ? *
+                    </Label>
+                    <RadioGroup name="budget" className="space-y-3" required>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="moins_5000" id="moins_5000" />
+                        <Label
+                          htmlFor="moins_5000"
+                          className="[font-family:'Sofia_Pro']"
+                        >
+                          Moins de 5000€
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="10000_30000" id="10000_30000" />
+                        <Label
+                          htmlFor="10000_30000"
+                          className="[font-family:'Sofia_Pro']"
+                        >
+                          Entre 10 000 et 30 000€
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="30000_50000" id="30000_50000" />
+                        <Label
+                          htmlFor="30000_50000"
+                          className="[font-family:'Sofia_Pro']"
+                        >
+                          Entre 30 000 € et 50 000 €
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem
+                          value="100000_250000"
+                          id="100000_250000"
+                        />
+                        <Label
+                          htmlFor="100000_250000"
+                          className="[font-family:'Sofia_Pro']"
+                        >
+                          Entre 100 000 € et 250 000 €
+                        </Label>
+                      </div>
+                      <div className="flex items-center space-x-2">
+                        <RadioGroupItem value="500000_plus" id="500000_plus" />
+                        <Label
+                          htmlFor="500000_plus"
+                          className="[font-family:'Sofia_Pro']"
+                        >
+                          entre 500 000 € et plus
+                        </Label>
+                      </div>
+                    </RadioGroup>
+                  </div>
+
+                  {/* Description du projet */}
+                  <div className="space-y-4">
+                    <Label
+                      htmlFor="description_projet"
+                      className="text-lg font-medium text-[#1e1e1e] [font-family:'Sofia_Pro']"
+                    >
+                      Voulez-vous décrire plus en détail votre projet ?
+                    </Label>
+                    <Textarea
+                      id="description_projet"
+                      name="description_projet"
+                      placeholder="Décrive mon projet (optionnel)"
+                      className="border-0 border-b-2 border-gray-300  rounded-none px-2 py-3 focus:outline-none focus:border-yellow-400 transition h-24 placeholder:[font-family:'Sofia_Pro'] placeholder:text-base"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           )}
