@@ -29,7 +29,7 @@ export const ContactFormSection = (): JSX.Element => {
   const subjectOptions = [
     { id: "Information", label: "Demande d'information" },
     { id: "Devis", label: "Devis" },
-    { id: "Assistance IA", label: "Assistance IA" },
+    { id: "Assistance intelligente", label: "Assistance intelligente" },
     { id: "Partenariat", label: "Partenariat" },
     { id: "Autre", label: "Autre" },
   ];

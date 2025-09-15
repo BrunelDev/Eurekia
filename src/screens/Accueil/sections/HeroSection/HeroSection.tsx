@@ -18,7 +18,7 @@ export const HeroSection = (): JSX.Element => {
     },
     {
       number: "+800",
-      description: "utilisateurs ont déjà testé nos outils IA",
+      description: "utilisateurs ont déjà testé nos outils intelligents",
       avatars: [
         { src: "/ellipse-1-1.png", alt: "Ellipse" },
         { src: "/ellipse-2-1.png", alt: "Ellipse" },
