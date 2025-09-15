@@ -6,7 +6,7 @@ import { Skeleton } from "../../../../components/ui/skeleton";
 
 export const BlogPresentationSection = (): JSX.Element => {
   // Blog post data for mapping
-  const { data, loading, error, refetch } = useRSSFeed(
+  const { data, loading } = useRSSFeed(
     "https://blog.eurekaingenierie.com/feed/"
   );
 

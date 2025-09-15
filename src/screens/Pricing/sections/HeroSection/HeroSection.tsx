@@ -15,7 +15,7 @@ export const HeroSection = (): JSX.Element => {
     {
       name: "GRATUIT",
       price: "0",
-      description: "Idéal pour découvrir nos outils.",
+      description: "(Les Curieux)",
       buttonText: "Créer un compte",
       buttonVariant: "secondary",
       features: [
@@ -27,11 +27,12 @@ export const HeroSection = (): JSX.Element => {
         "Accès à la base technique publique",
         "Base de données client privée",
       ],
+      HTPrice : "(0€ HT)"
     },
     {
       name: "LITE",
       price: "9",
-      description: "Particuliers ou auto-constructeurs.",
+      description: "(Les Débrouillards)",
       buttonText: "Choisir LITE",
       buttonVariant: "secondary",
       features: [
@@ -43,11 +44,12 @@ export const HeroSection = (): JSX.Element => {
         "Accès à la base technique publique",
         "Base de données client privée",
       ],
+      HTPrice : "(7,99€ HT)"
     },
     {
       name: "PRO",
       price: "29",
-      description: "Professionnels du bâtiment.",
+      description: "(Les Connectés)",
       buttonText: "Choisir PRO",
       buttonVariant: "primary",
       features: [
@@ -59,11 +61,12 @@ export const HeroSection = (): JSX.Element => {
         "Accès à la base technique publique",
         "Base de données client privée",
       ],
+      HTPrice : "(27,49€ HT)"
     },
     {
       name: "PREMIUM",
       price: "59",
-      description: "Description",
+      description: "(Les Innovateurs)",
       buttonText: "Choisir PREMIUM",
       buttonVariant: "secondary",
       features: [
@@ -75,6 +78,7 @@ export const HeroSection = (): JSX.Element => {
         "Accès à la base technique publique",
         "Base de données client privée",
       ],
+      HTPrice : "(47,34€ HT)"
     },
   ];
 
@@ -129,9 +133,13 @@ export const HeroSection = (): JSX.Element => {
           {pricingPlans.map((plan, index) => (
             <Card key={index} className="border-0 shadow-none">
               <CardContent className="pt-5 px-0">
-                <div className="flex flex-col gap-5">
-                  <div className="flex flex-col gap-4">
-                    <h3 className="font-label-large font-[number:var(--label-large-font-weight)] text-[#1e1e1e] text-[length:var(--label-large-font-size)] tracking-[var(--label-large-letter-spacing)] leading-[var(--label-large-line-height)] [font-style:var(--label-large-font-style)]">
+                <div className="flex flex-col gap-5 px-2">
+                  <div
+                    className={`flex flex-col gap-4 ${
+                      plan.name === "PRO" ? "bg-[#F6F2CB]" : "bg-[#F6F6F6]"
+                    } py-3 px-2 rounded-[20px]`}
+                  >
+                    <h3 className="font-label-large font-[number:var(--label-large-font-weight)] text-[#1e1e1e] tracking-[var(--label-large-letter-spacing)] leading-[var(--label-large-line-height)] [font-style:var(--label-large-font-style)] bg-white px-2 py-1 rounded-full w-fit text-[18px]">
                       {plan.name}
                     </h3>
                     <div className="flex items-end gap-2.5">
@@ -141,39 +149,50 @@ export const HeroSection = (): JSX.Element => {
                       <span className="font-display-h4 font-[number:var(--display-h4-font-weight)] text-[#1e1e1e] text-[length:var(--display-h4-font-size)] tracking-[var(--display-h4-letter-spacing)] leading-[var(--display-h4-line-height)] whitespace-nowrap [font-style:var(--display-h4-font-style)]">
                         {plan.price}
                       </span>
-                      <span className="font-text-bold-large font-[number:var(--text-bold-large-font-weight)] text-[#1e1e1e] text-[length:var(--text-bold-large-font-size)] tracking-[var(--text-bold-large-letter-spacing)] leading-[var(--text-bold-large-line-height)] whitespace-nowrap [font-style:var(--text-bold-large-font-style)]">
-                        /mois
+                      <span className="font-text-bold-large text-[#1e1e1e] text-[length:var(--text-bold-large-font-size)] tracking-[var(--text-bold-large-letter-spacing)] leading-[var(--text-bold-large-line-height)] whitespace-nowrap [font-style:var(--text-bold-large-font-style)] font-normal">
+                        {plan.HTPrice}
                       </span>
                     </div>
                   </div>
-                  <p className="font-text-small font-[number:var(--text-small-font-weight)] text-[#1e1e1e] text-[length:var(--text-small-font-size)] tracking-[var(--text-small-letter-spacing)] leading-[var(--text-small-line-height)] [font-style:var(--text-small-font-style)]">
-                    {plan.description}
-                  </p>
                 </div>
-
-                <Button
-                  className={`w-full mt-6 ${
-                    plan.buttonVariant === "primary"
-                      ? "bg-[#483621] text-white hover:bg-[#5a442d]"
-                      : "bg-[#f6f2cb] text-[#483621] hover:bg-[#f0ebc0] "
-                  } rounded-none shadow-none`}
+                <div
+                  className={
+                    "bg-[#F6F6F6] flex flex-col gap-5 rounded-[28px]  relative "
+                  }
                 >
-                  <span className="font-label-small font-[number:var(--label-small-font-weight)] text-[length:var(--label-small-font-size)] tracking-[var(--label-small-letter-spacing)] leading-[var(--label-small-line-height)] whitespace-nowrap [font-style:var(--label-small-font-style)]">
-                    {plan.buttonText}
-                  </span>
-                </Button>
+                  <div className="bg-white h-[130px] flex flex-col justify-center rounded-[28px] w-full px-3">
+                    <p className="text-[#CD9F25]  tracking-[var(--text-small-letter-spacing)] leading-[var(--text-small-line-height)] [font-style:var(--text-small-font-style)] font-display-h3 text-[18px] font-normal">
+                      {plan.description}
+                    </p>
 
-                <div className="mt-6 space-y-3">
-                  {plan.features.map((feature, featureIndex) => (
-                    <div key={featureIndex} className="flex items-start gap-2">
-                      <div className="w-fit h-fit p-1 rounded-full bg-[#8D5A1B]">
-                        <Check size={14} color="white" />
-                      </div>
-                      <span className="font-text-medium font-[number:var(--text-medium-font-weight)] text-[#1e1e1e] text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
-                        {feature}
+                    <Button
+                      className={`w-full mt-6 ${
+                        plan.buttonVariant === "primary"
+                          ? "bg-[#483621] text-white hover:bg-[#5a442d]"
+                          : "bg-[#f6f2cb] text-[#483621] hover:bg-[#f0ebc0] "
+                      } rounded-full shadow-none h-[44px]`}
+                    >
+                      <span className="font-label-small font-[number:var(--label-small-font-weight)] text-[length:var(--label-small-font-size)] tracking-[var(--label-small-letter-spacing)] leading-[var(--label-small-line-height)] whitespace-nowrap [font-style:var(--label-small-font-style)]">
+                        {plan.buttonText}
                       </span>
-                    </div>
-                  ))}
+                    </Button>
+                  </div>
+
+                  <div className="mt-4 space-y-3 px-4 pb-4">
+                    {plan.features.map((feature, featureIndex) => (
+                      <div
+                        key={featureIndex}
+                        className="flex items-start gap-2"
+                      >
+                        <div className="w-fit h-fit p-1 rounded-full bg-[#8D5A1B]">
+                          <Check size={14} color="white" />
+                        </div>
+                        <span className="font-text-medium font-[number:var(--text-medium-font-weight)] text-[#1e1e1e] text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
+                          {feature}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </CardContent>
             </Card>
