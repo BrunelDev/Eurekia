@@ -1,15 +1,14 @@
-import { FaqSection } from "./sections/FaqSection";
 import { FooterSection } from "../../components/FooterSection";
-import { HeroSection } from "./sections/HeroSection";
 import { NavigationSection } from "../../components/NavigationSection";
-import { PricingSection } from "./sections/PricingSection";
+import { FaqSection } from "./sections/FaqSection";
+import { HeroSection } from "./sections/HeroSection";
 
 export const Pricing = (): JSX.Element => {
   return (
     <main className="flex flex-col w-full bg-white">
       <NavigationSection />
       <HeroSection />
-      <PricingSection />
+      {/* <PricingSection />*/}
       <FaqSection />
       <FooterSection />
     </main>

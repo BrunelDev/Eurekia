@@ -1,4 +1,3 @@
-import { Check } from "lucide-react";
 import { useState } from "react";
 import { Button } from "../../../../components/ui/button";
 import { Card, CardContent } from "../../../../components/ui/card";
@@ -27,7 +26,7 @@ export const HeroSection = (): JSX.Element => {
         "Accès à la base technique publique",
         "Base de données client privée",
       ],
-      HTPrice : "(0€ HT)"
+      HTPrice: "(0€ HT)",
     },
     {
       name: "LITE",
@@ -44,7 +43,7 @@ export const HeroSection = (): JSX.Element => {
         "Accès à la base technique publique",
         "Base de données client privée",
       ],
-      HTPrice : "(7,99€ HT)"
+      HTPrice: "(7,99€ HT)",
     },
     {
       name: "PRO",
@@ -61,7 +60,7 @@ export const HeroSection = (): JSX.Element => {
         "Accès à la base technique publique",
         "Base de données client privée",
       ],
-      HTPrice : "(27,49€ HT)"
+      HTPrice: "(27,49€ HT)",
     },
     {
       name: "PREMIUM",
@@ -78,7 +77,7 @@ export const HeroSection = (): JSX.Element => {
         "Accès à la base technique publique",
         "Base de données client privée",
       ],
-      HTPrice : "(47,34€ HT)"
+      HTPrice: "(47,34€ HT)",
     },
   ];
 
@@ -179,7 +178,7 @@ export const HeroSection = (): JSX.Element => {
                   </div>
 
                   <div className="mt-4 space-y-3 px-4 pb-4">
-                    {plan.features.map((feature, featureIndex) => (
+                    {/* {plan.features.map((feature, featureIndex) => (
                       <div
                         key={featureIndex}
                         className="flex items-start gap-2"
@@ -191,7 +190,33 @@ export const HeroSection = (): JSX.Element => {
                           {feature}
                         </span>
                       </div>
-                    ))}
+                    ))}*/}
+                    <div className="flex items-center justify-center">
+                      <div className="relative px-4 py-2 bg-gradient-to-r from-lime-50 to-amber-50 rounded-lg border border-green-200 shadow-sm">
+                        <div className="flex items-center">
+                          <div className="flex-shrink-0">
+                            <svg
+                              className="h-5 w-5 text-green-500"
+                              xmlns="http://www.w3.org/2000/svg"
+                              viewBox="0 0 20 20"
+                              fill="currentColor"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                          </div>
+                          <div className="ml-3">
+                            <h6 className="font-display-h3 text-sm font-normal text-green-800">
+                              En cours de développement
+                            </h6>
+                          </div>
+                        </div>
+                        <div className="absolute inset-0 rounded-lg bg-green-200 opacity-10 animate-pulse"></div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </CardContent>

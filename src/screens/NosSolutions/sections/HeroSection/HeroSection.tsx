@@ -1,5 +1,3 @@
-import React from "react";
-
 export const HeroSection = (): JSX.Element => {
   // Define the decorative elements data for mapping
   const decorativeElements = [
@@ -30,13 +28,13 @@ export const HeroSection = (): JSX.Element => {
       </div>
 
       {/* Decorative elements are hidden on small screens to prevent layout issues */}
-      {decorativeElements.map((element, index) => (
+      {/* {decorativeElements.map((element, index) => (
         <div
           key={`decorative-element-${index}`}
           className={`hidden md:block absolute w-24 h-24 md:w-32 md:h-32 lg:w-[167px] lg:h-[167px] ${element.position} -translate-x-1/2 -translate-y-1/2`}
           style={checkerBackground}
         />
-      ))}
+      ))} */}
       <div className="flex flex-col justify-center items-center gap-4 md:hidden">
         {decorativeElements.map((element, index) => (
           <div
