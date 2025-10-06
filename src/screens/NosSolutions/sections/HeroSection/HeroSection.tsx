@@ -14,7 +14,7 @@ export const HeroSection = (): JSX.Element => {
   };
 
   return (
-    <section className="relative w-full  py-20 md:py-40">
+    <section className="relative w-full py-20 md:pt-40 md:pb-14">
       <div className="flex flex-col max-w-[762px] mx-auto items-center gap-8 px-4">
         <h1 className="font-display-h3 font-[number:var(--display-h3-font-weight)] text-[#1e1e1e] text-[length:var(--display-h3-font-size)] text-center tracking-[var(--display-h3-letter-spacing)] leading-[var(--display-h3-line-height)] [font-style:var(--display-h3-font-style)]">
           Nos solutions pour construire mieux, plus vite, et en toute sérénité
@@ -35,7 +35,7 @@ export const HeroSection = (): JSX.Element => {
           style={checkerBackground}
         />
       ))} */}
-      <div className="flex flex-col justify-center items-center gap-4 md:hidden">
+      {/*<div className="flex flex-col justify-center items-center gap-4 md:hidden">
         {decorativeElements.map((element, index) => (
           <div
             key={`decorative-element-${index}`}
@@ -43,7 +43,7 @@ export const HeroSection = (): JSX.Element => {
             style={checkerBackground}
           />
         ))}
-      </div>
+      </div>*/}
     </section>
   );
 };

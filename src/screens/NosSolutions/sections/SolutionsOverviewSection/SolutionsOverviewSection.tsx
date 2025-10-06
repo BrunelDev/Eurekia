@@ -50,8 +50,8 @@ export const SolutionsOverviewSection = (): JSX.Element => {
           </div>
 
           <ArrowButton
-            handleClick={() => (window.location.href = "/solutions")}
-            text="Essayer une démo"
+            handleClick={() => (window.location.href = "/pricing")}
+            text="Découvrez la solution"
             lucideIcon={
               <ArrowRightIcon className="w-5 h-5 text-black group-hover:text-[#cd9f25]" />
             }

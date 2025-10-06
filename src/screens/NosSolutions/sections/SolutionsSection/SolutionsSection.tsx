@@ -31,7 +31,7 @@ export const SolutionsSection = (): JSX.Element => {
 
   return (
 
-    <section className="w-full py-16 px-4 sm:px-8 lg:px-12 md:mt-[320px] mt-0">
+    <section className="w-full py-0 px-4 sm:px-8 lg:px-1 mt-0">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-center items-center gap-12 lg:gap-8">
         {/* Image Column - Order 1 on mobile, Order 2 on desktop */}
         <div className="w-full lg:w-1/3 order-1 lg:order-2">
@@ -48,8 +48,8 @@ export const SolutionsSection = (): JSX.Element => {
           </p>
           
           <ArrowButton
-            handleClick={() => window.location.href = "/pricing"}
-            text="Découvrir les prestations"
+            handleClick={() => window.location.href = "/contact?sujet=Devis personnalisé"}
+            text="Demander un devis personnalisé"
             lucideIcon={<ArrowRightIcon className="w-5 h-5 text-black group-hover:text-[#cd9f25]" />}
           />
         </div>
