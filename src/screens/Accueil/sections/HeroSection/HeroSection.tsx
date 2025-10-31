@@ -102,7 +102,7 @@ export const HeroSection = (): JSX.Element => {
             <img
               className="w-full h-auto object-cover rounded-none shadow-none"
               alt="Placeholder image"
-              src="/placeholder-image.png"
+              src="/placeholder-image-0.jpeg"
             />
           </div>
         </div>
