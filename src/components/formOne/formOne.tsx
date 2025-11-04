@@ -9,7 +9,7 @@ export default function FormOne() {
   const { formData, updateFormData } = useFormState();
   const [selectedService, setSelectedService] = useState<
     "AMO" | "MOE" | undefined
-  >(undefined);
+  >(undefined)
 
   return (
     <div className="px-4 my-6 space-y-8">
