@@ -13,6 +13,7 @@ import CookiesSettings from "./screens/CookiesSettings/CookiesSettings";
 import ConditionsGenerales from "./screens/ConditionsGenerales/ConditionsGenerales";
 import { NewsletterRegister } from "./screens/newsletterRegister/Register";
 import { DevisChoice } from "./screens/DevisChoice";
+import { Formulaire } from "./screens/Formulaire";
 
 const router = createBrowserRouter([
   {
@@ -66,6 +67,13 @@ const router = createBrowserRouter([
   {
     path: "/conditions-generales",
     element: <ConditionsGenerales />,
+  },
+  {
+    path: "/formulaire",
+    element: <Formulaire />,
+  },
+  {
+    path: "/*",
   },
 ]);
 

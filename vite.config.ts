@@ -1,8 +1,8 @@
 import react from "@vitejs/plugin-react";
-import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
-import tailwind from "tailwindcss";
 import path from "path";
+import tailwind from "tailwindcss";
 import { defineConfig } from "vite";
+import { ViteImageOptimizer } from "vite-plugin-image-optimizer";
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -29,7 +29,7 @@ export default defineConfig({
   base: "/",
   resolve: {
     alias: {
-      "@": path.resolve("src"),
+      "@": path.resolve(__dirname, "src"),
     },
   },
   css: {
