@@ -1,6 +1,5 @@
 "use client";
 import { FooterSection } from "../../components/FooterSection";
-import FormFive from "../../components/formFive/formFive";
 import FormFour from "../../components/formFour/formFour";
 import FormOne from "../../components/formOne/formOne";
 import FormThree from "../../components/formThree/formThree";
@@ -25,7 +24,7 @@ export function Formulaire() {
           <UserInfoSection />
         </div>
         {isStepFourChecked ? (
-          <FormFive />
+          <FormFour />
         ) : isStepThreeChecked ? (
           <FormFour />
         ) : isStepTwoChecked ? (
