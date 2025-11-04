@@ -38,7 +38,7 @@ export const ContactFormSection = (): JSX.Element => {
   const [submissionStatus, setSubmissionStatus] = useState<"idle" | "sending">(
     "idle"
   );
-  const [isFocused, setIsFocused] = useState(false);
+  const [isFocused, setIsFocused] = useState(false)
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
