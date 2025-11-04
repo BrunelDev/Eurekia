@@ -26,10 +26,10 @@ export const ContactFormSection = (): JSX.Element => {
     { id: "Partenariat", label: "Partenariat" },
     { id: "Autre", label: "Autre" },
   ];
-  const devis = [
-    { id: "Devis personnalisé", label: "Devis personnalisé" },
-    { id: "Devis instantané", label: "Devis instantané" },
-  ];
+  // const devis = [
+  //   { id: "Devis personnalisé", label: "Devis personnalisé" },
+  //   { id: "Devis instantané", label: "Devis instantané" },
+  // ];
 
   const [selectedSubject, setSelectedSubject] = useState<string>(
     sujet || "Information"

@@ -9,29 +9,11 @@ export default function FormOne() {
   const { formData, updateFormData } = useFormState();
   const [selectedService, setSelectedService] = useState<
     "AMO" | "MOE" | undefined
-  >(undefined)
+  >(undefined);
 
   return (
     <div className="px-4 my-6 space-y-8">
-      {selectedService && (
-        <Card className="max-w-[620px] mx-auto border-amber-200 bg-amber-50/40">
-          <CardContent className="pt-6 flex items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <div>
-                <div className="text-sm font-semibold text-amber-900">
-                  Service sélectionné: {selectedService}
-                </div>
-                <div className="text-xs text-amber-800/80">
-                  Cliquez à nouveau sur une carte pour désélectionner
-                </div>
-              </div>
-            </div>
-            <div className="text-[10px] px-2 py-1 rounded-md bg-amber-100 text-amber-800">
-              Aperçu
-            </div>
-          </CardContent>
-        </Card>
-      )}
+   
       <div className="flex flex-row flex-wrap justify-center gap-6 sm:gap-8 items-stretch">
         <PrestationCard
           onClick={() =>
