@@ -17,11 +17,6 @@ export default function FormOne() {
         <Card className="max-w-[620px] mx-auto border-amber-200 bg-amber-50/40">
           <CardContent className="pt-6 flex items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              {selectedService === "AMO" ? (
-                <DraftingCompass className="w-5 h-5 text-amber-600" />
-              ) : (
-                <HardHat className="w-5 h-5 text-amber-600" />
-              )}
               <div>
                 <div className="text-sm font-semibold text-amber-900">
                   Service sélectionné: {selectedService}
