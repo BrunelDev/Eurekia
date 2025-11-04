@@ -1,4 +1,4 @@
 export const ContentWrapperSection = () => {
-  // Contenu actuel de FormFive (avant refonte) — à étendre si besoin
+  //TODO :FIX THIS
   return <div>5</div>;
 };

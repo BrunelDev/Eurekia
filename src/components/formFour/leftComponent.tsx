@@ -23,7 +23,7 @@ const statistics = [
 ];
 
 export default function LeftComponent() {
-  const isPersonnalized = true;
+  const isPersonnalized = false;
 
   return (
     <section className="flex flex-col w-full items-start gap-4 sm:gap-3 pt-0 px-4 sm:px-0 relative">

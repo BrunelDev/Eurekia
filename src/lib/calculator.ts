@@ -1,4 +1,4 @@
-type ServiceToggles = {
+export type ServiceToggles = {
   // AMO toggles
   descriptiveNotice?: boolean;
   urbanismAuthorization?: boolean;
@@ -26,13 +26,12 @@ type ServiceToggles = {
   moeFinalAttestationAcv?: boolean;
 };
 
-type ServiceItem = {
+export type ServiceItem = {
   key: string;
   designation: string;
   pu: number;
   tva: number;
 };
-
 const designationsMapping: Record<
   string,
   {
@@ -234,8 +233,7 @@ const services: ServiceToggles = {
 
 const selectedList = getSelectedServices(services);
 
-
-function getSelectedServicesWithTotal(toggles: ServiceToggles) {
+export function getSelectedServicesWithTotal(toggles: ServiceToggles) {
   const services = getSelectedServices(toggles);
 
   const totalHT = services.reduce((sum, service) => sum + service.pu, 0);

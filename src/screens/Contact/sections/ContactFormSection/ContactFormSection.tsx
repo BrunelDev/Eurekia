@@ -48,10 +48,10 @@ export const ContactFormSection = (): JSX.Element => {
 
     emailjs
       .sendForm(
-        process.env.VITE_EMAILJS_SERVICE_ID as string,
-        process.env.VITE_EMAILJS_TEMPLATE_ID as string,
+        import.meta.env.VITE_EMAILJS_SERVICE_ID as string,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID as string,
         form.current,
-        process.env.VITE_EMAILJS_PUBLIC_KEY as string
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY as string
       )
       .then(
         () => {
