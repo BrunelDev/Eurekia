@@ -4,21 +4,21 @@ const contactInfo = [
   {
     icon: "/icons/call.svg",
     label: "Nous appeler",
-    value: "(+33) 6 56 74 54 70",
-    href: "tel:+33656745470",
+    value: "(+33) 0615663970",
+    href: "tel:0615663970",
   },
   {
     icon: "/icons/mail.svg",
     label: "Nous écrire",
-    value: "contact@mesplansdepermis.fr",
-    href: "mailto:contact@mesplansdepermis.fr",
+    value: "contact@eurekaingenierie.com",
+    href: "mailto:contact@eurekaingenierie.com",
   },
 ];
 
 const statistics = [
   { number: "6800+", label: "Plans réalisés" },
-  { number: "900+", label: "Cerfas remplis" },
-  { number: "96%", label: "Permis acceptés" },
+  // { number: "900+", label: "Cerfas remplis" },
+  // { number: "96%", label: "Permis acceptés" },
   { number: "70%", label: "D'économie" },
 ];
 
@@ -29,7 +29,7 @@ export default function LeftComponent() {
     <section className="flex flex-col w-full items-start gap-4 sm:gap-3 pt-0 px-4 sm:px-0 relative">
       {/* Header */}
       <header className="flex flex-col items-start w-full animate-fade-in opacity-1">
-        <h1 className="w-full font-heading-h2 text-[#094d9a] tracking-[var(--heading-h2-letter-spacing)] leading-[var(--heading-h2-line-height)] font-medium text-lg sm:text-2xl">
+        <h1 className="w-full font-heading-h2 text-yellow-500 tracking-[var(--heading-h2-letter-spacing)] leading-[var(--heading-h2-line-height)] font-medium text-lg sm:text-2xl">
           Félicitations !
         </h1>
 
