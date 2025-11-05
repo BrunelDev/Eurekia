@@ -1,19 +1,21 @@
+import { FormData } from "@/context/useFormState";
+import { ServiceItem } from "./calculator";
+
 export const generateDevis = (
   formData: FormData,
-  selectedServices: ServiceItem[]
+  selectedServices: {
+    services: ServiceItem[];
+    totalHT: number;
+    totalTTC: number;
+    count: number;
+  }
 ) => {
   // Calcul des totaux
-  const totalHT = selectedServices.reduce(
-    (sum, service) => sum + service.pu,
-    0
-  );
-  const totalTVA = selectedServices.reduce((sum, service) => {
-    return sum + (service.pu * service.tva) / 100;
-  }, 0);
-  const totalTTC = totalHT + totalTVA;
+
+
 
   // Génération des lignes du tableau
-  const tableRows = selectedServices
+  const tableRows = selectedServices.services
     .map(
       (service) => `
           <tr>
@@ -377,7 +379,7 @@ export const generateDevis = (
           <p><strong>Bon pour Accord</strong></p>
           <h3>Conditions de paiement :</h3>
           <p>
-            • 100,00 % soit <strong>${totalTTC.toFixed(
+            • 100,00 % soit <strong>${selectedServices.totalTTC.toFixed(
               2
             )} €</strong> : Paiement après réception
             de l'Avant-Projet Sommaire.
@@ -388,15 +390,15 @@ export const generateDevis = (
         <div class="total-section">
           <div class="total-row">
             <span>Total HT</span>
-            <span>${totalHT.toFixed(2)} €</span>
+            <span>${selectedServices.totalHT.toFixed(2)} €</span>
           </div>
           <div class="total-row">
             <span>TVA (20%)</span>
-            <span>${totalTVA.toFixed(2)} €</span>
+            <span>${selectedServices.totalTTC.toFixed(2)} €</span>
           </div>
           <div class="total-row final">
             <span>Total TTC</span>
-            <span>${totalTTC.toFixed(2)} €</span>
+            <span>${selectedServices.totalTTC.toFixed(2)} €</span>
           </div>
         </div>
       </div>
@@ -413,8 +415,7 @@ export const generateDevis = (
         <p>
           Les présentes conditions générales ont pour objet de définir les
           droits et obligations d'Eurêka et de ses clients dans le cadre de la
-          réalisation de prestations de conception de plans nécessaires aux
-          demandes de permis de construire ou déclarations préalables.
+          réalisation de prestations .
         </p>
 
         <h3>Acceptation du devis</h3>
@@ -463,8 +464,7 @@ export const generateDevis = (
         <p><strong>1. Sans option "Vérification du P.L.U."</strong></p>
         <p>
           Dans ce cas, Eurêka ne pourra en aucun cas être tenu responsable en
-          cas de refus du permis de construire ou de la déclaration préalable de
-          travaux par la mairie ou tout autre organisme compétent. Le client
+          cas de refus  de travaux par la mairie ou tout autre organisme compétent. Le client
           reste seul responsable de la conformité de son projet avec les règles
           d'urbanisme locales, notamment celles définies par le Plan Local
           d'Urbanisme (P.L.U.). Toute modification nécessaire suite à un refus,
@@ -475,8 +475,7 @@ export const generateDevis = (
         <p><strong>2. Avec option "Vérification du P.L.U."</strong></p>
         <p>
           En souscrivant à cette prestation, Eurêka vérifie la conformité du
-          projet avec le P.L.U. en vigueur et garantit l'acceptation du permis
-          de construire ou de la déclaration préalable de travaux. Dans ce
+          projet avec le P.L.U. en vigueur et garantit l'acceptation des travaux. Dans ce
           cadre, toutes les modifications demandées par la mairie seront
           réalisées gratuitement. En revanche, toute modification sollicitée par
           le client pour modifier l'aspect ou la conception initiale du projet

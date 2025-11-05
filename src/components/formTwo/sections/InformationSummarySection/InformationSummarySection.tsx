@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import {  useFormState } from "../../../../context/useFormState.ts";
+import { useFormState } from "../../../../context/useFormState.ts";
 import BackButton from "../../PrimaryButton/BackButton.tsx";
 import { PrimaryButton } from "../../PrimaryButton/PrimaryButton.tsx";
 import { Question, QuestionWithInput } from "../formFour/questionComponent.tsx";
@@ -353,7 +353,7 @@ export const InformationSummarySection = () => {
         ? moeForm
         : [];
 
-    if (formData.option === '') {
+    if (formData.option === "") {
       const hasNeededPlans = formData.doesNeedPlan === true;
       const hasRdcPlan = formData.rdcPlanVerification === true;
       const has3DRender = formData.render3D === true;
@@ -420,15 +420,13 @@ export const InformationSummarySection = () => {
   };
 
   useEffect(() => {
-    if (
-      formData
-    ) {
+    if (formData) {
       updateFormData({
         ...formData,
         isStepThreeChecked: false,
       });
     }
-  }, [ updateFormData]);
+  }, [updateFormData]);
 
   const formToUse: FormItem[] =
     formData.serviceChosen === "AMO"
@@ -537,7 +535,7 @@ export const InformationSummarySection = () => {
             if (validateForm()) {
               updateFormData({
                 ...formData,
-                isStepFourChecked: true,
+                isStepTwoChecked: true,
               });
             } else {
               window.scrollTo({ top: 0, behavior: "smooth" });

@@ -1,4 +1,7 @@
+import { getSelectedServicesWithTotal } from "@/lib/calculator";
+import { generateDevis } from "@/lib/generateDevis";
 import { useRef, useState } from "react";
+import PhoneInput from "react-phone-input-2";
 import { useFormState } from "../../context/useFormState";
 import BackButton from "../formTwo/PrimaryButton/BackButton";
 import { PrimaryButton } from "../formTwo/PrimaryButton/PrimaryButton";
@@ -11,14 +14,6 @@ const statistics = [
   {
     value: "6800+",
     label: "Plans réalisés",
-  },
-  {
-    value: "900+",
-    label: "Cerfas remplis",
-  },
-  {
-    value: "96%",
-    label: "Permis acceptés",
   },
   {
     value: "70%",
@@ -40,6 +35,7 @@ export default function FormThree() {
     telephone?: string;
   }>({});
   const formRef = useRef<HTMLFormElement>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const [nom, setNom] = useState(formData.clientLastName || "");
   const [prenom, setPrenom] = useState(formData.clientFirstName || "");
@@ -119,6 +115,77 @@ export default function FormThree() {
     });
   };
 
+  const handleSubmit = async () => {
+    const isValid = validateForm();
+    if (!isValid) return;
+    if (isSubmitting) return;
+
+    try {
+      setIsSubmitting(true);
+      const services = getSelectedServicesWithTotal(formData);
+      const htmlContent = generateDevis(formData, services);
+
+      const response = await fetch("http://localhost:3000/api/generate-pdf", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          htmlContent,
+          filename: `devis-1.pdf`,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Erreur lors de la génération du PDF");
+      }
+
+      // Télécharger le PDF
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `devis-1.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      window.URL.revokeObjectURL(url);
+      document.body.removeChild(a);
+
+      // Envoyer les données du formulaire si nécessaire
+      const dataToSend = new FormData();
+      dataToSend.append("pdf", blob, `devis-1.pdf`);
+      dataToSend.append(
+        "data",
+        JSON.stringify({
+          ...formData,
+          clientLastName: nom,
+          clientFirstName: prenom,
+          clientEmail: email,
+          clientPhone: telephone,
+        })
+      );
+
+      // Sauvegarde dans l'état global et passage à l'étape suivante
+      updateFormData({
+        ...formData,
+        clientLastName: nom,
+        clientFirstName: prenom,
+        clientEmail: email,
+        clientPhone: telephone,
+        isStepThreeChecked: true,
+        isStepFourChecked: false,
+      });
+
+      // Ajouter ici l'appel API pour envoyer les données si nécessaire
+      // await fetch("/api/submit-form", { method: "POST", body: dataToSend });
+    } catch (error) {
+      console.error("Erreur lors de la soumission:", error);
+      alert("Une erreur s'est produite. Veuillez réessayer.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section className="w-full sm:pb-8 pb-[150px]">
       <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-5 w-full justify-center px-4">
@@ -185,7 +252,7 @@ export default function FormThree() {
                               }));
                             }
                           }}
-                          className={`px-3 w-full sm:px-4 py-2.5 sm:py-3 rounded-lg border ${
+                          className={`px-3 h-[48px] w-full sm:px-4 py-2.5 sm:py-3 rounded-lg border ${
                             formErrors[field.id as keyof typeof formErrors]
                               ? "border-red-500"
                               : "border-[#6d7074]"
@@ -203,53 +270,129 @@ export default function FormThree() {
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-start gap-4 sm:gap-5 w-full">
-                  {formFields.slice(2, 4).map((field) => (
-                    <div
-                      key={field.id}
-                      className="flex flex-col items-stretch gap-2 flex-1 w-full"
-                    >
-                      <Label
-                        htmlFor={field.id}
-                        className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#042347] text-sm sm:text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] flex items-center"
-                      >
-                        {field.label}
-                        {field.required && (
-                          <span className="text-red-500 ml-1">*</span>
-                        )}
-                      </Label>
+                  {formFields.slice(2, 4).map((field) => {
+                    if (field.label === "Téléphone") {
+                      return (
+                        <div
+                          className="flex flex-col gap-2 flex-1 w-full"
+                          key={field.id}
+                        >
+                          <Label
+                            htmlFor="telephone"
+                            className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#042347] text-sm sm:text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] flex items-center"
+                          >
+                            Téléphone
+                            <span className="text-red-500 ml-1">*</span>
+                          </Label>
 
-                      <div className="relative w-full">
-                        <Input
-                          id={field.id}
-                          placeholder={field.placeholder}
-                          className={`px-3 w-full sm:px-4 py-2.5 sm:py-3 rounded-lg border ${
-                            formErrors[field.id as keyof typeof formErrors]
-                              ? "border-red-500"
-                              : "border-[#6d7074]"
-                          } font-text-medium font-[number:var(--text-medium-font-weight)] text-placeholder-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]`}
-                          value={field.value}
-                          onChange={(e) => {
-                            field.onChange(e.target.value);
-                            if (
+                          <PhoneInput
+                            value={telephone}
+                            onChange={(phone) => {
+                              setTelephone(phone);
+                              if (formErrors.telephone) {
+                                setFormErrors((prev) => ({
+                                  ...prev,
+                                  telephone: undefined,
+                                }));
+                              }
+                            }}
+                            country={"fr"}
+                            inputProps={{
+                              name: "telephone",
+                              required: true,
+                            }}
+                            containerStyle={{
+                              width: "100%",
+                            }}
+                            buttonStyle={{
+                              border: "1px solid #6d7074",
+                              borderRight: "none",
+                              borderRadius: "6px 0 0 6px",
+                              backgroundColor: "transparent",
+                              padding: "0 12px",
+                              height: "48px",
+                            }}
+                            inputStyle={{
+                              width: "100%",
+                              height: "48px",
+                              border: "1px solid #6d7074",
+                              borderRadius: "6px",
+                              backgroundColor: "transparent",
+                              paddingLeft: "60px",
+                              fontSize: "14px",
+                              fontFamily: "inherit",
+                              outline: "none",
+                              boxShadow: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
+                              transition:
+                                "color 0.2s, box-shadow 0.2s, border-color 0.2s",
+                            }}
+                            dropdownStyle={{
+                              borderRadius: "6px",
+                              boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
+                            }}
+                            autoFormat={true}
+                            isValid={(value) => {
+                              if (!value) return true;
+                              if (value.startsWith("0")) return false;
+                              return true;
+                            }}
+                          />
+                          {formErrors.telephone && (
+                            <p className="text-red-500 text-xs mt-1">
+                              {formErrors.telephone}
+                            </p>
+                          )}
+                        </div>
+                      );
+                    }
+                    return (
+                      <div
+                        key={field.id}
+                        className="flex flex-col items-stretch gap-2 flex-1 w-full"
+                      >
+                        <Label
+                          htmlFor={field.id}
+                          className="font-label-medium font-[number:var(--label-medium-font-weight)] text-[#042347] text-sm sm:text-[length:var(--label-medium-font-size)] tracking-[var(--label-medium-letter-spacing)] leading-[var(--label-medium-line-height)] [font-style:var(--label-medium-font-style)] flex items-center"
+                        >
+                          {field.label}
+                          {field.required && (
+                            <span className="text-red-500 ml-1">*</span>
+                          )}
+                        </Label>
+
+                        <div className="relative w-full">
+                          <Input
+                            id={field.id}
+                            placeholder={field.placeholder}
+                            className={`px-3 h-[48px] w-full sm:px-4 py-2.5 sm:py-3 rounded-lg border ${
                               formErrors[field.id as keyof typeof formErrors]
-                            ) {
-                              setFormErrors((prev) => ({
-                                ...prev,
-                                [field.id]: undefined,
-                              }));
-                            }
-                          }}
-                          required={field.required}
-                          type={field.type as string}
-                        />
-                        {formErrors[field.id as keyof typeof formErrors] && (
-                          <p className="text-red-500 text-xs mt-1">
-                            {formErrors[field.id as keyof typeof formErrors]}
-                          </p>
-                        )}
+                                ? "border-red-500"
+                                : "border-[#6d7074]"
+                            } font-text-medium font-[number:var(--text-medium-font-weight)] text-placeholder-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]`}
+                            value={field.value}
+                            onChange={(e) => {
+                              field.onChange(e.target.value);
+                              if (
+                                formErrors[field.id as keyof typeof formErrors]
+                              ) {
+                                setFormErrors((prev) => ({
+                                  ...prev,
+                                  [field.id]: undefined,
+                                }));
+                              }
+                            }}
+                            required={field.required}
+                            type={field.type}
+                          />
+                          {formErrors[field.id as keyof typeof formErrors] && (
+                            <p className="text-red-500 text-xs mt-1">
+                              {formErrors[field.id as keyof typeof formErrors]}
+                            </p>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </form>
 
@@ -266,8 +409,11 @@ export default function FormThree() {
                 />
 
                 <PrimaryButton
-                  disabled={!nom || !prenom || !email || !telephone}
-                  handleClick={handleNextStep}
+                  disabled={
+                    !nom || !prenom || !email || !telephone || isSubmitting
+                  }
+                  isLoading={isSubmitting}
+                  handleClick={handleSubmit}
                 />
               </div>
             </div>
@@ -287,14 +433,6 @@ export default function FormThree() {
                     compétents
                   </p>
                 </div>
-
-                {/* <img
-                  width={120}
-                  height={100}
-                  className="w-[100px] h-[80px] sm:w-[120px] sm:h-[100px] object-cover flex-shrink-0"
-                  alt="Urban building hero"
-                  src="/building.svg"
-                /> */}
               </div>
 
               <div className="grid grid-cols-2 sm:flex lg:grid lg:gap-4 lg:h-auto lg:mx-auto xl:flex sm:h-16 items-center lg:items-center lg:justify-center justify-center sm:justify-between gap-4 sm:gap-0 w-full">
@@ -303,7 +441,7 @@ export default function FormThree() {
                     key={index}
                     className="flex flex-col w-full sm:w-[98px] lg:w-full xl:w-[98px] items-center lg:items-center sm:items-start xl:items-start gap-1"
                   >
-                    <div className="w-full  text-white text-2xl sm:text-3xl text-center">
+                    <div className="w-full text-white text-2xl sm:text-3xl text-center">
                       {stat.value}
                     </div>
                     <div className="w-full font-text-medium text-white text-xs sm:text-sm text-center text-nowrap">
@@ -319,12 +457,13 @@ export default function FormThree() {
         <img
           width={534}
           height={640}
-          className="w-full lg:w-[40%] h-auto lg:h-[640px] translate-y-[-1rem] animate-fade-in opacity-1 [--animation-delay:800ms] object-contain hidden sm:block "
+          className="w-full lg:w-[40%] h-auto lg:h-[640px] translate-y-[-1rem] animate-fade-in opacity-1 [--animation-delay:800ms] object-contain hidden sm:block"
           alt="Frame"
           src="/etape2b.jpg"
         />
       </div>
-      <div className="sm:hidden fixed bottom-0 left-0 right-0 flex items-center justify-between animate-fade-in opacity-1 [--animation-delay:400ms]  bg-[#ffffffaa] pt-10 pb-14 px-4 shadow-xl backdrop-blur-lg">
+
+      <div className="sm:hidden fixed bottom-0 left-0 right-0 flex items-center justify-between animate-fade-in opacity-1 [--animation-delay:400ms] bg-[#ffffffaa] pt-10 pb-14 px-4 shadow-xl backdrop-blur-lg">
         <BackButton
           handleClick={() => {
             updateFormData({
@@ -337,8 +476,9 @@ export default function FormThree() {
         />
 
         <PrimaryButton
-          disabled={!nom || !prenom || !email || !telephone}
-          handleClick={handleNextStep}
+          disabled={!nom || !prenom || !email || !telephone || isSubmitting}
+          isLoading={isSubmitting}
+          handleClick={handleSubmit}
         />
       </div>
     </section>

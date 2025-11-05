@@ -16,13 +16,13 @@ export const PrimaryButton = ({
 }) => {
   const [animationClass, setAnimationClass] = useState("");
 
-  const handleMouseEnter = () => {
-    setAnimationClass("animate-hover-bounce");
-  };
+  // const handleMouseEnter = () => {
+  //   setAnimationClass("animate-hover-bounce");
+  // };
 
-  const handleMouseLeave = () => {
-    setAnimationClass("animate-hover-bounce-reverse");
-  };
+  // const handleMouseLeave = () => {
+  //   setAnimationClass("animate-hover-bounce-reverse");
+  // };
 
   return (
     <Button
@@ -38,8 +38,8 @@ export const PrimaryButton = ({
         }
       }}
       disabled={disabled || isLoading}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      // onMouseEnter={handleMouseEnter}
+      // onMouseLeave={handleMouseLeave}
     >
       <div className={cn("flex items-center gap-2 text-sm", animationClass)}>
         {isLoading && <Loader2 className="h-4 w-4 animate-spin" />}

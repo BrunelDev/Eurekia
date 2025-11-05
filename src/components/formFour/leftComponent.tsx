@@ -1,19 +1,29 @@
+import { MailIcon, MapPinIcon, PhoneIcon } from "lucide-react";
 import { Card, CardContent } from "../ui/card";
+import { Link } from "react-router-dom";
 
-const contactInfo = [
-  {
-    icon: "/icons/call.svg",
-    label: "Nous appeler",
-    value: "(+33) 0615663970",
-    href: "tel:0615663970",
-  },
-  {
-    icon: "/icons/mail.svg",
-    label: "Nous écrire",
-    value: "contact@eurekaingenierie.com",
-    href: "mailto:contact@eurekaingenierie.com",
-  },
-];
+
+ const contactItems = [
+    {
+      icon: <MapPinIcon className="w-7 h-7 text-black" />,
+      description: "Nos bureaux sont situés :",
+      link: "/contact/carte",
+      href: "/contact/carte",
+      target: "_self",
+    },
+    {
+      icon: <PhoneIcon className="w-7 h-7 text-black" />,
+      description: "Appelez-nous du lundi au vendredi, de 9h à 18h",
+      link: "0615663970",
+      href: "tel:0615663970",
+    },
+    {
+      icon: <MailIcon className="w-7 h-7 text-black" />,
+      description: "Nous répondons sous 24h ouvrées",
+      link: "contact@eurekaingenierie.com",
+      href: "mailto:contact@eurekaingenierie.com",
+    },
+  ];
 
 const statistics = [
   { number: "6800+", label: "Plans réalisés" },
@@ -53,42 +63,37 @@ export default function LeftComponent() {
                     : "Des questions ? Envie de valider votre devis ?"}
                 </h2>
 
-                <p className="w-full font-medium tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] text-[#042347] text-xs sm:text-base ">
+                <p className="w-full font-medium tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] text-[#6d7074] text-xs sm:text-base ">
                   {isPersonnalized
                     ? "En attendant, vous pouvez nous contacter si vous avez la moindre question."
                     : "Contactez l'équipe dès maintenant par téléphone ou par mail."}
                 </p>
               </div>
 
-              <div className="flex flex-col items-start gap-4 sm:gap-5 w-full">
-                {contactInfo.map((contact, index) => (
-                  <div key={index} className="inline-flex items-center gap-3">
-                    <div className="relative w-10 h-10 sm:w-11 sm:h-11 flex items-center justify-center">
-                      <img
-                        src={contact.icon}
-                        alt="Icône"
-                        width={40}
-                        height={40}
-                      />
-                    </div>
-
-                    <div className="inline-flex flex-col items-start">
-                      <div className="mt-[-1.00px] tracking-[var(--label-small-letter-spacing)] leading-[var(--label-small-line-height)] font-medium text-xs sm:text-sm text-oxford_blue">
-                        {contact.label}
+                <div className="w-full flex flex-col gap-4 sm:gap-5 mt-2">
+                  {contactItems.map((item, index) => (
+                    <Link
+                      to={item.href}
+                      target={item.target}
+                      key={index}
+                      className="flex items-start gap-3 sm:gap-4 no-underline group transition-all hover:translate-x-1"
+                    >
+                      <div className="flex-shrink-0 flex w-12 h-12 sm:w-14 sm:h-14 items-center justify-center rounded-full bg-radial-gold-circle group-hover:scale-110 transition-transform">
+                        {item.icon}
                       </div>
-
-                      <a
-                        href={contact.href}
-                        className="w-fit font-normal text-sm sm:text-base tracking-[0] leading-4 transition-colors hover:opacity-80"
-                      >
-                        <span className="leading-[var(--text-medium-line-height)] underline font-text-medium [font-style:var(--text-medium-font-style)] font-[number:var(--text-medium-font-weight)] tracking-[var(--text-medium-letter-spacing)] text-xs sm:text-sm text-[#db4200]">
-                          {contact.value}
-                        </span>
-                      </a>
-                    </div>
-                  </div>
-                ))}
-              </div>
+                      <div className="flex flex-col gap-0.5 sm:gap-1 min-w-0">
+                        <p className="text-[#6d7074] font-light text-xs sm:text-sm">
+                          {item.description}
+                        </p>
+                        <p className="text-sm sm:text-base font-medium text-yellow-600 group-hover:text-yellow-500 transition-colors break-words">
+                          {item.link === "/contact/carte"
+                            ? "159 Chemin du Val de Cagne 06800 Cagnes-sur-Mer FRANCE"
+                            : item.link}
+                        </p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
             </CardContent>
           </Card>
 

@@ -29,8 +29,8 @@ export default function BackButton({
         className
       )}
       onClick={handleClick}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
+      // onMouseEnter={handleMouseEnter}
+      // onMouseLeave={handleMouseLeave}
     >
       <div className={animationClass + " text-[#6D7074]"}>Retour</div>
     </Button>
