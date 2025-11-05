@@ -125,16 +125,19 @@ export default function FormThree() {
       const services = getSelectedServicesWithTotal(formData);
       const htmlContent = generateDevis(formData, services);
 
-      const response = await fetch("http://localhost:3000/api/generate-pdf", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          htmlContent,
-          filename: `devis-1.pdf`,
-        }),
-      });
+      const response = await fetch(
+        "https://formulaire.mesplansdepermis.fr/api/generate-pdf",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            htmlContent,
+            filename: `devis-1.pdf`,
+          }),
+        }
+      );
 
       if (!response.ok) {
         throw new Error("Erreur lors de la génération du PDF");
@@ -419,7 +422,7 @@ export default function FormThree() {
             </div>
           </div>
 
-          <Card className="w-full bg-gradient-to-b from-[#483621df] to-[#483621] border-0 translate-y-[-1rem] animate-fade-in opacity-1 [--animation-delay:600ms]">
+          <Card className="w-full bg-gradient-to-b from-[#483621df] to-[#483621] border-0 translate-y-[-1rem] animate-fade-in opacity-1 [--animation-delay:600ms] -z-10">
             <CardContent className="flex flex-col items-center justify-center gap-5 sm:gap-7 p-4 sm:p-5">
               <div className="flex flex-col sm:flex-row items-center sm:items-start justify-center gap-4 sm:gap-8 w-full">
                 <div className="flex flex-col items-center sm:items-start gap-2 sm:gap-3 flex-1 text-center sm:text-left">
