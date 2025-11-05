@@ -32,7 +32,7 @@ export const SolutionInstant = (): JSX.Element => {
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-center items-center gap-12 lg:gap-8">
         {/* Image Column - Order 1 on mobile, Order 2 on desktop */}
         <div className="w-full lg:w-1/3 order-1 lg:order-2">
-          <div className="h-[400px] md:h-[600px] bg-[url(/engineer.png)] bg-cover bg-center rounded-lg" />
+          <div className="h-[400px] md:h-[600px] bg-[url(/eurekaInstant.jpg)] bg-cover bg-center rounded-lg" />
         </div>
 
         {/* Left Column - Title and description - Order 2 on mobile, Order 1 on desktop */}
