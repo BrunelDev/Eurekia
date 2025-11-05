@@ -4,6 +4,7 @@ import { HeroSection } from "./sections/HeroSection";
 import { NavigationSection } from "../../components/NavigationSection";
 import { SolutionsOverviewSection } from "./sections/SolutionsOverviewSection";
 import { SolutionsSection } from "./sections/SolutionsSection";
+import { SolutionInstant } from "./sections/SolutionInstantSection";
 
 export const NosSolutions = (): JSX.Element => {
   return (
@@ -12,6 +13,7 @@ export const NosSolutions = (): JSX.Element => {
       <HeroSection />
       <SolutionsSection />
       <SolutionsOverviewSection />
+      <SolutionInstant/>
       <CallToActionSection />
       <FooterSection />
     </div>

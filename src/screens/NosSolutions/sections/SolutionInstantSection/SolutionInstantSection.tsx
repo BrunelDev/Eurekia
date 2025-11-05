@@ -2,33 +2,33 @@ import { ArrowRightIcon } from "lucide-react";
 import ArrowButton from "../../../../components/ArrowButton";
 import { Card, CardContent } from "../../../../components/ui/card";
 
-export const SolutionsSection = (): JSX.Element => {
+export const SolutionInstant = (): JSX.Element => {
   // Services data for the accordion
   const services = [
     {
-      title: "Assistant à la Maîtrise d'Ouvrage (AMO)",
+      title: "Forfait de conception d’AMO ou de MOE",
       content: "Description for AMO service.",
     },
     {
-      title: "Maîtrise d'Œuvre (MOE)",
+      title: "Notice de vos besoins et estimation des travaux",
       content: "Description for MOE service.",
     },
     {
-      title: "Ordonnancement, Pilotage, Coordination (OPC)",
+      title: "Diagnostic et/ou faisabilité de votre projet",
       content: "Description for OPC service.",
     },
     {
-      title: "Études techniques, notices, autorisations",
+      title: "Etudes : étude thermique, note de calcul, plans, cahier des charges",
       content: "Description for technical studies.",
     },
     {
-      title: "Rédaction de CCTP, CCAP, DPGF, etc.",
+      title: "Planning",
       content: "Description for document writing.",
     },
   ];
 
   return (
-    <section className="w-full py-0 px-4 sm:px-8 lg:px-1 mt-0">
+    <section className="w-full py-0 px-4 sm:px-8 lg:px-1 mt-0 pb-24">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row justify-center items-center gap-12 lg:gap-8">
         {/* Image Column - Order 1 on mobile, Order 2 on desktop */}
         <div className="w-full lg:w-1/3 order-1 lg:order-2">
@@ -38,10 +38,10 @@ export const SolutionsSection = (): JSX.Element => {
         {/* Left Column - Title and description - Order 2 on mobile, Order 1 on desktop */}
         <div className="w-full lg:w-1/3 flex flex-col items-start gap-8 order-2 lg:order-1">
           <h2 className="self-stretch font-display-h3 font-[number:var(--display-h3-font-weight)] text-[#1e1e1e] text-[length:var(--display-h3-font-size)] tracking-[var(--display-h3-letter-spacing)] leading-[var(--display-h3-line-height)] [font-style:var(--display-h3-font-style)]">
-            EURÊKA INGENIERIE!
+            EURÊKA INSTANT!
           </h2>
           <p className="self-stretch font-text-medium font-[number:var(--text-medium-font-weight)] text-[#1e1e1e] text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]">
-            L'expertise terrain de notre équipe pour piloter vos projets
+            Les conseils et l’encadrement humain à votre portée
           </p>
 
           <ArrowButton

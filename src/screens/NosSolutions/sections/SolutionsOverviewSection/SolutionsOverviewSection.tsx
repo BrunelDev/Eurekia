@@ -1,7 +1,6 @@
 import { ArrowRightIcon } from "lucide-react";
-import { Button } from "../../../../components/ui/button";
-import { Card, CardContent } from "../../../../components/ui/card";
 import ArrowButton from "../../../../components/ArrowButton";
+import { Card, CardContent } from "../../../../components/ui/card";
 
 export const SolutionsOverviewSection = (): JSX.Element => {
   // Data for the accordion items
