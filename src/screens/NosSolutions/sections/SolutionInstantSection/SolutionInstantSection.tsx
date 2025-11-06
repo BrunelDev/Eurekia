@@ -46,9 +46,9 @@ export const SolutionInstant = (): JSX.Element => {
 
           <ArrowButton
             handleClick={() =>
-              (window.location.href = "/contact?sujet=Devis personnalisé")
+              (window.location.href = "/formulaire")
             }
-            text="Demander un devis personnalisé"
+            text="Demander un devis instantané"
             lucideIcon={
               <ArrowRightIcon className="w-5 h-5 text-black group-hover:text-[#cd9f25]" />
             }
