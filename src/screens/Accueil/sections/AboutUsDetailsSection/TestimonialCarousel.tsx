@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import {
   Avatar,
   AvatarFallback,
@@ -6,7 +6,7 @@ import {
 } from "../../../../components/ui/avatar";
 import { Button } from "../../../../components/ui/button";
 import { Card, CardContent } from "../../../../components/ui/card";
-import { testimonials, Testimonial } from "../../../../lib/testimonials";
+import { Testimonial, testimonials } from "../../../../lib/testimonials";
 
 export const TestimonialCarousel = (): JSX.Element => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -23,7 +23,7 @@ export const TestimonialCarousel = (): JSX.Element => {
       setCurrentIndex((prevIndex) =>
         prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
       );
-      setTimeout(() => setIsAnimating(false), 300);
+      setTimeout(() => setIsAnimating(false), 150);
     }
   };
 
@@ -31,10 +31,8 @@ export const TestimonialCarousel = (): JSX.Element => {
   const handlePrevious = () => {
     if (!isAnimating) {
       setIsAnimating(true);
-      setCurrentIndex((prevIndex) =>
-        prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
-      );
-      setTimeout(() => setIsAnimating(false), 300);
+      setCurrentIndex((prevIndex) => (prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1));
+      setTimeout(() => setIsAnimating(false), 150);
     }
   };
 
@@ -43,8 +41,29 @@ export const TestimonialCarousel = (): JSX.Element => {
     if (!isAnimating && index !== currentIndex) {
       setIsAnimating(true);
       setCurrentIndex(index);
-      setTimeout(() => setIsAnimating(false), 300);
+      setTimeout(() => setIsAnimating(false), 150);
     }
+  };
+
+  const getVisibleDots = () => {
+    const totalTestimonials = testimonials.length;
+    if (totalTestimonials <= 3) {
+      return testimonials.map((_, index) => index);
+    }
+
+    let dotsToShow = [];
+    if (currentIndex === 0) {
+      dotsToShow = [0, 1, 2];
+    } else if (currentIndex === totalTestimonials - 1) {
+      dotsToShow = [
+        totalTestimonials - 3,
+        totalTestimonials - 2,
+        totalTestimonials - 1,
+      ];
+    } else {
+      dotsToShow = [currentIndex - 1, currentIndex, currentIndex + 1];
+    }
+    return dotsToShow;
   };
 
   return (
@@ -55,17 +74,16 @@ export const TestimonialCarousel = (): JSX.Element => {
           <CardContent className="p-0 flex flex-col gap-6">
             {/* Citation avec hauteur fixe et débordement caché */}
             <div
-              className={`transition-opacity duration-300 ${
-              isAnimating ? "opacity-0" : "opacity-100"
-            }`}
->
-            <div className="relative">
-             <p className="font-text-large text-[#1e1e1e] text-[length:var(--text-large-font-size)] tracking-[var(--text-large-letter-spacing)] leading-[var(--text-large-line-height)] [font-style:var(--text-large-font-style)] [font-family:'Sofia_Pro'] font-light">
-               "{currentTestimonial.quote}"
-             </p>
+              className={`transition-opacity duration-150 h-[500px] lg:h-[350px] overflow-hidden ${
+                isAnimating ? "opacity-0" : "opacity-100"
+              }`}
+            >
+              <div className="relative">
+                <p className="font-text-large text-[#1e1e1e] text-[length:var(--text-large-font-size)] tracking-[var(--text-large-letter-spacing)] leading-[var(--text-large-line-height)] [font-style:var(--text-large-font-style)] font-normal  font-display-h3">
+                  "{currentTestimonial.quote}"
+                </p>
+              </div>
             </div>
-            </div>
-   
 
             {/* Auteur et rôle */}
             <div className="flex items-center gap-3 w-full">
@@ -79,7 +97,7 @@ export const TestimonialCarousel = (): JSX.Element => {
                 </AvatarFallback>
               </Avatar>
 
-              <div className="flex flex-col items-start justify-center gap-1">
+              <div className="flex flex-col items-start justify-center gap-1 h-[48px]">
                 <span className="font-label-large text-[#cd9f25] text-[length:var(--label-large-font-size)] tracking-[var(--label-large-letter-spacing)] leading-[var(--label-large-line-height)] [font-style:var(--label-large-font-style)]">
                   {currentTestimonial.name}
                 </span>
@@ -92,10 +110,10 @@ export const TestimonialCarousel = (): JSX.Element => {
         </Card>
 
         {/* Navigation controls - Hauteur fixe pour éviter le chevauchement */}
-        <div className="flex items-center justify-between w-full pt-4 h-[50px]">
+        <div className="flex items-center justify-between w-full pt-4">
           {/* Pagination dots - Gauche */}
-          <div className="flex items-center gap-2">
-            {testimonials.map((_, index) => (
+          <div className="flex items-center gap-2 h-[50px]">
+            {getVisibleDots().map((index) => (
               <button
                 key={`dot-${index}`}
                 onClick={() => handleDotClick(index)}
@@ -211,4 +229,3 @@ export const TestimonialCarousel = (): JSX.Element => {
     </>
   );
 };
- 

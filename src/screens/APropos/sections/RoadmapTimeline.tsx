@@ -30,17 +30,17 @@ const RoadmapItem: React.FC<{ phase: RoadmapPhase; phaseIndex: number }> = ({
       <div
         className={`ml-10 md:ml-0 md:w-1/2 ${
           phaseIndex % 2 === 0
-            ? "md:pr-12 md:text-right"
+            ? "md:pr-12 "
             : "md:pl-12 md:ml-auto"
         }`}
       >
         {/* En-tête */}
         <div className="mb-3 flex items-center gap-3 justify-start md:justify-end">
           <div>
-            <h3 className="text-2xl font-bold text-[#1e1e1e] leading-tight">
+            <h3 className="text-2xl font-bold text-[#1e1e1e] leading-tight [font-family:'Sofia_Pro-Light',Helvetica]">
               {phase.title}
             </h3>
-            <p className="text-sm text-[#cd9f25] font-semibold">
+            <p className="text-sm text-[#cd9f25] font-semibold [font-family:'Sofia_Pro-Light',Helvetica]">
               {phase.period}
             </p>
           </div>
@@ -53,9 +53,9 @@ const RoadmapItem: React.FC<{ phase: RoadmapPhase; phaseIndex: number }> = ({
           className="bg-[#fbf9eb] rounded-xl p-6 space-y-3 shadow-sm hover:shadow-md transition-shadow"
         >
           {phase.items.map((item, index) => (
-            <div key={index} className="flex gap-3 items-start">
+            <div key={index} className="flex gap-3 ">
               <div className="w-2 h-2 bg-[#cd9f25] rounded-full mt-2 flex-shrink-0" />
-              <p className="font-medium text-[#1e1e1e]">{item.title}</p>
+              <p className=" text-[#1e1e1e] [font-family:'Sofia_Pro-Light',Helvetica] font-light ">{item.title}</p>
             </div>
           ))}
         </motion.div>
@@ -93,7 +93,7 @@ const RoadmapTimeline = (): JSX.Element => {
           className="mt-20 bg-[#fbf9eb] rounded-2xl p-10 text-center shadow-inner"
         >
           <h3 className="text-2xl font-bold text-[#1e1e1e] mb-3">
-            🙋 Vous souhaitez nous aider à prioriser ?
+            Vous souhaitez nous aider à prioriser ?
           </h3>
           <p className="text-lg text-[#666] mb-6">
             Une fonctionnalité vous semble prioritaire ? Donnez-nous votre avis
@@ -159,3 +159,4 @@ const RoadmapTimeline = (): JSX.Element => {
 };
 
 export default RoadmapTimeline;
+
