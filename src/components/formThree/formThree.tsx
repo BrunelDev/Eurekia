@@ -1,7 +1,9 @@
 import { getSelectedServicesWithTotal } from "@/lib/calculator";
 import { generateDevis } from "@/lib/generateDevis";
+import { useAction } from "convex/react";
 import { useRef, useState } from "react";
 import PhoneInput from "react-phone-input-2";
+import { api } from "../../../convex/_generated/api";
 import { useFormState } from "../../context/useFormState";
 import BackButton from "../formTwo/PrimaryButton/BackButton";
 import { PrimaryButton } from "../formTwo/PrimaryButton/PrimaryButton";
@@ -41,6 +43,22 @@ export default function FormThree() {
   const [prenom, setPrenom] = useState(formData.clientFirstName || "");
   const [email, setEmail] = useState(formData.clientEmail || "");
   const [telephone, setTelephone] = useState(formData.clientPhone || "");
+
+  const sendMailAction = useAction(api.sendMail.post);
+  function blobToBase64(blob: Blob): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        // Retirer le préfixe data:application/pdf;base64,
+        const base64Content = base64String.split(",")[1];
+        resolve(base64Content);
+      };
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  }
+  
 
   const formFields = [
     {
@@ -145,6 +163,14 @@ export default function FormThree() {
 
       // Télécharger le PDF
       const blob = await response.blob();
+      const base64pdf = await blobToBase64(blob);
+      await sendMailAction({
+        nom,
+        prenom,
+        email,
+        numero: telephone,
+        pdfBlob: base64pdf,
+      });
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
@@ -256,9 +282,9 @@ export default function FormThree() {
                             }
                           }}
                           className={`px-3 h-[48px] w-full sm:px-4 py-2.5 sm:py-3 rounded-lg border ${
-                            formErrors[field.id as keyof typeof formErrors]
-                              ? "border-red-500"
-                              : "border-[#6d7074]"
+                            formErrors[field.id as keyof typeof formErrors] ?
+                              "border-red-500"
+                            : "border-[#6d7074]"
                           }`}
                           required={field.required}
                         />
@@ -368,9 +394,9 @@ export default function FormThree() {
                             id={field.id}
                             placeholder={field.placeholder}
                             className={`px-3 h-[48px] w-full sm:px-4 py-2.5 sm:py-3 rounded-lg border ${
-                              formErrors[field.id as keyof typeof formErrors]
-                                ? "border-red-500"
-                                : "border-[#6d7074]"
+                              formErrors[field.id as keyof typeof formErrors] ?
+                                "border-red-500"
+                              : "border-[#6d7074]"
                             } font-text-medium font-[number:var(--text-medium-font-weight)] text-placeholder-color text-sm sm:text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)] [font-style:var(--text-medium-font-style)]`}
                             value={field.value}
                             onChange={(e) => {
