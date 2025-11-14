@@ -20,7 +20,7 @@ export const SolutionsOverviewSection = (): JSX.Element => {
   ];
 
   return (
-    <section className="w-full bg-white py-24">
+    <section className="w-full bg-white">
       <div className="container flex flex-col md:flex-row items-center gap-8 max-w-[1220px] mx-auto">
         <div className="relative w-full md:w-1/2 h-[621px] bg-[url(/placeholder-image.png)] bg-cover bg-center rounded-md" />
 

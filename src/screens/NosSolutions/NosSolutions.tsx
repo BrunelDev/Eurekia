@@ -1,19 +1,22 @@
-import { CallToActionSection } from "./sections/CallToActionSection";
 import { FooterSection } from "../../components/FooterSection";
-import { HeroSection } from "./sections/HeroSection";
 import { NavigationSection } from "../../components/NavigationSection";
+import { CallToActionSection } from "./sections/CallToActionSection";
+import { HeroSection } from "./sections/HeroSection";
+import { SolutionInstant } from "./sections/SolutionInstantSection";
 import { SolutionsOverviewSection } from "./sections/SolutionsOverviewSection";
 import { SolutionsSection } from "./sections/SolutionsSection";
-import { SolutionInstant } from "./sections/SolutionInstantSection";
 
 export const NosSolutions = (): JSX.Element => {
   return (
     <div className="flex flex-col w-full bg-white">
       <NavigationSection />
       <HeroSection />
-      <SolutionsSection />
-      <SolutionsOverviewSection />
-      <SolutionInstant/>
+      <div className="flex flex-col gap-24 pb-8">
+        <SolutionsSection />
+        <SolutionInstant />
+        <SolutionsOverviewSection />
+      </div>
+
       <CallToActionSection />
       <FooterSection />
     </div>
