@@ -1,15 +1,23 @@
 import { DraftingCompass, HardHat } from "lucide-react";
 import { useEffect } from "react";
 import { useFormState } from "../../context/useFormState";
+import { ForfaitRecap } from "../ForfaitRecap/ForfaitRecap";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { ScrollArea } from "../ui/scroll-area";
+import BackButton from "./PrimaryButton/BackButton";
+import { PrimaryButton } from "./PrimaryButton/PrimaryButton";
 import { ClientFeedbackSection } from "./sections/ClientFeedbackSection/ClientFeedbackSection";
 import { InformationSummarySection } from "./sections/InformationSummarySection/InformationSummarySection";
+
 export default function FormTwo() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  const { formData } = useFormState();
+  const { formData, updateFormData } = useFormState();
+
+  // Check if this is a forfait flow
+  const isForfaitFlow = formData.flowType === "forfait";
+
   const selectedAmo = [
     formData.descriptiveNotice ? "Notice descriptive + estimation" : null,
     formData.urbanismAuthorization ? "Autorisation urbanisme" : null,
@@ -27,18 +35,18 @@ export default function FormTwo() {
     formData.moeFeasibility ? "Étude de faisabilité" : null,
     formData.moeApsApd ? "Études de conception (APS/APD)" : null,
     formData.moeDceAct ? "DCE & ACT" : null,
-    formData.moeExecutionPlans ? "Plans d’exécution technique" : null,
+    formData.moeExecutionPlans ? "Plans d'exécution technique" : null,
     formData.moeElectricalCalc ? "Note de calcul électrique" : null,
     formData.moePlumbingCalc ? "Note de calcul plomberie" : null,
     formData.moeHvacCalc ? "Note de calcul aéraulique (HVAC)" : null,
     formData.moeVrdCalc ? "Note de calcul VRD" : null,
-    formData.moeThermalAttestationSmall
-      ? "Attestation thermique (<50 m²)"
-      : null,
+    formData.moeThermalAttestationSmall ?
+      "Attestation thermique (<50 m²)"
+    : null,
     formData.moeThermalStudyPc ? "Étude thermique (PC >50 m²)" : null,
-    formData.moeThermalStudyConstruction
-      ? "Étude thermique (phase chantier)"
-      : null,
+    formData.moeThermalStudyConstruction ?
+      "Étude thermique (phase chantier)"
+    : null,
     formData.moeFinalAttestationAcv ? "Attestation + ACV fin de travaux" : null,
   ].filter(Boolean) as string[];
 
@@ -54,7 +62,33 @@ export default function FormTwo() {
             scrollHideDelay={100}
           >
             <div className="w-full z-50 h-full">
-              <InformationSummarySection />
+              {
+                isForfaitFlow && formData.serviceChosen ?
+                  // Show Forfait Recap for forfait flow
+                  <div className="space-y-6">
+                    <ForfaitRecap forfaitType={formData.serviceChosen} />
+                    <div className="hidden sm:flex flex-row items-center justify-between gap-4">
+                      <BackButton
+                        handleClick={() => {
+                          updateFormData({
+                            ...formData,
+                            isStepOneChecked: false,
+                          });
+                        }}
+                      />
+                      <PrimaryButton
+                        handleClick={() => {
+                          updateFormData({
+                            ...formData,
+                            isStepTwoChecked: true,
+                          });
+                        }}
+                      />
+                    </div>
+                  </div>
+                  // Show InformationSummarySection for prestations flow
+                : <InformationSummarySection />
+              }
             </div>
           </ScrollArea>
           {/*here we add the resume of choosen services card*/}
@@ -66,30 +100,52 @@ export default function FormTwo() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-3 pt-2 max-h-72 sm:max-h-80 lg:max-h-[calc(100vh-240px)] overflow-y-auto">
-                {formData.serviceChosen ? (
+                {formData.serviceChosen ?
                   <div className="flex items-start gap-3">
-                    {formData.serviceChosen === "AMO" ? (
+                    {formData.serviceChosen === "AMO" ?
                       <DraftingCompass className="mt-0.5 w-5 h-5 text-black" />
-                    ) : (
-                      <HardHat className="mt-0.5 w-5 h-5 text-black" />
-                    )}
+                    : <HardHat className="mt-0.5 w-5 h-5 text-black" />}
                     <div>
                       <div className="text-base font-medium text-black">
-                        {formData.serviceChosen === "AMO"
-                          ? "Assistance à Maîtrise d'Ouvrage"
-                          : "Maîtrise d’Œuvre"}
+                        {formData.serviceChosen === "AMO" ?
+                          "Assistance à Maîtrise d'Ouvrage"
+                        : "Maîtrise d'Œuvre"}
                       </div>
                       <div className="text-sm text-gray-600">
-                        {formData.serviceChosen === "AMO"
-                          ? "Je pilote mon projet"
-                          : "Je conçois techniquement mon projet"}
+                        {formData.serviceChosen === "AMO" ?
+                          "Je pilote mon projet"
+                        : "Je conçois techniquement mon projet"}
+                      </div>
+                      {/* Show flow type */}
+                      <div className="mt-2 text-xs text-[#deb83b] font-medium">
+                        {isForfaitFlow ?
+                          "✓ Forfait complet"
+                        : "Prestations à la carte"}
                       </div>
                       <div className="mt-3">
                         {(() => {
+                          // For forfait flow, show that all prestations are included
+                          if (isForfaitFlow) {
+                            const count =
+                              formData.serviceChosen === "AMO" ? 9 : 13;
+                            return (
+                              <div>
+                                <div className="text-sm text-gray-500 mb-1">
+                                  Forfait complet ({count} prestations)
+                                </div>
+                                <p className="text-xs text-gray-600">
+                                  Toutes les prestations{" "}
+                                  {formData.serviceChosen} sont incluses
+                                </p>
+                              </div>
+                            );
+                          }
+
+                          // For prestations flow, show selected items
                           const items =
-                            formData.serviceChosen === "AMO"
-                              ? selectedAmo
-                              : selectedMoe;
+                            formData.serviceChosen === "AMO" ?
+                              selectedAmo
+                            : selectedMoe;
                           if (items.length === 0) return null;
                           return (
                             <div>
@@ -107,16 +163,37 @@ export default function FormTwo() {
                       </div>
                     </div>
                   </div>
-                ) : (
-                  <div className="text-sm text-gray-500">
-                    Aucun service sélectionné pour l’instant
+                : <div className="text-sm text-gray-500">
+                    Aucun service sélectionné pour l'instant
                   </div>
-                )}
+                }
               </CardContent>
             </Card>
           </div>
         </div>
       </div>
+
+      {/* Mobile buttons for forfait flow */}
+      {isForfaitFlow && formData.serviceChosen && (
+        <div className="sm:hidden fixed bottom-0 left-0 right-0 flex items-center justify-between animate-fade-in opacity-1 [--animation-delay:400ms] bg-[#ffffffaa] pt-10 pb-14 px-4 shadow-xl backdrop-blur-lg">
+          <BackButton
+            handleClick={() => {
+              updateFormData({
+                ...formData,
+                isStepOneChecked: false,
+              });
+            }}
+          />
+          <PrimaryButton
+            handleClick={() => {
+              updateFormData({
+                ...formData,
+                isStepTwoChecked: true,
+              });
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 }

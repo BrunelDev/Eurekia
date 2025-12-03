@@ -23,16 +23,16 @@ export function PrestationCard({
     <div
       onClick={onClick}
       className={`w-full max-w-[620px] grid md:grid-cols-2 rounded-xl overflow-hidden shadow-xl cursor-pointer transition-all duration-200 ${
-        prestation.selected
-          ? "border-2 border-amber-400 rounded-lg"
-          : "border border-gray-200"
+        prestation.selected ?
+          "border-2 border-[#deb83b] ring-2 ring-[#deb83b] ring-opacity-30"
+        : "border border-gray-200 hover:border-[#deb83b] hover:border-opacity-50"
       }`}
     >
       {/* Left Section - Dark Navy */}
       <div className="bg-[#0a2540] brightness-100 text-white p-6 sm:p-8 flex flex-col justify-between min-h-[360px]">
         <div>
           <prestation.icon
-            className="w-8 h-8 mb-4 text-teal-300"
+            className={`w-8 h-8 mb-4 transition-colors ${prestation.selected ? "text-[#deb83b]" : "text-gray-300"}`}
             strokeWidth={1.5}
           />
           <h1 className="text-2xl sm:text-3xl font-bold mb-2 text-balance">
@@ -55,7 +55,7 @@ export function PrestationCard({
         {/* Avantages */}
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <Sparkles className="w-4 h-4 text-teal-600" />
+            <Sparkles className="w-4 h-4 text-[#deb83b]" />
             <h2 className="text-lg font-semibold text-gray-900">Avantages</h2>
           </div>
 
@@ -72,7 +72,7 @@ export function PrestationCard({
         {/* Pour Qui */}
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <Users className="w-4 h-4 text-teal-600" />
+            <Users className="w-4 h-4 text-[#deb83b]" />
             <h2 className="text-lg font-semibold text-gray-900">Pour Qui</h2>
           </div>
           <ul className="space-y-1.5 text-sm text-gray-700">
@@ -88,7 +88,7 @@ export function PrestationCard({
         {/* Exemples */}
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <Building2 className="w-4 h-4 text-teal-600" />
+            <Building2 className="w-4 h-4 text-[#deb83b]" />
             <h2 className="text-lg font-semibold text-gray-900">Exemples</h2>
           </div>
           <ul className="space-y-1.5 text-sm text-gray-700">

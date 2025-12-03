@@ -1,5 +1,5 @@
-import { useFormState } from "../../context/useFormState"
 import React from "react";
+import { useFormState } from "../../context/useFormState";
 
 export const UserInfoSection = () => {
   const { formData, updateFormData } = useFormState();
@@ -8,48 +8,48 @@ export const UserInfoSection = () => {
     {
       icon: "/icons/localisation.svg",
       inactiveIcon: "/icons/localisation-inactive.svg",
-      label: "Forfaits",
-      isCompleted: true,
+      label: "Choix formule",
+      isCompleted: formData.isStepZeroChecked,
       labelPosition: "-left-4",
-      isCurrent: !formData.isStepOneChecked,
+      isCurrent: !formData.isStepZeroChecked,
     },
     {
       icon: "/icons/estimation.svg",
       inactiveIcon: "/icons/estimation-inactive.svg",
-      label: "Prestations",
-      isCompleted: formData.isStepOneChecked && formData.isStepTwoChecked,
+      label: "Type",
+      isCompleted: formData.isStepZeroChecked && formData.isStepOneChecked,
       labelPosition: "left-[-13px]",
-      isCurrent: formData.isStepOneChecked && !formData.isStepTwoChecked,
+      isCurrent: formData.isStepZeroChecked && !formData.isStepOneChecked,
     },
     {
       icon: "/icons/projets.svg",
       inactiveIcon: "/icons/projets-inactive.svg",
-      label: "Coordonnées",
+      label: "Prestations",
       isCompleted:
+        formData.isStepZeroChecked &&
         formData.isStepOneChecked &&
-        formData.isStepTwoChecked &&
-        formData.isStepThreeChecked,
+        formData.isStepTwoChecked,
       labelPosition: "left-0",
       isCurrent:
+        formData.isStepZeroChecked &&
         formData.isStepOneChecked &&
-        formData.isStepTwoChecked &&
-        !formData.isStepThreeChecked,
+        !formData.isStepTwoChecked,
     },
     {
       icon: "/icons/details.svg",
       inactiveIcon: "/icons/details-inactive.svg",
-      label: "Finalisation",
+      label: "Coordonnées",
       isCompleted:
+        formData.isStepZeroChecked &&
         formData.isStepOneChecked &&
         formData.isStepTwoChecked &&
-        formData.isStepThreeChecked &&
-        formData.isStepFourChecked,
+        formData.isStepThreeChecked,
       labelPosition: "-left-0.5",
       isCurrent:
+        formData.isStepZeroChecked &&
         formData.isStepOneChecked &&
         formData.isStepTwoChecked &&
-        formData.isStepThreeChecked &&
-        !formData.isStepFourChecked,
+        !formData.isStepThreeChecked,
     },
     // {
     //   icon: "/icons/coordonnees.svg",
@@ -91,60 +91,45 @@ export const UserInfoSection = () => {
     // },
   ];
   const handleNavigation = (stepIndex: number) => {
-    if (stepIndex === 0 && formData.isStepOneChecked) {
+    // Step 0: Choix formule (FormZero)
+    if (stepIndex === 0 && formData.isStepZeroChecked) {
+      updateFormData({
+        ...formData,
+        isStepZeroChecked: false,
+        isStepOneChecked: false,
+        isStepTwoChecked: false,
+        isStepThreeChecked: false,
+        isStepFourChecked: false,
+      });
+      return;
+    }
+    // Step 1: Type (FormOne - AMO/MOE selection)
+    if (stepIndex === 1 && formData.isStepOneChecked) {
       updateFormData({
         ...formData,
         isStepOneChecked: false,
         isStepTwoChecked: false,
         isStepThreeChecked: false,
         isStepFourChecked: false,
-        isStepFiveChecked: false,
-        isStepSixChecked: false,
       });
       return;
     }
-    if (stepIndex === 1 && formData.isStepTwoChecked) {
+    // Step 2: Prestations (FormTwo - selection or recap)
+    if (stepIndex === 2 && formData.isStepTwoChecked) {
       updateFormData({
         ...formData,
         isStepTwoChecked: false,
         isStepThreeChecked: false,
         isStepFourChecked: false,
-        isStepFiveChecked: false,
-        isStepSixChecked: false,
       });
       return;
     }
-    if (stepIndex === 2 && formData.isStepThreeChecked) {
+    // Step 3: Coordonnées (FormThree - client info)
+    if (stepIndex === 3 && formData.isStepThreeChecked) {
       updateFormData({
         ...formData,
         isStepThreeChecked: false,
         isStepFourChecked: false,
-        isStepFiveChecked: false,
-        isStepSixChecked: false,
-      });
-      return;
-    }
-    if (stepIndex === 3 && formData.isStepFourChecked) {
-      updateFormData({
-        ...formData,
-        isStepFourChecked: false,
-        isStepFiveChecked: false,
-        isStepSixChecked: false,
-      });
-      return;
-    }
-    if (stepIndex === 4 && formData.isStepFiveChecked) {
-      updateFormData({
-        ...formData,
-        isStepFiveChecked: false,
-        isStepSixChecked: false,
-      });
-      return;
-    }
-    if (stepIndex === 5 && formData.isStepSixChecked) {
-      updateFormData({
-        ...formData,
-        isStepSixChecked: false,
       });
       return;
     }
@@ -160,29 +145,29 @@ export const UserInfoSection = () => {
           >
             <div
               className={`flex items-center justify-center w-6 h-6 sm:w-8 sm:h-8 rounded-full ${
-                step.isCompleted || step.isCurrent
-                  ? "bg-yellow-400"
-                  : "bg-[#f7f7f8] border border-solid border-[#b8b9c1]"
+                step.isCompleted || step.isCurrent ?
+                  "bg-yellow-400"
+                : "bg-[#f7f7f8] border border-solid border-[#b8b9c1]"
               }`}
             >
               <img
                 className="w-[12px] h-[12px] sm:w-5 sm:h-5"
                 alt="Icon step"
                 src={
-                  step.isCurrent || step.isCompleted
-                    ? step.icon
-                    : step.inactiveIcon
+                  step.isCurrent || step.isCompleted ?
+                    step.icon
+                  : step.inactiveIcon
                 }
               />
             </div>
 
             <div
               className={`absolute top-[28px] sm:top-[35px] left-1/2 transform -translate-x-1/2 ${
-                step.isCurrent
-                  ? "font-[number:var(--label-smaller-font-weight)] font-label-smaller text-[#021327] text-xs sm:text-[length:var(--label-smaller-font-size)] text-center tracking-[var(--label-smaller-letter-spacing)] leading-[var(--label-smaller-line-height)] [font-style:var(--label-smaller-font-style)]"
-                  : step.isCompleted
-                  ? "opacity-80 font-[number:var(--text-smaller-font-weight)] font-text-smaller text-[#021327] text-xs sm:text-[length:var(--text-smaller-font-size)] text-center tracking-[var(--text-smaller-letter-spacing)] leading-[var(--text-smaller-line-height)] [font-style:var(--text-smaller-font-style)]"
-                  : "opacity-60 font-[number:var(--text-smaller-font-weight)] font-text-smaller text-[#021327] text-xs sm:text-[length:var(--text-smaller-font-size)] text-center tracking-[var(--text-smaller-letter-spacing)] leading-[var(--text-smaller-line-height)] [font-style:var(--text-smaller-font-style)]"
+                step.isCurrent ?
+                  "font-[number:var(--label-smaller-font-weight)] font-label-smaller text-[#021327] text-xs sm:text-[length:var(--label-smaller-font-size)] text-center tracking-[var(--label-smaller-letter-spacing)] leading-[var(--label-smaller-line-height)] [font-style:var(--label-smaller-font-style)]"
+                : step.isCompleted ?
+                  "opacity-80 font-[number:var(--text-smaller-font-weight)] font-text-smaller text-[#021327] text-xs sm:text-[length:var(--text-smaller-font-size)] text-center tracking-[var(--text-smaller-letter-spacing)] leading-[var(--text-smaller-line-height)] [font-style:var(--text-smaller-font-style)]"
+                : "opacity-60 font-[number:var(--text-smaller-font-weight)] font-text-smaller text-[#021327] text-xs sm:text-[length:var(--text-smaller-font-size)] text-center tracking-[var(--text-smaller-letter-spacing)] leading-[var(--text-smaller-line-height)] [font-style:var(--text-smaller-font-style)]"
               } whitespace-nowrap hidden md:block`}
             >
               {step.label}
@@ -192,9 +177,7 @@ export const UserInfoSection = () => {
           {index < steps.length - 1 && (
             <div
               className={`w-4 sm:w-8 h-[1px] border ${
-                step.isCompleted
-                  ? "border-yellow-500"
-                  : "border-gray-300"
+                step.isCompleted ? "border-yellow-500" : "border-gray-300"
               } object-cover flex-shrink-0`}
             ></div>
           )}

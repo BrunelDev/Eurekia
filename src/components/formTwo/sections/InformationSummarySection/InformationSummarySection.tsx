@@ -347,11 +347,9 @@ export const InformationSummarySection = () => {
     const errors: { [key: string]: string } = {};
     let isValid = true;
     const currentForm =
-      formData.serviceChosen === "AMO"
-        ? amoForm
-        : formData.serviceChosen === "MOE"
-        ? moeForm
-        : [];
+      formData.serviceChosen === "AMO" ? amoForm
+      : formData.serviceChosen === "MOE" ? moeForm
+      : [];
 
     if (formData.option === "") {
       const hasNeededPlans = formData.doesNeedPlan === true;
@@ -429,11 +427,9 @@ export const InformationSummarySection = () => {
   }, [updateFormData]);
 
   const formToUse: FormItem[] =
-    formData.serviceChosen === "AMO"
-      ? amoForm
-      : formData.serviceChosen === "MOE"
-      ? moeForm
-      : [];
+    formData.serviceChosen === "AMO" ? amoForm
+    : formData.serviceChosen === "MOE" ? moeForm
+    : [];
   console.log(formData.serviceChosen, formToUse);
   return (
     <div className="flex flex-col w-full items-start gap-6 sm:gap-8 pt-0 px-0">
@@ -462,7 +458,7 @@ export const InformationSummarySection = () => {
       <div className="flex flex-col items-start gap-4 sm:gap-5 relative self-stretch w-full flex-[0_0_auto] overflow-y-auto">
         <div></div>
         {formToUse.map((item, index) =>
-          "type" in item && item.type === "default" ? (
+          "type" in item && item.type === "default" ?
             <Question
               key={index}
               question={item.question}
@@ -472,8 +468,7 @@ export const InformationSummarySection = () => {
               required={item.required}
               error={formErrors[`question_${index}`]}
             />
-          ) : (
-            <QuestionWithInput
+          : <QuestionWithInput
               key={index}
               question={item.question}
               description={item.description}
@@ -492,7 +487,6 @@ export const InformationSummarySection = () => {
               inputValue={item.inputValue?.toString() || ""}
               alert={item.alert}
             />
-          )
         )}
       </div>
       <div className="hidden sm:flex flex-row sm:flex-row items-center justify-between gap-4 sm:gap-0 relative self-stretch w-full flex-[0_0_auto] translate-y-[-1rem] animate-fade-in opacity-100 [--animation-delay:600ms]">

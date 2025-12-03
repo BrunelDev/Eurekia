@@ -1,15 +1,18 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-
 export interface FormData {
+  // Step 0 - Flow selection
+  isStepZeroChecked: boolean;
+  flowType?: "forfait" | "prestations";
+  forfaitType?: "AMO" | "MOE";
 
+  // Step 1
   isStepOneChecked: boolean;
   serviceChosen?: "AMO" | "MOE";
 
   // Step 2
   isStepTwoChecked: boolean;
-
 
   // Step 3
   isStepThreeChecked: boolean;
@@ -139,14 +142,17 @@ interface FormState {
 }
 
 const initialFormData: FormData = {
-  // Step 1
+  // Step 0
+  isStepZeroChecked: false,
+  flowType: undefined,
+  forfaitType: undefined,
 
+  // Step 1
   isStepOneChecked: false,
   serviceChosen: undefined,
 
   // Step 2
   isStepTwoChecked: false,
-
 
   // Step 3
   isStepThreeChecked: false,
