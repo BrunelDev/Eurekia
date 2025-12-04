@@ -1,3 +1,4 @@
+import { storeFormSubmission } from "@/lib/airtable";
 import { getSelectedServicesWithTotal } from "@/lib/calculator";
 import { generateDevis } from "@/lib/generateDevis";
 import { useAction } from "convex/react";
@@ -45,6 +46,35 @@ export default function FormThree() {
   const [telephone, setTelephone] = useState(formData.clientPhone || "");
 
   const sendMailAction = useAction(api.sendMail.post);
+
+  // Fonction pour ajouter l'utilisateur à la newsletter via Make.com
+  const addToNewsletter = async (
+    email: string,
+    firstName: string,
+    lastName: string
+  ) => {
+    try {
+      await fetch(
+        "https://hook.eu2.make.com/9cb4yl7issaxao75j7x32gp7n03ncs9d",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            first_name: firstName,
+            last_name: lastName,
+          }),
+        }
+      );
+      console.log("Utilisateur ajouté à la newsletter avec succès");
+    } catch (error) {
+      console.error("Erreur lors de l'ajout à la newsletter:", error);
+      // Ne pas bloquer le processus principal
+    }
+  };
+
   function blobToBase64(blob: Blob): Promise<string> {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -58,7 +88,6 @@ export default function FormThree() {
       reader.readAsDataURL(blob);
     });
   }
-  
 
   const formFields = [
     {
@@ -171,6 +200,30 @@ export default function FormThree() {
         numero: telephone,
         pdfBlob: base64pdf,
       });
+
+      // Ajouter l'utilisateur à la newsletter
+      await addToNewsletter(email, prenom, nom);
+
+      // Stocker les données dans Airtable
+      try {
+        const updatedFormData = {
+          ...formData,
+          clientLastName: nom,
+          clientFirstName: prenom,
+          clientEmail: email,
+          clientPhone: telephone,
+        };
+
+        // Vous pouvez ajouter ici les documents qui ont été cochés
+        const documentsChecked = ["CGV", "Politique de confidentialité"]; // À adapter selon vos besoins
+
+        await storeFormSubmission(updatedFormData, documentsChecked);
+        console.log("Données stockées dans Airtable avec succès");
+      } catch (airtableError) {
+        console.error("Erreur lors du stockage dans Airtable:", airtableError);
+        // Ne pas bloquer le processus principal
+      }
+
       const url = window.URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
@@ -218,9 +271,9 @@ export default function FormThree() {
   return (
     <section className="w-full sm:pb-8 pb-[150px]">
       <div className="flex flex-col lg:flex-row items-center gap-6 lg:gap-5 w-full justify-center px-4">
-        <div className="flex flex-col w-full lg:w-[40%] items-start gap-6 lg:gap-7 animate-fade-in opacity-1 [--animation-delay:0ms]">
+        <div className="flex flex-col w-full lg:w-[40%] items-start gap-6 lg:gap-7">
           <div className="flex flex-col items-end gap-4 sm:gap-5 w-full">
-            <header className="flex items-start gap-3 sm:gap-3.5 w-full translate-y-[-1rem] animate-fade-in opacity-1 [--animation-delay:200ms]">
+            <header className="flex items-start gap-3 sm:gap-3.5 w-full translate-y-[-1rem]">
               <Avatar className="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] flex-shrink-0">
                 <AvatarImage src="/ellipse-1.png" alt="Conseiller" />
                 <AvatarFallback>C</AvatarFallback>
@@ -240,7 +293,7 @@ export default function FormThree() {
               </div>
             </header>
 
-            <div className="flex flex-col items-start gap-6 sm:gap-8 w-full translate-y-[-1rem] animate-fade-in opacity-1 [--animation-delay:400ms]">
+            <div className="flex flex-col items-start gap-6 sm:gap-8 w-full translate-y-[-1rem] animate-fade-in opacity-1 [--animation-delay:400m]">
               <form
                 ref={formRef}
                 className="flex flex-col items-start gap-4 w-full"

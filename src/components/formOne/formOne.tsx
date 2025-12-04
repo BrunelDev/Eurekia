@@ -1,11 +1,12 @@
 import { DraftingCompass, HardHat } from "lucide-react";
 import { useState } from "react";
 import { useFormState } from "../../context/useFormState";
+import BackButton from "../formTwo/PrimaryButton/BackButton";
 import { PrimaryButton } from "../formTwo/PrimaryButton/PrimaryButton";
 import { PrestationCard } from "../prestationCard";
 
 export default function FormOne() {
-  const { formData, updateFormData } = useFormState();
+  const { formData, updateFormData, resetStepThree } = useFormState();
   const [selectedService, setSelectedService] = useState<
     "AMO" | "MOE" | undefined
   >(formData.serviceChosen);
@@ -33,9 +34,14 @@ export default function FormOne() {
 
       <div className="flex flex-row flex-wrap justify-center gap-6 sm:gap-8 items-stretch">
         <PrestationCard
-          onClick={() =>
-            setSelectedService((prev) => (prev === "AMO" ? undefined : "AMO"))
-          }
+          onClick={() => {
+            const newService = selectedService === "AMO" ? undefined : "AMO";
+            setSelectedService(newService);
+            // Reset step 3 when changing service type
+            if (newService !== formData.serviceChosen) {
+              resetStepThree();
+            }
+          }}
           prestation={{
             selected: selectedService === "AMO",
             code: "AMO",
@@ -69,9 +75,14 @@ export default function FormOne() {
         />
 
         <PrestationCard
-          onClick={() =>
-            setSelectedService((prev) => (prev === "MOE" ? undefined : "MOE"))
-          }
+          onClick={() => {
+            const newService = selectedService === "MOE" ? undefined : "MOE";
+            setSelectedService(newService);
+            // Reset step 3 when changing service type
+            if (newService !== formData.serviceChosen) {
+              resetStepThree();
+            }
+          }}
           prestation={{
             selected: selectedService === "MOE",
             code: "MOE",
@@ -104,7 +115,16 @@ export default function FormOne() {
           }}
         />
       </div>
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center gap-4">
+        <BackButton
+          handleClick={() => {
+            updateFormData({
+              ...formData,
+              isStepZeroChecked: false,
+              isStepOneChecked: false,
+            });
+          }}
+        />
         <PrimaryButton
           handleClick={() => {
             updateFormData({

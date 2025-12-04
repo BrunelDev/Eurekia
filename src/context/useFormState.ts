@@ -254,6 +254,7 @@ export const useFormState = create<FormState>()(
         set((state) => ({
           formData: {
             ...state.formData,
+            // Reset step 3 form fields
             isArchitectNeeded: false,
             hasMultipleRealizationsOnSameConstructionPermit: undefined,
             realizationsOnSameConstructionPermitNumber: undefined,
@@ -278,6 +279,30 @@ export const useFormState = create<FormState>()(
             shouldMake3dRender: undefined,
             renderCount3d: undefined,
             render3D: undefined,
+            // Reset AMO toggles
+            descriptiveNotice: false,
+            urbanismAuthorization: false,
+            accessibilityNotice: false,
+            fireSecurityNotice: false,
+            planningStudies: false,
+            concessionaryProcedures: false,
+            geotechnicalSpecifications: false,
+            ccapRedaction: false,
+            consultationRegulation: false,
+            // Reset MOE toggles
+            moeDiagnostic: false,
+            moeFeasibility: false,
+            moeApsApd: false,
+            moeDceAct: false,
+            moeExecutionPlans: false,
+            moeElectricalCalc: false,
+            moePlumbingCalc: false,
+            moeHvacCalc: false,
+            moeVrdCalc: false,
+            moeThermalAttestationSmall: false,
+            moeThermalStudyPc: false,
+            moeThermalStudyConstruction: false,
+            moeFinalAttestationAcv: false,
           },
         })),
 

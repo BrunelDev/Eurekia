@@ -23,3 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 formDocs/*
+AIRTABLE_INTEGRATION.md
+airtable_structure.csv
+.env*

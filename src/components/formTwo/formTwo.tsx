@@ -54,7 +54,7 @@ export default function FormTwo() {
     <div className="w-full  relative">
       <div className="bg-[#f7f7f8]">
         <div className="flex sm:flex-col flex-col-reverse lg:flex-row gap-4 lg:gap-6 pr-3">
-          <div className="w-full lg:w-[28%] animate-fade-in opacity-100 [--animation-delay:600ms] pb-[150px] sm:pb-0">
+          <div className="w-full lg:w-[28%] pb-[150px] sm:pb-0">
             <ClientFeedbackSection />
           </div>
           <ScrollArea
@@ -175,7 +175,7 @@ export default function FormTwo() {
 
       {/* Mobile buttons for forfait flow */}
       {isForfaitFlow && formData.serviceChosen && (
-        <div className="sm:hidden fixed bottom-0 left-0 right-0 flex items-center justify-between animate-fade-in opacity-1 [--animation-delay:400ms] bg-[#ffffffaa] pt-10 pb-14 px-4 shadow-xl backdrop-blur-lg">
+        <div className="sm:hidden fixed bottom-0 left-0 right-0 flex items-center justify-between bg-[#ffffffaa] pt-10 pb-14 px-4 shadow-xl backdrop-blur-lg">
           <BackButton
             handleClick={() => {
               updateFormData({

@@ -1,6 +1,7 @@
 import { ListChecks, Package } from "lucide-react";
 import { useState } from "react";
 import { useFormState } from "../../context/useFormState";
+import BackButton from "../formTwo/PrimaryButton/BackButton";
 import { PrimaryButton } from "../formTwo/PrimaryButton/PrimaryButton";
 
 interface FlowChoice {
@@ -13,7 +14,7 @@ interface FlowChoice {
 }
 
 export default function FormZero() {
-  const { formData, updateFormData } = useFormState();
+  const { formData, updateFormData, resetStepThree } = useFormState();
   const [selectedFlow, setSelectedFlow] = useState<
     "forfait" | "prestations" | undefined
   >(formData.flowType);
@@ -67,7 +68,13 @@ export default function FormZero() {
         {flowChoices.map((choice) => (
           <div
             key={choice.type}
-            onClick={() => setSelectedFlow(choice.type)}
+            onClick={() => {
+              setSelectedFlow(choice.type);
+              // Reset step 3 selections when changing flow type
+              if (choice.type !== formData.flowType) {
+                resetStepThree();
+              }
+            }}
             className={`w-full max-w-[500px] mx-auto rounded-xl overflow-hidden shadow-xl cursor-pointer transition-all duration-200 ${
               selectedFlow === choice.type ?
                 "border-2 border-[#deb83b] ring-2 ring-[#deb83b] ring-opacity-30 scale-[1.02]"
@@ -113,7 +120,13 @@ export default function FormZero() {
       </div>
 
       {/* Continue Button */}
-      <div className="flex justify-center items-center translate-y-[-1rem] animate-fade-in opacity-1 [--animation-delay:400ms]">
+      <div className="flex justify-center items-center gap-4 translate-y-[-1rem] animate-fade-in opacity-1 [--animation-delay:400ms]">
+        <BackButton
+          handleClick={() => {
+            // Navigate to homepage or reset
+            window.location.href = "/";
+          }}
+        />
         <PrimaryButton
           handleClick={() => {
             if (selectedFlow) {

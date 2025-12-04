@@ -10,7 +10,6 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "../../../ui/dialog";
 import { Input } from "../../../ui/input";
 import { Label } from "../../../ui/label";
@@ -40,7 +39,7 @@ export function Question({
   error?: string;
 }) {
   return (
-    <Card className="translate-y-[-1rem] animate-fade-in opacity-100 [--animation-delay:200ms]">
+    <Card>
       <CardContent className="flex flex-col items-start gap-3 p-4 sm:p-5">
         <div className="flex flex-col items-start gap-2 relative self-stretch w-full flex-[0_0_auto]">
           <div className="relative self-stretch mt-[-1.00px] font-text-bold-medium font-[number:var(--text-bold-medium-font-weight)] text-picto-color text-sm sm:text-[length:var(--text-bold-medium-font-size)] tracking-[var(--text-bold-medium-letter-spacing)] leading-[var(--text-bold-medium-line-height)] [font-style:var(--text-bold-medium-font-style)] flex items-center">
@@ -152,105 +151,101 @@ export function QuestionWithInput({
   }, [isDialogOpen, alert]);
 
   return (
-    <Card className="translate-y-[-1rem] animate-fade-in opacity-100 [--animation-delay:400ms] w-full">
+    <Card className="w-full">
       <CardContent className="flex flex-col items-start gap-3 p-4 sm:p-5">
         <div className="flex flex-col items-start gap-2 relative self-stretch w-full flex-[0_0_auto]">
           <div className="flex items-start gap-2 relative self-stretch w-full flex-[0_0_auto]">
-            {alert ? (
-              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                <DialogTrigger asChild>
-                  <Checkbox
-                    id={question}
-                    checked={checked}
-                    onCheckedChange={() => {
+            {alert ?
+              <>
+                <Checkbox
+                  id={question}
+                  checked={checked}
+                  onCheckedChange={() => {
+                    if (!checked) {
+                      // User is checking the box - show dialog
                       setIsDialogOpen(true);
-                    }}
-                    className={`w-5 h-5 sm:w-6 sm:h-6 mt-0.5 ${
-                      checked ? "bg-yellow-500" : ""
-                    }`}
-                  />
-                </DialogTrigger>
-                <DialogContent>
-                  <DialogHeader>
-                    <DialogTitle>Conditions requises</DialogTitle>
-                    <div className="flex flex-col gap-2">
-                      {alert?.map((item, idx) => (
-                        <label
-                          key={`alert-${idx}`}
-                          className="flex items-start gap-2"
+                    } else {
+                      // User is unchecking - no dialog, just uncheck directly
+                      setChecked(false);
+                      handleChange(false);
+                      handleInputChange(undefined);
+                      setSelectedOption("");
+                    }
+                  }}
+                  className={`w-5 h-5 sm:w-6 sm:h-6 mt-0.5 ${
+                    checked ? "bg-yellow-500" : ""
+                  }`}
+                />
+                <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Conditions requises</DialogTitle>
+                      <DialogDescription className="text-sm text-gray-600 mb-2">
+                        Veuillez prendre connaissance des conditions suivantes.
+                        Ces informations sont fournies à titre indicatif.
+                      </DialogDescription>
+                      <div className="flex flex-col gap-2">
+                        {alert?.map((item, idx) => (
+                          <label
+                            key={`alert-${idx}`}
+                            className="flex items-start gap-2"
+                          >
+                            <Checkbox
+                              id={`alert-${idx}`}
+                              checked={Boolean(alertChecks[idx])}
+                              onCheckedChange={(val) => {
+                                const next = [...alertChecks];
+                                next[idx] = Boolean(val);
+                                setAlertChecks(next);
+                              }}
+                              className="w-4 h-4 mt-0.5"
+                            />
+                            <DialogDescription className="text-sm text-gray-700">
+                              {item}
+                            </DialogDescription>
+                          </label>
+                        ))}
+                      </div>
+                    </DialogHeader>
+                    <DialogFooter className="flex justify-end gap-2">
+                      <DialogClose asChild>
+                        <button
+                          className="px-4 py-2 bg-gray-200 rounded-lg"
+                          onClick={() => {
+                            setChecked(false);
+                            handleChange(false);
+                            setAlertChecks(
+                              alert ? new Array(alert.length).fill(false) : []
+                            );
+                            if (!checked) {
+                              handleInputChange(undefined);
+                              setSelectedOption("");
+                            }
+                          }}
                         >
-                          <Checkbox
-                            id={`alert-${idx}`}
-                            checked={Boolean(alertChecks[idx])}
-                            onCheckedChange={(val) => {
-                              const next = [...alertChecks];
-                              next[idx] = Boolean(val);
-                              setAlertChecks(next);
-                            }}
-                            className="w-4 h-4 mt-0.5"
-                          />
-                          <DialogDescription className="text-sm text-yellow-600">
-                            {item}
-                          </DialogDescription>
-                        </label>
-                      ))}
-                    </div>
-                  </DialogHeader>
-                  <DialogFooter className="flex justify-end gap-2">
-                    <DialogClose asChild>
-                      <button
-                        className="px-4 py-2 bg-gray-200 rounded-lg"
-                        onClick={() => {
-                          setChecked(false);
-                          handleChange(false);
-                          setAlertChecks(
-                            alert ? new Array(alert.length).fill(false) : []
-                          );
-                          if (!checked) {
-                            handleInputChange(undefined);
-                            setSelectedOption("");
-                          }
-                        }}
-                      >
-                        Annuler
-                      </button>
-                    </DialogClose>
-                    <DialogClose asChild>
-                      <button
-                        className={`px-4 py-2 rounded-lg ${
-                          alert &&
-                          alert.length > 0 &&
-                          !alertChecks.every(Boolean)
-                            ? "bg-info-300 text-white opacity-50 cursor-not-allowed"
-                            : "bg-info-500 text-white"
-                        }`}
-                        disabled={Boolean(
-                          alert &&
-                            alert.length > 0 &&
-                            !alertChecks.every(Boolean)
-                        )}
-                        onClick={() => {
-                          const newChecked = !checked;
-                          setChecked(newChecked);
-                          handleChange(newChecked);
-                          // Réinitialiser les cases d'alerte après confirmation
-                          setAlertChecks(
-                            alert ? new Array(alert.length).fill(false) : []
-                          );
-                          if (!newChecked) {
-                            handleInputChange(undefined);
-                            setSelectedOption("");
-                          }
-                        }}
-                      >
-                        Continuer
-                      </button>
-                    </DialogClose>
-                  </DialogFooter>
-                </DialogContent>
-              </Dialog>
-            ) : (
-              <Checkbox
+                          Annuler
+                        </button>
+                      </DialogClose>
+                      <DialogClose asChild>
+                        <button
+                          className="px-4 py-2 rounded-lg bg-info-500 text-white hover:bg-info-600 transition-colors"
+                          onClick={() => {
+                            setChecked(true);
+                            handleChange(true);
+                            // Réinitialiser les cases d'alerte après confirmation
+                            setAlertChecks(
+                              alert ? new Array(alert.length).fill(false) : []
+                            );
+                          }}
+                        >
+                          Continuer
+                        </button>
+                      </DialogClose>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
+              </>
+            : <Checkbox
                 id={question}
                 checked={checked}
                 onCheckedChange={() => {
@@ -266,7 +261,7 @@ export function QuestionWithInput({
                   checked ? "bg-syracuse_red_orange" : ""
                 }`}
               />
-            )}
+            }
 
             <div className="flex items-center gap-[4px_8px] ">
               <Label
