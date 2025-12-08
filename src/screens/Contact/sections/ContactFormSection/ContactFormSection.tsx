@@ -13,6 +13,7 @@ import {
   RadioGroupItem,
 } from "../../../../components/ui/radio-group";
 import { Textarea } from "../../../../components/ui/textarea";
+import DevisForm from "./DevisForm";
 
 export const ContactFormSection = (): JSX.Element => {
   const location = useLocation();
@@ -34,6 +35,10 @@ export const ContactFormSection = (): JSX.Element => {
   const [selectedSubject, setSelectedSubject] = useState<string>(
     sujet || "Information"
   );
+  // état pour le sous-choix Devis (instantané / personnalisé)
+  const [devisType, setDevisType] = useState<
+    "instantane" | "personnalise" | null
+  >(null);
   const form = useRef<HTMLFormElement>(null);
   const [submissionStatus, setSubmissionStatus] = useState<"idle" | "sending">(
     "idle"
@@ -93,87 +98,8 @@ export const ContactFormSection = (): JSX.Element => {
             name="logo_url"
             value="https://www.eurekaingenierie.com/logo-black.png"
           />
-          {/* Input Fields */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
-            <div className="flex flex-col gap-2">
-              <Label
-                htmlFor="nom"
-                className="text-lg font-medium text-[#1e1e1e] [font-family:'Sofia_Pro']"
-              >
-                Nom
-              </Label>
-              <Input
-                id="nom"
-                name="nom"
-                placeholder="DOE"
-                className="border-0 border-b-2 border-gray-300 rounded-none px-2 py-3 focus:border-yellow-400 transition placeholder:[font-family:'Sofia_Pro']"
-                required
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <Label
-                htmlFor="prenom"
-                className="text-lg font-medium text-[#1e1e1e] [font-family:'Sofia_Pro']"
-              >
-                Prénom
-              </Label>
-              <Input
-                id="prenom"
-                name="prenom"
-                placeholder="John"
-                className="border-0 border-b-2 border-gray-300 rounded-none px-2 py-3 focus:border-yellow-400 transition placeholder:[font-family:'Sofia_Pro']"
-                required
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <Label
-                htmlFor="email"
-                className="text-lg font-medium text-[#1e1e1e] [font-family:'Sofia_Pro']"
-              >
-                Email
-              </Label>
-              <Input
-                id="email"
-                name="user_email"
-                type="email"
-                placeholder="johndoe@gmail.com"
-                className="border-0 border-b-2 border-gray-300 rounded-none px-2 py-3 focus:border-yellow-400 transition placeholder:[font-family:'Sofia_Pro']"
-                required
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <Label
-                htmlFor="telephone"
-                className="text-lg font-medium text-[#1e1e1e] [font-family:'Sofia_Pro']"
-              >
-                Téléphone
-              </Label>
-              {/*
-                <Input
-                id="telephone"
-                name="telephone"
-                type="tel"
-                className="border-0 border-b-2 border-gray-300 rounded-none px-2 py-3 focus:border-yellow-400 transition placeholder:[font-family:'Sofia_Pro']"
-              />*/}
-              <PhoneInput
-                inputProps={{ name: "telephone", required: true }}
-                inputStyle={{
-                  width: "100%",
-                  border: "0",
-                  borderBottom: "2px solid rgb(209, 213, 219)",
-                  borderRadius: "0",
-                  padding: "0.75rem 3rem",
-                  fontFamily: "Sofia_Pro",
-                  backgroundColor: "transparent",
-                  borderBottomColor: isFocused ? "rgb(250, 204, 21)" : "#ccc",
-                  outline: "none",
-                }}
-                country={"fr"}
-                onFocus={() => setIsFocused(true)}
-                onBlur={() => setIsFocused(false)}
-              />
-            </div>
-          </div>
+          
+          
 
           {/* Subject Selection */}
           {!sujet &&
@@ -215,6 +141,13 @@ export const ContactFormSection = (): JSX.Element => {
                 </RadioGroup>
               </div>
             )}
+
+                  
+
+          {/* Devis block (si sélectionné) : afficher si l'utilisateur a choisi "Devis" ou si l'URL fournit "Devis personnalisé" */}
+          {(selectedSubject === "Devis" || selectedSubject === "Devis personnalisé") && (
+            <DevisForm />
+          )}
 
           {/* Message Field */}
           <div className="flex flex-col gap-2">

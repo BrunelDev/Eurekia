@@ -11,25 +11,23 @@ export const AboutUsSection = (): JSX.Element => {
       description:
         "Préparez votre projet en toute autonomie avec nos outils pour estimer les coûts, générer vos documents et structurer votre dossier.",
       buttonText: "Simuler votre projet",
-      backgroundImage: "url(..//frame16-1.png)",
-      backgroundOverlay:
-        "linear-gradient(0deg,rgba(72,54,33,0.4) 0%,rgba(72,54,33,0.4) 100%)",
+      backgroundImage: "url(..//Particuliers.png)",
+     
     },
     {
       title: "Agents immobiliers",
       description:
         "Préparez votre projet en toute autonomie avec nos outils pour estimer les coûts, générer vos documents et structurer votre dossier.",
       buttonText: "Voir un exemple",
-      backgroundImage: "url(..//frame16-2.png)",
-      backgroundOverlay: "none",
+      backgroundImage: "url(..//Agent_immobilier.png)",
+      
     },
     {
       title: "Professionnels du bâtiment",
       description:
         "Automatisez la rédaction de vos documents techniques et gagnez un temps précieux sur vos projets grâce à notre algorithme intelligent.",
       buttonText: "Accéder aux solutions",
-      backgroundImage: "url(..//frame16-3.png)",
-      backgroundOverlay: "none",
+      backgroundImage: "url(..//Fonctionnel_du_batiment.png)",
     },
   ];
 
