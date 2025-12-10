@@ -223,28 +223,103 @@ function getSelectedServices(toggles: ServiceToggles): ServiceItem[] {
   return selectedServices;
 }
 
-// Exemple d'utilisation :
-const services: ServiceToggles = {
-  descriptiveNotice: true,
-  accessibilityNotice: true,
-  moeDiagnostic: false,
-  moeFeasibility: true,
-};
+// All AMO service keys for forfait
+const AMO_FORFAIT_KEYS = [
+  "descriptiveNotice",
+  "urbanismAuthorization",
+  "accessibilityNotice",
+  "fireSecurityNotice",
+  "planningStudies",
+  "concessionaryProcedures",
+  "geotechnicalSpecifications",
+  "ccapRedaction",
+  "consultationRegulation",
+] as const;
 
-const selectedList = getSelectedServices(services);
+// All MOE service keys for forfait
+const MOE_FORFAIT_KEYS = [
+  "moeDiagnostic",
+  "moeFeasibility",
+  "moeApsApd",
+  "moeDceAct",
+  "moeExecutionPlans",
+  "moeElectricalCalc",
+  "moePlumbingCalc",
+  "moeHvacCalc",
+  "moeVrdCalc",
+  "moeThermalAttestationSmall",
+  "moeThermalStudyPc",
+  "moeThermalStudyConstruction",
+  "moeFinalAttestationAcv",
+] as const;
 
-export function getSelectedServicesWithTotal(toggles: ServiceToggles) {
-  const services = getSelectedServices(toggles);
+/**
+ * Get all services for a forfait based on the service type (AMO or MOE)
+ */
+function getForfaitServices(serviceType: "AMO" | "MOE"): ServiceItem[] {
+  const keys = serviceType === "AMO" ? AMO_FORFAIT_KEYS : MOE_FORFAIT_KEYS;
 
-  const totalHT = services.reduce((sum, service) => sum + service.pu, 0);
-  const totalTTC = services.reduce((sum, service) => {
+  return keys.map((key) => {
+    const mapping = designationsMapping[key];
+    return {
+      key,
+      designation: mapping.designation,
+      pu: mapping.pu || 0,
+      tva: mapping.tva || 20,
+    };
+  });
+}
+
+/**
+ * Extended toggles interface that includes forfait flow information and missing documents
+ */
+interface ExtendedToggles extends ServiceToggles {
+  flowType?: "forfait" | "prestations";
+  serviceChosen?: "AMO" | "MOE";
+  missingDocuments?: string[];
+}
+
+// Supplementary cost per missing document
+const SUPPLEMENTARY_COST_PER_DOCUMENT = 50;
+
+export function getSelectedServicesWithTotal(toggles: ExtendedToggles) {
+  // Check if this is a forfait flow - if so, include all services for the chosen type
+  const isForfait = toggles.flowType === "forfait";
+  const serviceType = toggles.serviceChosen;
+
+  let services: ServiceItem[];
+
+  if (isForfait && serviceType) {
+    // Forfait flow: include all services for the selected type
+    services = getForfaitServices(serviceType);
+  } else {
+    // Prestations flow: only include manually selected services
+    services = getSelectedServices(toggles);
+  }
+
+  // Add supplementary costs for missing documents
+  const missingDocuments = toggles.missingDocuments || [];
+  const supplementaryCosts: ServiceItem[] = missingDocuments.map(
+    (docName, index) => ({
+      key: `supplementary_${index}`,
+      designation: `Coût supplémentaire pour la conception du document : ${docName}`,
+      pu: SUPPLEMENTARY_COST_PER_DOCUMENT,
+      tva: 20,
+    })
+  );
+
+  // Combine services with supplementary costs
+  const allServices = [...services, ...supplementaryCosts];
+
+  const totalHT = allServices.reduce((sum, service) => sum + service.pu, 0);
+  const totalTTC = allServices.reduce((sum, service) => {
     return sum + service.pu * (1 + service.tva / 100);
   }, 0);
 
   return {
-    services,
+    services: allServices,
     totalHT,
     totalTTC,
-    count: services.length,
+    count: allServices.length,
   };
 }

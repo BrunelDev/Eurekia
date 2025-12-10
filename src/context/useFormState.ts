@@ -84,6 +84,13 @@ export interface FormData {
   moeThermalStudyPc?: boolean;
   moeThermalStudyConstruction?: boolean;
   moeFinalAttestationAcv?: boolean;
+
+  // Missing documents for supplementary costs
+  missingDocuments?: string[];
+
+  // Uploaded files for Airtable attachments
+  // Key is document name, value is base64 content with filename
+  uploadedFiles?: { name: string; base64: string; type: string }[];
 }
 
 interface FormState {
@@ -196,6 +203,12 @@ const initialFormData: FormData = {
   moeThermalStudyPc: false,
   moeThermalStudyConstruction: false,
   moeFinalAttestationAcv: false,
+
+  // Missing documents for supplementary costs
+  missingDocuments: [],
+
+  // Uploaded files for Airtable attachments
+  uploadedFiles: [],
 };
 
 export const useFormState = create<FormState>()(

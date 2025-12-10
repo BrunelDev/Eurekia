@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { Upload } from "lucide-react";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { Card, CardContent } from "../../../ui/card";
 import { Checkbox } from "../../../ui/checkbox";
 import {
@@ -109,6 +111,8 @@ export function QuestionWithInput({
   error,
   inputError,
   alert,
+  formData,
+  updateFormData,
 }: {
   question: string;
   description?: string;
@@ -126,13 +130,15 @@ export function QuestionWithInput({
   alert?: string[];
   index?: number;
   formData?: any;
+  updateFormData?: (data: any) => void;
 }) {
   const [checked, setChecked] = useState(value || false);
   const [selectedOption, setSelectedOption] = useState<string | undefined>(
     inputValue || undefined
   );
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [alertChecks, setAlertChecks] = useState<boolean[]>([]);
+  // Track uploaded files for each alert item (null = not uploaded)
+  const [uploadedFiles, setUploadedFiles] = useState<(File | null)[]>([]);
 
   // Fonction utilitaire pour mettre à jour le résumé de manière cohérente
   const updateSummary = (
@@ -142,11 +148,10 @@ export function QuestionWithInput({
   ) => {};
   const [selectedBoxes, setSelectedBoxes] = useState<string[]>([]);
 
-  // Initialiser/réinitialiser l'état des cases d'alerte à l'ouverture du dialogue ou quand la liste change
-  // Toutes décochées par défaut
+  // Initialize uploaded files state when dialog opens
   useEffect(() => {
     if (isDialogOpen && alert) {
-      setAlertChecks(new Array(alert.length).fill(false));
+      setUploadedFiles(new Array(alert.length).fill(null));
     }
   }, [isDialogOpen, alert]);
 
@@ -177,45 +182,86 @@ export function QuestionWithInput({
                   }`}
                 />
                 <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                  <DialogContent>
+                  <DialogContent className="max-w-lg max-h-[80vh] overflow-y-auto">
                     <DialogHeader>
-                      <DialogTitle>Conditions requises</DialogTitle>
+                      <DialogTitle>Documents requis</DialogTitle>
                       <DialogDescription className="text-sm text-gray-600 mb-2">
-                        Veuillez prendre connaissance des conditions suivantes.
-                        Ces informations sont fournies à titre indicatif.
+                        Veuillez télécharger les documents suivants. Si vous ne
+                        disposez pas d'un document, un coût supplémentaire de
+                        50€ sera appliqué pour sa conception.
                       </DialogDescription>
-                      <div className="flex flex-col gap-2">
+                      <div className="flex flex-col gap-4 mt-4">
                         {alert?.map((item, idx) => (
-                          <label
+                          <div
                             key={`alert-${idx}`}
-                            className="flex items-start gap-2"
+                            className="flex flex-col gap-2 p-3 border border-gray-200 rounded-lg"
                           >
-                            <Checkbox
-                              id={`alert-${idx}`}
-                              checked={Boolean(alertChecks[idx])}
-                              onCheckedChange={(val) => {
-                                const next = [...alertChecks];
-                                next[idx] = Boolean(val);
-                                setAlertChecks(next);
-                              }}
-                              className="w-4 h-4 mt-0.5"
-                            />
-                            <DialogDescription className="text-sm text-gray-700">
+                            <label className="text-sm font-medium text-gray-700">
                               {item}
-                            </DialogDescription>
-                          </label>
+                            </label>
+                            <div className="flex items-center gap-2">
+                              <label
+                                htmlFor={`file-${question}-${idx}`}
+                                className={`flex items-center gap-2 px-3 py-2 rounded-lg border cursor-pointer transition-colors ${
+                                  uploadedFiles[idx] ?
+                                    "border-green-500 bg-green-50 text-green-700"
+                                  : "border-gray-300 bg-gray-50 hover:bg-gray-100"
+                                }`}
+                              >
+                                <Upload className="w-4 h-4" />
+                                <span className="text-sm">
+                                  {uploadedFiles[idx] ?
+                                    uploadedFiles[idx]!.name.slice(0, 20) +
+                                    (uploadedFiles[idx]!.name.length > 20 ?
+                                      "..."
+                                    : "")
+                                  : "Choisir un fichier"}
+                                </span>
+                              </label>
+                              <input
+                                id={`file-${question}-${idx}`}
+                                type="file"
+                                className="hidden"
+                                accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                                onChange={(e) => {
+                                  const file = e.target.files?.[0] || null;
+                                  const next = [...uploadedFiles];
+                                  next[idx] = file;
+                                  setUploadedFiles(next);
+                                }}
+                              />
+                              {uploadedFiles[idx] && (
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    const next = [...uploadedFiles];
+                                    next[idx] = null;
+                                    setUploadedFiles(next);
+                                  }}
+                                  className="text-red-500 hover:text-red-700 text-sm"
+                                >
+                                  ✕
+                                </button>
+                              )}
+                            </div>
+                            {!uploadedFiles[idx] && (
+                              <p className="text-xs text-amber-600">
+                                +50€ si non fourni
+                              </p>
+                            )}
+                          </div>
                         ))}
                       </div>
                     </DialogHeader>
-                    <DialogFooter className="flex justify-end gap-2">
+                    <DialogFooter className="flex justify-end gap-2 mt-4">
                       <DialogClose asChild>
                         <button
-                          className="px-4 py-2 bg-gray-200 rounded-lg"
+                          className="px-4 py-2 bg-gray-200 rounded-lg hover:bg-gray-300 transition-colors"
                           onClick={() => {
                             setChecked(false);
                             handleChange(false);
-                            setAlertChecks(
-                              alert ? new Array(alert.length).fill(false) : []
+                            setUploadedFiles(
+                              alert ? new Array(alert.length).fill(null) : []
                             );
                             if (!checked) {
                               handleInputChange(undefined);
@@ -230,11 +276,96 @@ export function QuestionWithInput({
                         <button
                           className="px-4 py-2 rounded-lg bg-info-500 text-white hover:bg-info-600 transition-colors"
                           onClick={() => {
+                            // Find missing documents
+                            const missingDocs: string[] = [];
+                            alert?.forEach((item, idx) => {
+                              if (!uploadedFiles[idx]) {
+                                missingDocs.push(item);
+                              }
+                            });
+
+                            // Show toast if there are missing documents
+                            if (missingDocs.length > 0) {
+                              const totalCost = missingDocs.length * 50;
+                              toast.warning(
+                                `Coût supplémentaire de ${totalCost}€ pour ${missingDocs.length} document${missingDocs.length > 1 ? "s" : ""} manquant${missingDocs.length > 1 ? "s" : ""}`,
+                                {
+                                  description:
+                                    "Ce montant sera ajouté à votre devis.",
+                                  duration: 5000,
+                                }
+                              );
+
+                              // Update form state with missing documents
+                              if (updateFormData && formData) {
+                                const existingMissing =
+                                  formData.missingDocuments || [];
+                                // Add new missing docs (avoiding duplicates)
+                                const allMissing = [
+                                  ...new Set([
+                                    ...existingMissing,
+                                    ...missingDocs,
+                                  ]),
+                                ];
+                                updateFormData({
+                                  ...formData,
+                                  missingDocuments: allMissing,
+                                });
+                              }
+                            }
+
+                            // Save uploaded files to form state (convert to base64)
+                            const filesToSave: {
+                              name: string;
+                              base64: string;
+                              type: string;
+                            }[] = [];
+                            const filePromises = uploadedFiles
+                              .filter((file): file is File => file !== null)
+                              .map((file) => {
+                                return new Promise<{
+                                  name: string;
+                                  base64: string;
+                                  type: string;
+                                }>((resolve) => {
+                                  const reader = new FileReader();
+                                  reader.onloadend = () => {
+                                    const base64 = (
+                                      reader.result as string
+                                    ).split(",")[1]; // Remove data:... prefix
+                                    resolve({
+                                      name: file.name,
+                                      base64,
+                                      type: file.type,
+                                    });
+                                  };
+                                  reader.readAsDataURL(file);
+                                });
+                              });
+
+                            Promise.all(filePromises).then((newFiles) => {
+                              if (
+                                updateFormData &&
+                                formData &&
+                                newFiles.length > 0
+                              ) {
+                                const existingFiles =
+                                  formData.uploadedFiles || [];
+                                updateFormData({
+                                  ...formData,
+                                  uploadedFiles: [
+                                    ...existingFiles,
+                                    ...newFiles,
+                                  ],
+                                });
+                              }
+                            });
+
                             setChecked(true);
                             handleChange(true);
-                            // Réinitialiser les cases d'alerte après confirmation
-                            setAlertChecks(
-                              alert ? new Array(alert.length).fill(false) : []
+                            // Reset uploaded files after confirmation
+                            setUploadedFiles(
+                              alert ? new Array(alert.length).fill(null) : []
                             );
                           }}
                         >

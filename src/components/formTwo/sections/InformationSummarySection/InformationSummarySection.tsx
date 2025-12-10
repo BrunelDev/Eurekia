@@ -483,6 +483,7 @@ export const InformationSummarySection = () => {
               inputError={formErrors[`question_${index}_input`]}
               index={index}
               formData={formData}
+              updateFormData={updateFormData}
               handleInputChange={item.handleInputChange || (() => {})}
               inputValue={item.inputValue?.toString() || ""}
               alert={item.alert}

@@ -56,7 +56,7 @@ L'équipe
 
       // Configuration de l'email pour Resend
       const emailPayload = {
-        from: "onboarding@resend.dev", // À remplacer par votre domaine vérifié
+        from: "contact@eurekaingenierie.com",
         to: email,
         subject: sujet,
         text: corpsMessage,
