@@ -7,6 +7,13 @@ export interface FormData {
   flowType?: "forfait" | "prestations";
   forfaitType?: "AMO" | "MOE";
 
+  //Project Type
+  projectType?: "new" | "renovation";
+
+  // Estimated Cost
+  estimatedProjectCost?: number;
+  isEstimatedCostKnown?: boolean;
+
   // Step 1
   isStepOneChecked: boolean;
   serviceChosen?: "AMO" | "MOE";
@@ -85,8 +92,8 @@ export interface FormData {
   moeThermalStudyConstruction?: boolean;
   moeFinalAttestationAcv?: boolean;
 
-  // Missing documents for supplementary costs
-  missingDocuments?: string[];
+  // Missing documents for supplementary costs (with individual pricing)
+  missingDocuments?: { name: string; price: number }[];
 
   // Uploaded files for Airtable attachments
   // Key is document name, value is base64 content with filename
@@ -153,6 +160,13 @@ const initialFormData: FormData = {
   isStepZeroChecked: false,
   flowType: undefined,
   forfaitType: undefined,
+
+  //Project Type
+  projectType: undefined,
+
+  // Estimated Cost
+  estimatedProjectCost: undefined,
+  isEstimatedCostKnown: undefined,
 
   // Step 1
   isStepOneChecked: false,
@@ -316,6 +330,10 @@ export const useFormState = create<FormState>()(
             moeThermalStudyPc: false,
             moeThermalStudyConstruction: false,
             moeFinalAttestationAcv: false,
+            // Reset forfait flow fields
+            projectType: undefined,
+            estimatedProjectCost: undefined,
+            isEstimatedCostKnown: undefined,
           },
         })),
 

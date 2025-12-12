@@ -23,7 +23,7 @@ export const InformationSummarySection = () => {
     inputRequired?: boolean;
     handleInputChange?: (value: string | undefined) => void;
     inputValue?: string | number;
-    alert?: string[]; // Add this new property
+    alert?: { doc: string; price: number }[]; // Document name and price
   };
 
   const amoForm: FormItem[] = [
@@ -32,8 +32,8 @@ export const InformationSummarySection = () => {
       description:
         "Élaboration d’un descriptif sommaire du projet avec estimation indicative du coût des travaux (devis estimatif). Durée: 1–2 semaines.",
       alert: [
-        "Plans de masse fournis par le client.",
-        "Programme fonctionnel fourni par le client.",
+        { doc: "Plans de masse fournis par le client.", price: 50 },
+        { doc: "Programme fonctionnel fourni par le client.", price: 50 },
       ],
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, descriptiveNotice: value });
@@ -46,9 +46,9 @@ export const InformationSummarySection = () => {
       description:
         "Montage et dépôt du dossier de permis de construire ou déclaration de travaux. Durée: 2–4 semaines. Hors délai de traitement des services urbanisme.",
       alert: [
-        "Plans à jour fournis.",
-        "Études préliminaires fournies.",
-        "Frais de dossier selon mairie fournis.",
+        { doc: "Plans à jour fournis.", price: 50 },
+        { doc: "Études préliminaires fournies.", price: 50 },
+        { doc: "Frais de dossier selon mairie fournis.", price: 50 },
       ],
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, urbanismAuthorization: value });
@@ -61,8 +61,8 @@ export const InformationSummarySection = () => {
       description:
         "Rédaction de la notice d’accessibilité (ERP 5e catégorie ou logement) conformément aux normes en vigueur. Durée: 1 semaine.",
       alert: [
-        "Surface du projet communiquée.",
-        "Typologie d’usage communiquée.",
+        { doc: "Surface du projet communiquée.", price: 50 },
+        { doc: "Typologie d’usage communiquée.", price: 50 },
       ],
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, accessibilityNotice: value });
@@ -75,9 +75,9 @@ export const InformationSummarySection = () => {
       description:
         "Rédaction de la notice sécurité incendie (ERP 5e catégorie ou équivalent) selon réglementation. Durée: 1 semaine.",
       alert: [
-        "Fiches techniques des installations fournies.",
-        "Surfaces précises communiquées.",
-        "Volumes précisés.",
+        { doc: "Fiches techniques des installations fournies.", price: 50 },
+        { doc: "Surfaces précises communiquées.", price: 50 },
+        { doc: "Volumes précisés.", price: 50 },
       ],
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, fireSecurityNotice: value });
@@ -90,8 +90,8 @@ export const InformationSummarySection = () => {
       description:
         "Élaboration d’un planning global (études d’ingénierie et exécution des travaux). Durée: 1–2 semaines.",
       alert: [
-        "Durées unitaires prévisionnelles fournies.",
-        "Séquençage indicatif communiqué.",
+        { doc: "Durées unitaires prévisionnelles fournies.", price: 50 },
+        { doc: "Séquençage indicatif communiqué.", price: 50 },
       ],
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, planningStudies: value });
@@ -104,8 +104,8 @@ export const InformationSummarySection = () => {
       description:
         "Démarches de raccordement auprès des concessionnaires (électricité, eau, gaz, télécom, assainissement). Durée: 1–2 semaines. Hors délai de traitement et travaux des concessionnaires.",
       alert: [
-        "Coordonnées clients des concessions fournies.",
-        "Documents requis (PV de propriété, etc.) fournis.",
+        { doc: "Coordonnées clients des concessions fournies.", price: 50 },
+        { doc: "Documents requis (PV de propriété, etc.) fournis.", price: 50 },
       ],
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, concessionaryProcedures: value });
@@ -118,8 +118,11 @@ export const InformationSummarySection = () => {
       description:
         "Rédaction du CCTP pour étude géotechnique préalable (missions G1, G2-AVP). Durée: 1 semaine.",
       alert: [
-        "Cotes cadastrales à disposition.",
-        "Informations géotechniques initiales (hypothèses de sol) à disposition.",
+        { doc: "Cotes cadastrales à disposition.", price: 50 },
+        {
+          doc: "Informations géotechniques initiales (hypothèses de sol) à disposition.",
+          price: 50,
+        },
       ],
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, geotechnicalSpecifications: value });
@@ -132,8 +135,11 @@ export const InformationSummarySection = () => {
       description:
         "Rédaction du Cahier des Clauses Administratives Particulières pour consultation des entreprises. Durée: 1 semaine.",
       alert: [
-        "Spécifications administratives générales (CCAG) fournies.",
-        "Avenants éventuels fournis.",
+        {
+          doc: "Spécifications administratives générales (CCAG) fournies.",
+          price: 50,
+        },
+        { doc: "Avenants éventuels fournis.", price: 50 },
       ],
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, ccapRedaction: value });
@@ -146,8 +152,8 @@ export const InformationSummarySection = () => {
       description:
         "Élaboration du règlement de consultation (modalités d’appel d’offres, critères de sélection). Durée: 1 semaine.",
       alert: [
-        "Contenu du CCTP technique fourni.",
-        "Règlement-type ou CCAP de référence fourni.",
+        { doc: "Contenu du CCTP technique fourni.", price: 50 },
+        { doc: "Règlement-type ou CCAP de référence fourni.", price: 50 },
       ],
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, consultationRegulation: value });
@@ -163,9 +169,9 @@ export const InformationSummarySection = () => {
       description:
         "Diagnostic technique de la structure et des éléments porteurs du bâtiment. Durée: 1–2 semaines.",
       alert: [
-        "Accès chantier fourni.",
-        "Historique des pathologies fourni.",
-        "Relevés initiaux fournis.",
+        { doc: "Accès chantier fourni.", price: 50 },
+        { doc: "Historique des pathologies fourni.", price: 50 },
+        { doc: "Relevés initiaux fournis.", price: 50 },
       ],
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, moeDiagnostic: value });
@@ -178,8 +184,8 @@ export const InformationSummarySection = () => {
       description:
         "Étude de faisabilité (implantation, conformité, normes) avec estimation sommaire du budget travaux. Durée: 2 semaines.",
       alert: [
-        "Plans de l’existant fournis.",
-        "Besoins fonctionnels détaillés fournis.",
+        { doc: "Plans de l’existant fournis.", price: 50 },
+        { doc: "Besoins fonctionnels détaillés fournis.", price: 50 },
       ],
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, moeFeasibility: value });
@@ -192,8 +198,8 @@ export const InformationSummarySection = () => {
       description:
         "Conception sommaire (esquisses, principes constructifs) incluant estimation des lots gros-œuvre. Durée: 3–4 semaines.",
       alert: [
-        "Programme architectural précis défini.",
-        "Contraintes techniques définies.",
+        { doc: "Programme architectural précis défini.", price: 50 },
+        { doc: "Contraintes techniques définies.", price: 50 },
       ],
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, moeApsApd: value });
@@ -206,8 +212,8 @@ export const InformationSummarySection = () => {
       description:
         "Rédaction des pièces administratives (CCAP, CCTP, DPGF…) et Analyse des Offres (ACT). Durée: 2 semaines.",
       alert: [
-        "Évaluation chiffrée des travaux connue.",
-        "Liste de candidats potentiels disponible.",
+        { doc: "Évaluation chiffrée des travaux connue.", price: 50 },
+        { doc: "Liste de candidats potentiels disponible.", price: 50 },
       ],
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, moeDceAct: value });
@@ -220,8 +226,11 @@ export const InformationSummarySection = () => {
       description:
         "Établissement des plans d’exécution détaillés (coffrage, charpente, électricité, plomberie, etc.). Durée: 2–3 semaines.",
       alert: [
-        "Avant-projet détaillé validé.",
-        "Cahier des charges techniques initial ou plans de niveau APD disponibles.",
+        { doc: "Avant-projet détaillé validé.", price: 50 },
+        {
+          doc: "Cahier des charges techniques initial ou plans de niveau APD disponibles.",
+          price: 50,
+        },
       ],
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, moeExecutionPlans: value });
@@ -234,8 +243,8 @@ export const InformationSummarySection = () => {
       description:
         "Calculs de dimensionnement des installations électriques (courants forts/faibles). Durée: 1–2 semaines.",
       alert: [
-        "Schéma électrique de principe fourni.",
-        "Puissances nominatives fournies.",
+        { doc: "Schéma électrique de principe fourni.", price: 50 },
+        { doc: "Puissances nominatives fournies.", price: 50 },
       ],
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, moeElectricalCalc: value });
@@ -248,8 +257,8 @@ export const InformationSummarySection = () => {
       description:
         "Calculs de dimensionnement des réseaux d’eau potable et d’assainissement (débits, sections). Durée: 1 semaine.",
       alert: [
-        "Plans sommaires de plomberie communiqués.",
-        "Débits estimés communiqués.",
+        { doc: "Plans sommaires de plomberie communiqués.", price: 50 },
+        { doc: "Débits estimés communiqués.", price: 50 },
       ],
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, moePlumbingCalc: value });
@@ -262,8 +271,11 @@ export const InformationSummarySection = () => {
       description:
         "Calculs de dimensionnement des réseaux de ventilation/climatisation (débits d’air, pertes de charge). Durée: 1 semaine.",
       alert: [
-        "Hypothèses de système (VMC simple/fluides frigorigènes) fournies.",
-        "Plans HVAC de base fournis.",
+        {
+          doc: "Hypothèses de système (VMC simple/fluides frigorigènes) fournies.",
+          price: 50,
+        },
+        { doc: "Plans HVAC de base fournis.", price: 50 },
       ],
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, moeHvacCalc: value });
@@ -276,8 +288,8 @@ export const InformationSummarySection = () => {
       description:
         "Calculs de dimensionnement VRD (voirie, assainissement pluvial et EU). Durée: 1 semaine.",
       alert: [
-        "Plans topographiques disponibles.",
-        "Données pluviométriques locales disponibles.",
+        { doc: "Plans topographiques disponibles.", price: 50 },
+        { doc: "Données pluviométriques locales disponibles.", price: 50 },
       ],
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, moeVrdCalc: value });
@@ -286,12 +298,12 @@ export const InformationSummarySection = () => {
       price: "(300 € HT)",
     },
     {
-      question: "Attestation thermique (PC <50 m²)",
+      question: "Attestation thermique (Permis de Construire <50 m²)",
       description:
         "Attestation de respect de la réglementation thermique (RT/RE2020) pour dépôt de permis (<50 m²). Durée: 1 semaine.",
       alert: [
-        "Données climatiques envoyées.",
-        "Fiches techniques des parois envoyées.",
+        { doc: "Données climatiques envoyées.", price: 50 },
+        { doc: "Fiches techniques des parois envoyées.", price: 50 },
       ],
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, moeThermalAttestationSmall: value });
@@ -300,13 +312,13 @@ export const InformationSummarySection = () => {
       price: "(16 € HT)  Référence: 30 € HT",
     },
     {
-      question: "Étude thermique (PC >50 m²)",
+      question: "Étude thermique (Permis de Construire >50 m²)",
       description:
         "Étude thermique réglementaire (RT/RE2020) préalable au permis de construire (>50 m²). Durée: 1 semaine.",
       alert: [
-        "Cahier des charges thermique défini.",
-        "Maquettes géométriques fournies.",
-        "Descriptifs des systèmes fournis.",
+        { doc: "Cahier des charges thermique défini.", price: 50 },
+        { doc: "Maquettes géométriques fournies.", price: 50 },
+        { doc: "Descriptifs des systèmes fournis.", price: 50 },
       ],
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, moeThermalStudyPc: value });
@@ -319,7 +331,10 @@ export const InformationSummarySection = () => {
       description:
         "Calculs thermiques en cours de chantier (bilans Cep, etc.). Durée: 2 semaines.",
       alert: [
-        "Validation des choix thermiques initiaux réalisée avant travaux.",
+        {
+          doc: "Validation des choix thermiques initiaux réalisée avant travaux.",
+          price: 50,
+        },
       ],
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, moeThermalStudyConstruction: value });
@@ -332,8 +347,11 @@ export const InformationSummarySection = () => {
       description:
         "Calculs finaux (Cep, Cepₙr, Ic énergie+construction) et attestation de conformité RT/RE2020 avec ACV. Durée: 2 semaines.",
       alert: [
-        "Rapports d’exécution (isolation, surfaces réelles) fournis.",
-        "Factures finales fournies.",
+        {
+          doc: "Rapports d'exécution (isolation, surfaces réelles) fournis.",
+          price: 50,
+        },
+        { doc: "Factures finales fournies.", price: 50 },
       ],
       handleChange: (value: boolean) => {
         updateFormData({ ...formData, moeFinalAttestationAcv: value });

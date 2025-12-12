@@ -111,8 +111,8 @@ export function QuestionWithInput({
   error,
   inputError,
   alert,
-  formData,
-  updateFormData,
+  // formData,
+  // updateFormData,
 }: {
   question: string;
   description?: string;
@@ -127,7 +127,7 @@ export function QuestionWithInput({
   inputRequired?: boolean;
   error?: string;
   inputError?: string;
-  alert?: string[];
+  alert?: { doc: string; price: number }[];
   index?: number;
   formData?: any;
   updateFormData?: (data: any) => void;
@@ -197,7 +197,7 @@ export function QuestionWithInput({
                             className="flex flex-col gap-2 p-3 border border-gray-200 rounded-lg"
                           >
                             <label className="text-sm font-medium text-gray-700">
-                              {item}
+                              {typeof item === "string" ? item : item.doc}
                             </label>
                             <div className="flex items-center gap-2">
                               <label
@@ -246,7 +246,8 @@ export function QuestionWithInput({
                             </div>
                             {!uploadedFiles[idx] && (
                               <p className="text-xs text-amber-600">
-                                +50€ si non fourni
+                                +{typeof item === "string" ? 50 : item.price}€
+                                si non fourni
                               </p>
                             )}
                           </div>
@@ -276,17 +277,30 @@ export function QuestionWithInput({
                         <button
                           className="px-4 py-2 rounded-lg bg-info-500 text-white hover:bg-info-600 transition-colors"
                           onClick={() => {
-                            // Find missing documents
-                            const missingDocs: string[] = [];
+                            // Find missing documents with their prices
+                            const missingDocs: {
+                              name: string;
+                              price: number;
+                            }[] = [];
                             alert?.forEach((item, idx) => {
                               if (!uploadedFiles[idx]) {
-                                missingDocs.push(item);
+                                if (typeof item === "string") {
+                                  missingDocs.push({ name: item, price: 50 });
+                                } else {
+                                  missingDocs.push({
+                                    name: item.doc,
+                                    price: item.price,
+                                  });
+                                }
                               }
                             });
 
                             // Show toast if there are missing documents
                             if (missingDocs.length > 0) {
-                              const totalCost = missingDocs.length * 50;
+                              const totalCost = missingDocs.reduce(
+                                (sum, doc) => sum + doc.price,
+                                0
+                              );
                               toast.warning(
                                 `Coût supplémentaire de ${totalCost}€ pour ${missingDocs.length} document${missingDocs.length > 1 ? "s" : ""} manquant${missingDocs.length > 1 ? "s" : ""}`,
                                 {
@@ -295,31 +309,9 @@ export function QuestionWithInput({
                                   duration: 5000,
                                 }
                               );
-
-                              // Update form state with missing documents
-                              if (updateFormData && formData) {
-                                const existingMissing =
-                                  formData.missingDocuments || [];
-                                // Add new missing docs (avoiding duplicates)
-                                const allMissing = [
-                                  ...new Set([
-                                    ...existingMissing,
-                                    ...missingDocs,
-                                  ]),
-                                ];
-                                updateFormData({
-                                  ...formData,
-                                  missingDocuments: allMissing,
-                                });
-                              }
                             }
 
                             // Save uploaded files to form state (convert to base64)
-                            const filesToSave: {
-                              name: string;
-                              base64: string;
-                              type: string;
-                            }[] = [];
                             const filePromises = uploadedFiles
                               .filter((file): file is File => file !== null)
                               .map((file) => {
@@ -343,26 +335,54 @@ export function QuestionWithInput({
                                 });
                               });
 
-                            Promise.all(filePromises).then((newFiles) => {
-                              if (
-                                updateFormData &&
-                                formData &&
-                                newFiles.length > 0
-                              ) {
-                                const existingFiles =
-                                  formData.uploadedFiles || [];
-                                updateFormData({
-                                  ...formData,
-                                  uploadedFiles: [
-                                    ...existingFiles,
-                                    ...newFiles,
-                                  ],
-                                });
-                              }
-                            });
-
+                            // First, set the prestation as checked
                             setChecked(true);
                             handleChange(true);
+
+                            // Update form state with both missing documents and uploaded files
+                            // Note: We wait a tick to ensure the prestation toggle has been applied
+                            Promise.all(filePromises).then((newFiles) => {
+                              // Use setTimeout to ensure we get the latest formData after handleChange
+                              setTimeout(() => {
+                                // Get fresh state from Zustand store
+                                const {
+                                  useFormState,
+                                } = require("../../../../context/useFormState");
+                                const {
+                                  formData: freshData,
+                                  updateFormData: freshUpdate,
+                                } = useFormState.getState();
+
+                                if (freshUpdate && freshData) {
+                                  const existingFiles =
+                                    freshData.uploadedFiles || [];
+                                  const existingMissing: {
+                                    name: string;
+                                    price: number;
+                                  }[] = freshData.missingDocuments || [];
+
+                                  // Add new missing docs (avoiding duplicates by name)
+                                  const existingNames = new Set(
+                                    existingMissing.map((d: any) => d.name)
+                                  );
+                                  const newMissingDocs = missingDocs.filter(
+                                    (d) => !existingNames.has(d.name)
+                                  );
+
+                                  freshUpdate({
+                                    missingDocuments: [
+                                      ...existingMissing,
+                                      ...newMissingDocs,
+                                    ],
+                                    uploadedFiles:
+                                      newFiles.length > 0 ?
+                                        [...existingFiles, ...newFiles]
+                                      : existingFiles,
+                                  });
+                                }
+                              }, 50);
+                            });
+
                             // Reset uploaded files after confirmation
                             setUploadedFiles(
                               alert ? new Array(alert.length).fill(null) : []

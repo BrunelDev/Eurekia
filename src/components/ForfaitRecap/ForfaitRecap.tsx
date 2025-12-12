@@ -1,4 +1,5 @@
-import { CheckCircle2 } from "lucide-react";
+import { useFormState } from "@/context/useFormState";
+import { AlertCircle, CheckCircle2 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 
 interface Prestation {
@@ -11,7 +12,41 @@ interface ForfaitRecapProps {
   forfaitType: "AMO" | "MOE";
 }
 
+// Pricing configuration
+const FORFAIT_PRICING = {
+  AMO: {
+    new: { percentage: 3.5, minimum: 3000 },
+    renovation: { percentage: 4.5, minimum: 3500 },
+  },
+  MOE: {
+    new: { percentage: 5, minimum: 3200 },
+    renovation: { percentage: 6, minimum: 3600 },
+  },
+};
+
 export function ForfaitRecap({ forfaitType }: ForfaitRecapProps) {
+  const { formData } = useFormState();
+  const { projectType, estimatedProjectCost, isEstimatedCostKnown } = formData;
+
+  // Calculate the forfait price if applicable
+  let forfaitPrice: number | null = null;
+  let pricingInfo: string = "";
+  let isPendingEstimation = false;
+
+  if (projectType) {
+    const config =
+      FORFAIT_PRICING[forfaitType][projectType as "new" | "renovation"];
+
+    if (isEstimatedCostKnown === false || estimatedProjectCost === undefined) {
+      isPendingEstimation = true;
+      pricingInfo = `${config.percentage}% du coût prévisionnel (min. ${config.minimum.toLocaleString("fr-FR")} € HT)`;
+    } else {
+      const calculatedPrice = estimatedProjectCost * (config.percentage / 100);
+      forfaitPrice = Math.max(calculatedPrice, config.minimum);
+      pricingInfo = `${config.percentage}% de ${estimatedProjectCost.toLocaleString("fr-FR")} €`;
+    }
+  }
+
   const prestationsAMO: Prestation[] = [
     {
       titre: "Notice descriptive + estimation prévisionnelle",
@@ -125,13 +160,13 @@ export function ForfaitRecap({ forfaitType }: ForfaitRecapProps) {
       price: "300 € HT",
     },
     {
-      titre: "Attestation thermique (PC <50 m²)",
+      titre: "Attestation thermique (Permis de Construire <50 m²)",
       description:
         "Attestation de respect de la réglementation thermique (RT/RE2020) pour dépôt de permis (<50 m²).",
       price: "16 € HT",
     },
     {
-      titre: "Étude thermique (PC >50 m²)",
+      titre: "Étude thermique (Permis de Construire >50 m²)",
       description:
         "Étude thermique réglementaire (RT/RE2020) préalable au permis de construire (>50 m²).",
       price: "90 € HT",
@@ -155,6 +190,11 @@ export function ForfaitRecap({ forfaitType }: ForfaitRecapProps) {
     forfaitType === "AMO" ?
       "Forfait AMO - Assistance à Maîtrise d'Ouvrage"
     : "Forfait MOE - Maîtrise d'Œuvre";
+
+  const projectTypeLabel =
+    projectType === "new" ? "Neuf"
+    : projectType === "renovation" ? "Rénovation"
+    : "";
 
   return (
     <div className="w-full">
@@ -209,13 +249,52 @@ export function ForfaitRecap({ forfaitType }: ForfaitRecapProps) {
             ))}
           </div>
 
-          <div className="bg-gray-50 px-6 py-4 border-t-2 border-[#deb83b]">
-            <p className="text-sm text-gray-700 text-center">
-              <span className="font-semibold text-[#0a2540]">
-                Tarif forfaitaire avantageux
-              </span>{" "}
-              - Solution clé en main pour votre projet
-            </p>
+          <div className="bg-gray-50 px-6 py-4 border-t-2 border-[#deb83b] space-y-3">
+            {projectType && (
+              <div className="flex items-center justify-center gap-2 text-sm">
+                <span className="text-gray-600">Type de projet :</span>
+                <span className="font-semibold text-[#0a2540]">
+                  {projectTypeLabel}
+                </span>
+              </div>
+            )}
+
+            {isPendingEstimation ?
+              <div className="bg-amber-50 border border-amber-200 rounded-lg p-3">
+                <div className="flex items-start gap-2">
+                  <AlertCircle className="w-4 h-4 text-amber-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <p className="text-sm font-medium text-amber-800">
+                      Coût en attente d'estimation
+                    </p>
+                    <p className="text-xs text-amber-700 mt-1">
+                      Le prix final sera calculé après l'estimation de votre
+                      projet par nos experts.
+                    </p>
+                    <p className="text-xs text-amber-700 mt-1 font-medium">
+                      Formule : {pricingInfo} + 300 € HT (prestation
+                      d'estimation)
+                    </p>
+                  </div>
+                </div>
+              </div>
+            : forfaitPrice !== null ?
+              <div className="text-center">
+                <p className="text-sm text-gray-600 mb-1">{pricingInfo}</p>
+                <p className="text-2xl font-bold text-[#0a2540]">
+                  {forfaitPrice.toLocaleString("fr-FR")} € HT
+                </p>
+                <p className="text-sm text-gray-500">
+                  ({(forfaitPrice * 1.2).toLocaleString("fr-FR")} € TTC)
+                </p>
+              </div>
+            : <p className="text-sm text-gray-700 text-center">
+                <span className="font-semibold text-[#0a2540]">
+                  Tarif forfaitaire avantageux
+                </span>{" "}
+                - Solution clé en main pour votre projet
+              </p>
+            }
           </div>
         </CardContent>
       </Card>

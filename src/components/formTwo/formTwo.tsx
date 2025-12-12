@@ -43,12 +43,13 @@ export default function FormTwo() {
     formData.moeThermalAttestationSmall ?
       "Attestation thermique (<50 m²)"
     : null,
-    formData.moeThermalStudyPc ? "Étude thermique (PC >50 m²)" : null,
+    formData.moeThermalStudyPc ? "Étude thermique (Permis de Construire >50 m²)" : null,
     formData.moeThermalStudyConstruction ?
       "Étude thermique (phase chantier)"
     : null,
     formData.moeFinalAttestationAcv ? "Attestation + ACV fin de travaux" : null,
   ].filter(Boolean) as string[];
+
 
   return (
     <div className="w-full  relative">
@@ -141,7 +142,6 @@ export default function FormTwo() {
                             );
                           }
 
-                          // For prestations flow, show selected items
                           const items =
                             formData.serviceChosen === "AMO" ?
                               selectedAmo
@@ -160,6 +160,23 @@ export default function FormTwo() {
                             </div>
                           );
                         })()}
+                        {/* Documents non fournis section */}
+                        {formData.missingDocuments &&
+                          formData.missingDocuments.length > 0 && (
+                            <div className="mt-3 pt-3 border-t border-gray-200">
+                              <div className="text-sm text-gray-500 mb-1">
+                                Documents non fournis (
+                                {formData.missingDocuments.length})
+                              </div>
+                              <ul className="space-y-1 list-disc pl-4 text-sm text-amber-600">
+                                {formData.missingDocuments.map((doc, index) => (
+                                  <li key={index}>
+                                    {doc.name} (+{doc.price}€)
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
                       </div>
                     </div>
                   </div>

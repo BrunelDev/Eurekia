@@ -174,14 +174,14 @@ const designationsMapping: Record<
     tva: 20,
   },
   moeThermalAttestationSmall: {
-    designation: `Attestation thermique (PC <50 m²)<br><br>
+    designation: `Attestation thermique (Permis de Construire <50 m²)<br><br>
     Attestation de respect de la réglementation thermique (RT/RE2020) pour dépôt de permis (<50 m²).<br><br>
     Conditions d'entrée : Données climatiques et fiches techniques des parois envoyées.`,
     pu: 30,
     tva: 20,
   },
   moeThermalStudyPc: {
-    designation: `Étude thermique (PC >50 m²)<br><br>
+    designation: `Étude thermique (Permis de Construire >50 m²)<br><br>
     Étude thermique réglementaire (RT/RE2020) préalable au permis de construire (>50 m²).<br><br>
     Conditions d'entrée : Cahier des charges thermique défini ; maquettes géométriques et descriptifs des systèmes fournis.`,
     pu: 90,
@@ -276,34 +276,96 @@ function getForfaitServices(serviceType: "AMO" | "MOE"): ServiceItem[] {
 interface ExtendedToggles extends ServiceToggles {
   flowType?: "forfait" | "prestations";
   serviceChosen?: "AMO" | "MOE";
-  missingDocuments?: string[];
+  missingDocuments?: { name: string; price: number }[];
+  // New fields for forfait pricing
+  projectType?: "new" | "renovation";
+  estimatedProjectCost?: number;
+  isEstimatedCostKnown?: boolean;
 }
 
-// Supplementary cost per missing document
-const SUPPLEMENTARY_COST_PER_DOCUMENT = 50;
+// Forfait pricing configuration
+const FORFAIT_PRICING = {
+  AMO: {
+    new: { percentage: 3.5, minimum: 3000 },
+    renovation: { percentage: 4.5, minimum: 3500 },
+  },
+  MOE: {
+    new: { percentage: 5, minimum: 3200 },
+    renovation: { percentage: 6, minimum: 3600 },
+  },
+};
+
+// Estimation fee when cost is unknown
+const ESTIMATION_FEE = 300;
 
 export function getSelectedServicesWithTotal(toggles: ExtendedToggles) {
   // Check if this is a forfait flow - if so, include all services for the chosen type
   const isForfait = toggles.flowType === "forfait";
   const serviceType = toggles.serviceChosen;
+  const projectType = toggles.projectType;
 
   let services: ServiceItem[];
+  let forfaitTotalHT: number | null = null;
+  let isPendingEstimation = false;
 
-  if (isForfait && serviceType) {
-    // Forfait flow: include all services for the selected type
+  if (isForfait && serviceType && projectType) {
+    // Forfait flow: calculate percentage-based pricing
+    const config =
+      FORFAIT_PRICING[serviceType][projectType as "new" | "renovation"];
+
+    if (
+      toggles.isEstimatedCostKnown === false ||
+      toggles.estimatedProjectCost === undefined
+    ) {
+      // Cost is unknown - pending estimation
+      isPendingEstimation = true;
+      forfaitTotalHT = null;
+
+      // Add the estimation prestation
+      services = [
+        {
+          key: "estimation_prestation",
+          designation: `Notice descriptive + estimation prévisionnelle<br><br>
+          Élaboration d'un descriptif sommaire du projet avec estimation indicative du coût des travaux.<br><br>
+          Le coût final du forfait sera calculé après cette estimation.`,
+          pu: ESTIMATION_FEE,
+          tva: 20,
+        },
+      ];
+    } else {
+      // Cost is known - calculate percentage-based price
+      const calculatedPrice =
+        toggles.estimatedProjectCost * (config.percentage / 100);
+      forfaitTotalHT = Math.max(calculatedPrice, config.minimum);
+
+      // For forfait with known cost, we create a single line item
+      services = [
+        {
+          key: "forfait_total",
+          designation: `Forfait ${serviceType} ${projectType === "new" ? "Neuf" : "Rénovation"}<br><br>
+          ${config.percentage}% du coût prévisionnel des travaux (${toggles.estimatedProjectCost.toLocaleString("fr-FR")} €)<br><br>
+          Plancher minimum : ${config.minimum.toLocaleString("fr-FR")} € HT<br><br>
+          Comprend toutes les prestations ${serviceType}.`,
+          pu: forfaitTotalHT,
+          tva: 20,
+        },
+      ];
+    }
+  } else if (isForfait && serviceType) {
+    // Forfait flow but project type not yet selected - show all services for display
     services = getForfaitServices(serviceType);
   } else {
     // Prestations flow: only include manually selected services
     services = getSelectedServices(toggles);
   }
 
-  // Add supplementary costs for missing documents
+  // Add supplementary costs for missing documents (using individual prices)
   const missingDocuments = toggles.missingDocuments || [];
   const supplementaryCosts: ServiceItem[] = missingDocuments.map(
-    (docName, index) => ({
+    (doc, index) => ({
       key: `supplementary_${index}`,
-      designation: `Coût supplémentaire pour la conception du document : ${docName}`,
-      pu: SUPPLEMENTARY_COST_PER_DOCUMENT,
+      designation: `Coût supplémentaire pour la conception du document : ${doc.name}`,
+      pu: doc.price,
       tva: 20,
     })
   );
@@ -321,5 +383,9 @@ export function getSelectedServicesWithTotal(toggles: ExtendedToggles) {
     totalHT,
     totalTTC,
     count: allServices.length,
+    // New fields for forfait pricing
+    isForfait,
+    isPendingEstimation,
+    forfaitTotalHT,
   };
 }
