@@ -330,10 +330,11 @@ export const useFormState = create<FormState>()(
             moeThermalStudyPc: false,
             moeThermalStudyConstruction: false,
             moeFinalAttestationAcv: false,
-            // Reset forfait flow fields
-            projectType: undefined,
-            estimatedProjectCost: undefined,
-            isEstimatedCostKnown: undefined,
+            
+
+            // Reset form fields
+            missingDocuments: [],
+            uploadedFiles: [],
           },
         })),
 

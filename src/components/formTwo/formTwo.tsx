@@ -43,13 +43,14 @@ export default function FormTwo() {
     formData.moeThermalAttestationSmall ?
       "Attestation thermique (<50 m²)"
     : null,
-    formData.moeThermalStudyPc ? "Étude thermique (Permis de Construire >50 m²)" : null,
+    formData.moeThermalStudyPc ?
+      "Étude thermique (Permis de Construire >50 m²)"
+    : null,
     formData.moeThermalStudyConstruction ?
       "Étude thermique (phase chantier)"
     : null,
     formData.moeFinalAttestationAcv ? "Attestation + ACV fin de travaux" : null,
   ].filter(Boolean) as string[];
-
 
   return (
     <div className="w-full  relative">
@@ -127,12 +128,10 @@ export default function FormTwo() {
                         {(() => {
                           // For forfait flow, show that all prestations are included
                           if (isForfaitFlow) {
-                            const count =
-                              formData.serviceChosen === "AMO" ? 9 : 13;
                             return (
                               <div>
                                 <div className="text-sm text-gray-500 mb-1">
-                                  Forfait complet ({count} prestations)
+                                  Forfait complet
                                 </div>
                                 <p className="text-xs text-gray-600">
                                   Toutes les prestations{" "}
@@ -168,7 +167,7 @@ export default function FormTwo() {
                                 Documents non fournis (
                                 {formData.missingDocuments.length})
                               </div>
-                              <ul className="space-y-1 list-disc pl-4 text-sm text-amber-600">
+                              <ul className="space-y-1 list-disc pl-4 text-sm">
                                 {formData.missingDocuments.map((doc, index) => (
                                   <li key={index}>
                                     {doc.name} (+{doc.price}€)

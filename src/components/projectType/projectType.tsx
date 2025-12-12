@@ -91,11 +91,11 @@ export function ProjectType() {
       <div className="flex justify-center items-center gap-4 translate-y-[-1rem] animate-fade-in opacity-1 [--animation-delay:400ms]">
         <BackButton
           handleClick={() => {
-            // Go back to estimated cost step
+            // Go back to estimated cost step only (reset isEstimatedCostKnown)
             updateFormData({
-              projectType: undefined,
               isEstimatedCostKnown: undefined,
               estimatedProjectCost: undefined,
+              descriptiveNotice: false,
             });
           }}
         />

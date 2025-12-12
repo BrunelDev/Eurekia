@@ -58,10 +58,6 @@ export default function FormOne() {
           onClick={() => {
             const newService = selectedService === "AMO" ? undefined : "AMO";
             setSelectedService(newService);
-            // Reset step 3 when changing service type
-            if (newService !== formData.serviceChosen) {
-              resetStepThree();
-            }
           }}
           prestation={{
             selected: selectedService === "AMO",
@@ -99,10 +95,6 @@ export default function FormOne() {
           onClick={() => {
             const newService = selectedService === "MOE" ? undefined : "MOE";
             setSelectedService(newService);
-            // Reset step 3 when changing service type
-            if (newService !== formData.serviceChosen) {
-              resetStepThree();
-            }
           }}
           prestation={{
             selected: selectedService === "MOE",
@@ -160,6 +152,7 @@ export default function FormOne() {
               isStepOneChecked: true,
               serviceChosen: selectedService || undefined,
             });
+            resetStepThree();
           }}
           disabled={!selectedService}
         />
