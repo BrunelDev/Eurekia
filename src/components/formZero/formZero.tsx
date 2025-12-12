@@ -18,7 +18,7 @@ export default function FormZero() {
   const [selectedFlow, setSelectedFlow] = useState<
     "forfait" | "prestations" | undefined
   >(formData.flowType);
-  const [isSizeChecked, setIsSizeChecked] = useState(!!formData.flowType);
+  const [isSizeChecked, setIsSizeChecked] = useState(false);
 
   const flowChoices: FlowChoice[] = [
     {
