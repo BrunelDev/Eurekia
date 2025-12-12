@@ -18,6 +18,7 @@ export default function FormZero() {
   const [selectedFlow, setSelectedFlow] = useState<
     "forfait" | "prestations" | undefined
   >(formData.flowType);
+  const [isSizeChecked, setIsSizeChecked] = useState(!!formData.flowType);
 
   const flowChoices: FlowChoice[] = [
     {
@@ -52,94 +53,141 @@ export default function FormZero() {
 
   return (
     <div className="px-4 my-6 space-y-8">
-      {/* Header */}
-      <div className="text-center space-y-3 translate-y-[-1rem] animate-fade-in opacity-1 [--animation-delay:200ms]">
-        <h1 className="text-3xl sm:text-4xl font-bold text-[#0a2540]">
-          Choisissez votre formule
-        </h1>
-        <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-          Sélectionnez la formule qui correspond le mieux à vos besoins et à
-          votre projet
-        </p>
-      </div>
+      {!isSizeChecked ?
+        <div className="max-w-2xl mx-auto space-y-8">
+          <div className="text-center space-y-3 translate-y-[-1rem] animate-fade-in opacity-1 [--animation-delay:200ms]">
+            <h1 className="text-3xl sm:text-4xl font-bold text-[#0a2540]">
+              Surface du projet
+            </h1>
+            <p className="text-base sm:text-lg text-gray-600">
+              Pour mieux vous orienter, nous avons besoin de connaître la
+              surface de votre chantier.
+            </p>
+          </div>
 
-      {/* Flow Choice Cards */}
-      <div className="flex flex-col lg:flex-row justify-center gap-6 sm:gap-8 items-stretch">
-        {flowChoices.map((choice) => (
-          <div
-            key={choice.type}
-            onClick={() => {
-              setSelectedFlow(choice.type);
-              // Reset step 3 selections when changing flow type
-              if (choice.type !== formData.flowType) {
-                resetStepThree();
-              }
-            }}
-            className={`w-full max-w-[500px] mx-auto rounded-xl overflow-hidden shadow-xl cursor-pointer transition-all duration-200 ${
-              selectedFlow === choice.type ?
-                "border-2 border-[#deb83b] ring-2 ring-[#deb83b] ring-opacity-30 scale-[1.02]"
-              : "border border-gray-200 hover:border-[#deb83b] hover:border-opacity-50 hover:scale-[1.01]"
-            }`}
-          >
-            {/* Top Section - Dark Navy */}
-            <div className="bg-[#0a2540] text-white p-6 sm:p-8">
-              <choice.icon
-                className={`w-10 h-10 mb-4 transition-colors ${selectedFlow === choice.type ? "text-[#deb83b]" : "text-gray-300"}`}
-                strokeWidth={1.5}
-              />
-              <h2 className="text-2xl sm:text-3xl font-bold mb-2">
-                {choice.titre}
-              </h2>
-              <p className="text-base text-gray-200 italic">
-                {choice.sousTitre}
-              </p>
-            </div>
+          <div className="bg-white p-8 rounded-xl shadow-lg border border-gray-100 text-center space-y-6">
+            <p className="text-xl font-medium text-gray-900">
+              Votre chantier est-il inférieur à 150m² ?
+            </p>
 
-            {/* Bottom Section - Light Gray */}
-            <div className="bg-gray-50 p-6 sm:p-8 space-y-4">
-              <p className="text-sm text-gray-700 leading-relaxed">
-                {choice.description}
-              </p>
-
-              <div>
-                <h3 className="text-base font-semibold text-gray-900 mb-3">
-                  Avantages
-                </h3>
-                <ul className="space-y-2 text-sm text-gray-700">
-                  {choice.avantages.map((avantage, index) => (
-                    <li key={index} className="flex items-start">
-                      <span className="text-[#deb83b] mr-2 font-bold">✓</span>
-                      <span>{avantage}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <button
+                onClick={() => {
+                  window.location.href = "/";
+                }}
+                className="px-8 py-3 rounded-lg border-2 border-gray-200 text-gray-600 font-medium hover:border-gray-300 hover:bg-gray-50 transition-colors"
+              >
+                Non, il est supérieur
+              </button>
+              <button
+                onClick={() => setIsSizeChecked(true)}
+                className="px-8 py-3 rounded-lg bg-[#0a2540] text-white font-medium hover:bg-[#0a2540]/90 transition-colors shadow-lg hover:shadow-xl"
+              >
+                Oui, il est inférieur
+              </button>
             </div>
           </div>
-        ))}
-      </div>
 
-      {/* Continue Button */}
-      <div className="flex justify-center items-center gap-4 translate-y-[-1rem] animate-fade-in opacity-1 [--animation-delay:400ms]">
-        <BackButton
-          handleClick={() => {
-            // Navigate to homepage or reset
-            window.location.href = "/";
-          }}
-        />
-        <PrimaryButton
-          handleClick={() => {
-            if (selectedFlow) {
-              updateFormData({
-                ...formData,
-                flowType: selectedFlow,
-                isStepZeroChecked: true,
-              });
-            }
-          }}
-          disabled={!selectedFlow}
-        />
-      </div>
+          <div className="flex justify-center">
+            <BackButton
+              handleClick={() => {
+                window.location.href = "/";
+              }}
+            />
+          </div>
+        </div>
+      : <>
+          {/* Header */}
+          <div className="text-center space-y-3 translate-y-[-1rem] animate-fade-in opacity-1 [--animation-delay:200ms]">
+            <h1 className="text-3xl sm:text-4xl font-bold text-[#0a2540]">
+              Choisissez votre formule
+            </h1>
+            <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
+              Sélectionnez la formule qui correspond le mieux à vos besoins et à
+              votre projet
+            </p>
+          </div>
+
+          {/* Flow Choice Cards */}
+          <div className="flex flex-col lg:flex-row justify-center gap-6 sm:gap-8 items-stretch">
+            {flowChoices.map((choice) => (
+              <div
+                key={choice.type}
+                onClick={() => {
+                  setSelectedFlow(choice.type);
+                  // Reset step 3 selections when changing flow type
+                  if (choice.type !== formData.flowType) {
+                    resetStepThree();
+                  }
+                }}
+                className={`w-full max-w-[500px] mx-auto rounded-xl overflow-hidden shadow-xl cursor-pointer transition-all duration-200 ${
+                  selectedFlow === choice.type ?
+                    "border-2 border-[#deb83b] ring-2 ring-[#deb83b] ring-opacity-30 scale-[1.02]"
+                  : "border border-gray-200 hover:border-[#deb83b] hover:border-opacity-50 hover:scale-[1.01]"
+                }`}
+              >
+                {/* Top Section - Dark Navy */}
+                <div className="bg-[#0a2540] text-white p-6 sm:p-8">
+                  <choice.icon
+                    className={`w-10 h-10 mb-4 transition-colors ${selectedFlow === choice.type ? "text-[#deb83b]" : "text-gray-300"}`}
+                    strokeWidth={1.5}
+                  />
+                  <h2 className="text-2xl sm:text-3xl font-bold mb-2">
+                    {choice.titre}
+                  </h2>
+                  <p className="text-base text-gray-200 italic">
+                    {choice.sousTitre}
+                  </p>
+                </div>
+
+                {/* Bottom Section - Light Gray */}
+                <div className="bg-gray-50 p-6 sm:p-8 space-y-4">
+                  <p className="text-sm text-gray-700 leading-relaxed">
+                    {choice.description}
+                  </p>
+
+                  <div>
+                    <h3 className="text-base font-semibold text-gray-900 mb-3">
+                      Avantages
+                    </h3>
+                    <ul className="space-y-2 text-sm text-gray-700">
+                      {choice.avantages.map((avantage, index) => (
+                        <li key={index} className="flex items-start">
+                          <span className="text-[#deb83b] mr-2 font-bold">
+                            ✓
+                          </span>
+                          <span>{avantage}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Continue Button */}
+          <div className="flex justify-center items-center gap-4 translate-y-[-1rem] animate-fade-in opacity-1 [--animation-delay:400ms]">
+            <BackButton
+              handleClick={() => {
+                setIsSizeChecked(false);
+              }}
+            />
+            <PrimaryButton
+              handleClick={() => {
+                if (selectedFlow) {
+                  updateFormData({
+                    ...formData,
+                    flowType: selectedFlow,
+                    isStepZeroChecked: true,
+                  });
+                }
+              }}
+              disabled={!selectedFlow}
+            />
+          </div>
+        </>
+      }
     </div>
   );
 }
