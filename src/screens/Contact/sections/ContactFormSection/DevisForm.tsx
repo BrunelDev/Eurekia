@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 
@@ -130,9 +131,7 @@ export default function DevisForm() {
           Niveau de performance énergétique
         </Label>
 
-        <select
-          className="border-0 border-b-2 border-gray-300 py-3 text-[#1e1e1e] bg-transparent focus:border-yellow-400 outline-none [font-family:'Sofia_Pro']"
-        >
+        <select className="border-0 border-b-2 border-gray-300 py-3 text-[#1e1e1e] bg-transparent focus:border-yellow-400 outline-none [font-family:'Sofia_Pro']">
           <option>Sélectionner…</option>
           <option>À rafraîchir ou rénovation lourde</option>
           <option>RT2012</option>
@@ -171,8 +170,14 @@ export default function DevisForm() {
             "Plus de 300 000 €",
           ].map((label, i) => (
             <label key={i} className="flex gap-3 items-center cursor-pointer">
-              <input type="radio" name="budget" className="w-4 h-4 accent-[#cd9f25]" />
-              <span className="text-[#1e1e1e] [font-family:'Sofia_Pro']">{label}</span>
+              <input
+                type="radio"
+                name="budget"
+                className="w-4 h-4 accent-[#cd9f25]"
+              />
+              <span className="text-[#1e1e1e] [font-family:'Sofia_Pro']">
+                {label}
+              </span>
             </label>
           ))}
         </div>
@@ -192,12 +197,13 @@ export default function DevisForm() {
       </div>
 
       {/* SUBMIT */}
-      <button
+
+      <Button
         type="submit"
-        className="w-full bg-[#cd9f25] text-white py-3 rounded-lg font-semibold hover:bg-[#b8891f] transition-colors duration-200 [font-family:'Sofia_Pro']"
+        className="w-full md:w-auto bg-[#F6F2CB] hover:bg-[#EFE299] text-black py-3 px-8 shadow-none rounded-none disabled:opacity-50 [font-family:'Sofia_Pro']"
       >
         ENVOYER MA DEMANDE
-      </button>
+      </Button>
     </form>
   );
 }
