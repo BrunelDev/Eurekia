@@ -1,9 +1,11 @@
 import { DraftingCompass, HardHat } from "lucide-react";
 import { useState } from "react";
 import { useFormState } from "../../context/useFormState";
+import { EstimatedCost } from "../estimatedCost/estimatedCost";
 import BackButton from "../formTwo/PrimaryButton/BackButton";
 import { PrimaryButton } from "../formTwo/PrimaryButton/PrimaryButton";
 import { PrestationCard } from "../prestationCard";
+import { ProjectType } from "../projectType/projectType";
 
 export default function FormOne() {
   const { formData, updateFormData, resetStepThree } = useFormState();
@@ -18,6 +20,25 @@ export default function FormOne() {
       "Choisissez votre type de forfait"
     : "Choisissez votre type de prestations";
 
+  // For forfait flow, we need to check steps in order:
+  // 1. Estimated cost (isEstimatedCostKnown must be set)
+  // 2. Project type (projectType must be set)
+  // 3. AMO vs MOE selection
+
+  // For prestations flow, skip directly to AMO vs MOE selection
+  if (isForfaitFlow) {
+    // Step 1: Check if estimated cost is known
+    if (formData.isEstimatedCostKnown === undefined) {
+      return <EstimatedCost />;
+    }
+
+    // Step 2: Check if project type is selected
+    if (!formData.projectType) {
+      return <ProjectType />;
+    }
+  }
+
+  // Step 3 (or Step 1 for prestations): AMO vs MOE selection
   return (
     <div className="px-4 my-6 space-y-8">
       {/* Title */}
@@ -37,10 +58,6 @@ export default function FormOne() {
           onClick={() => {
             const newService = selectedService === "AMO" ? undefined : "AMO";
             setSelectedService(newService);
-            // Reset step 3 when changing service type
-            if (newService !== formData.serviceChosen) {
-              resetStepThree();
-            }
           }}
           prestation={{
             selected: selectedService === "AMO",
@@ -78,10 +95,6 @@ export default function FormOne() {
           onClick={() => {
             const newService = selectedService === "MOE" ? undefined : "MOE";
             setSelectedService(newService);
-            // Reset step 3 when changing service type
-            if (newService !== formData.serviceChosen) {
-              resetStepThree();
-            }
           }}
           prestation={{
             selected: selectedService === "MOE",
@@ -118,11 +131,18 @@ export default function FormOne() {
       <div className="flex justify-center items-center gap-4">
         <BackButton
           handleClick={() => {
-            updateFormData({
-              ...formData,
-              isStepZeroChecked: false,
-              isStepOneChecked: false,
-            });
+            if (isForfaitFlow) {
+              // Go back to project type selection
+              updateFormData({
+                projectType: undefined,
+              });
+            } else {
+              // Go back to flow selection
+              updateFormData({
+                isStepZeroChecked: false,
+                isStepOneChecked: false,
+              });
+            }
           }}
         />
         <PrimaryButton
@@ -132,6 +152,7 @@ export default function FormOne() {
               isStepOneChecked: true,
               serviceChosen: selectedService || undefined,
             });
+            resetStepThree();
           }}
           disabled={!selectedService}
         />

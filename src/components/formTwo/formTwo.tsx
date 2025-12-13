@@ -43,7 +43,9 @@ export default function FormTwo() {
     formData.moeThermalAttestationSmall ?
       "Attestation thermique (<50 m²)"
     : null,
-    formData.moeThermalStudyPc ? "Étude thermique (PC >50 m²)" : null,
+    formData.moeThermalStudyPc ?
+      "Étude thermique (Permis de Construire >50 m²)"
+    : null,
     formData.moeThermalStudyConstruction ?
       "Étude thermique (phase chantier)"
     : null,
@@ -126,12 +128,10 @@ export default function FormTwo() {
                         {(() => {
                           // For forfait flow, show that all prestations are included
                           if (isForfaitFlow) {
-                            const count =
-                              formData.serviceChosen === "AMO" ? 9 : 13;
                             return (
                               <div>
                                 <div className="text-sm text-gray-500 mb-1">
-                                  Forfait complet ({count} prestations)
+                                  Forfait complet
                                 </div>
                                 <p className="text-xs text-gray-600">
                                   Toutes les prestations{" "}
@@ -141,7 +141,6 @@ export default function FormTwo() {
                             );
                           }
 
-                          // For prestations flow, show selected items
                           const items =
                             formData.serviceChosen === "AMO" ?
                               selectedAmo
@@ -160,6 +159,23 @@ export default function FormTwo() {
                             </div>
                           );
                         })()}
+                        {/* Documents non fournis section */}
+                        {formData.missingDocuments &&
+                          formData.missingDocuments.length > 0 && (
+                            <div className="mt-3 pt-3 border-t border-gray-200">
+                              <div className="text-sm text-gray-500 mb-1">
+                                Documents non fournis (
+                                {formData.missingDocuments.length})
+                              </div>
+                              <ul className="space-y-1 list-disc pl-4 text-sm">
+                                {formData.missingDocuments.map((doc, index) => (
+                                  <li key={index}>
+                                    {doc.name} (+{doc.price}€)
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                          )}
                       </div>
                     </div>
                   </div>

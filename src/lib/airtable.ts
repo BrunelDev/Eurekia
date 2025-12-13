@@ -24,6 +24,10 @@ export interface ClientSubmission {
 
   // Date of submission
   dateSubmission: string;
+
+  // File attachments (base64 encoded)
+  devisPdf?: { base64: string; filename: string };
+  uploadedFiles?: { name: string; base64: string; type: string }[];
 }
 
 /**
@@ -41,6 +45,84 @@ const formatPhoneForAirtable = (phone: string): string => {
   }
 
   return phone; // Return as-is if format is unexpected
+};
+
+/**
+ * Upload a file to an Airtable record's attachment field
+ * Note: Airtable's uploadAttachment API requires field ID (fld...) or exact field name
+ *
+ * Environment variables needed:
+ * - VITE_AIRTABLE_DEVIS_FIELD_ID: Field ID for Devis column (e.g., "fldXXXXXXXXXXXXXX")
+ * - VITE_AIRTABLE_PIECES_JOINTES_FIELD_ID: Field ID for Pièces jointes column
+ */
+const uploadAttachment = async (
+  recordId: string,
+  fieldIdOrName: string,
+  file: { base64: string; filename: string; contentType: string }
+): Promise<void> => {
+  const baseId = import.meta.env.VITE_AIRTABLE_BASE_ID;
+  const apiKey = import.meta.env.VITE_AIRTABLE_API_TOKEN;
+
+  if (!baseId || !apiKey) {
+    console.error("Missing Airtable configuration");
+    return;
+  }
+
+  // Debug logging
+  // Note: Field IDs like "fldXXXX" don't need URL encoding
+  const url = `https://content.airtable.com/v0/${baseId}/${recordId}/${fieldIdOrName}/uploadAttachment`;
+
+  // Validate base64 content
+  if (!file.base64 || file.base64.length === 0) {
+    console.error("Empty base64 content for file:", file.filename);
+    return;
+  }
+
+  // Make sure base64 doesn't have data URI prefix
+  let cleanBase64 = file.base64;
+  if (cleanBase64.includes(",")) {
+    cleanBase64 = cleanBase64.split(",")[1];
+  }
+
+  console.log("Upload URL:", url);
+  console.log("File info:", {
+    filename: file.filename,
+    contentType: file.contentType,
+    base64Length: cleanBase64?.length || 0,
+    base64Preview: cleanBase64?.substring(0, 50) + "...",
+  });
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        contentType: file.contentType,
+        file: cleanBase64,
+        filename: file.filename,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(
+        `Failed to upload attachment to field "${fieldIdOrName}":`,
+        errorText
+      );
+      console.error(
+        "Make sure the field exists in Airtable as an 'Attachment' type field"
+      );
+    } else {
+      console.log(
+        `Successfully uploaded ${file.filename} to field ${fieldIdOrName}`
+      );
+    }
+  } catch (error) {
+    console.error("Error uploading attachment:", error);
+  }
 };
 
 /**
@@ -72,7 +154,8 @@ export const storeClientSubmission = async (
       apiKey: import.meta.env.VITE_AIRTABLE_API_TOKEN,
     }).base(import.meta.env.VITE_AIRTABLE_BASE_ID!);
 
-    return new Promise((resolve, reject) => {
+    // First, create the record with text fields
+    const recordId = await new Promise<string>((resolve, reject) => {
       base(import.meta.env.VITE_AIRTABLE_TABLE_NAME!).create(
         [
           {
@@ -107,6 +190,42 @@ export const storeClientSubmission = async (
         }
       );
     });
+
+    // Get field IDs from environment (fallback to field names if not set)
+    const devisFieldId =
+      import.meta.env.VITE_AIRTABLE_DEVIS_FIELD_ID || "Devis";
+    const piecesJointesFieldId =
+      import.meta.env.VITE_AIRTABLE_PIECES_JOINTES_FIELD_ID || "Pièces jointes";
+
+    // Upload devis PDF if provided
+    if (clientData.devisPdf) {
+      try {
+        await uploadAttachment(recordId, devisFieldId, {
+          base64: clientData.devisPdf.base64,
+          filename: clientData.devisPdf.filename,
+          contentType: "application/pdf",
+        });
+      } catch (error) {
+        console.error("Error uploading devis PDF:", error);
+      }
+    }
+
+    // Upload user-provided files if any
+    if (clientData.uploadedFiles && clientData.uploadedFiles.length > 0) {
+      for (const file of clientData.uploadedFiles) {
+        try {
+          await uploadAttachment(recordId, piecesJointesFieldId, {
+            base64: file.base64,
+            filename: file.name,
+            contentType: file.type || "application/octet-stream",
+          });
+        } catch (error) {
+          console.error(`Error uploading file ${file.name}:`, error);
+        }
+      }
+    }
+
+    return recordId;
   } catch (error) {
     console.error("Erreur lors de la soumission à Airtable:", error);
     throw error;
@@ -208,16 +327,18 @@ export const extractSelectedPrestations = (formData: FormData): string[] => {
  *
  * @param formData - The complete form data from the form state
  * @param documentsChecked - Array of document names that were checked
+ * @param devisPdf - Optional devis PDF as base64
  * @returns Promise with the created record ID
  *
  * @example
  * ```typescript
- * const recordId = await storeFormSubmission(formData, ["CGV", "Privacy Policy"]);
+ * const recordId = await storeFormSubmission(formData, ["CGV", "Privacy Policy"], { base64: "...", filename: "devis.pdf" });
  * ```
  */
 export const storeFormSubmission = async (
   formData: FormData,
-  documentsChecked: string[] = []
+  documentsChecked: string[] = [],
+  devisPdf?: { base64: string; filename: string }
 ): Promise<string> => {
   const prestationsChoisies = extractSelectedPrestations(formData);
 
@@ -232,6 +353,8 @@ export const storeFormSubmission = async (
     prestationsChoisies,
     documentsChecked,
     dateSubmission: new Date().toISOString(),
+    devisPdf,
+    uploadedFiles: formData.uploadedFiles,
   };
 
   return storeClientSubmission(clientSubmission);

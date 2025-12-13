@@ -217,7 +217,10 @@ export default function FormThree() {
         // Vous pouvez ajouter ici les documents qui ont été cochés
         const documentsChecked = ["CGV", "Politique de confidentialité"]; // À adapter selon vos besoins
 
-        await storeFormSubmission(updatedFormData, documentsChecked);
+        await storeFormSubmission(updatedFormData, documentsChecked, {
+          base64: base64pdf, // blobToBase64 already returns pure base64 without prefix
+          filename: `devis-${prenom}-${nom}.pdf`,
+        });
         console.log("Données stockées dans Airtable avec succès");
       } catch (airtableError) {
         console.error("Erreur lors du stockage dans Airtable:", airtableError);

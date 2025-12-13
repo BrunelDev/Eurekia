@@ -48,7 +48,7 @@ Nous vous remercions de votre intérêt.
 
 Veuillez trouver ci-joint le document demandé au format PDF.
 
-Si vous avez des questions, n'hésitez pas à nous contacter au ${numero}.
+Si vous avez des questions, n'hésitez pas à nous contacter au +33 6 15 66 39 70.
 
 Cordialement,
 L'équipe
@@ -56,7 +56,7 @@ L'équipe
 
       // Configuration de l'email pour Resend
       const emailPayload = {
-        from: "onboarding@resend.dev", // À remplacer par votre domaine vérifié
+        from: "contact@eurekaingenierie.com",
         to: email,
         subject: sujet,
         text: corpsMessage,

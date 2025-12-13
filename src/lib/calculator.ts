@@ -174,14 +174,14 @@ const designationsMapping: Record<
     tva: 20,
   },
   moeThermalAttestationSmall: {
-    designation: `Attestation thermique (PC <50 m²)<br><br>
+    designation: `Attestation thermique (Permis de Construire <50 m²)<br><br>
     Attestation de respect de la réglementation thermique (RT/RE2020) pour dépôt de permis (<50 m²).<br><br>
     Conditions d'entrée : Données climatiques et fiches techniques des parois envoyées.`,
     pu: 30,
     tva: 20,
   },
   moeThermalStudyPc: {
-    designation: `Étude thermique (PC >50 m²)<br><br>
+    designation: `Étude thermique (Permis de Construire >50 m²)<br><br>
     Étude thermique réglementaire (RT/RE2020) préalable au permis de construire (>50 m²).<br><br>
     Conditions d'entrée : Cahier des charges thermique défini ; maquettes géométriques et descriptifs des systèmes fournis.`,
     pu: 90,
@@ -223,28 +223,169 @@ function getSelectedServices(toggles: ServiceToggles): ServiceItem[] {
   return selectedServices;
 }
 
-// Exemple d'utilisation :
-const services: ServiceToggles = {
-  descriptiveNotice: true,
-  accessibilityNotice: true,
-  moeDiagnostic: false,
-  moeFeasibility: true,
+// All AMO service keys for forfait
+const AMO_FORFAIT_KEYS = [
+  "descriptiveNotice",
+  "urbanismAuthorization",
+  "accessibilityNotice",
+  "fireSecurityNotice",
+  "planningStudies",
+  "concessionaryProcedures",
+  "geotechnicalSpecifications",
+  "ccapRedaction",
+  "consultationRegulation",
+] as const;
+
+// All MOE service keys for forfait
+const MOE_FORFAIT_KEYS = [
+  "moeDiagnostic",
+  "moeFeasibility",
+  "moeApsApd",
+  "moeDceAct",
+  "moeExecutionPlans",
+  "moeElectricalCalc",
+  "moePlumbingCalc",
+  "moeHvacCalc",
+  "moeVrdCalc",
+  "moeThermalAttestationSmall",
+  "moeThermalStudyPc",
+  "moeThermalStudyConstruction",
+  "moeFinalAttestationAcv",
+] as const;
+
+/**
+ * Get all services for a forfait based on the service type (AMO or MOE)
+ */
+function getForfaitServices(serviceType: "AMO" | "MOE"): ServiceItem[] {
+  const keys = serviceType === "AMO" ? AMO_FORFAIT_KEYS : MOE_FORFAIT_KEYS;
+
+  return keys.map((key) => {
+    const mapping = designationsMapping[key];
+    return {
+      key,
+      designation: mapping.designation,
+      pu: mapping.pu || 0,
+      tva: mapping.tva || 20,
+    };
+  });
+}
+
+/**
+ * Extended toggles interface that includes forfait flow information and missing documents
+ */
+interface ExtendedToggles extends ServiceToggles {
+  flowType?: "forfait" | "prestations";
+  serviceChosen?: "AMO" | "MOE";
+  missingDocuments?: { name: string; price: number }[];
+  // New fields for forfait pricing
+  projectType?: "new" | "renovation";
+  estimatedProjectCost?: number;
+  isEstimatedCostKnown?: boolean;
+}
+
+// Forfait pricing configuration
+const FORFAIT_PRICING = {
+  AMO: {
+    new: { percentage: 3.5, minimum: 3000 },
+    renovation: { percentage: 4.5, minimum: 3500 },
+  },
+  MOE: {
+    new: { percentage: 5, minimum: 3200 },
+    renovation: { percentage: 6, minimum: 3600 },
+  },
 };
 
-const selectedList = getSelectedServices(services);
+// Estimation fee when cost is unknown
+const ESTIMATION_FEE = 300;
 
-export function getSelectedServicesWithTotal(toggles: ServiceToggles) {
-  const services = getSelectedServices(toggles);
+export function getSelectedServicesWithTotal(toggles: ExtendedToggles) {
+  // Check if this is a forfait flow - if so, include all services for the chosen type
+  const isForfait = toggles.flowType === "forfait";
+  const serviceType = toggles.serviceChosen;
+  const projectType = toggles.projectType;
 
-  const totalHT = services.reduce((sum, service) => sum + service.pu, 0);
-  const totalTTC = services.reduce((sum, service) => {
+  let services: ServiceItem[];
+  let forfaitTotalHT: number | null = null;
+  let isPendingEstimation = false;
+
+  if (isForfait && serviceType && projectType) {
+    // Forfait flow: calculate percentage-based pricing
+    const config =
+      FORFAIT_PRICING[serviceType][projectType as "new" | "renovation"];
+
+    if (
+      toggles.isEstimatedCostKnown === false ||
+      toggles.estimatedProjectCost === undefined
+    ) {
+      // Cost is unknown - pending estimation
+      isPendingEstimation = true;
+      forfaitTotalHT = null;
+
+      // Add the estimation prestation
+      services = [
+        {
+          key: "estimation_prestation",
+          designation: `Notice descriptive + estimation prévisionnelle<br><br>
+          Élaboration d'un descriptif sommaire du projet avec estimation indicative du coût des travaux.<br><br>
+          Le coût final du forfait sera calculé après cette estimation.`,
+          pu: ESTIMATION_FEE,
+          tva: 20,
+        },
+      ];
+    } else {
+      // Cost is known - calculate percentage-based price
+      const calculatedPrice =
+        toggles.estimatedProjectCost * (config.percentage / 100);
+      forfaitTotalHT = Math.max(calculatedPrice, config.minimum);
+
+      // For forfait with known cost, we create a single line item
+      services = [
+        {
+          key: "forfait_total",
+          designation: `Forfait ${serviceType} ${projectType === "new" ? "Neuf" : "Rénovation"}<br><br>
+          ${config.percentage}% du coût prévisionnel des travaux (${toggles.estimatedProjectCost.toLocaleString("fr-FR")} €)<br><br>
+          Plancher minimum : ${config.minimum.toLocaleString("fr-FR")} € HT<br><br>
+          Comprend toutes les prestations ${serviceType}.`,
+          pu: forfaitTotalHT,
+          tva: 20,
+        },
+      ];
+    }
+  } else if (isForfait && serviceType) {
+    // Forfait flow but project type not yet selected - show all services for display
+    services = getForfaitServices(serviceType);
+  } else {
+    // Prestations flow: only include manually selected services
+    services = getSelectedServices(toggles);
+  }
+
+  // Add supplementary costs for missing documents (using individual prices)
+  const missingDocuments = toggles.missingDocuments || [];
+  const supplementaryCosts: ServiceItem[] = missingDocuments.map(
+    (doc, index) => ({
+      key: `supplementary_${index}`,
+      designation: `Coût supplémentaire pour la conception du document : ${doc.name}`,
+      pu: doc.price,
+      tva: 20,
+    })
+  );
+
+  // Combine services with supplementary costs
+  const allServices = [...services, ...supplementaryCosts];
+
+  const totalHT = allServices.reduce((sum, service) => sum + service.pu, 0);
+  const totalTTC = allServices.reduce((sum, service) => {
     return sum + service.pu * (1 + service.tva / 100);
   }, 0);
 
   return {
-    services,
+    services: allServices,
     totalHT,
     totalTTC,
-    count: services.length,
+    count: allServices.length,
+    // New fields for forfait pricing
+    isForfait,
+    isPendingEstimation,
+    forfaitTotalHT,
   };
 }

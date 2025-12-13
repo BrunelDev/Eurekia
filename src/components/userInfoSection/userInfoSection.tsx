@@ -107,6 +107,11 @@ export const UserInfoSection = () => {
     if (stepIndex === 1 && formData.isStepOneChecked) {
       updateFormData({
         ...formData,
+        // Reset forfait flow fields
+        projectType: undefined,
+        estimatedProjectCost: undefined,
+        isEstimatedCostKnown: undefined,
+
         isStepOneChecked: false,
         isStepTwoChecked: false,
         isStepThreeChecked: false,
