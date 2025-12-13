@@ -56,9 +56,7 @@ export const AboutUsSection = (): JSX.Element => {
                 <div
                   className="h-64 sm:h-80 w-full rounded-lg mb-6 bg-cover bg-center"
                   style={{
-                    backgroundImage: category.backgroundOverlay
-                      ? `linear-gradient(0deg, rgba(72,54,33,0.4), rgba(72,54,33,0.4)), ${category.backgroundImage}`
-                      : category.backgroundImage,
+                    backgroundImage: category.backgroundImage,
                   }}
                 />
                 <CardContent className="p-0 flex flex-col gap-5 flex-grow">

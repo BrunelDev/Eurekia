@@ -1,6 +1,7 @@
 import { ArrowRightIcon } from "lucide-react";
 import ArrowButton from "../../../../components/ArrowButton";
 import { Card, CardContent } from "../../../../components/ui/card";
+import { Badge } from "../../../../components/ui/badge";
 
 export const SolutionsOverviewSection = (): JSX.Element => {
   // Data for the accordion items
@@ -26,9 +27,12 @@ export const SolutionsOverviewSection = (): JSX.Element => {
 
         <div className="flex flex-col w-full md:w-1/2 items-start gap-[60px]">
           <div className="flex flex-col items-start gap-8 w-full">
-            <h2 className="font-display-h3 text-[#1e1e1e] text-[length:var(--display-h3-font-size)] tracking-[var(--display-h3-letter-spacing)] leading-[var(--display-h3-line-height)]">
-              EURÊK&apos;IA!
-            </h2>
+            <div className="flex items-center gap-4">
+              <h2 className="font-display-h3 text-[#1e1e1e] text-[length:var(--display-h3-font-size)] tracking-[var(--display-h3-letter-spacing)] leading-[var(--display-h3-line-height)]">
+                EURÊK&apos;IA!
+              </h2>
+              <Badge className="text-sm py-1 px-2 bg-[#fbf9eb] text-[#1e1e1e] border-transparent">En cours de développement</Badge>
+            </div>
 
             <p className="font-text-medium text-[#1e1e1e] text-[length:var(--text-medium-font-size)] tracking-[var(--text-medium-letter-spacing)] leading-[var(--text-medium-line-height)]">
               Des outils intelligents pour simplifier, accélérer et fiabiliser

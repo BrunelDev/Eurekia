@@ -50,7 +50,7 @@ export const HeroSection = (): JSX.Element => {
       price: "29",
       description: "(Les Connectés)",
       buttonText: "Choisir PRO",
-      buttonVariant: "primary",
+      buttonVariant: "secondary",
       features: [
         "Accès au blog Archim'aide",
         "Simulateur de coût simplifié",
@@ -133,36 +133,15 @@ export const HeroSection = (): JSX.Element => {
             <Card key={index} className="border-0 shadow-none">
               <CardContent className="pt-5 px-0">
                 <div className="flex flex-col gap-5 px-2">
-                  <div
-                    className={`flex flex-col gap-4 ${
-                      plan.name === "PRO" ? "bg-[#F6F2CB]" : "bg-[#F6F6F6]"
-                    } py-3 px-2 rounded-[20px]`}
-                  >
-                    <h3 className="font-label-large font-[number:var(--label-large-font-weight)] text-[#1e1e1e] tracking-[var(--label-large-letter-spacing)] leading-[var(--label-large-line-height)] [font-style:var(--label-large-font-style)] bg-white px-2 py-1 rounded-full w-fit text-[18px]">
-                      {plan.name}
-                    </h3>
-                    <div className="flex items-end gap-2.5">
-                      <span className="font-display-h4 font-[number:var(--display-h4-font-weight)] text-[#1e1e1e] text-[length:var(--display-h4-font-size)] tracking-[var(--display-h4-letter-spacing)] leading-[var(--display-h4-line-height)] whitespace-nowrap [font-style:var(--display-h4-font-style)]">
-                        €
-                      </span>
-                      <span className="font-display-h4 font-[number:var(--display-h4-font-weight)] text-[#1e1e1e] text-[length:var(--display-h4-font-size)] tracking-[var(--display-h4-letter-spacing)] leading-[var(--display-h4-line-height)] whitespace-nowrap [font-style:var(--display-h4-font-style)]">
-                        {plan.price}
-                      </span>
-                      <span className="font-text-bold-large text-[#1e1e1e] text-[length:var(--text-bold-large-font-size)] tracking-[var(--text-bold-large-letter-spacing)] leading-[var(--text-bold-large-line-height)] whitespace-nowrap [font-style:var(--text-bold-large-font-style)] font-normal">
-                        {plan.HTPrice}
-                      </span>
-                    </div>
-                  </div>
+                  {/* top colored header removed as requested */}
                 </div>
                 <div
                   className={
                     "bg-[#F6F6F6] flex flex-col gap-5 rounded-[28px]  relative "
                   }
                 >
-                  <div className="bg-white h-[130px] flex flex-col justify-center rounded-[28px] w-full px-3">
-                    <p className="text-[#CD9F25]  tracking-[var(--text-small-letter-spacing)] leading-[var(--text-small-line-height)] [font-style:var(--text-small-font-style)] font-display-h3 text-[18px] font-normal">
-                      {plan.description}
-                    </p>
+                    <div className="bg-white h-[130px] flex flex-col justify-center rounded-[28px] w-full px-3">
+                    {/* description removed as requested */}
 
                     <Button
                       className={`w-full mt-6 ${

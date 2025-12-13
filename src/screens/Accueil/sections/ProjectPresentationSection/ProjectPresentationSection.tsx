@@ -36,11 +36,11 @@ export const ProjectPresentationSection = (): JSX.Element => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projectTools.map((tool, index) => (
-              <Card
+                <Card
                 key={`tool-${index}`}
                 className="w-full h-96 sm:h-[500px] rounded-xl overflow-hidden p-0 border-0 relative group bg-cover bg-center"
                 style={{
-                  backgroundImage: `linear-gradient(180deg, rgba(72,54,33,0) 0%, rgba(72,54,33,0.8) 100%), ${tool.backgroundImage}`,
+                  backgroundImage: tool.backgroundImage,
                 }}
               >
                 <CardContent className="flex flex-col items-start justify-end gap-4 p-6 text-left h-full">

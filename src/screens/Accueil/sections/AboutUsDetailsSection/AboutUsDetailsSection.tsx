@@ -8,7 +8,7 @@ export const AboutUsDetailsSection = (): JSX.Element => {
       <div className="flex flex-row w-full">
         {/* Left side - Background image with overlay */}
         <div className="relative w-1/2 md:w-1/2 min-h-[790px] bg-[url(/Ils_ont_construit_avec_nous.png)] bg-cover bg-center hidden sm:block">
-          <div className="absolute inset-0 bg-[rgba(72,54,33,0.4)]" />
+          {/* overlay removed to show image clearly */}
         </div>
 
         {/* Right side - Testimonial content */}

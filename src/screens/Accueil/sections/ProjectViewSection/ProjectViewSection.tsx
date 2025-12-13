@@ -2,6 +2,7 @@ import ArrowButton from "../../../../components/ArrowButton";
 import { Card, CardContent, CardHeader } from "../../../../components/ui/card";
 import { Separator } from "../../../../components/ui/separator";
 import { ArrowRightIcon } from "lucide-react";
+import { Badge } from "../../../../components/ui/badge";
 
 // Service item data for both cards
 const engineeringServices = [
@@ -81,8 +82,8 @@ export const ProjectViewSection = (): JSX.Element => {
                   </p>
 
                   <ArrowButton
-                    handleClick={() => (window.location.href = "/contact?sujet=Devis personnalisé")}
-                    text="Demander un devis personnalisé"
+                    handleClick={() => window.location.href = "/pricing"}
+                    text="Voir toutes les prestations"
                     lucideIcon={
                       <ArrowRightIcon className="w-6 h-6 text-black group-hover:text-[#cd9f25]" />
                     }
@@ -98,9 +99,12 @@ export const ProjectViewSection = (): JSX.Element => {
               <div className="flex items-center justify-between w-full translate-y-1 rounded-tr-[28px] overflow-hidden">
                 <div className="bg-[#f6f6f6] ">
                   <CardHeader className="px-5 py-4 bg-white rounded-[0px_0px_28px_0px] overflow-hidden">
-                    <h2 className="md:text-3xl text-xl md:font-bold font-semibold font-heading-h1 text-[#1e1e1e]  tracking-[var(--heading-h1-letter-spacing)] leading-[var(--heading-h1-line-height)] [font-style:var(--heading-h1-font-style)]">
-                      EURÊK’IA!
-                    </h2>
+                    <div className="flex items-center gap-4">
+                      <h2 className="md:text-3xl text-xl md:font-bold font-semibold font-heading-h1 text-[#1e1e1e]  tracking-[var(--heading-h1-letter-spacing)] leading-[var(--heading-h1-line-height)] [font-style:var(--heading-h1-font-style)]">
+                        EURÊK’IA!
+                      </h2>
+                      <Badge className="text-sm py-1 px-2 bg-[#f6f6f6] text-[#1e1e1e] border-transparent">En cours de développement</Badge>
+                    </div>
                   </CardHeader>
                 </div>
                 <div className="flex-1 h-[69px] bg-[#f6f6f6] rounded-[28px_0px_0px_0px]"></div>
