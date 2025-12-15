@@ -72,9 +72,11 @@ export const BlogPresentationSection = (): JSX.Element => {
               blogPosts.slice(0, 3).map((post) => (
                 <Card key={post.id} className="border-none shadow-none">
                   <CardContent className="flex flex-col items-start gap-5 p-0">
-                    <div
-                      className="w-full h-[380px] bg-cover bg-center"
+                    <a
+                      href={post.url}
+                      className="w-full block h-[380px] bg-cover bg-center"
                       style={{ backgroundImage: `url(${post.image})` }}
+                      aria-label={post.title}
                     />
                     <div className="flex flex-col items-start gap-3 w-full">
                       <div className="flex flex-col items-start gap-1 w-full">
@@ -85,12 +87,6 @@ export const BlogPresentationSection = (): JSX.Element => {
                           {post.date}
                         </p>
                       </div>
-                      <a
-                        href={post.url}
-                        className="font-text-underline [font-family:'Sofia_Pro-Light',Helvetica] font-[number:var(--text-underline-font-weight)] text-[#deb83b] text-[length:var(--text-underline-font-size)] tracking-[var(--text-underline-letter-spacing)] leading-[var(--text-underline-line-height)] underline [font-style:var(--text-underline-font-style)]"
-                      >
-                        {post.url}
-                      </a>
                     </div>
                   </CardContent>
                 </Card>

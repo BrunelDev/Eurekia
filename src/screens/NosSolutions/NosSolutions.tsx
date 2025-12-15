@@ -12,9 +12,10 @@ export const NosSolutions = (): JSX.Element => {
       <NavigationSection />
       <HeroSection />
       <div className="flex flex-col gap-24 pb-8">
-        <SolutionsSection />
-        <SolutionInstant />
+        {/* Order changed to: EURÊK'IA, EURÊKA INSTANT, EURÊKA INGENIERIE */}
         <SolutionsOverviewSection />
+        <SolutionInstant />
+        <SolutionsSection />
       </div>
 
       <CallToActionSection />

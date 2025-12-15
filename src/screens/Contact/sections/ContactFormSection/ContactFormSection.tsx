@@ -1,18 +1,17 @@
 import emailjs from "@emailjs/browser";
 import { CheckIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useLocation } from "react-router-dom";
 import { toast } from "sonner";
 import { Button } from "../../../../components/ui/button";
-import { Input } from "../../../../components/ui/input";
 import { Label } from "../../../../components/ui/label";
 import {
   RadioGroup,
   RadioGroupItem,
 } from "../../../../components/ui/radio-group";
 import { Textarea } from "../../../../components/ui/textarea";
+import DevisForm from "./DevisForm";
 
 export const ContactFormSection = (): JSX.Element => {
   const location = useLocation();
@@ -21,7 +20,7 @@ export const ContactFormSection = (): JSX.Element => {
 
   const subjectOptions = [
     { id: "Information", label: "Demande d'information" },
-    { id: "Devis", label: "Devis" },
+    { id: "Devis personnalisé", label: "Devis" },
     { id: "Assistance intelligente", label: "Assistance intelligente" },
     { id: "Partenariat", label: "Partenariat" },
     { id: "Autre", label: "Autre" },
@@ -34,11 +33,15 @@ export const ContactFormSection = (): JSX.Element => {
   const [selectedSubject, setSelectedSubject] = useState<string>(
     sujet || "Information"
   );
+  // état pour le sous-choix Devis (instantané / personnalisé)
+  const [devisType, setDevisType] = useState<
+    "instantane" | "personnalise" | null
+  >(null);
   const form = useRef<HTMLFormElement>(null);
   const [submissionStatus, setSubmissionStatus] = useState<"idle" | "sending">(
     "idle"
   );
-  const [isFocused, setIsFocused] = useState(false)
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -93,158 +96,84 @@ export const ContactFormSection = (): JSX.Element => {
             name="logo_url"
             value="https://www.eurekaingenierie.com/logo-black.png"
           />
-          {/* Input Fields */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-10">
-            <div className="flex flex-col gap-2">
-              <Label
-                htmlFor="nom"
-                className="text-lg font-medium text-[#1e1e1e] [font-family:'Sofia_Pro']"
-              >
-                Nom
-              </Label>
-              <Input
-                id="nom"
-                name="nom"
-                placeholder="DOE"
-                className="border-0 border-b-2 border-gray-300 rounded-none px-2 py-3 focus:border-yellow-400 transition placeholder:[font-family:'Sofia_Pro']"
-                required
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <Label
-                htmlFor="prenom"
-                className="text-lg font-medium text-[#1e1e1e] [font-family:'Sofia_Pro']"
-              >
-                Prénom
-              </Label>
-              <Input
-                id="prenom"
-                name="prenom"
-                placeholder="John"
-                className="border-0 border-b-2 border-gray-300 rounded-none px-2 py-3 focus:border-yellow-400 transition placeholder:[font-family:'Sofia_Pro']"
-                required
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <Label
-                htmlFor="email"
-                className="text-lg font-medium text-[#1e1e1e] [font-family:'Sofia_Pro']"
-              >
-                Email
-              </Label>
-              <Input
-                id="email"
-                name="user_email"
-                type="email"
-                placeholder="johndoe@gmail.com"
-                className="border-0 border-b-2 border-gray-300 rounded-none px-2 py-3 focus:border-yellow-400 transition placeholder:[font-family:'Sofia_Pro']"
-                required
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <Label
-                htmlFor="telephone"
-                className="text-lg font-medium text-[#1e1e1e] [font-family:'Sofia_Pro']"
-              >
-                Téléphone
-              </Label>
-              {/*
-                <Input
-                id="telephone"
-                name="telephone"
-                type="tel"
-                className="border-0 border-b-2 border-gray-300 rounded-none px-2 py-3 focus:border-yellow-400 transition placeholder:[font-family:'Sofia_Pro']"
-              />*/}
-              <PhoneInput
-                inputProps={{ name: "telephone", required: true }}
-                inputStyle={{
-                  width: "100%",
-                  border: "0",
-                  borderBottom: "2px solid rgb(209, 213, 219)",
-                  borderRadius: "0",
-                  padding: "0.75rem 3rem",
-                  fontFamily: "Sofia_Pro",
-                  backgroundColor: "transparent",
-                  borderBottomColor: isFocused ? "rgb(250, 204, 21)" : "#ccc",
-                  outline: "none",
-                }}
-                country={"fr"}
-                onFocus={() => setIsFocused(true)}
-                onBlur={() => setIsFocused(false)}
-              />
-            </div>
-          </div>
 
           {/* Subject Selection */}
-          {!sujet &&
-            selectedSubject !== "Devis personnalisé" &&
-            selectedSubject !== "Devis instantané" && (
-              <div className="flex flex-col gap-4">
-                <Label className="text-lg font-medium text-[#1e1e1e] [font-family:'Sofia_Pro']">
-                  Sélectionnez un Sujet?
-                </Label>
-                <RadioGroup
-                  defaultValue="Information"
-                  className="flex flex-wrap gap-x-6 gap-y-4"
-                  onValueChange={setSelectedSubject}
-                  name="sujet"
-                >
-                  {subjectOptions.map((option) => (
-                    <div key={option.id} className="flex items-center gap-2">
-                      <div className="relative">
-                        <RadioGroupItem
-                          value={option.id}
-                          id={option.id}
-                          className="w-5 h-5 border-[#DEB83B] text-yellow-400 [font-family:'Sofia_Pro']"
-                        />
-                        {selectedSubject === option.id && (
-                          <div className="w-5 h-5 bg-[#DEB83B] rounded-full top-0 left-0 absolute flex justify-center items-center">
-                            <CheckIcon size={14} color="white" />
-                          </div>
-                        )}
-                      </div>
 
-                      <Label
-                        htmlFor={option.id}
-                        className="text-base text-[#1e1e1e] [font-family:'Sofia_Pro']"
-                      >
-                        {option.label}
-                      </Label>
-                    </div>
-                  ))}
-                </RadioGroup>
-              </div>
-            )}
+          <div className="flex flex-col gap-4">
+            <Label className="text-lg font-medium text-[#1e1e1e] [font-family:'Sofia_Pro']">
+              Sélectionnez un Sujet?
+            </Label>
+            <RadioGroup
+              defaultValue={sujet || "Information"}
+              className="flex flex-wrap gap-x-6 gap-y-4"
+              onValueChange={setSelectedSubject}
+              name="sujet"
+            >
+              {subjectOptions.map((option) => (
+                <div key={option.id} className="flex items-center gap-2">
+                  <div className="relative">
+                    <RadioGroupItem
+                      value={option.id}
+                      id={option.id}
+                      className="w-5 h-5 border-[#DEB83B] text-yellow-400 [font-family:'Sofia_Pro']"
+                    />
+                    {selectedSubject === option.id && (
+                      <div className="w-5 h-5 bg-[#DEB83B] rounded-full top-0 left-0 absolute flex justify-center items-center">
+                        <CheckIcon size={14} color="white" />
+                      </div>
+                    )}
+                  </div>
+
+                  <Label
+                    htmlFor={option.id}
+                    className="text-base text-[#1e1e1e] [font-family:'Sofia_Pro']"
+                  >
+                    {option.label}
+                  </Label>
+                </div>
+              ))}
+            </RadioGroup>
+          </div>
+
+          {/* Devis block (si sélectionné) : afficher si l'utilisateur a choisi "Devis" ou si l'URL fournit "Devis personnalisé" */}
+          {(selectedSubject === "Devis" ||
+            selectedSubject === "Devis personnalisé") && <DevisForm />}
 
           {/* Message Field */}
-          <div className="flex flex-col gap-2">
-            <Label
-              htmlFor="message"
-              className="text-lg font-medium text-[#1e1e1e] [font-family:'Sofia_Pro']"
-            >
-              Message
-            </Label>
-            <Textarea
-              id="message"
-              name="message"
-              placeholder="Écrivez votre message ici..."
-              className="border-0 border-b-2 border-gray-300  rounded-none px-2 py-3 focus:outline-none focus:border-yellow-400 transition h-24 placeholder:[font-family:'Sofia_Pro'] placeholder:text-base"
-              required
-            />
-          </div>
-
-          {/* Submit Button */}
-          <div className="flex flex-col items-end w-full pt-6">
-            <Button
-              type="submit"
-              className="w-full md:w-auto bg-[#F6F2CB] hover:bg-[#EFE299] text-black py-3 px-8 shadow-none rounded-none disabled:opacity-50 [font-family:'Sofia_Pro']"
-              disabled={submissionStatus === "sending"}
-            >
-              {submissionStatus === "sending"
-                ? "Envoi en cours..."
-                : "Envoyer le message"}
-            </Button>
-          </div>
+          {!(
+            selectedSubject === "Devis" ||
+            selectedSubject === "Devis personnalisé"
+          ) && (
+            <>
+              <div className="flex flex-col gap-2">
+                <Label
+                  htmlFor="message"
+                  className="text-lg font-medium text-[#1e1e1e] [font-family:'Sofia_Pro']"
+                >
+                  Message
+                </Label>
+                <Textarea
+                  id="message"
+                  name="message"
+                  placeholder="Écrivez votre message ici..."
+                  className="border-0 border-b-2 border-gray-300  rounded-none px-2 py-3 focus:outline-none focus:border-yellow-400 transition h-24 placeholder:[font-family:'Sofia_Pro'] placeholder:text-base"
+                  required
+                />
+              </div>
+              {/* Submit Button */}
+              <div className="flex flex-col items-end w-full pt-6">
+                <Button
+                  type="submit"
+                  className="w-full md:w-auto bg-[#F6F2CB] hover:bg-[#EFE299] text-black py-3 px-8 shadow-none rounded-none disabled:opacity-50 [font-family:'Sofia_Pro']"
+                  disabled={submissionStatus === "sending"}
+                >
+                  {submissionStatus === "sending" ?
+                    "Envoi en cours..."
+                  : "Envoyer le message"}
+                </Button>
+              </div>
+            </>
+          )}
         </form>
       </div>
     </section>
