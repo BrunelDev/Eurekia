@@ -40,17 +40,19 @@ export default function FormTwo() {
     formData.moePlumbingCalc ? "Note de calcul plomberie" : null,
     formData.moeHvacCalc ? "Note de calcul aéraulique (HVAC)" : null,
     formData.moeVrdCalc ? "Note de calcul VRD" : null,
-    formData.moeThermalAttestationSmall ?
-      "Attestation thermique (<50 m²)"
-    : null,
-    formData.moeThermalStudyPc ?
-      "Étude thermique (Permis de Construire >50 m²)"
-    : null,
-    formData.moeThermalStudyConstruction ?
-      "Étude thermique (phase chantier)"
-    : null,
+    formData.moeThermalAttestationSmall
+      ? "Attestation thermique (<50 m²)"
+      : null,
+    formData.moeThermalStudyPc
+      ? "Étude thermique (Permis de Construire >50 m²)"
+      : null,
+    formData.moeThermalStudyConstruction
+      ? "Étude thermique (phase chantier)"
+      : null,
     formData.moeFinalAttestationAcv ? "Attestation + ACV fin de travaux" : null,
   ].filter(Boolean) as string[];
+
+  console.log(formData.missingDocuments);
 
   return (
     <div className="w-full  relative">
@@ -64,33 +66,33 @@ export default function FormTwo() {
             scrollHideDelay={100}
           >
             <div className="w-full z-50 h-full">
-              {
-                isForfaitFlow && formData.serviceChosen ?
-                  // Show Forfait Recap for forfait flow
-                  <div className="space-y-6">
-                    <ForfaitRecap forfaitType={formData.serviceChosen} />
-                    <div className="hidden sm:flex flex-row items-center justify-between gap-4">
-                      <BackButton
-                        handleClick={() => {
-                          updateFormData({
-                            ...formData,
-                            isStepOneChecked: false,
-                          });
-                        }}
-                      />
-                      <PrimaryButton
-                        handleClick={() => {
-                          updateFormData({
-                            ...formData,
-                            isStepTwoChecked: true,
-                          });
-                        }}
-                      />
-                    </div>
+              {isForfaitFlow && formData.serviceChosen ? (
+                // Show Forfait Recap for forfait flow
+                <div className="space-y-6">
+                  <ForfaitRecap forfaitType={formData.serviceChosen} />
+                  <div className="hidden sm:flex flex-row items-center justify-between gap-4">
+                    <BackButton
+                      handleClick={() => {
+                        updateFormData({
+                          ...formData,
+                          isStepOneChecked: false,
+                        });
+                      }}
+                    />
+                    <PrimaryButton
+                      handleClick={() => {
+                        updateFormData({
+                          ...formData,
+                          isStepTwoChecked: true,
+                        });
+                      }}
+                    />
                   </div>
-                  // Show InformationSummarySection for prestations flow
-                : <InformationSummarySection />
-              }
+                </div>
+              ) : (
+                // Show InformationSummarySection for prestations flow
+                <InformationSummarySection />
+              )}
             </div>
           </ScrollArea>
           {/*here we add the resume of choosen services card*/}
@@ -102,27 +104,29 @@ export default function FormTwo() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="p-3 pt-2 max-h-72 sm:max-h-80 lg:max-h-[calc(100vh-240px)] overflow-y-auto">
-                {formData.serviceChosen ?
+                {formData.serviceChosen ? (
                   <div className="flex items-start gap-3">
-                    {formData.serviceChosen === "AMO" ?
+                    {formData.serviceChosen === "AMO" ? (
                       <DraftingCompass className="mt-0.5 w-5 h-5 text-black" />
-                    : <HardHat className="mt-0.5 w-5 h-5 text-black" />}
+                    ) : (
+                      <HardHat className="mt-0.5 w-5 h-5 text-black" />
+                    )}
                     <div>
                       <div className="text-base font-medium text-black">
-                        {formData.serviceChosen === "AMO" ?
-                          "Assistance à Maîtrise d'Ouvrage"
-                        : "Maîtrise d'Œuvre"}
+                        {formData.serviceChosen === "AMO"
+                          ? "Assistance à Maîtrise d'Ouvrage"
+                          : "Maîtrise d'Œuvre"}
                       </div>
                       <div className="text-sm text-gray-600">
-                        {formData.serviceChosen === "AMO" ?
-                          "Je pilote mon projet"
-                        : "Je conçois techniquement mon projet"}
+                        {formData.serviceChosen === "AMO"
+                          ? "Je pilote mon projet"
+                          : "Je conçois techniquement mon projet"}
                       </div>
                       {/* Show flow type */}
                       <div className="mt-2 text-xs text-[#deb83b] font-medium">
-                        {isForfaitFlow ?
-                          "✓ Forfait complet"
-                        : "Prestations à la carte"}
+                        {isForfaitFlow
+                          ? "✓ Forfait complet"
+                          : "Prestations à la carte"}
                       </div>
                       <div className="mt-3">
                         {(() => {
@@ -142,9 +146,9 @@ export default function FormTwo() {
                           }
 
                           const items =
-                            formData.serviceChosen === "AMO" ?
-                              selectedAmo
-                            : selectedMoe;
+                            formData.serviceChosen === "AMO"
+                              ? selectedAmo
+                              : selectedMoe;
                           if (items.length === 0) return null;
                           return (
                             <div>
@@ -179,10 +183,11 @@ export default function FormTwo() {
                       </div>
                     </div>
                   </div>
-                : <div className="text-sm text-gray-500">
+                ) : (
+                  <div className="text-sm text-gray-500">
                     Aucun service sélectionné pour l'instant
                   </div>
-                }
+                )}
               </CardContent>
             </Card>
           </div>

@@ -24,6 +24,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../../../ui/select";
+import { useFormState } from "@/context/useFormState";
 
 export function Question({
   question,
@@ -134,7 +135,7 @@ export function QuestionWithInput({
 }) {
   const [checked, setChecked] = useState(value || false);
   const [selectedOption, setSelectedOption] = useState<string | undefined>(
-    inputValue || undefined
+    inputValue || undefined,
   );
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   // Track uploaded files for each alert item (null = not uploaded)
@@ -144,7 +145,7 @@ export function QuestionWithInput({
   const updateSummary = (
     _questionText: string,
     _inputValue?: string,
-    _isChecked?: boolean
+    _isChecked?: boolean,
   ) => {};
   const [selectedBoxes, setSelectedBoxes] = useState<string[]>([]);
 
@@ -160,7 +161,7 @@ export function QuestionWithInput({
       <CardContent className="flex flex-col items-start gap-3 p-4 sm:p-5">
         <div className="flex flex-col items-start gap-2 relative self-stretch w-full flex-[0_0_auto]">
           <div className="flex items-start gap-2 relative self-stretch w-full flex-[0_0_auto]">
-            {alert ?
+            {alert ? (
               <>
                 <Checkbox
                   id={question}
@@ -203,19 +204,19 @@ export function QuestionWithInput({
                               <label
                                 htmlFor={`file-${question}-${idx}`}
                                 className={`flex items-center gap-2 px-3 py-2 rounded-lg border cursor-pointer transition-colors ${
-                                  uploadedFiles[idx] ?
-                                    "border-green-500 bg-green-50 text-green-700"
-                                  : "border-gray-300 bg-gray-50 hover:bg-gray-100"
+                                  uploadedFiles[idx]
+                                    ? "border-green-500 bg-green-50 text-green-700"
+                                    : "border-gray-300 bg-gray-50 hover:bg-gray-100"
                                 }`}
                               >
                                 <Upload className="w-4 h-4" />
                                 <span className="text-sm">
-                                  {uploadedFiles[idx] ?
-                                    uploadedFiles[idx]!.name.slice(0, 20) +
-                                    (uploadedFiles[idx]!.name.length > 20 ?
-                                      "..."
-                                    : "")
-                                  : "Choisir un fichier"}
+                                  {uploadedFiles[idx]
+                                    ? uploadedFiles[idx]!.name.slice(0, 20) +
+                                      (uploadedFiles[idx]!.name.length > 20
+                                        ? "..."
+                                        : "")
+                                    : "Choisir un fichier"}
                                 </span>
                               </label>
                               <input
@@ -262,7 +263,7 @@ export function QuestionWithInput({
                             setChecked(false);
                             handleChange(false);
                             setUploadedFiles(
-                              alert ? new Array(alert.length).fill(null) : []
+                              alert ? new Array(alert.length).fill(null) : [],
                             );
                             if (!checked) {
                               handleInputChange(undefined);
@@ -299,7 +300,7 @@ export function QuestionWithInput({
                             if (missingDocs.length > 0) {
                               const totalCost = missingDocs.reduce(
                                 (sum, doc) => sum + doc.price,
-                                0
+                                0,
                               );
                               toast.warning(
                                 `Coût supplémentaire de ${totalCost}€ pour ${missingDocs.length} document${missingDocs.length > 1 ? "s" : ""} manquant${missingDocs.length > 1 ? "s" : ""}`,
@@ -307,7 +308,7 @@ export function QuestionWithInput({
                                   description:
                                     "Ce montant sera ajouté à votre devis.",
                                   duration: 5000,
-                                }
+                                },
                               );
                             }
 
@@ -346,9 +347,6 @@ export function QuestionWithInput({
                               setTimeout(() => {
                                 // Get fresh state from Zustand store
                                 const {
-                                  useFormState,
-                                } = require("../../../../context/useFormState");
-                                const {
                                   formData: freshData,
                                   updateFormData: freshUpdate,
                                 } = useFormState.getState();
@@ -363,10 +361,10 @@ export function QuestionWithInput({
 
                                   // Add new missing docs (avoiding duplicates by name)
                                   const existingNames = new Set(
-                                    existingMissing.map((d: any) => d.name)
+                                    existingMissing.map((d: any) => d.name),
                                   );
                                   const newMissingDocs = missingDocs.filter(
-                                    (d) => !existingNames.has(d.name)
+                                    (d) => !existingNames.has(d.name),
                                   );
 
                                   freshUpdate({
@@ -375,9 +373,9 @@ export function QuestionWithInput({
                                       ...newMissingDocs,
                                     ],
                                     uploadedFiles:
-                                      newFiles.length > 0 ?
-                                        [...existingFiles, ...newFiles]
-                                      : existingFiles,
+                                      newFiles.length > 0
+                                        ? [...existingFiles, ...newFiles]
+                                        : existingFiles,
                                   });
                                 }
                               }, 50);
@@ -385,7 +383,7 @@ export function QuestionWithInput({
 
                             // Reset uploaded files after confirmation
                             setUploadedFiles(
-                              alert ? new Array(alert.length).fill(null) : []
+                              alert ? new Array(alert.length).fill(null) : [],
                             );
                           }}
                         >
@@ -396,7 +394,8 @@ export function QuestionWithInput({
                   </DialogContent>
                 </Dialog>
               </>
-            : <Checkbox
+            ) : (
+              <Checkbox
                 id={question}
                 checked={checked}
                 onCheckedChange={() => {
@@ -412,7 +411,7 @@ export function QuestionWithInput({
                   checked ? "bg-syracuse_red_orange" : ""
                 }`}
               />
-            }
+            )}
 
             <div className="flex items-center gap-[4px_8px] ">
               <Label
@@ -470,7 +469,7 @@ export function QuestionWithInput({
               onValueChange={(value) => {
                 console.log(
                   "Selected option:---------------------------------",
-                  value
+                  value,
                 );
                 setSelectedOption(value);
                 handleInputChange(value);
@@ -511,12 +510,12 @@ export function QuestionWithInput({
                     onCheckedChange={(isChecked) => {
                       if (isChecked) {
                         handleInputChange(
-                          JSON.stringify([...selectedBoxes, option.value])
+                          JSON.stringify([...selectedBoxes, option.value]),
                         );
                         setSelectedBoxes([...selectedBoxes, option.value]);
                       } else {
                         setSelectedBoxes(
-                          selectedBoxes.filter((item) => item !== option.value)
+                          selectedBoxes.filter((item) => item !== option.value),
                         );
                         handleInputChange(JSON.stringify(selectedBoxes));
                       }
