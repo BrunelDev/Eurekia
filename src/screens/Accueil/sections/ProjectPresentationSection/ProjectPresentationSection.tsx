@@ -37,19 +37,25 @@ export const ProjectPresentationSection = (): JSX.Element => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projectTools.map((tool, index) => (
                 <Card
-                key={`tool-${index}`}
-                className="w-full h-96 sm:h-[500px] rounded-xl overflow-hidden p-0 border-0 relative group bg-cover bg-center"
-                style={{
-                  backgroundImage: tool.backgroundImage,
-                }}
-              >
-                <CardContent className="flex flex-col items-start justify-end gap-4 p-6 text-left h-full">
-                  <h3 className={`text-xl ${tool.titleColor} font-display-h6`}>
-                    {tool.title}
-                  </h3>
-                  <p className="text-base text-white [font-family:'Sofia_Pro'] font-light">{tool.description}</p>
-                </CardContent>
-              </Card>
+                  key={`tool-${index}`}
+                  className="w-full h-96 sm:h-[500px] rounded-xl overflow-hidden p-0 border-0 relative group bg-cover bg-center"
+                  style={{
+                    backgroundImage: tool.backgroundImage,
+                  }}
+                >
+                  {/* Overlay to improve text contrast */}
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-black/20"
+                  />
+
+                  <CardContent className="flex flex-col items-start justify-end gap-4 p-6 text-left h-full relative">
+                    <h3 className={`text-xl ${tool.titleColor} font-display-h6`}>
+                      {tool.title}
+                    </h3>
+                    <p className="text-base text-white [font-family:'Sofia_Pro'] font-light">{tool.description}</p>
+                  </CardContent>
+                </Card>
             ))}
           </div>
         </div>

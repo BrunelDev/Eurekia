@@ -82,8 +82,8 @@ export const ProjectViewSection = (): JSX.Element => {
                   </p>
 
                   <ArrowButton
-                    handleClick={() => window.location.href = "/pricing"}
-                    text="Voir toutes les prestations"
+                    handleClick={() => window.location.href = "/contact?sujet=Devis%20personnalis%C3%A9"}
+                    text="Demander un devis personnalisé"
                     lucideIcon={
                       <ArrowRightIcon className="w-6 h-6 text-black group-hover:text-[#cd9f25]" />
                     }

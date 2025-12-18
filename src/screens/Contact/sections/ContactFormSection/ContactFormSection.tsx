@@ -40,37 +40,103 @@ export const ContactFormSection = (): JSX.Element => {
     "instantane" | "personnalise" | null
   >(null);
   const form = useRef<HTMLFormElement>(null);
-  const [submissionStatus, setSubmissionStatus] = useState<"idle" | "sending">(
-    "idle"
-  );
+  type Status = "idle" | "sending" | "success" | "error";
+  const [submissionResults, setSubmissionResults] = useState<{
+    main: Status;
+    devis: Status;
+  }>({ main: "idle", devis: "idle" });
+  const timeoutRef = useRef<{ [k: string]: number | null }>({ main: null, devis: null });
   const [isFocused, setIsFocused] = useState(false)
 
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
+  const handleSubmit = async (
+    event?: React.FormEvent,
+    source: "main" | "devis" = "main"
+  ) => {
+    if (event) event.preventDefault();
     if (!form.current) return;
 
-    setSubmissionStatus("sending");
+    // Before sending, serialize Devis checkbox group into a single hidden input
+    try {
+      const formEl = form.current;
+      const checked = Array.from(
+        formEl.querySelectorAll<HTMLInputElement>(
+          'input[name="devis_project_categories"]:checked'
+        )
+      ).map((el) => el.value);
 
-    emailjs
-      .sendForm(
+      let hidden = formEl.querySelector(
+        'input[name="devis_project_categories_serialized"]'
+      ) as HTMLInputElement | null;
+      if (!hidden) {
+        hidden = document.createElement("input");
+        hidden.type = "hidden";
+        hidden.name = "devis_project_categories_serialized";
+        formEl.appendChild(hidden);
+      }
+      hidden.value = checked.join(", ");
+    } catch (err) {
+      console.warn("Failed to serialize devis categories:", err);
+    }
+
+    // start sending for the given source only
+    setSubmissionResults((prev) => ({ ...prev, [source]: "sending" }));
+
+    try {
+      await emailjs.sendForm(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         form.current,
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-      )
-      .then(
-        () => {
-          setSubmissionStatus("idle");
-          toast.success("Votre message a été envoyé avec succès !");
-          form.current?.reset();
-        },
-        (error) => {
-          setSubmissionStatus("idle");
-          toast.error("Une erreur s'est produite. Veuillez réessayer.");
-          console.log("FAILED...", error.text);
-        }
       );
+
+      setSubmissionResults((prev) => ({ ...prev, [source]: "success" }));
+      toast.success("Votre message a été envoyé avec succès !");
+      form.current?.reset();
+
+      // remove serialized hidden input if present
+      try {
+        const formEl = form.current;
+        const hidden = formEl?.querySelector(
+          'input[name="devis_project_categories_serialized"]'
+        );
+        if (hidden && hidden.parentNode) hidden.parentNode.removeChild(hidden);
+      } catch (e) {
+        console.warn("Could not remove serialized hidden input:", e);
+      }
+
+      // clear any previous timeout for this source
+      if (timeoutRef.current[source]) {
+        window.clearTimeout(timeoutRef.current[source] as number);
+      }
+      // after 4s, reset to idle for this source
+      timeoutRef.current[source] = window.setTimeout(() => {
+        setSubmissionResults((prev) => ({ ...prev, [source]: "idle" }));
+        timeoutRef.current[source] = null;
+      }, 4000) as unknown as number;
+    } catch (error: any) {
+      setSubmissionResults((prev) => ({ ...prev, [source]: "error" }));
+      toast.error("Une erreur s'est produite. Veuillez réessayer.");
+      console.log("FAILED...", error?.text || error);
+
+      if (timeoutRef.current[source]) {
+        window.clearTimeout(timeoutRef.current[source] as number);
+      }
+      // after 6s, allow retry for this source
+      timeoutRef.current[source] = window.setTimeout(() => {
+        setSubmissionResults((prev) => ({ ...prev, [source]: "idle" }));
+        timeoutRef.current[source] = null;
+      }, 6000) as unknown as number;
+    }
   };
+
+  useEffect(() => {
+    return () => {
+      Object.keys(timeoutRef.current).forEach((k) => {
+        const v = timeoutRef.current[k];
+        if (v) window.clearTimeout(v as number);
+      });
+    };
+  }, []);
 
   useEffect(() => {
     if (sujet) {
@@ -146,7 +212,8 @@ export const ContactFormSection = (): JSX.Element => {
 
           {/* Devis block (si sélectionné) : afficher si l'utilisateur a choisi "Devis" ou si l'URL fournit "Devis personnalisé" */}
           {(selectedSubject === "Devis" || selectedSubject === "Devis personnalisé") && (
-            <DevisForm />
+            // pass the MAIN submission status so the Devis button becomes the primary action
+            <DevisForm submissionStatus={submissionResults.main} onSubmitSource={(src) => handleSubmit(undefined, src)} />
           )}
 
           {/* Message Field */}
@@ -162,21 +229,34 @@ export const ContactFormSection = (): JSX.Element => {
               name="message"
               placeholder="Écrivez votre message ici..."
               className="border-0 border-b-2 border-gray-300  rounded-none px-2 py-3 focus:outline-none focus:border-yellow-400 transition h-24 placeholder:[font-family:'Sofia_Pro'] placeholder:text-base"
-              required
             />
           </div>
 
           {/* Submit Button */}
           <div className="flex flex-col items-end w-full pt-6">
-            <Button
-              type="submit"
-              className="w-full md:w-auto bg-[#F6F2CB] hover:bg-[#EFE299] text-black py-3 px-8 shadow-none rounded-none disabled:opacity-50 [font-family:'Sofia_Pro']"
-              disabled={submissionStatus === "sending"}
-            >
-              {submissionStatus === "sending"
-                ? "Envoi en cours..."
-                : "Envoyer le message"}
-            </Button>
+            <div className="w-full flex">
+              <button
+                type="button"
+                // this small button now triggers the 'devis' submission flow
+                onClick={() => handleSubmit(undefined, "devis")}
+                disabled={submissionResults.devis === "sending"}
+                className={`ml-auto px-6 py-2 rounded-md font-semibold transition-colors duration-150 [font-family:'Sofia_Pro']
+                  ${submissionResults.devis === "success" ? "bg-green-600 text-white" : "bg-[#cd9f25] text-white hover:bg-[#b8891f]"}
+                `}
+              >
+                {submissionResults.devis === "sending" && "Envoi en cours..."}
+                {submissionResults.devis === "success" && "Demande envoyée ✔"}
+                {submissionResults.devis === "idle" && "Envoyer le message"}
+              </button>
+            </div>
+            <div className="mt-2 w-full md:w-auto text-left">
+              {submissionResults.main === "success" && (
+                <p className="text-sm text-green-700">Merci — votre message a bien été envoyé.</p>
+              )}
+              {submissionResults.main === "error" && (
+                <p className="text-sm text-red-600">Une erreur est survenue. Vérifiez votre connexion et réessayez.</p>
+              )}
+            </div>
           </div>
         </form>
       </div>

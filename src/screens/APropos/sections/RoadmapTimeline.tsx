@@ -1,5 +1,7 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import emailjs from "@emailjs/browser";
+import { toast } from "sonner";
 import { motion } from "framer-motion";
 import { roadmapData, RoadmapPhase } from "./../../../lib/Roadmap";
 
@@ -66,6 +68,17 @@ const RoadmapItem: React.FC<{ phase: RoadmapPhase; phaseIndex: number }> = ({
 
 const RoadmapTimeline = (): JSX.Element => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const formRef = useRef<HTMLFormElement | null>(null);
+  const [submissionStatus, setSubmissionStatus] = useState<
+    "idle" | "sending" | "success" | "error"
+  >("idle");
+  const timeoutRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) window.clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   return (
     <section className="w-full py-16 px-4 md:px-8 bg-white overflow-hidden">
@@ -133,22 +146,64 @@ const RoadmapTimeline = (): JSX.Element => {
             <p className="text-sm text-gray-600 mb-4">
               Dites-nous quelle fonctionnalité ou idée vous semble prioritaire.
             </p>
-            <form className="space-y-4">
+            <form
+              ref={(el) => (formRef.current = el)}
+              className="space-y-4"
+              onSubmit={async (e) => {
+                e.preventDefault();
+                if (!formRef.current) return;
+
+                setSubmissionStatus("sending");
+                try {
+                  await emailjs.sendForm(
+                    import.meta.env.VITE_EMAILJS_SERVICE_ID,
+                    import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+                    formRef.current,
+                    import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+                  );
+                  setSubmissionStatus("success");
+                  toast.success("Merci — votre avis a bien été envoyé.");
+                  formRef.current.reset();
+                  // close modal after short delay
+                  timeoutRef.current = window.setTimeout(() => {
+                    setIsModalOpen(false);
+                    setSubmissionStatus("idle");
+                  }, 1800) as unknown as number;
+                } catch (err: any) {
+                  console.error("Roadmap feedback send failed:", err);
+                  setSubmissionStatus("error");
+                  toast.error("Impossible d'envoyer votre avis. Réessayez.");
+                  timeoutRef.current = window.setTimeout(() => {
+                    setSubmissionStatus("idle");
+                  }, 4000) as unknown as number;
+                }
+              }}
+            >
               <input
                 type="text"
+                name="roadmap_name"
                 placeholder="Votre nom"
                 className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#cd9f25]"
               />
               <textarea
+                name="roadmap_suggestion"
                 placeholder="Votre suggestion..."
                 rows={4}
                 className="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#cd9f25]"
               />
               <button
                 type="submit"
-                className="w-full bg-[#cd9f25] text-white py-3 rounded-lg font-semibold hover:bg-[#b8891f] transition-all"
+                disabled={submissionStatus === "sending"}
+                className={`w-full ${
+                  submissionStatus === "success"
+                    ? "bg-green-600"
+                    : "bg-[#cd9f25] hover:bg-[#b8891f]"
+                } text-white py-3 rounded-lg font-semibold transition-all`}
               >
-                Envoyer
+                {submissionStatus === "sending" && "Envoi en cours..."}
+                {submissionStatus === "success" && "Envoyé ✔"}
+                {submissionStatus === "idle" && "Envoyer"}
+                {submissionStatus === "error" && "Réessayer"}
               </button>
             </form>
           </motion.div>
