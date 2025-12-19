@@ -1,12 +1,10 @@
 import emailjs from "@emailjs/browser";
 import { CheckIcon } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import { useLocation } from "react-router-dom";
 import { toast } from "sonner";
 import { Button } from "../../../../components/ui/button";
-import { Input } from "../../../../components/ui/input";
 import { Label } from "../../../../components/ui/label";
 import {
   RadioGroup,
@@ -22,7 +20,7 @@ export const ContactFormSection = (): JSX.Element => {
 
   const subjectOptions = [
     { id: "Information", label: "Demande d'information" },
-    { id: "Devis", label: "Devis" },
+    { id: "Devis personnalisé", label: "Devis" },
     { id: "Assistance intelligente", label: "Assistance intelligente" },
     { id: "Partenariat", label: "Partenariat" },
     { id: "Autre", label: "Autre" },
@@ -46,7 +44,7 @@ export const ContactFormSection = (): JSX.Element => {
     devis: Status;
   }>({ main: "idle", devis: "idle" });
   const timeoutRef = useRef<{ [k: string]: number | null }>({ main: null, devis: null });
-  const [isFocused, setIsFocused] = useState(false)
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleSubmit = async (
     event?: React.FormEvent,
@@ -164,51 +162,44 @@ export const ContactFormSection = (): JSX.Element => {
             name="logo_url"
             value="https://www.eurekaingenierie.com/logo-black.png"
           />
-          
-          
 
           {/* Subject Selection */}
-          {!sujet &&
-            selectedSubject !== "Devis personnalisé" &&
-            selectedSubject !== "Devis instantané" && (
-              <div className="flex flex-col gap-4">
-                <Label className="text-lg font-medium text-[#1e1e1e] [font-family:'Sofia_Pro']">
-                  Sélectionnez un Sujet?
-                </Label>
-                <RadioGroup
-                  defaultValue="Information"
-                  className="flex flex-wrap gap-x-6 gap-y-4"
-                  onValueChange={setSelectedSubject}
-                  name="sujet"
-                >
-                  {subjectOptions.map((option) => (
-                    <div key={option.id} className="flex items-center gap-2">
-                      <div className="relative">
-                        <RadioGroupItem
-                          value={option.id}
-                          id={option.id}
-                          className="w-5 h-5 border-[#DEB83B] text-yellow-400 [font-family:'Sofia_Pro']"
-                        />
-                        {selectedSubject === option.id && (
-                          <div className="w-5 h-5 bg-[#DEB83B] rounded-full top-0 left-0 absolute flex justify-center items-center">
-                            <CheckIcon size={14} color="white" />
-                          </div>
-                        )}
+
+          <div className="flex flex-col gap-4">
+            <Label className="text-lg font-medium text-[#1e1e1e] [font-family:'Sofia_Pro']">
+              Sélectionnez un Sujet?
+            </Label>
+            <RadioGroup
+              defaultValue={sujet || "Information"}
+              className="flex flex-wrap gap-x-6 gap-y-4"
+              onValueChange={setSelectedSubject}
+              name="sujet"
+            >
+              {subjectOptions.map((option) => (
+                <div key={option.id} className="flex items-center gap-2">
+                  <div className="relative">
+                    <RadioGroupItem
+                      value={option.id}
+                      id={option.id}
+                      className="w-5 h-5 border-[#DEB83B] text-yellow-400 [font-family:'Sofia_Pro']"
+                    />
+                    {selectedSubject === option.id && (
+                      <div className="w-5 h-5 bg-[#DEB83B] rounded-full top-0 left-0 absolute flex justify-center items-center">
+                        <CheckIcon size={14} color="white" />
                       </div>
+                    )}
+                  </div>
 
-                      <Label
-                        htmlFor={option.id}
-                        className="text-base text-[#1e1e1e] [font-family:'Sofia_Pro']"
-                      >
-                        {option.label}
-                      </Label>
-                    </div>
-                  ))}
-                </RadioGroup>
-              </div>
-            )}
-
-                  
+                  <Label
+                    htmlFor={option.id}
+                    className="text-base text-[#1e1e1e] [font-family:'Sofia_Pro']"
+                  >
+                    {option.label}
+                  </Label>
+                </div>
+              ))}
+            </RadioGroup>
+          </div>
 
           {/* Devis block (si sélectionné) : afficher si l'utilisateur a choisi "Devis" ou si l'URL fournit "Devis personnalisé" */}
           {(selectedSubject === "Devis" || selectedSubject === "Devis personnalisé") && (
