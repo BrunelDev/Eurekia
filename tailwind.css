@@ -8,55 +8,55 @@
 }
 
 :root {
-  --display-h3-font-family: "Neulis Alt", Helvetica;
+  --display-h3-font-family: "Roboto Flex", Helvetica;
   --display-h3-font-size: 48px;
   --display-h3-font-style: normal;
   --display-h3-font-weight: 400;
   --display-h3-letter-spacing: 0px;
   --display-h3-line-height: normal;
-  --display-h4-font-family: "Neulis Alt", Helvetica;
+  --display-h4-font-family: "Roboto Flex", Helvetica;
   --display-h4-font-size: 36px;
   --display-h4-font-style: normal;
   --display-h4-font-weight: 400;
   --display-h4-letter-spacing: 0px;
   --display-h4-line-height: normal;
-  --display-h6-font-family: "Neulis Alt", Helvetica;
+  --display-h6-font-family: "Roboto Flex", Helvetica;
   --display-h6-font-size: 20px;
   --display-h6-font-style: normal;
   --display-h6-font-weight: 400;
   --display-h6-letter-spacing: 0px;
   --display-h6-line-height: normal;
-  --label-large-font-family: "Sofia Pro", Helvetica;
+  --label-large-font-family: "Open Sans", Helvetica;
   --label-large-font-size: 18px;
   --label-large-font-style: normal;
   --label-large-font-weight: 400;
   --label-large-letter-spacing: 0px;
   --label-large-line-height: 28px;
-  --label-medium-font-family: "Sofia Pro", Helvetica;
+  --label-medium-font-family: "Open Sans", Helvetica;
   --label-medium-font-size: 16px;
   --label-medium-font-style: normal;
   --label-medium-font-weight: 400;
   --label-medium-letter-spacing: 0px;
   --label-medium-line-height: 24px;
-  --label-small-font-family: "Sofia Pro", Helvetica;
+  --label-small-font-family: "Open Sans", Helvetica;
   --label-small-font-size: 14px;
   --label-small-font-style: normal;
   --label-small-font-weight: 400;
   --label-small-letter-spacing: 0px;
   --label-small-line-height: 20px;
-  --text-bold-large-font-family: "Sofia Pro", Helvetica;
+  --text-bold-large-font-family: "Open Sans", Helvetica;
   --text-bold-large-font-size: 18px;
   --text-bold-large-font-style: normal;
   --text-bold-large-font-weight: 500;
   --text-bold-large-letter-spacing: 0px;
   --text-bold-large-line-height: 28px;
-  --text-medium-font-family: "Sofia Pro", Helvetica;
+  --text-medium-font-family: "Open Sans", Helvetica;
   --text-medium-font-size: 16px;
   --text-medium-font-style: normal;
   --text-medium-font-weight: 300;
   --text-medium-letter-spacing: 0px;
   --text-medium-line-height: 24px;
-  --text-small-font-family: "Sofia Pro", Helvetica;
+  --text-small-font-family: "Open Sans", Helvetica;
   --text-small-font-size: 14px;
   --text-small-font-style: normal;
   --text-small-font-weight: 300;
@@ -72,286 +72,47 @@
 @layer base {
   /*
   ================================================================================
-  NEULIS ALT
+  ROBOTO FLEX (Variable Font - replaces Neulis Alt)
   ================================================================================
   */
 
-  /* Neulis Alt - Thin (100) */
+  /* Roboto Flex - Variable Font (supports all weights 100-900) */
   @font-face {
-    font-family: "Neulis Alt";
+    font-family: "Roboto Flex";
     font-style: normal;
-    font-weight: 100;
-    src: url("/fonts/NeulisAlt-Thin.woff2") format("woff2");
-  }
-
-  /* Neulis Alt - Thin Italic (100) */
-  @font-face {
-    font-family: "Neulis Alt";
-    font-style: italic;
-    font-weight: 100;
-    src: url("/fonts/NeulisAlt-ThinItalic.woff2") format("woff2");
-  }
-
-  /* Neulis Alt - ExtraLight (200) */
-  @font-face {
-    font-family: "Neulis Alt";
-    font-style: normal;
-    font-weight: 200;
-    src: url("/fonts/NeulisAlt-ExtraLight.woff2") format("woff2");
-  }
-
-  /* Neulis Alt - ExtraLight Italic (200) */
-  @font-face {
-    font-family: "Neulis Alt";
-    font-style: italic;
-    font-weight: 200;
-    src: url("/fonts/NeulisAlt-ExtraLightItalic.woff2") format("woff2");
-  }
-
-  /* Neulis Alt - Light (300) */
-  @font-face {
-    font-family: "Neulis Alt";
-    font-style: normal;
-    font-weight: 300;
-    src: url("/fonts/NeulisAlt-Light.woff2") format("woff2");
-  }
-
-  /* Neulis Alt - Light Italic (300) */
-  @font-face {
-    font-family: "Neulis Alt";
-    font-style: italic;
-    font-weight: 300;
-    src: url("/fonts/NeulisAlt-LightItalic.woff2") format("woff2");
-  }
-
-  /* Neulis Alt - Regular (400) */
-  @font-face {
-    font-family: "Neulis Alt";
-    font-style: normal;
-    font-weight: 400;
-    src: url("/fonts/NeulisAlt-Regular.woff2") format("woff2");
-  }
-
-  /* Neulis Alt - Regular Italic (400) */
-  @font-face {
-    font-family: "Neulis Alt";
-    font-style: italic;
-    font-weight: 400;
-    src: url("/fonts/NeulisAlt-Italic.woff2") format("woff2");
-  }
-
-  /* Neulis Alt - Medium (500) */
-  @font-face {
-    font-family: "Neulis Alt";
-    font-style: normal;
-    font-weight: 500;
-    src: url("/fonts/NeulisAlt-Medium.woff2") format("woff2");
-  }
-
-  /* Neulis Alt - Medium Italic (500) */
-  @font-face {
-    font-family: "Neulis Alt";
-    font-style: italic;
-    font-weight: 500;
-    src: url("/fonts/NeulisAlt-MediumItalic.woff2") format("woff2");
-  }
-
-  /* Neulis Alt - SemiBold (600) */
-  @font-face {
-    font-family: "Neulis Alt";
-    font-style: normal;
-    font-weight: 600;
-    src: url("/fonts/NeulisAlt-SemiBold.woff2") format("woff2");
-  }
-
-  /* Neulis Alt - SemiBold Italic (600) */
-  @font-face {
-    font-family: "Neulis Alt";
-    font-style: italic;
-    font-weight: 600;
-    src: url("/fonts/NeulisAlt-SemiBoldItalic.woff2") format("woff2");
-  }
-
-  /* Neulis Alt - Bold (700) */
-  @font-face {
-    font-family: "Neulis Alt";
-    font-style: normal;
-    font-weight: 700;
-    src: url("/fonts/NeulisAlt-Bold.woff2") format("woff2");
-  }
-
-  /* Neulis Alt - Bold Italic (700) */
-  @font-face {
-    font-family: "Neulis Alt";
-    font-style: italic;
-    font-weight: 700;
-    src: url("/fonts/NeulisAlt-BoldItalic.woff2") format("woff2");
-  }
-
-  /* Neulis Alt - ExtraBold (800) */
-  @font-face {
-    font-family: "Neulis Alt";
-    font-style: normal;
-    font-weight: 800;
-    src: url("/fonts/NeulisAlt-ExtraBold.woff2") format("woff2");
-  }
-
-  /* Neulis Alt - ExtraBold Italic (800) */
-  @font-face {
-    font-family: "Neulis Alt";
-    font-style: italic;
-    font-weight: 800;
-    src: url("/fonts/NeulisAlt-ExtraBoldItalic.woff2") format("woff2");
-  }
-
-  /* Neulis Alt - Black (900) */
-  @font-face {
-    font-family: "Neulis Alt";
-    font-style: normal;
-    font-weight: 900;
-    src: url("/fonts/NeulisAlt-Black.woff2") format("woff2");
-  }
-
-  /* Neulis Alt - Black Italic (900) */
-  @font-face {
-    font-family: "Neulis Alt";
-    font-style: italic;
-    font-weight: 900;
-    src: url("/fonts/NeulisAlt-BlackItalic.woff2") format("woff2");
+    font-weight: 100 900;
+    font-stretch: 25% 151%;
+    src: url("/fonts/RobotoFlex-VariableFont_GRAD,XOPQ,XTRA,YOPQ,YTAS,YTDE,YTFI,YTLC,YTUC,opsz,slnt,wdth,wght.ttf")
+      format("truetype-variations");
+    font-display: swap;
   }
 
   /*
   ================================================================================
-  SOFIA PRO
+  OPEN SANS (Variable Font - replaces Sofia Pro)
   ================================================================================
   */
 
-  /* Sofia Pro - UltraLight (200) */
+  /* Open Sans - Variable Font (supports all weights 300-800) */
   @font-face {
-    font-family: "Sofia Pro";
+    font-family: "Open Sans";
     font-style: normal;
-    font-weight: 200;
-    src: url("/fonts/Sofia Pro UltraLight Az.otf") format("opentype");
+    font-weight: 300 800;
+    font-stretch: 75% 100%;
+    src: url("/fonts/OpenSans-VariableFont_wdth,wght.ttf")
+      format("truetype-variations");
+    font-display: swap;
   }
 
-  /* Sofia Pro - UltraLight Italic (200) */
+  /* Open Sans Italic - Variable Font */
   @font-face {
-    font-family: "Sofia Pro";
+    font-family: "Open Sans";
     font-style: italic;
-    font-weight: 200;
-    src: url("/fonts/Sofia Pro UltraLight Italic Az.otf") format("opentype");
-  }
-
-  /* Sofia Pro - ExtraLight (200) */
-  @font-face {
-    font-family: "Sofia Pro";
-    font-style: normal;
-    font-weight: 200; /* Note: Same weight as UltraLight */
-    src: url("/fonts/Sofia Pro ExtraLight Az.otf") format("opentype");
-  }
-
-  /* Sofia Pro - ExtraLight Italic (200) */
-  @font-face {
-    font-family: "Sofia Pro";
-    font-style: italic;
-    font-weight: 200; /* Note: Same weight as UltraLight */
-    src: url("/fonts/Sofia Pro ExtraLight Italic Az.otf") format("opentype");
-  }
-
-  /* Sofia Pro - Light (300) */
-  @font-face {
-    font-family: "Sofia Pro";
-    font-style: normal;
-    font-weight: 300;
-    src: url("/fonts/Sofia Pro Light Az.otf") format("opentype");
-  }
-
-  /* Sofia Pro - Light Italic (300) */
-  @font-face {
-    font-family: "Sofia Pro";
-    font-style: italic;
-    font-weight: 300;
-    src: url("/fonts/Sofia Pro Light Italic Az.otf") format("opentype");
-  }
-
-  /* Sofia Pro - Regular (400) */
-  @font-face {
-    font-family: "Sofia Pro";
-    font-style: normal;
-    font-weight: 400;
-    src: url("/fonts/Sofia Pro Regular Az.otf") format("opentype");
-  }
-
-  /* Sofia Pro - Regular Italic (400) */
-  @font-face {
-    font-family: "Sofia Pro";
-    font-style: italic;
-    font-weight: 400;
-    src: url("/fonts/Sofia Pro Regular Italic Az.otf") format("opentype");
-  }
-
-  /* Sofia Pro - Medium (500) */
-  @font-face {
-    font-family: "Sofia Pro";
-    font-style: normal;
-    font-weight: 500;
-    src: url("/fonts/Sofia Pro Medium Az.otf") format("opentype");
-  }
-
-  /* Sofia Pro - Medium Italic (500) */
-  @font-face {
-    font-family: "Sofia Pro";
-    font-style: italic;
-    font-weight: 500;
-    src: url("/fonts/Sofia Pro Medium Italic Az.otf") format("opentype");
-  }
-
-  /* Sofia Pro - SemiBold (600) */
-  @font-face {
-    font-family: "Sofia Pro";
-    font-style: normal;
-    font-weight: 600;
-    src: url("/fonts/Sofia Pro Semi Bold Az.otf") format("opentype");
-  }
-
-  /* Sofia Pro - SemiBold Italic (600) */
-  @font-face {
-    font-family: "Sofia Pro";
-    font-style: italic;
-    font-weight: 600;
-    src: url("/fonts/Sofia Pro Semi Bold Italic Az.otf") format("opentype");
-  }
-
-  /* Sofia Pro - Bold (700) */
-  @font-face {
-    font-family: "Sofia Pro";
-    font-style: normal;
-    font-weight: 700;
-    src: url("/fonts/Sofia Pro Bold Az.otf") format("opentype");
-  }
-
-  /* Sofia Pro - Bold Italic (700) */
-  @font-face {
-    font-family: "Sofia Pro";
-    font-style: italic;
-    font-weight: 700;
-    src: url("/fonts/Sofia Pro Bold Italic Az.otf") format("opentype");
-  }
-
-  /* Sofia Pro - Black (900) */
-  @font-face {
-    font-family: "Sofia Pro";
-    font-style: normal;
-    font-weight: 900;
-    src: url("/fonts/Sofia Pro Black Az.otf") format("opentype");
-  }
-
-  /* Sofia Pro - Black Italic (900) */
-  @font-face {
-    font-family: "Sofia Pro";
-    font-style: italic;
-    font-weight: 900;
-    src: url("/fonts/Sofia Pro Black Italic Az.otf") format("opentype");
+    font-weight: 300 800;
+    font-stretch: 75% 100%;
+    src: url("/fonts/OpenSans-Italic-VariableFont_wdth,wght.ttf")
+      format("truetype-variations");
+    font-display: swap;
   }
 }
 
@@ -450,7 +211,9 @@
 
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
   }
 }
 
