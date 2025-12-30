@@ -1,14 +1,13 @@
 import { ArrowRightIcon } from "lucide-react";
+import React from "react";
+import ArrowButton from "../../../../components/ArrowButton";
 import { Avatar } from "../../../../components/ui/avatar";
 import { Badge } from "../../../../components/ui/badge";
-import { Button } from "../../../../components/ui/button";
 import { Card, CardContent } from "../../../../components/ui/card";
 import {
   ToggleGroup,
   ToggleGroupItem,
 } from "../../../../components/ui/toggle-group";
-import React from "react";
-import ArrowButton from "../../../../components/ArrowButton";
 
 // Define filter categories
 const filterCategories = [
@@ -97,7 +96,7 @@ export const HeroWrapperSection = (): JSX.Element => {
                 value={category.id}
                 className={`px-3 py-6 rounded `}
               >
-                <span className="[font-family:'Sofia_Pro'] font-light text-[15px] text-[#1e1e1e]">
+                <span className="[font-family:'Open_Sans'] font-light text-[15px] text-[#1e1e1e]">
                   {category.label}
                 </span>
               </ToggleGroupItem>

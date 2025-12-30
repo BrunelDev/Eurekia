@@ -1,6 +1,6 @@
 "use client";
-import React, { useState } from "react";
 import { motion } from "framer-motion";
+import React, { useState } from "react";
 import { roadmapData, RoadmapPhase } from "./../../../lib/Roadmap";
 
 // 🔹 Animation variants
@@ -29,18 +29,16 @@ const RoadmapItem: React.FC<{ phase: RoadmapPhase; phaseIndex: number }> = ({
       {/* Bloc de contenu alterné */}
       <div
         className={`ml-10 md:ml-0 md:w-1/2 ${
-          phaseIndex % 2 === 0
-            ? "md:pr-12 "
-            : "md:pl-12 md:ml-auto"
+          phaseIndex % 2 === 0 ? "md:pr-12 " : "md:pl-12 md:ml-auto"
         }`}
       >
         {/* En-tête */}
         <div className="mb-3 flex items-center gap-3 justify-start md:justify-end">
           <div>
-            <h3 className="text-2xl font-bold text-[#1e1e1e] leading-tight [font-family:'Sofia_Pro-Light',Helvetica]">
+            <h3 className="text-2xl font-bold text-[#1e1e1e] leading-tight [font-family:'Open_Sans',Helvetica]">
               {phase.title}
             </h3>
-            <p className="text-sm text-[#cd9f25] font-semibold [font-family:'Sofia_Pro-Light',Helvetica]">
+            <p className="text-sm text-[#cd9f25] font-semibold [font-family:'Open_Sans',Helvetica]">
               {phase.period}
             </p>
           </div>
@@ -55,7 +53,9 @@ const RoadmapItem: React.FC<{ phase: RoadmapPhase; phaseIndex: number }> = ({
           {phase.items.map((item, index) => (
             <div key={index} className="flex gap-3 ">
               <div className="w-2 h-2 bg-[#cd9f25] rounded-full mt-2 flex-shrink-0" />
-              <p className=" text-[#1e1e1e] [font-family:'Sofia_Pro-Light',Helvetica] font-light ">{item.title}</p>
+              <p className=" text-[#1e1e1e] [font-family:'Open_Sans',Helvetica] font-light ">
+                {item.title}
+              </p>
             </div>
           ))}
         </motion.div>
@@ -73,8 +73,6 @@ const RoadmapTimeline = (): JSX.Element => {
         {/* Ligne verticale */}
         <div className="relative">
           <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-[3px] bg-[#fbf9eb] transform md:-translate-x-1/2" />
-
-
 
           {/* Phases */}
           <div className="space-y-03 md:space-y-08">
@@ -106,7 +104,6 @@ const RoadmapTimeline = (): JSX.Element => {
             >
               Donnez votre avis
             </button>
-          
           </div>
         </motion.div>
       </div>
@@ -159,4 +156,3 @@ const RoadmapTimeline = (): JSX.Element => {
 };
 
 export default RoadmapTimeline;
-

@@ -1,9 +1,8 @@
 import { ArrowRightIcon } from "lucide-react";
-import { Card, CardContent } from "../../../../components/ui/card";
 import ArrowButton from "../../../../components/ArrowButton";
+import { Card, CardContent } from "../../../../components/ui/card";
 
 export const AboutUsSection = (): JSX.Element => {
-
   // Data for the three user category cards
   const userCategories = [
     {
@@ -12,7 +11,6 @@ export const AboutUsSection = (): JSX.Element => {
         "Préparez votre projet en toute autonomie avec nos outils pour estimer les coûts, générer vos documents et structurer votre dossier.",
       buttonText: "Simuler votre projet",
       backgroundImage: "url(..//Particuliers.png)",
-     
     },
     {
       title: "Agents immobiliers",
@@ -20,7 +18,6 @@ export const AboutUsSection = (): JSX.Element => {
         "Préparez votre projet en toute autonomie avec nos outils pour estimer les coûts, générer vos documents et structurer votre dossier.",
       buttonText: "Voir un exemple",
       backgroundImage: "url(..//Agent_immobilier.png)",
-      
     },
     {
       title: "Professionnels du bâtiment",
@@ -39,7 +36,7 @@ export const AboutUsSection = (): JSX.Element => {
             <h2 className="text-3xl sm:text-4xl text-[#1e1e1e] font-display-h6">
               Une plateforme pensée pour chaque acteur du projet
             </h2>
-            <p className="text-base sm:text-lg text-[#1e1e1e] max-w-4xl mx-auto md:mx-0 [font-family:'Sofia_Pro'] font-light">
+            <p className="text-base sm:text-lg text-[#1e1e1e] max-w-4xl mx-auto md:mx-0 [font-family:'Open_Sans'] font-light">
               Que vous soyez particulier, agent immobilier ou professionnel du
               bâtiment, EURÊKA vous offre des outils adaptés à vos besoins pour
               piloter, valoriser ou accélérer vos projets de construction et de
@@ -64,12 +61,12 @@ export const AboutUsSection = (): JSX.Element => {
                     <h3 className="text-xl text-[#cd9f25] font-display-h6">
                       {category.title}
                     </h3>
-                    <p className="text-base text-[#1e1e1e] flex-grow [font-family:'Sofia_Pro'] font-light">
+                    <p className="text-base text-[#1e1e1e] flex-grow [font-family:'Open_Sans'] font-light">
                       {category.description}
                     </p>
                   </div>
                   <ArrowButton
-                    handleClick={() => window.location.href = "category.link"}
+                    handleClick={() => (window.location.href = "category.link")}
                     text={category.buttonText}
                     lucideIcon={
                       <ArrowRightIcon className="w-6 h-6 text-black group-hover:text-[#cd9f25]" />

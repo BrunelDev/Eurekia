@@ -1,12 +1,20 @@
 import {
+  CheckCircle,
+  Eye,
+  FileText,
+  Lock,
+  Mail,
+  Shield,
+  Users,
+} from "lucide-react";
+import { FooterSection } from "../../components/FooterSection";
+import { NavigationSection } from "../../components/NavigationSection";
+import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "../../components/ui/card";
-import { NavigationSection } from "../../components/NavigationSection";
-import { FooterSection } from "../../components/FooterSection";
-import { Shield, Lock, Eye, Users, FileText, CheckCircle, Mail } from "lucide-react";
 
 const PrivacyPolicy = () => {
   const policyData = [
@@ -14,7 +22,7 @@ const PrivacyPolicy = () => {
       icon: Shield,
       title: "Introduction",
       content: (
-        <p className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e] leading-relaxed">
+        <p className="[font-family:'Open_Sans'] font-light text-[#1e1e1e] leading-relaxed">
           Bienvenue sur le site d'
           <span className="font-medium">Eurêka Ingénierie</span>. Nous nous
           engageons à protéger votre vie privée. Cette politique de
@@ -29,13 +37,13 @@ const PrivacyPolicy = () => {
       title: "1. Collecte de l'information",
       content: (
         <div className="space-y-4">
-          <p className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e] leading-relaxed">
+          <p className="[font-family:'Open_Sans'] font-light text-[#1e1e1e] leading-relaxed">
             Nous collectons des informations lorsque vous vous inscrivez à notre
             newsletter, remplissez un formulaire de contact ou de demande de
             devis.
           </p>
           <div className="bg-primary-50 p-4 rounded-lg border-l-4 border-primary-400">
-            <p className="[font-family:'Sofia_Pro'] font-medium text-[#1e1e1e] text-sm">
+            <p className="[font-family:'Open_Sans'] font-medium text-[#1e1e1e] text-sm">
               <strong>Informations collectées :</strong> nom, prénom, adresse
               e-mail, numéro de téléphone (optionnel)
             </p>
@@ -48,7 +56,7 @@ const PrivacyPolicy = () => {
       title: "2. Utilisation des informations",
       content: (
         <div className="space-y-4">
-          <p className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e] leading-relaxed">
+          <p className="[font-family:'Open_Sans'] font-light text-[#1e1e1e] leading-relaxed">
             Toutes les informations que nous recueillons auprès de vous peuvent
             être utilisées pour :
           </p>
@@ -62,7 +70,7 @@ const PrivacyPolicy = () => {
             ].map((item, index) => (
               <li key={index} className="flex items-start gap-3">
                 <CheckCircle className="w-5 h-5 text-primary-500 mt-0.5 flex-shrink-0" />
-                <span className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e] leading-relaxed">
+                <span className="[font-family:'Open_Sans'] font-light text-[#1e1e1e] leading-relaxed">
                   {item}
                 </span>
               </li>
@@ -76,14 +84,14 @@ const PrivacyPolicy = () => {
       title: "3. Confidentialité et Sécurité",
       content: (
         <div className="space-y-4">
-          <p className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e] leading-relaxed">
+          <p className="[font-family:'Open_Sans'] font-light text-[#1e1e1e] leading-relaxed">
             Nous sommes les seuls propriétaires des informations recueillies sur
             ce site. Vos informations personnelles ne seront pas vendues,
             échangées, transférées, ou données à une autre société sans votre
             consentement.
           </p>
           <div className="bg-success-50 p-4 rounded-lg border border-success-200">
-            <p className="[font-family:'Sofia_Pro'] font-medium text-success-800 text-sm">
+            <p className="[font-family:'Open_Sans'] font-medium text-success-800 text-sm">
               🔒 Vos données sont protégées par des mesures de sécurité avancées
             </p>
           </div>
@@ -94,7 +102,7 @@ const PrivacyPolicy = () => {
       icon: FileText,
       title: "4. Divulgation à des tiers",
       content: (
-        <p className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e] leading-relaxed">
+        <p className="[font-family:'Open_Sans'] font-light text-[#1e1e1e] leading-relaxed">
           Nous ne vendons, n'échangeons et ne transférons pas vos informations
           personnelles identifiables à des tiers. Ceci ne comprend pas les tiers
           de confiance qui nous aident à exploiter notre site Web, tant que ces
@@ -107,12 +115,12 @@ const PrivacyPolicy = () => {
       title: "5. Consentement",
       content: (
         <div className="space-y-4">
-          <p className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e] leading-relaxed">
+          <p className="[font-family:'Open_Sans'] font-light text-[#1e1e1e] leading-relaxed">
             En utilisant notre site, vous consentez à notre politique de
             confidentialité.
           </p>
           <div className="bg-info-50 p-4 rounded-lg border border-info-200">
-            <p className="[font-family:'Sofia_Pro'] font-medium text-info-800 text-sm">
+            <p className="[font-family:'Open_Sans'] font-medium text-info-800 text-sm">
               💡 Vous pouvez retirer votre consentement à tout moment en nous
               contactant
             </p>
@@ -133,13 +141,13 @@ const PrivacyPolicy = () => {
             <h1 className="text-4xl sm:text-5xl lg:text-6xl text-[#1e1e1e] font-display-h6 mb-6">
               Politique de Confidentialité
             </h1>
-            <p className="text-lg sm:text-xl text-[#1e1e1e] [font-family:'Sofia_Pro'] font-light max-w-3xl mx-auto mb-4">
+            <p className="text-lg sm:text-xl text-[#1e1e1e] [font-family:'Open_Sans'] font-light max-w-3xl mx-auto mb-4">
               Votre confiance est notre priorité. Découvrez comment nous
               protégeons vos données personnelles.
             </p>
             <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full border border-primary-200">
               <div className="w-2 h-2 bg-success-500 rounded-full animate-pulse"></div>
-              <span className="text-sm [font-family:'Sofia_Pro'] font-medium text-[#1e1e1e]">
+              <span className="text-sm [font-family:'Open_Sans'] font-medium text-[#1e1e1e]">
                 Dernière mise à jour : 11 août 2025
               </span>
             </div>
@@ -180,7 +188,7 @@ const PrivacyPolicy = () => {
               <h3 className="text-2xl text-[#1e1e1e] font-display-h6 mb-4">
                 Des questions sur notre politique de confidentialité ?
               </h3>
-              <p className="text-[#1e1e1e] [font-family:'Sofia_Pro'] font-light mb-6 max-w-2xl mx-auto">
+              <p className="text-[#1e1e1e] [font-family:'Open_Sans'] font-light mb-6 max-w-2xl mx-auto">
                 Notre équipe est à votre disposition pour répondre à toutes vos
                 questions concernant la protection de vos données.
               </p>

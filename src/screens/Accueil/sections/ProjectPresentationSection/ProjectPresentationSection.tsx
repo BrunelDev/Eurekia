@@ -36,7 +36,7 @@ export const ProjectPresentationSection = (): JSX.Element => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {projectTools.map((tool, index) => (
-                <Card
+              <Card
                 key={`tool-${index}`}
                 className="w-full h-96 sm:h-[500px] rounded-xl overflow-hidden p-0 border-0 relative group bg-cover bg-center"
                 style={{
@@ -47,7 +47,9 @@ export const ProjectPresentationSection = (): JSX.Element => {
                   <h3 className={`text-xl ${tool.titleColor} font-display-h6`}>
                     {tool.title}
                   </h3>
-                  <p className="text-base text-white [font-family:'Sofia_Pro'] font-light">{tool.description}</p>
+                  <p className="text-base text-white [font-family:'Open_Sans'] font-light">
+                    {tool.description}
+                  </p>
                 </CardContent>
               </Card>
             ))}

@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import { ArrowDownIcon, MailIcon, MapPinIcon, PhoneIcon } from "lucide-react";
-import { Card, CardContent } from "../../../../components/ui/card";
+import { Link } from "react-router-dom";
 import ArrowButton from "../../../../components/ArrowButton";
+import { Card, CardContent } from "../../../../components/ui/card";
 
 export const HeroHeader = (): JSX.Element => {
   const handleScrollToContact = () => {
@@ -72,13 +72,19 @@ export const HeroHeader = (): JSX.Element => {
                 Une <span className="text-[#cd9f25]">question</span> ? Un{" "}
                 <span className="text-[#cd9f25]">projet</span> ? Parlons-en.
               </h1>
-              <p className="text-lg text-[#1e1e1e] [font-family:'Sofia_Pro-Light',Helvetica] font-light">
+              <p className="text-lg text-[#1e1e1e] [font-family:'Open_Sans',Helvetica] font-light">
                 Notre équipe vous répond sous 24h ouvrées. Choisissez le canal
                 de contact qui vous convient.
               </p>
             </div>
-      
-            <ArrowButton handleClick={handleScrollToContact} text="Envoyer un message" lucideIcon={<ArrowDownIcon className="w-5 h-5 text-black group-hover:text-[#cd9f25]" />} />
+
+            <ArrowButton
+              handleClick={handleScrollToContact}
+              text="Envoyer un message"
+              lucideIcon={
+                <ArrowDownIcon className="w-5 h-5 text-black group-hover:text-[#cd9f25]" />
+              }
+            />
           </div>
 
           {/* Right side with image and contact info */}
@@ -100,13 +106,13 @@ export const HeroHeader = (): JSX.Element => {
                         {item.icon}
                       </div>
                       <div className="flex flex-col gap-1">
-                        <p className="text-white font-light [font-family:'Sofia_Pro-Light',Helvetica]">
+                        <p className="text-white font-light [font-family:'Open_Sans',Helvetica]">
                           {item.description}
                         </p>
                         <p className="text-base font-light text-[#f7e1aa] underline font-display-h6">
-                          {item.link === "/contact/carte"
-                            ? "159 Chemin du Val de Cagne 06800 Cagnes-sur-Mer FRANCE"
-                            : item.link}
+                          {item.link === "/contact/carte" ?
+                            "159 Chemin du Val de Cagne 06800 Cagnes-sur-Mer FRANCE"
+                          : item.link}
                         </p>
                       </div>
                     </Link>

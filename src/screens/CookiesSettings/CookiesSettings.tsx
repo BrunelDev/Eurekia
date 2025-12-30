@@ -1,16 +1,16 @@
+import { Activity, Cookie, Settings, ShieldCheck } from "lucide-react";
 import { useEffect, useState } from "react";
-import { NavigationSection } from "../../components/NavigationSection";
 import { FooterSection } from "../../components/FooterSection";
+import { NavigationSection } from "../../components/NavigationSection";
+import { Button } from "../../components/ui/button";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "../../components/ui/card";
-import { Button } from "../../components/ui/button";
-import { Label } from "../../components/ui/label";
 import { Input } from "../../components/ui/input";
-import { Cookie, Settings, ShieldCheck, Activity } from "lucide-react";
+import { Label } from "../../components/ui/label";
 
 interface CookiePrefs {
   essential: boolean;
@@ -90,7 +90,7 @@ const CookiesSettings = (): JSX.Element => {
             <h1 className="font-display-h6 text-4xl sm:text-5xl lg:text-6xl text-[#1e1e1e] mb-6">
               Paramètres des cookies
             </h1>
-            <p className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e] max-w-3xl mx-auto">
+            <p className="[font-family:'Open_Sans'] font-light text-[#1e1e1e] max-w-3xl mx-auto">
               Gérez vos préférences de cookies. Nous utilisons des cookies pour
               améliorer votre expérience, analyser l'audience et personnaliser
               le contenu.
@@ -115,7 +115,7 @@ const CookiesSettings = (): JSX.Element => {
                   </CardTitle>
                 </div>
               </CardHeader>
-              <CardContent className="pt-0 [font-family:'Sofia_Pro'] font-light text-[#1e1e1e]">
+              <CardContent className="pt-0 [font-family:'Open_Sans'] font-light text-[#1e1e1e]">
                 Les cookies nous aident à faire fonctionner le site, à mémoriser
                 vos préférences, à comprendre l'utilisation et à améliorer nos
                 services. Vous pouvez ajuster vos préférences ci-dessous à tout
@@ -142,7 +142,7 @@ const CookiesSettings = (): JSX.Element => {
                     <h4 className="font-display-h6 text-[#1e1e1e]">
                       Essentiels
                     </h4>
-                    <p className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e] text-sm">
+                    <p className="[font-family:'Open_Sans'] font-light text-[#1e1e1e] text-sm">
                       Indispensables au fonctionnement du site (sécurité,
                       connexion, navigation).
                     </p>
@@ -154,7 +154,7 @@ const CookiesSettings = (): JSX.Element => {
                       readOnly
                       className="w-5 h-5"
                     />
-                    <Label className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e]">
+                    <Label className="[font-family:'Open_Sans'] font-light text-[#1e1e1e]">
                       Toujours actifs
                     </Label>
                   </div>
@@ -166,7 +166,7 @@ const CookiesSettings = (): JSX.Element => {
                     <h4 className="font-display-h6 text-[#1e1e1e]">
                       Préférences
                     </h4>
-                    <p className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e] text-sm">
+                    <p className="[font-family:'Open_Sans'] font-light text-[#1e1e1e] text-sm">
                       Mémorisent vos choix (langue, région) pour une expérience
                       personnalisée.
                     </p>
@@ -180,7 +180,7 @@ const CookiesSettings = (): JSX.Element => {
                       }
                       className="w-5 h-5"
                     />
-                    <Label className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e]">
+                    <Label className="[font-family:'Open_Sans'] font-light text-[#1e1e1e]">
                       Activer
                     </Label>
                   </div>
@@ -192,7 +192,7 @@ const CookiesSettings = (): JSX.Element => {
                     <h4 className="font-display-h6 text-[#1e1e1e]">
                       Statistiques
                     </h4>
-                    <p className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e] text-sm">
+                    <p className="[font-family:'Open_Sans'] font-light text-[#1e1e1e] text-sm">
                       Nous aident à comprendre l'utilisation du site pour
                       améliorer nos services.
                     </p>
@@ -206,7 +206,7 @@ const CookiesSettings = (): JSX.Element => {
                       }
                       className="w-5 h-5"
                     />
-                    <Label className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e]">
+                    <Label className="[font-family:'Open_Sans'] font-light text-[#1e1e1e]">
                       Activer
                     </Label>
                   </div>
@@ -216,7 +216,7 @@ const CookiesSettings = (): JSX.Element => {
                 {/*<div className="flex items-start justify-between gap-6">
                   <div>
                     <h4 className="font-display-h6 text-[#1e1e1e]">Marketing</h4>
-                    <p className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e] text-sm">
+                    <p className="[font-family:'Open_Sans'] font-light text-[#1e1e1e] text-sm">
                       Utilisés pour le contenu et les offres personnalisées.
                     </p>
                   </div>
@@ -227,7 +227,7 @@ const CookiesSettings = (): JSX.Element => {
                       onChange={(e) => updatePref("marketing", e.target.checked)}
                       className="w-5 h-5"
                     />
-                    <Label className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e]">Activer</Label>
+                    <Label className="[font-family:'Open_Sans'] font-light text-[#1e1e1e]">Activer</Label>
                   </div>
                 </div>*/}
               </CardContent>
@@ -268,11 +268,11 @@ const CookiesSettings = (): JSX.Element => {
                   </Button>
                 </div>
                 {saved && (
-                  <div className="mt-4 inline-flex items-center gap-2 bg-success-50 text-success-800 border border-success-200 px-3 py-2 rounded-md [font-family:'Sofia_Pro'] text-sm">
+                  <div className="mt-4 inline-flex items-center gap-2 bg-success-50 text-success-800 border border-success-200 px-3 py-2 rounded-md [font-family:'Open_Sans'] text-sm">
                     <Activity className="w-4 h-4" /> {saved}
                   </div>
                 )}
-                <p className="mt-6 [font-family:'Sofia_Pro'] font-light text-[#1e1e1e] text-sm">
+                <p className="mt-6 [font-family:'Open_Sans'] font-light text-[#1e1e1e] text-sm">
                   Pour en savoir plus, consultez notre{" "}
                   <a className="underline" href="/privacy-policy">
                     Politique de confidentialité

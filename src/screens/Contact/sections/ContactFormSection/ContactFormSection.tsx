@@ -100,7 +100,7 @@ export const ContactFormSection = (): JSX.Element => {
           {/* Subject Selection */}
 
           <div className="flex flex-col gap-4">
-            <Label className="text-lg font-medium text-[#1e1e1e] [font-family:'Sofia_Pro']">
+            <Label className="text-lg font-medium text-[#1e1e1e] [font-family:'Open_Sans']">
               Sélectionnez un Sujet?
             </Label>
             <RadioGroup
@@ -115,7 +115,7 @@ export const ContactFormSection = (): JSX.Element => {
                     <RadioGroupItem
                       value={option.id}
                       id={option.id}
-                      className="w-5 h-5 border-[#DEB83B] text-yellow-400 [font-family:'Sofia_Pro']"
+                      className="w-5 h-5 border-[#DEB83B] text-yellow-400 [font-family:'Open_Sans']"
                     />
                     {selectedSubject === option.id && (
                       <div className="w-5 h-5 bg-[#DEB83B] rounded-full top-0 left-0 absolute flex justify-center items-center">
@@ -126,7 +126,7 @@ export const ContactFormSection = (): JSX.Element => {
 
                   <Label
                     htmlFor={option.id}
-                    className="text-base text-[#1e1e1e] [font-family:'Sofia_Pro']"
+                    className="text-base text-[#1e1e1e] [font-family:'Open_Sans']"
                   >
                     {option.label}
                   </Label>
@@ -148,7 +148,7 @@ export const ContactFormSection = (): JSX.Element => {
               <div className="flex flex-col gap-2">
                 <Label
                   htmlFor="message"
-                  className="text-lg font-medium text-[#1e1e1e] [font-family:'Sofia_Pro']"
+                  className="text-lg font-medium text-[#1e1e1e] [font-family:'Open_Sans']"
                 >
                   Message
                 </Label>
@@ -156,7 +156,7 @@ export const ContactFormSection = (): JSX.Element => {
                   id="message"
                   name="message"
                   placeholder="Écrivez votre message ici..."
-                  className="border-0 border-b-2 border-gray-300  rounded-none px-2 py-3 focus:outline-none focus:border-yellow-400 transition h-24 placeholder:[font-family:'Sofia_Pro'] placeholder:text-base"
+                  className="border-0 border-b-2 border-gray-300  rounded-none px-2 py-3 focus:outline-none focus:border-yellow-400 transition h-24 placeholder:[font-family:'Open_Sans'] placeholder:text-base"
                   required
                 />
               </div>
@@ -164,7 +164,7 @@ export const ContactFormSection = (): JSX.Element => {
               <div className="flex flex-col items-end w-full pt-6">
                 <Button
                   type="submit"
-                  className="w-full md:w-auto bg-[#F6F2CB] hover:bg-[#EFE299] text-black py-3 px-8 shadow-none rounded-none disabled:opacity-50 [font-family:'Sofia_Pro']"
+                  className="w-full md:w-auto bg-[#F6F2CB] hover:bg-[#EFE299] text-black py-3 px-8 shadow-none rounded-none disabled:opacity-50 [font-family:'Open_Sans']"
                   disabled={submissionStatus === "sending"}
                 >
                   {submissionStatus === "sending" ?

@@ -1,7 +1,19 @@
-import { NavigationSection } from "../../components/NavigationSection";
+import {
+  CreditCard,
+  FileText,
+  Receipt,
+  RefreshCcw,
+  Shield,
+  Truck,
+} from "lucide-react";
 import { FooterSection } from "../../components/FooterSection";
-import { Card, CardContent, CardHeader, CardTitle } from "../../components/ui/card";
-import { FileText, Receipt, Truck, Shield, CreditCard, RefreshCcw } from "lucide-react";
+import { NavigationSection } from "../../components/NavigationSection";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "../../components/ui/card";
 
 const ConditionsGenerales = (): JSX.Element => {
   const sections = [
@@ -9,8 +21,11 @@ const ConditionsGenerales = (): JSX.Element => {
       icon: FileText,
       title: "1. Objet",
       content: (
-        <p className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e] leading-relaxed">
-          Les présentes Conditions Générales encadrent les relations entre Eurêka Ingénierie et ses clients pour la fourniture de ses prestations et services. Elles prévalent sur tout autre document, sauf accord écrit contraire.
+        <p className="[font-family:'Open_Sans'] font-light text-[#1e1e1e] leading-relaxed">
+          Les présentes Conditions Générales encadrent les relations entre
+          Eurêka Ingénierie et ses clients pour la fourniture de ses prestations
+          et services. Elles prévalent sur tout autre document, sauf accord
+          écrit contraire.
         </p>
       ),
     },
@@ -26,7 +41,9 @@ const ConditionsGenerales = (): JSX.Element => {
           ].map((item, i) => (
             <li key={i} className="flex items-start gap-3">
               <span className="w-2 h-2 rounded-full bg-primary-500 mt-2" />
-              <span className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e] leading-relaxed">{item}</span>
+              <span className="[font-family:'Open_Sans'] font-light text-[#1e1e1e] leading-relaxed">
+                {item}
+              </span>
             </li>
           ))}
         </ul>
@@ -36,8 +53,10 @@ const ConditionsGenerales = (): JSX.Element => {
       icon: Receipt,
       title: "3. Commandes et Devis",
       content: (
-        <p className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e] leading-relaxed">
-          Les devis émis par Eurêka Ingénierie ont une durée de validité précisée sur le document. La commande est ferme à réception de l'acceptation écrite et, le cas échéant, de l'acompte.
+        <p className="[font-family:'Open_Sans'] font-light text-[#1e1e1e] leading-relaxed">
+          Les devis émis par Eurêka Ingénierie ont une durée de validité
+          précisée sur le document. La commande est ferme à réception de
+          l'acceptation écrite et, le cas échéant, de l'acompte.
         </p>
       ),
     },
@@ -45,8 +64,10 @@ const ConditionsGenerales = (): JSX.Element => {
       icon: Truck,
       title: "4. Livraison et Délais",
       content: (
-        <p className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e] leading-relaxed">
-          Les délais sont indiqués à titre indicatif et peuvent varier selon les contraintes techniques et d'exécution. Eurêka Ingénierie s'engage à informer le client en cas de retard prévisible.
+        <p className="[font-family:'Open_Sans'] font-light text-[#1e1e1e] leading-relaxed">
+          Les délais sont indiqués à titre indicatif et peuvent varier selon les
+          contraintes techniques et d'exécution. Eurêka Ingénierie s'engage à
+          informer le client en cas de retard prévisible.
         </p>
       ),
     },
@@ -54,8 +75,11 @@ const ConditionsGenerales = (): JSX.Element => {
       icon: Shield,
       title: "5. Responsabilités et Garanties",
       content: (
-        <p className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e] leading-relaxed">
-          Eurêka Ingénierie met en œuvre les moyens nécessaires à la bonne exécution des prestations. Sa responsabilité ne saurait être engagée au-delà des montants facturés au titre de la prestation concernée, sauf disposition impérative.
+        <p className="[font-family:'Open_Sans'] font-light text-[#1e1e1e] leading-relaxed">
+          Eurêka Ingénierie met en œuvre les moyens nécessaires à la bonne
+          exécution des prestations. Sa responsabilité ne saurait être engagée
+          au-delà des montants facturés au titre de la prestation concernée,
+          sauf disposition impérative.
         </p>
       ),
     },
@@ -63,8 +87,10 @@ const ConditionsGenerales = (): JSX.Element => {
       icon: RefreshCcw,
       title: "6. Modifications",
       content: (
-        <p className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e] leading-relaxed">
-          Eurêka Ingénierie réserve le droit de modifier à tout moment les présentes Conditions Générales. La version applicable est celle en vigueur à la date d'acceptation du devis ou de la commande.
+        <p className="[font-family:'Open_Sans'] font-light text-[#1e1e1e] leading-relaxed">
+          Eurêka Ingénierie réserve le droit de modifier à tout moment les
+          présentes Conditions Générales. La version applicable est celle en
+          vigueur à la date d'acceptation du devis ou de la commande.
         </p>
       ),
     },
@@ -81,7 +107,7 @@ const ConditionsGenerales = (): JSX.Element => {
             <h1 className="font-display-h6 text-4xl sm:text-5xl lg:text-6xl text-[#1e1e1e] mb-6">
               Conditions Générales
             </h1>
-            <p className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e] max-w-3xl mx-auto">
+            <p className="[font-family:'Open_Sans'] font-light text-[#1e1e1e] max-w-3xl mx-auto">
               Cadre contractuel des prestations et services Eurêka Ingénierie.
             </p>
           </div>
@@ -101,10 +127,14 @@ const ConditionsGenerales = (): JSX.Element => {
                       <div className="w-12 h-12 bg-radial-gold rounded-xl flex items-center justify-center">
                         <Icon className="w-6 h-6 text-[#1e1e1e]" />
                       </div>
-                      <CardTitle className="text-2xl text-[#1e1e1e] font-display-h6">{s.title}</CardTitle>
+                      <CardTitle className="text-2xl text-[#1e1e1e] font-display-h6">
+                        {s.title}
+                      </CardTitle>
                     </div>
                   </CardHeader>
-                  <CardContent className="pt-0 [font-family:'Sofia_Pro'] font-light">{s.content}</CardContent>
+                  <CardContent className="pt-0 [font-family:'Open_Sans'] font-light">
+                    {s.content}
+                  </CardContent>
                 </Card>
               );
             })}

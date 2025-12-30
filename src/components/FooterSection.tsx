@@ -1,7 +1,7 @@
+import { useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Separator } from "./ui/separator";
-import { useState } from "react";
 
 export const FooterSection = (): JSX.Element => {
   // Navigation links data
@@ -56,11 +56,11 @@ export const FooterSection = (): JSX.Element => {
             <div className="md:absolute top-0 left-0 w-full">
               <div className="flex flex-wrap items-center gap-8 relative md:px-16 py-16 px-4">
                 <div className="flex flex-col items-start gap-5 relative flex-1 grow md:min-w-[350px]">
-                  <div className="relative self-stretch mt-[-1.00px] [font-family:'Neulis_Alt-Regular',Helvetica] font-normal text-[#f6f6f6] text-4xl tracking-[0] leading-[normal]">
+                  <div className="relative self-stretch mt-[-1.00px] [font-family:'Roboto_Flex',Helvetica] font-normal text-[#f6f6f6] text-4xl tracking-[0] leading-[normal]">
                     Rejoignez la communauté EURÊKA
                   </div>
 
-                  <div className="relative self-stretch [font-family:'Sofia_Pro-Light',Helvetica] font-light text-[#f6f6f6] text-base tracking-[0] leading-5">
+                  <div className="relative self-stretch [font-family:'Open_Sans',Helvetica] font-light text-[#f6f6f6] text-base tracking-[0] leading-5">
                     Retrouvez nos conseils, actualités et guides pour réussir
                     tous vos projets.
                   </div>
@@ -69,7 +69,7 @@ export const FooterSection = (): JSX.Element => {
                 <div className="flex flex-col w-[460px] items-start gap-4 relative">
                   <div className="flex items-start gap-3 relative self-stretch w-full">
                     <Input
-                      className="flex-1 p-3 border border-solid border-[#f6f6f6] bg-transparent [font-family:'Sofia_Pro-Regular',Helvetica] text-[#d1d1d1] text-sm"
+                      className="flex-1 p-3 border border-solid border-[#f6f6f6] bg-transparent [font-family:'Open_Sans',Helvetica] text-[#d1d1d1] text-sm"
                       placeholder="Entrez votre email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
@@ -87,12 +87,14 @@ export const FooterSection = (): JSX.Element => {
                     </Button>
                   </div>
 
-                  <div className="relative self-stretch [font-family:'Sofia_Pro-Light',Helvetica] font-light text-[#f6f6f6] text-sm tracking-[0] leading-5">
-                    <span className="[font-family:'Sofia_Pro-Light',Helvetica] font-light text-[#f6f6f6] text-sm tracking-[0] leading-5">
+                  <div className="relative self-stretch [font-family:'Open_Sans',Helvetica] font-light text-[#f6f6f6] text-sm tracking-[0] leading-5">
+                    <span className="[font-family:'Open_Sans',Helvetica] font-light text-[#f6f6f6] text-sm tracking-[0] leading-5">
                       En cliquant sur s&#39;inscrire, vous confirmez que vous
                       acceptez nos{" "}
                     </span>
-                    <a href="/conditions-generales" className="underline">Conditions Générales.</a>
+                    <a href="/conditions-generales" className="underline">
+                      Conditions Générales.
+                    </a>
                   </div>
                 </div>
               </div>
@@ -134,9 +136,12 @@ export const FooterSection = (): JSX.Element => {
                   {policyLinks.map((link, index) => (
                     <div
                       key={index}
-                      className="relative w-fit mt-[-1.00px] [font-family:'Sofia_Pro-Regular',Helvetica] font-normal text-[#f6f6f6] text-sm tracking-[0] leading-[14px]"
+                      className="relative w-fit mt-[-1.00px] [font-family:'Open_Sans',Helvetica] font-normal text-[#f6f6f6] text-sm tracking-[0] leading-[14px]"
                     >
-                      <a href={link.link} className="leading-[var(--label-small-line-height)] underline font-label-small [font-style:var(--label-small-font-style)] font-[number:var(--label-small-font-weight)] tracking-[var(--label-small-letter-spacing)] text-[length:var(--label-small-font-size)] cursor-pointer">
+                      <a
+                        href={link.link}
+                        className="leading-[var(--label-small-line-height)] underline font-label-small [font-style:var(--label-small-font-style)] font-[number:var(--label-small-font-weight)] tracking-[var(--label-small-letter-spacing)] text-[length:var(--label-small-font-size)] cursor-pointer"
+                      >
                         {link.label}
                       </a>
                     </div>

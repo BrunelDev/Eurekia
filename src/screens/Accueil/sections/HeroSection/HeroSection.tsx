@@ -1,10 +1,9 @@
 import { ArrowRightIcon } from "lucide-react";
 import React from "react";
-import { Separator } from "../../../../components/ui/separator";
 import ArrowButton from "../../../../components/ArrowButton";
+import { Separator } from "../../../../components/ui/separator";
 
 export const HeroSection = (): JSX.Element => {
-
   // Stats data for the two stat cards
   const statsData = [
     {
@@ -27,8 +26,6 @@ export const HeroSection = (): JSX.Element => {
     },
   ];
 
-
-
   return (
     <section className="w-full bg-white">
       <div className="mx-auto">
@@ -36,7 +33,7 @@ export const HeroSection = (): JSX.Element => {
           {/* Text Content */}
           <div className="lg:w-1/2 flex px-4 flex-col items-start gap-10 sm:px-6 lg:px-8">
             <div className="flex flex-col items-start gap-6 self-stretch">
-              <h1 className="self-stretch font-['Neulis_Alt-Regular',Helvetica] font-normal text-3xl sm:text-4xl lg:text-5xl lg:leading-[1.2]">
+              <h1 className="self-stretch font-['Roboto_Flex',Helvetica] font-normal text-3xl sm:text-4xl lg:text-5xl lg:leading-[1.2]">
                 <span className="text-[#1e1e1e] font-display-h6">
                   Pilotez vos{" "}
                 </span>
@@ -48,7 +45,7 @@ export const HeroSection = (): JSX.Element => {
                   avec EURÊKA INGÉNIERIE!
                 </span>
               </h1>
-              <p className="self-stretch text-base sm:text-lg text-[#1e1e1e] [font-family:'Sofia_Pro'] font-light">
+              <p className="self-stretch text-base sm:text-lg text-[#1e1e1e] [font-family:'Open_Sans'] font-light">
                 Des solutions humaines et intelligentes pour piloter vos projets
                 de construction, de la simple rénovation à l&apos;ouvrage
                 complexe.
@@ -56,7 +53,7 @@ export const HeroSection = (): JSX.Element => {
             </div>
 
             <ArrowButton
-              handleClick={() => window.location.href = "/nos-solutions"}
+              handleClick={() => (window.location.href = "/nos-solutions")}
               text="Découvrir nos solutions"
               lucideIcon={
                 <ArrowRightIcon className="w-6 h-6 text-black group-hover:text-[#cd9f25]" />

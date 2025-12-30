@@ -1,10 +1,10 @@
+import { useState } from "react";
+import { toast } from "sonner";
+import { FooterSection } from "../../components/FooterSection";
+import { NavigationSection } from "../../components/NavigationSection";
 import { Button } from "../../components/ui/button";
 import { Input } from "../../components/ui/input";
 import { Label } from "../../components/ui/label";
-import { useState } from "react";
-import { FooterSection } from "../../components/FooterSection";
-import { NavigationSection } from "../../components/NavigationSection";
-import { toast } from "sonner";
 
 export const NewsletterRegister = () => {
   const queryParams = new URLSearchParams(location.search);
@@ -62,10 +62,10 @@ export const NewsletterRegister = () => {
       <NavigationSection />
       <div className="flex items-center justify-center min-h-[calc(100vh-72px)] bg-gray-100">
         <div className="p-8 bg-white shadow-md rounded-lg max-w-md w-full mx-4">
-          <h2 className="text-2xl font-bold text-center mb-6 text-gray-800 [font-family:'Sofia_Pro-Bold',Helvetica]">
+          <h2 className="text-2xl font-bold text-center mb-6 text-gray-800 [font-family:'Open_Sans',Helvetica]">
             Inscrivez-vous à notre Newsletter
           </h2>
-          <p className="text-center mb-6 text-gray-600 [font-family:'Sofia_Pro-Regular',Helvetica]">
+          <p className="text-center mb-6 text-gray-600 [font-family:'Open_Sans',Helvetica]">
             Recevez les dernières nouvelles et offres d'Eurêka directement dans
             votre boîte de réception.
           </p>
@@ -81,7 +81,7 @@ export const NewsletterRegister = () => {
                 value={firstName}
                 onChange={(e) => setFirstName(e.target.value)}
                 required
-                className="w-full border-b border-gray-300 mb-4 placeholder:[font-family:'Sofia_Pro-Regular',Helvetica]"
+                className="w-full border-b border-gray-300 mb-4 placeholder:[font-family:'Open_Sans',Helvetica]"
               />
             </div>
             <div>
@@ -95,7 +95,7 @@ export const NewsletterRegister = () => {
                 value={lastName}
                 onChange={(e) => setLastName(e.target.value)}
                 required
-                className="w-full border-b border-gray-300 mb-4 placeholder:[font-family:'Sofia_Pro-Regular',Helvetica]"
+                className="w-full border-b border-gray-300 mb-4 placeholder:[font-family:'Open_Sans',Helvetica]"
               />
             </div>
             <div>
@@ -110,7 +110,7 @@ export const NewsletterRegister = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full border-b border-gray-300 placeholder:[font-family:'Sofia_Pro-Regular',Helvetica]"
+                className="w-full border-b border-gray-300 placeholder:[font-family:'Open_Sans',Helvetica]"
               />
             </div>
             <Button

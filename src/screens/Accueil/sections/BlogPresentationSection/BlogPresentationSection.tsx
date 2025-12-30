@@ -1,7 +1,7 @@
 import { ArrowRightIcon } from "lucide-react";
-import { Card, CardContent } from "../../../../components/ui/card";
-import ArrowButton from "../../../../components/ArrowButton";
 import { useRSSFeed } from "../../../../../services/blogService";
+import ArrowButton from "../../../../components/ArrowButton";
+import { Card, CardContent } from "../../../../components/ui/card";
 import { Skeleton } from "../../../../components/ui/skeleton";
 
 export const BlogPresentationSection = (): JSX.Element => {
@@ -83,7 +83,7 @@ export const BlogPresentationSection = (): JSX.Element => {
                         <h3 className="font-heading-h5 min-h-[48px] font-display-h6 font-[number:var(--heading-h5-font-weight)] text-[length:var(--heading-h5-font-size)] leading-[var(--heading-h5-line-height)] text-[#1e1e1e] tracking-[var(--heading-h5-letter-spacing)] [font-style:var(--heading-h5-font-style)]">
                           {post.title}
                         </h3>
-                        <p className="font-text-smaller [font-family:'Sofia_Pro-Light',Helvetica] font-[number:var(--text-smaller-font-weight)] text-[length:var(--text-smaller-font-size)] leading-[var(--text-smaller-line-height)] text-[#1e1e1e] tracking-[var(--text-smaller-letter-spacing)] [font-style:var(--text-smaller-font-style)]">
+                        <p className="font-text-smaller [font-family:'Open_Sans',Helvetica] font-[number:var(--text-smaller-font-weight)] text-[length:var(--text-smaller-font-size)] leading-[var(--text-smaller-line-height)] text-[#1e1e1e] tracking-[var(--text-smaller-letter-spacing)] [font-style:var(--text-smaller-font-style)]">
                           {post.date}
                         </p>
                       </div>

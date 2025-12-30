@@ -1,20 +1,20 @@
-import { NavigationSection } from "../../components/NavigationSection";
+import {
+  Ban,
+  FileText,
+  Gavel,
+  Mail,
+  RefreshCcw,
+  Scale,
+  Shield,
+} from "lucide-react";
 import { FooterSection } from "../../components/FooterSection";
+import { NavigationSection } from "../../components/NavigationSection";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
 } from "../../components/ui/card";
-import {
-  Shield,
-  FileText,
-  Gavel,
-  Ban,
-  Scale,
-  RefreshCcw,
-  Mail,
-} from "lucide-react";
 
 const TermsOfService = (): JSX.Element => {
   const sections = [
@@ -22,9 +22,9 @@ const TermsOfService = (): JSX.Element => {
       icon: Shield,
       title: "1. Acceptation des Conditions",
       content: (
-        <p className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e] leading-relaxed">
+        <p className="[font-family:'Open_Sans'] font-light text-[#1e1e1e] leading-relaxed">
           En accédant et en utilisant le site et les services d'
-          <span className="[font-family:'Sofia_Pro'] font-medium">
+          <span className="[font-family:'Open_Sans'] font-medium">
             Eurêka Ingénierie
           </span>
           , vous acceptez d'être lié par les présentes Conditions d'Utilisation.
@@ -45,7 +45,7 @@ const TermsOfService = (): JSX.Element => {
           ].map((item, i) => (
             <li key={i} className="flex items-start gap-3">
               <span className="w-2 h-2 rounded-full bg-primary-500 mt-2" />
-              <span className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e] leading-relaxed">
+              <span className="[font-family:'Open_Sans'] font-light text-[#1e1e1e] leading-relaxed">
                 {item}
               </span>
             </li>
@@ -57,7 +57,7 @@ const TermsOfService = (): JSX.Element => {
       icon: Gavel,
       title: "3. Comptes et Sécurité",
       content: (
-        <p className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e] leading-relaxed">
+        <p className="[font-family:'Open_Sans'] font-light text-[#1e1e1e] leading-relaxed">
           Vous êtes responsable du maintien de la confidentialité de vos
           identifiants et de toutes les activités effectuées sous votre compte.
           Signalez immédiatement toute utilisation non autorisée.
@@ -88,7 +88,7 @@ const TermsOfService = (): JSX.Element => {
       icon: Scale,
       title: "5. Propriété Intellectuelle",
       content: (
-        <p className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e] leading-relaxed">
+        <p className="[font-family:'Open_Sans'] font-light text-[#1e1e1e] leading-relaxed">
           Tous les contenus, marques, logos, éléments visuels et logiciels sont
           la propriété d'Eurêka Ingénierie ou de ses partenaires. Toute
           reproduction ou utilisation sans autorisation écrite est interdite.
@@ -99,7 +99,7 @@ const TermsOfService = (): JSX.Element => {
       icon: RefreshCcw,
       title: "6. Modifications des Services et des Conditions",
       content: (
-        <p className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e] leading-relaxed">
+        <p className="[font-family:'Open_Sans'] font-light text-[#1e1e1e] leading-relaxed">
           Nous pouvons modifier ou mettre à jour les services et les présentes
           Conditions à tout moment. Les changements seront publiés sur cette
           page avec une date de mise à jour.
@@ -119,7 +119,7 @@ const TermsOfService = (): JSX.Element => {
             <h1 className="font-display-h6 text-4xl sm:text-5xl lg:text-6xl text-[#1e1e1e] mb-6">
               Conditions Générales d'Utilisation
             </h1>
-            <p className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e] max-w-3xl mx-auto">
+            <p className="[font-family:'Open_Sans'] font-light text-[#1e1e1e] max-w-3xl mx-auto">
               Veuillez lire attentivement ces conditions avant d'utiliser nos
               services.
             </p>
@@ -140,12 +140,12 @@ const TermsOfService = (): JSX.Element => {
                       <div className="w-12 h-12 bg-radial-gold rounded-xl flex items-center justify-center">
                         <Icon className="w-6 h-6 text-[#1e1e1e]" />
                       </div>
-                      <CardTitle className="text-2xl text-[#1e1e1e] [font-family:'Sofia_Pro']">
+                      <CardTitle className="text-2xl text-[#1e1e1e] [font-family:'Open_Sans']">
                         {s.title}
                       </CardTitle>
                     </div>
                   </CardHeader>
-                  <CardContent className="pt-0 [font-family:'Sofia_Pro'] font-light">
+                  <CardContent className="pt-0 [font-family:'Open_Sans'] font-light">
                     {s.content}
                   </CardContent>
                 </Card>
@@ -156,10 +156,10 @@ const TermsOfService = (): JSX.Element => {
           {/* Contact box */}
           <div className="mt-16 p-8 rounded-2xl border border-primary-200 ">
             <div className="text-center">
-              <h3 className="[font-family:'Sofia_Pro'] text-2xl text-[#1e1e1e] font-light mb-4">
+              <h3 className="[font-family:'Open_Sans'] text-2xl text-[#1e1e1e] font-light mb-4">
                 Des questions sur nos Conditions ?
               </h3>
-              <p className="[font-family:'Sofia_Pro'] font-light text-[#1e1e1e] mb-6 max-w-2xl mx-auto">
+              <p className="[font-family:'Open_Sans'] font-light text-[#1e1e1e] mb-6 max-w-2xl mx-auto">
                 Notre équipe est disponible pour vous renseigner et vous
                 accompagner.
               </p>
